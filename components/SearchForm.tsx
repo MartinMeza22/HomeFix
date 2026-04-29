@@ -30,7 +30,7 @@ export function SearchForm({ onSearch, categories = [] }: SearchFormProps) {
             placeholder="Electricista, Plomero..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="bg-white"
+            className="bg-card"
           />
         </div>
 
@@ -41,7 +41,7 @@ export function SearchForm({ onSearch, categories = [] }: SearchFormProps) {
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full px-3 py-2 border border-input rounded-md bg-white text-foreground"
+            className="w-full px-3 py-2 border border-input rounded-md bg-card text-foreground"
           >
             <option value="">Todas las categorías</option>
             {categories.map((cat) => (
@@ -60,7 +60,7 @@ export function SearchForm({ onSearch, categories = [] }: SearchFormProps) {
             placeholder="Tu zona..."
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            className="bg-white"
+            className="bg-card"
           />
         </div>
       </div>

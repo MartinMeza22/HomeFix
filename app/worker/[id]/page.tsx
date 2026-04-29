@@ -1,7 +1,3 @@
-'use client'
-
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { RatingStars } from '@/components/RatingStars'
@@ -9,15 +5,14 @@ import { VerificationBadge } from '@/components/VerificationBadge'
 import { ReviewCard } from '@/components/ReviewCard'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import Link from 'next/link'
 import { workers } from '@/lib/data/workers'
 import { reviews as allReviews } from '@/lib/data/reviews'
+import { WorkerChatClient } from '@/components/WorkerChatClient'
 
-export default function WorkerProfile({ params }: { params: { id: string } }) {
-  const router = useRouter()
-  const worker = workers.find(w => w.id === params.id)
-  const [showChat, setShowChat] = useState(false)
-  const [message, setMessage] = useState('')
-  const [chatMessages, setChatMessages] = useState<Array<{ sender: 'user' | 'worker'; text: string }>>([])
+export default async function WorkerProfile({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const worker = workers.find(w => w.id === id)
 
   if (!worker) {
     return (
@@ -25,12 +20,11 @@ export default function WorkerProfile({ params }: { params: { id: string } }) {
         <Navbar />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
           <h1 className="text-2xl font-bold text-foreground mb-4">Profesional no encontrado</h1>
-          <Button
-            className="bg-primary hover:bg-primary/90"
-            onClick={() => router.push('/search')}
-          >
-            Volver a Buscar
-          </Button>
+          <Link href="/search">
+            <Button className="bg-primary hover:bg-primary/90">
+              Volver a Buscar
+            </Button>
+          </Link>
         </div>
         <Footer />
       </main>
@@ -39,36 +33,16 @@ export default function WorkerProfile({ params }: { params: { id: string } }) {
 
   const workerReviews = allReviews.filter(r => r.workerId === worker.id)
 
-  const handleSendMessage = () => {
-    if (message.trim()) {
-      setChatMessages([
-        ...chatMessages,
-        { sender: 'user', text: message }
-      ])
-      // Simulate response
-      setTimeout(() => {
-        setChatMessages(prev => [
-          ...prev,
-          { sender: 'worker', text: `Hola! Gracias por tu mensaje. ¿En qué puedo ayudarte hoy?` }
-        ])
-      }, 800)
-      setMessage('')
-    }
-  }
-
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Back Button */}
-        <button
-          onClick={() => router.back()}
-          className="flex items-center gap-2 text-primary hover:text-primary/80 mb-6 transition-colors"
-        >
+        <Link href="/search" className="flex items-center gap-2 text-primary hover:text-primary/80 mb-6 transition-colors">
           <span>←</span>
           <span className="font-medium">Volver</span>
-        </button>
+        </Link>
 
         {/* Header Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -157,13 +131,7 @@ export default function WorkerProfile({ params }: { params: { id: string } }) {
 
             {/* Action Buttons */}
             <div className="space-y-3">
-              <Button
-                size="lg"
-                className="w-full bg-primary hover:bg-primary/90 text-white"
-                onClick={() => setShowChat(!showChat)}
-              >
-                {showChat ? 'Cerrar Chat' : 'Chat Ahora'}
-              </Button>
+              <WorkerChatClient workerName={worker.name} />
               <Button
                 size="lg"
                 variant="outline"
@@ -206,55 +174,6 @@ export default function WorkerProfile({ params }: { params: { id: string } }) {
             )}
           </div>
         </div>
-
-        {/* Chat Section */}
-        {showChat && (
-          <Card className="p-6 space-y-4">
-            <h2 className="font-bold text-lg text-foreground">Chat con {worker.name}</h2>
-
-            <div className="bg-background border border-border rounded-lg p-4 h-64 overflow-y-auto space-y-3 mb-4">
-              {chatMessages.length === 0 ? (
-                <div className="h-full flex items-center justify-center">
-                  <p className="text-muted-foreground">Inicia una conversación...</p>
-                </div>
-              ) : (
-                chatMessages.map((msg, idx) => (
-                  <div
-                    key={idx}
-                    className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                  >
-                    <div
-                      className={`px-4 py-2 rounded-lg max-w-xs ${
-                        msg.sender === 'user'
-                          ? 'bg-primary text-white'
-                          : 'bg-secondary text-foreground'
-                      }`}
-                    >
-                      {msg.text}
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-
-            <div className="flex gap-2">
-              <input
-                type="text"
-                placeholder="Escribe tu mensaje..."
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                className="flex-1 px-4 py-2 border border-input rounded-lg bg-background text-foreground"
-              />
-              <Button
-                onClick={handleSendMessage}
-                className="bg-primary hover:bg-primary/90"
-              >
-                Enviar
-              </Button>
-            </div>
-          </Card>
-        )}
       </div>
 
       <Footer />

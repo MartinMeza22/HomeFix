@@ -151,7 +151,7 @@ export function DiagnosticoWizard({ onComplete }: DiagnosticoWizardProps) {
               className={`p-4 rounded-lg border-2 transition-all text-left font-medium ${
                 selectedAnswers[currentStep] === option.value
                   ? 'border-primary bg-primary/10 text-primary'
-                  : 'border-border bg-white text-foreground hover:border-primary/50'
+                  : 'border-border bg-card text-foreground hover:border-primary/50'
               }`}
             >
               {option.label}

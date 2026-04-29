@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { WorkerCard } from '@/components/WorkerCard'
@@ -12,25 +12,17 @@ import { categories } from '@/lib/data/categories'
 
 export default function SearchPage() {
   const router = useRouter()
-  const searchParams = useSearchParams()
   const [filteredWorkers, setFilteredWorkers] = useState<Worker[]>(workers)
   const [selectedCategory, setSelectedCategory] = useState('')
   const [selectedRating, setSelectedRating] = useState('')
   const [location, setLocation] = useState('')
   const [sortBy, setSortBy] = useState('distance')
+  const [isClient, setIsClient] = useState(false)
 
-  // Initialize filters from URL params
+  // Only run on client side
   useEffect(() => {
-    const categoryParam = searchParams.get('category')
-    const locationParam = searchParams.get('location')
-
-    if (categoryParam) {
-      setSelectedCategory(categoryParam)
-    }
-    if (locationParam) {
-      setLocation(locationParam)
-    }
-  }, [searchParams])
+    setIsClient(true)
+  }, [])
 
   // Apply filters
   useEffect(() => {
@@ -106,7 +98,7 @@ export default function SearchPage() {
           {/* Filters Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-20 space-y-6">
-              <div className="bg-white border border-border rounded-lg p-6 space-y-6">
+              <div className="bg-card border border-border rounded-lg p-6 space-y-6">
                 <h2 className="font-bold text-lg text-foreground">Filtros</h2>
 
                 {/* Location Filter */}
@@ -192,7 +184,7 @@ export default function SearchPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 border border-input rounded-md bg-white text-foreground text-sm"
+                className="px-4 py-2 border border-input rounded-md bg-card text-foreground text-sm"
               >
                 <option value="distance">Más Cercanos</option>
                 <option value="rating">Mejor Calificados</option>
