@@ -1,5 +1,3 @@
-'use client'
-
 import { RatingStars } from './RatingStars'
 import type { Review } from '@/lib/data/reviews'
 import { Card } from '@/components/ui/card'
@@ -8,12 +6,21 @@ interface ReviewCardProps {
   review: Review
 }
 
+// Format date consistently without locale-dependent formatting
+function formatDate(dateString: string): string {
+  const date = new Date(dateString)
+  const months = [
+    'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+    'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+  ]
+  const day = date.getUTCDate()
+  const month = months[date.getUTCMonth()]
+  const year = date.getUTCFullYear()
+  return `${day} de ${month} de ${year}`
+}
+
 export function ReviewCard({ review }: ReviewCardProps) {
-  const formattedDate = new Date(review.date).toLocaleDateString('es-ES', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
+  const formattedDate = formatDate(review.date)
 
   return (
     <Card className="p-4 space-y-3">
