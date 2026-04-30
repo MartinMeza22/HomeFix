@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Search, MapPin, ArrowRight } from 'lucide-react'
 
 interface SearchFormProps {
   onSearch?: (query: string, category: string, location: string) => void
@@ -20,30 +21,33 @@ export function SearchForm({ onSearch, categories = [] }: SearchFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="space-y-2">
           <label className="text-sm font-medium text-foreground">
-            ¿Qué necesitas?
+            Que necesitas?
           </label>
-          <Input
-            placeholder="Electricista, Plomero..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="bg-card"
-          />
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              placeholder="Electricista, Plomero..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="bg-secondary border-border pl-10 h-12"
+            />
+          </div>
         </div>
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-foreground">
-            Categoría
+            Categoria
           </label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full px-3 py-2 border border-input rounded-md bg-card text-foreground"
+            className="w-full h-12 px-3 border border-border rounded-md bg-secondary text-foreground"
           >
-            <option value="">Todas las categorías</option>
+            <option value="">Todas las categorias</option>
             {categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
                 {cat.name}
@@ -54,19 +58,23 @@ export function SearchForm({ onSearch, categories = [] }: SearchFormProps) {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-foreground">
-            Ubicación
+            Ubicacion
           </label>
-          <Input
-            placeholder="Tu zona..."
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className="bg-card"
-          />
+          <div className="relative">
+            <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              placeholder="Tu zona..."
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="bg-secondary border-border pl-10 h-12"
+            />
+          </div>
         </div>
       </div>
 
-      <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90">
+      <Button type="submit" size="lg" className="w-full h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-medium">
         Buscar Profesionales
+        <ArrowRight className="ml-2 w-4 h-4" />
       </Button>
     </form>
   )

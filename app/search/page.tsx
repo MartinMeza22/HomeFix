@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { workers, type Worker } from '@/lib/data/workers'
 import { categories } from '@/lib/data/categories'
+import { Search, Filter, MapPin } from 'lucide-react'
 
 export default function SearchPage() {
   const router = useRouter()
@@ -83,14 +84,18 @@ export default function SearchPage() {
     <main className="min-h-screen bg-background">
       <Navbar />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-            Buscar Profesionales
+        <div className="mb-10">
+          <div className="flex items-center gap-2 text-sm text-primary mb-3">
+            <Search className="w-4 h-4" />
+            <span className="font-medium">Busqueda de profesionales</span>
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+            Profesionales verificados cerca de ti
           </h1>
           <p className="text-muted-foreground">
-            Encontramos {filteredWorkers.length} profesional{filteredWorkers.length !== 1 ? 'es' : ''}
+            {filteredWorkers.length} profesional{filteredWorkers.length !== 1 ? 'es' : ''} disponible{filteredWorkers.length !== 1 ? 's' : ''} en tu zona
           </p>
         </div>
 
@@ -98,18 +103,24 @@ export default function SearchPage() {
           {/* Filters Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-20 space-y-6">
-              <div className="bg-card border border-border rounded-lg p-6 space-y-6">
-                <h2 className="font-bold text-lg text-foreground">Filtros</h2>
+              <div className="bg-card border border-border rounded-xl p-6 space-y-6">
+                <div className="flex items-center gap-2">
+                  <Filter className="w-4 h-4 text-primary" />
+                  <h2 className="font-semibold text-foreground">Filtros</h2>
+                </div>
 
                 {/* Location Filter */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-foreground">Ubicación</label>
-                  <Input
-                    placeholder="Zona, ciudad..."
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    className="bg-background"
-                  />
+                  <label className="text-sm font-medium text-foreground">Ubicacion</label>
+                  <div className="relative">
+                    <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                      placeholder="Zona, ciudad..."
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                      className="bg-background pl-10"
+                    />
+                  </div>
                 </div>
 
                 {/* Category Filter */}
