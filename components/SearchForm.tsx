@@ -72,7 +72,7 @@ export function SearchForm({ onSearch, categories = [] }: SearchFormProps) {
         </div>
       </div>
 
-      <Button type="submit" size="lg" className="w-full h-14 bg-primary hover:bg-primary/90 text-primary-foreground font-medium">
+      <Button type="submit" size="lg" className="w-full h-14 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">
         Buscar Profesionales
         <ArrowRight className="ml-2 w-4 h-4" />
       </Button>
