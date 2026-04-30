@@ -1,15 +1,18 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { SOS } from '@/components/SOS'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const montserrat = Montserrat({ 
+  subsets: ["latin"],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-montserrat'
+})
 
 export const metadata: Metadata = {
-  title: 'OFIX - Plataforma de Servicios de Reparación',
-  description: 'Conecta con técnicos calificados para servicios de reparación a domicilio. Búsqueda inteligente, diagnóstico asistido y sistema de confianza.',
+  title: 'HomeFix - Servicios de Reparacion a Domicilio',
+  description: 'Conecta con tecnicos verificados para servicios de reparacion a domicilio. Sistema de confianza con verificacion de identidad, matriculas y antecedentes.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -36,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" className="bg-background">
+    <html lang="es" className={`${montserrat.variable} bg-background`}>
       <body className="font-sans antialiased bg-background text-foreground">
         {children}
         <SOS />

@@ -2,53 +2,63 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { Shield, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-18 py-3">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center">
-              <Shield className="w-5 h-5 text-primary-foreground" />
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/logo.png"
+              alt="HomeFix"
+              width={44}
+              height={44}
+              className="w-11 h-11"
+            />
+            <div className="flex flex-col">
+              <span className="font-bold text-lg tracking-tight leading-none">
+                <span className="text-primary">Home</span>
+                <span className="text-accent">Fix</span>
+              </span>
             </div>
-            <span className="font-bold text-xl tracking-tight text-foreground">OFIX</span>
           </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               Inicio
             </Link>
-            <Link href="/search" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/search" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               Buscar Profesionales
             </Link>
-            <Link href="/diagnostico" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-              Diagnostico IA
+            <Link href="/diagnostico" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              Diagnostico
             </Link>
-            <Link href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               Dashboard
             </Link>
           </div>
 
           {/* Desktop Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
+            <Button variant="ghost" className="text-muted-foreground hover:text-primary font-medium">
               Iniciar Sesion
             </Button>
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium">
+            <Button className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">
               Registrarse
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+            className="md:hidden p-2 rounded-lg text-muted-foreground hover:text-primary hover:bg-secondary transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Cerrar menu' : 'Abrir menu'}
           >
@@ -62,36 +72,36 @@ export function Navbar() {
             <div className="space-y-1">
               <Link 
                 href="/" 
-                className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors"
+                className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Inicio
               </Link>
               <Link 
                 href="/search" 
-                className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors"
+                className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Buscar Profesionales
               </Link>
               <Link 
                 href="/diagnostico" 
-                className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors"
+                className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Diagnostico IA
+                Diagnostico
               </Link>
               <Link 
                 href="/dashboard" 
-                className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors"
+                className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Dashboard
               </Link>
             </div>
             <div className="mt-4 pt-4 border-t border-border space-y-3 px-4">
-              <Button variant="outline" className="w-full">Iniciar Sesion</Button>
-              <Button className="w-full bg-primary hover:bg-primary/90">Registrarse</Button>
+              <Button variant="outline" className="w-full border-primary text-primary">Iniciar Sesion</Button>
+              <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">Registrarse</Button>
             </div>
           </div>
         )}
