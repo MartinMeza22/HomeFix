@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { ReviewCard } from '@/components/ReviewCard'
 import { reviews } from '@/lib/data/reviews'
@@ -25,14 +24,22 @@ import {
   FileCheck,
   Fingerprint,
   Clock,
-  Phone
+  Phone,
+  Play
 } from 'lucide-react'
 
 const stats = [
-  { value: '15,000+', label: 'Servicios completados', icon: CheckCircle2 },
-  { value: '2,500+', label: 'Profesionales verificados', icon: Users },
-  { value: '4.9', label: 'Calificacion promedio', icon: Star },
-  { value: '< 30min', label: 'Tiempo de respuesta', icon: Clock },
+  { value: '15,000+', label: 'Servicios completados' },
+  { value: '2,500+', label: 'Profesionales verificados' },
+  { value: '4.9', label: 'Calificacion promedio' },
+  { value: '< 30min', label: 'Tiempo de respuesta' },
+]
+
+const trustedBy = [
+  'Gobierno de la Ciudad',
+  'Consejo Profesional',
+  'Camara de Comercio',
+  'Defensa al Consumidor'
 ]
 
 export default function Home() {
@@ -42,95 +49,120 @@ export default function Home() {
     <main className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24 lg:pt-24 lg:pb-32">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left Content */}
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20">
-                <Shield className="w-4 h-4 text-accent" />
-                <span className="text-sm font-semibold text-accent">100% Verificados</span>
-              </div>
-              
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary leading-[1.1] tracking-tight">
-                Soluciones para tu hogar,{' '}
-                <span className="text-accent">con total confianza</span>
-              </h1>
-              
-              <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-                Conectamos tu hogar con profesionales verificados. Cada tecnico pasa por un riguroso proceso de validacion de identidad, matriculas y antecedentes penales.
-              </p>
-              
-              {/* Search Bar */}
-              <div className="flex flex-col sm:flex-row gap-3 max-w-lg">
-                <div className="relative flex-1">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input 
-                    placeholder="Que servicio necesitas?" 
-                    className="pl-12 h-14 bg-card border-border text-foreground placeholder:text-muted-foreground rounded-lg"
-                  />
-                </div>
-                <Button 
-                  size="lg" 
-                  className="h-14 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg"
-                  onClick={() => router.push('/search')}
-                >
-                  Buscar
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </div>
-              
-              {/* Trust Badges */}
-              <div className="flex flex-wrap items-center gap-6 pt-2">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-accent" />
-                  <span className="text-sm font-medium text-foreground">DNI verificado</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-accent" />
-                  <span className="text-sm font-medium text-foreground">Sin antecedentes</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-5 h-5 text-accent" />
-                  <span className="text-sm font-medium text-foreground">Matriculado</span>
-                </div>
-              </div>
+      {/* Hero Section - Full Width Image Background */}
+      <section className="relative min-h-[90vh] flex items-center">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/hero-bg.jpg"
+            alt="Profesional de HomeFix trabajando"
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Overlay Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/40" />
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="max-w-2xl">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
+              <Shield className="w-4 h-4 text-accent" />
+              <span className="text-sm font-semibold text-white">Profesionales 100% Verificados</span>
             </div>
-            
-            {/* Right - Logo */}
-            <div className="hidden lg:flex justify-center items-center">
-              <div className="relative">
-                <div className="absolute -inset-8 bg-accent/5 rounded-full blur-3xl" />
-                <Image
-                  src="/logo.png"
-                  alt="HomeFix"
-                  width={420}
-                  height={420}
-                  className="relative drop-shadow-2xl"
-                  priority
-                />
+
+            {/* Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-6">
+              Soluciones para tu hogar,{' '}
+              <span className="text-accent">con total confianza</span>
+            </h1>
+
+            {/* Subheadline */}
+            <p className="text-lg sm:text-xl text-white/80 mb-8 leading-relaxed max-w-xl">
+              Conectamos tu hogar con profesionales verificados. Cada tecnico pasa por validacion de identidad, matriculas y antecedentes.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-10">
+              <Button 
+                size="lg" 
+                className="h-14 px-8 bg-accent hover:bg-accent/90 text-white font-semibold text-base"
+                onClick={() => router.push('/search')}
+              >
+                Buscar profesional
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="h-14 px-8 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 font-semibold text-base"
+                onClick={() => router.push('/diagnostico')}
+              >
+                <Play className="w-5 h-5 mr-2" />
+                Como funciona
+              </Button>
+            </div>
+
+            {/* Trust Badges */}
+            <div className="flex flex-wrap items-center gap-6">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-accent" />
+                <span className="text-sm font-medium text-white/90">DNI verificado</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-accent" />
+                <span className="text-sm font-medium text-white/90">Sin antecedentes</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-accent" />
+                <span className="text-sm font-medium text-white/90">Matriculado</span>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
+            <div className="w-1 h-3 bg-white/50 rounded-full animate-bounce" />
+          </div>
+        </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="bg-primary py-16">
+      {/* Stats Bar */}
+      <section className="bg-primary py-8 border-y border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <stat.icon className="w-6 h-6 text-accent mx-auto mb-3" />
-                <div className="text-3xl md:text-4xl font-bold text-primary-foreground mb-1">
+                <div className="text-2xl md:text-3xl font-bold text-white mb-1">
                   {stat.value}
                 </div>
-                <div className="text-sm text-primary-foreground/70 font-medium">
+                <div className="text-sm text-white/60 font-medium">
                   {stat.label}
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Trusted By Section */}
+      <section className="py-12 bg-secondary/30 border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+            <p className="text-sm text-muted-foreground font-medium uppercase tracking-wider">
+              Respaldados por
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+              {trustedBy.map((name, idx) => (
+                <span key={idx} className="text-sm font-semibold text-muted-foreground/70 hover:text-primary transition-colors">
+                  {name}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -140,118 +172,154 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Sistema de Confianza</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
               Tu seguridad es nuestra prioridad
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Cada profesional en HomeFix pasa por un proceso de verificacion exhaustivo antes de poder ofrecer sus servicios.
+              Cada profesional en HomeFix pasa por un proceso de verificacion exhaustivo.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {/* Verification Card 1 */}
-            <Card className="p-8 bg-card border-border hover:border-accent/50 hover:shadow-lg transition-all duration-300 group">
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-accent/10 transition-colors">
-                <Fingerprint className="w-7 h-7 text-primary group-hover:text-accent transition-colors" />
+            <Card className="p-8 bg-card border-border hover:border-accent hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500" />
+              <div className="relative">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Fingerprint className="w-8 h-8 text-white" />
+                </div>
+                <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold mb-4">
+                  NIVEL 1
+                </div>
+                <h3 className="text-xl font-bold text-primary mb-3">
+                  Verificacion de Identidad
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Validamos el DNI de cada profesional con bases de datos oficiales. Sabes exactamente quien entrara a tu hogar.
+                </p>
               </div>
-              <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-4">
-                Nivel 1
-              </div>
-              <h3 className="text-xl font-bold text-primary mb-3">
-                Verificacion de Identidad
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Validamos el DNI de cada profesional con bases de datos oficiales. Sabes exactamente quien entrara a tu hogar.
-              </p>
             </Card>
 
             {/* Verification Card 2 */}
-            <Card className="p-8 bg-card border-border hover:border-accent/50 hover:shadow-lg transition-all duration-300 group">
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-accent/10 transition-colors">
-                <BadgeCheck className="w-7 h-7 text-primary group-hover:text-accent transition-colors" />
+            <Card className="p-8 bg-card border-border hover:border-accent hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500" />
+              <div className="relative">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <BadgeCheck className="w-8 h-8 text-white" />
+                </div>
+                <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold mb-4">
+                  NIVEL 2
+                </div>
+                <h3 className="text-xl font-bold text-primary mb-3">
+                  Matriculas Profesionales
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Verificamos las habilitaciones profesionales y certificaciones tecnicas de cada especialidad.
+                </p>
               </div>
-              <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-4">
-                Nivel 2
-              </div>
-              <h3 className="text-xl font-bold text-primary mb-3">
-                Matriculas Profesionales
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Verificamos las habilitaciones profesionales y certificaciones tecnicas de cada especialidad.
-              </p>
             </Card>
 
             {/* Verification Card 3 */}
-            <Card className="p-8 bg-card border-border hover:border-accent/50 hover:shadow-lg transition-all duration-300 group">
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-accent/10 transition-colors">
-                <FileCheck className="w-7 h-7 text-primary group-hover:text-accent transition-colors" />
+            <Card className="p-8 bg-card border-border hover:border-accent hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500" />
+              <div className="relative">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <FileCheck className="w-8 h-8 text-white" />
+                </div>
+                <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold mb-4">
+                  NIVEL 3
+                </div>
+                <h3 className="text-xl font-bold text-primary mb-3">
+                  Control de Antecedentes
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Realizamos verificacion de antecedentes penales para garantizar tu tranquilidad y la de tu familia.
+                </p>
               </div>
-              <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-4">
-                Nivel 3
-              </div>
-              <h3 className="text-xl font-bold text-primary mb-3">
-                Control de Antecedentes
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Realizamos verificacion de antecedentes penales para garantizar tu tranquilidad y la de tu familia.
-              </p>
             </Card>
+          </div>
+
+          {/* CTA After Security */}
+          <div className="text-center mt-12">
+            <Button 
+              size="lg" 
+              className="h-14 px-8 bg-accent hover:bg-accent/90 text-white font-semibold"
+              onClick={() => router.push('/search')}
+            >
+              Encontrar profesional verificado
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
           </div>
         </div>
       </section>
 
       {/* How it Works Section */}
-      <section className="py-24 bg-secondary/50">
+      <section className="py-24 bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Como Funciona</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
               Simple, rapido y seguro
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            <p className="text-white/70 max-w-2xl mx-auto text-lg">
               Tres pasos simples para resolver cualquier problema en tu hogar
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid md:grid-cols-3 gap-8 lg:gap-12 relative">
+            {/* Connection Line */}
+            <div className="hidden md:block absolute top-8 left-1/4 right-1/4 h-0.5 bg-white/20" />
+
             {/* Step 1 */}
             <div className="relative text-center">
-              <div className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-2xl mx-auto mb-6">
+              <div className="w-16 h-16 rounded-full bg-white text-primary flex items-center justify-center font-bold text-2xl mx-auto mb-6 relative z-10">
                 1
               </div>
-              <h3 className="text-xl font-bold text-primary mb-3">
+              <h3 className="text-xl font-bold text-white mb-3">
                 Describe tu problema
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Usa nuestro diagnostico asistido o busca directamente el tipo de servicio que necesitas.
+              <p className="text-white/70 leading-relaxed">
+                Usa nuestro diagnostico asistido o busca directamente el servicio que necesitas.
               </p>
             </div>
 
             {/* Step 2 */}
             <div className="relative text-center">
-              <div className="w-16 h-16 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-2xl mx-auto mb-6">
+              <div className="w-16 h-16 rounded-full bg-white text-primary flex items-center justify-center font-bold text-2xl mx-auto mb-6 relative z-10">
                 2
               </div>
-              <h3 className="text-xl font-bold text-primary mb-3">
+              <h3 className="text-xl font-bold text-white mb-3">
                 Elige un profesional
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Compara perfiles, reviews y disponibilidad. Todos nuestros profesionales estan verificados.
+              <p className="text-white/70 leading-relaxed">
+                Compara perfiles, reviews y disponibilidad. Todos verificados.
               </p>
             </div>
 
             {/* Step 3 */}
             <div className="relative text-center">
-              <div className="w-16 h-16 rounded-full bg-accent text-accent-foreground flex items-center justify-center font-bold text-2xl mx-auto mb-6">
+              <div className="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center font-bold text-2xl mx-auto mb-6 relative z-10">
                 3
               </div>
-              <h3 className="text-xl font-bold text-primary mb-3">
+              <h3 className="text-xl font-bold text-white mb-3">
                 Problema resuelto
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Coordina la visita, recibe el servicio y califica tu experiencia para ayudar a otros.
+              <p className="text-white/70 leading-relaxed">
+                Coordina la visita, recibe el servicio y califica tu experiencia.
               </p>
             </div>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center mt-16">
+            <Button 
+              size="lg" 
+              className="h-14 px-8 bg-accent hover:bg-accent/90 text-white font-semibold"
+              onClick={() => router.push('/diagnostico')}
+            >
+              Iniciar diagnostico gratuito
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
           </div>
         </div>
       </section>
@@ -266,11 +334,11 @@ export default function Home() {
                 Profesionales especializados
               </h2>
               <p className="text-muted-foreground max-w-xl">
-                Encuentra expertos verificados en las categorias mas demandadas
+                Expertos verificados en todas las categorias
               </p>
             </div>
             <Link href="/search" className="mt-6 md:mt-0">
-              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold">
+              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold">
                 Ver todos
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
@@ -284,7 +352,7 @@ export default function Home() {
                 onClick={() => router.push(`/search?category=${category.id}`)}
                 className="group p-6 rounded-xl bg-card border border-border hover:border-accent hover:shadow-lg transition-all duration-300 text-left"
               >
-                <span className="text-3xl mb-4 block">{category.icon}</span>
+                <span className="text-4xl mb-4 block">{category.icon}</span>
                 <h3 className="font-bold text-primary group-hover:text-accent transition-colors mb-1">
                   {category.name}
                 </h3>
@@ -298,59 +366,76 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 bg-secondary/50">
+      <section className="py-24 bg-secondary/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Caracteristicas</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-primary">
-              Todo lo que necesitas
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                icon: MapPin,
-                title: 'Busqueda Geolocalizada',
-                description: 'Encuentra profesionales cerca de ti con filtros avanzados por zona y disponibilidad.'
-              },
-              {
-                icon: Zap,
-                title: 'Diagnostico Asistido',
-                description: 'Nuestro sistema inteligente te ayuda a identificar exactamente que servicio necesitas.'
-              },
-              {
-                icon: Shield,
-                title: 'Verificacion Triple',
-                description: 'Identidad, matriculas y antecedentes. Todos nuestros profesionales estan verificados.'
-              },
-              {
-                icon: Star,
-                title: 'Reviews Verificados',
-                description: 'Sistema de reputacion basado en experiencias reales de usuarios verificados.'
-              },
-              {
-                icon: MessageSquare,
-                title: 'Chat Directo',
-                description: 'Comunicacion directa con los profesionales sin intermediarios ni comisiones ocultas.'
-              },
-              {
-                icon: Phone,
-                title: 'Soporte 24/7',
-                description: 'Equipo de soporte disponible para ayudarte en cualquier momento del dia.'
-              }
-            ].map((feature, idx) => (
-              <div 
-                key={idx} 
-                className="group p-6 rounded-xl bg-card border border-border hover:border-accent/50 transition-all duration-300"
-              >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-accent/10 transition-colors">
-                  <feature.icon className="w-6 h-6 text-primary group-hover:text-accent transition-colors" />
-                </div>
-                <h3 className="text-lg font-bold text-primary mb-2">{feature.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left - Image/Logo */}
+            <div className="hidden lg:flex justify-center">
+              <div className="relative">
+                <div className="absolute -inset-8 bg-accent/10 rounded-full blur-3xl" />
+                <Image
+                  src="/logo.png"
+                  alt="HomeFix"
+                  width={400}
+                  height={400}
+                  className="relative"
+                />
               </div>
-            ))}
+            </div>
+
+            {/* Right - Features */}
+            <div>
+              <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Por que HomeFix</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">
+                Todo lo que necesitas en un solo lugar
+              </h2>
+
+              <div className="space-y-6">
+                {[
+                  {
+                    icon: MapPin,
+                    title: 'Busqueda Geolocalizada',
+                    description: 'Profesionales cerca de ti con filtros avanzados.'
+                  },
+                  {
+                    icon: Zap,
+                    title: 'Diagnostico Inteligente',
+                    description: 'Sistema que identifica exactamente que necesitas.'
+                  },
+                  {
+                    icon: Shield,
+                    title: 'Verificacion Triple',
+                    description: 'Identidad, matriculas y antecedentes verificados.'
+                  },
+                  {
+                    icon: MessageSquare,
+                    title: 'Chat Directo',
+                    description: 'Comunicacion directa sin intermediarios.'
+                  },
+                ].map((feature, idx) => (
+                  <div key={idx} className="flex gap-4 group">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/10 transition-colors">
+                      <feature.icon className="w-6 h-6 text-primary group-hover:text-accent transition-colors" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-primary mb-1">{feature.title}</h3>
+                      <p className="text-sm text-muted-foreground">{feature.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-10">
+                <Button 
+                  size="lg" 
+                  className="h-14 px-8 bg-accent hover:bg-accent/90 text-white font-semibold"
+                  onClick={() => router.push('/search')}
+                >
+                  Comenzar ahora
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -367,7 +452,7 @@ export default function Home() {
               Lo que dicen nuestros usuarios
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Miles de hogares ya confian en HomeFix para sus reparaciones
+              Miles de hogares ya confian en HomeFix
             </p>
           </div>
 
@@ -379,32 +464,42 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-primary">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Shield className="w-16 h-16 text-accent mx-auto mb-6" />
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-6">
+      {/* Final CTA Section */}
+      <section className="py-24 bg-primary relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-accent/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/10 rounded-full translate-x-1/2 translate-y-1/2 blur-3xl" />
+
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <Image
+            src="/logo.png"
+            alt="HomeFix"
+            width={100}
+            height={100}
+            className="mx-auto mb-8 brightness-0 invert opacity-50"
+          />
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
             Resuelve tu problema hoy mismo
           </h2>
-          <p className="text-primary-foreground/80 text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-white/80 text-lg mb-10 max-w-2xl mx-auto">
             Conecta con profesionales verificados cerca de ti. Rapido, seguro y con garantia de satisfaccion.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              className="h-14 px-8 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
+              className="h-16 px-10 bg-accent hover:bg-accent/90 text-white font-bold text-lg"
               onClick={() => router.push('/search')}
             >
-              Buscar profesional
-              <ArrowRight className="w-4 h-4 ml-2" />
+              Buscar profesional ahora
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
-              className="h-14 px-8 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary font-semibold"
+              className="h-16 px-10 bg-transparent border-2 border-white/30 text-white hover:bg-white/10 font-semibold text-lg"
               onClick={() => router.push('/diagnostico')}
             >
-              <MessageSquare className="w-4 h-4 mr-2" />
+              <MessageSquare className="w-5 h-5 mr-2" />
               Diagnostico gratuito
             </Button>
           </div>
