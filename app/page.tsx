@@ -345,20 +345,33 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => router.push(`/search?category=${category.id}`)}
-                className="group p-6 rounded-xl bg-card border border-border hover:border-accent hover:shadow-lg transition-all duration-300 text-left"
+                className="group relative h-64 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
               >
-                <span className="text-4xl mb-4 block">{category.icon}</span>
-                <h3 className="font-bold text-primary group-hover:text-accent transition-colors mb-1">
-                  {category.name}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {category.count}+ profesionales
-                </p>
+                {/* Background Image */}
+                <Image
+                  src={category.image}
+                  alt={category.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-5">
+                  <h3 className="font-bold text-white text-lg mb-1 drop-shadow-md">
+                    {category.name}
+                  </h3>
+                  <p className="text-sm text-white/80">
+                    {category.count}+ profesionales
+                  </p>
+                </div>
+                {/* Hover Accent Border */}
+                <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-accent transition-colors" />
               </button>
             ))}
           </div>
