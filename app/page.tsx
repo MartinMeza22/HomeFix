@@ -389,8 +389,8 @@ export default function Home() {
                 <Image
                   src="/homefix-logo.png"
                   alt="HomeFix"
-                  width={400}
-                  height={400}
+                  width={1600}
+                  height={1600}
                   className="relative"
                 />
               </div>
