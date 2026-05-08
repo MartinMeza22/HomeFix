@@ -39,6 +39,9 @@ export function Navbar() {
             <Link href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               Dashboard
             </Link>
+            <Link href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              Trabajá con nosotros
+            </Link>
           </div>
 
           {/* Desktop Buttons */}
@@ -69,29 +72,29 @@ export function Navbar() {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-border py-4">
             <div className="space-y-1">
-              <Link 
-                href="/" 
+              <Link
+                href="/"
                 className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Inicio
               </Link>
-              <Link 
-                href="/search" 
+              <Link
+                href="/search"
                 className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Buscar Profesionales
               </Link>
-              <Link 
-                href="/diagnostico" 
+              <Link
+                href="/diagnostico"
                 className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Diagnostico
               </Link>
-              <Link 
-                href="/dashboard" 
+              <Link
+                href="/dashboard"
                 className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
