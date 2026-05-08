@@ -117,7 +117,7 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0" />
-                <span className="text-xs sm:text-sm font-medium text-white/90">Matriculado</span>
+                <span className="text-xs sm:text-sm font-medium text-white/90">Validado</span>
               </div>
             </div>
           </div>
