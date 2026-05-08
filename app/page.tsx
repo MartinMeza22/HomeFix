@@ -67,11 +67,7 @@ export default function Home() {
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 w-full">
           <div className="max-w-2xl">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 sm:mb-8">
-              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent" />
-              <span className="text-xs sm:text-sm font-semibold text-white">Profesionales 100% Validados</span>
-            </div>
+
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.15] sm:leading-[1.1] tracking-tight mb-4 sm:mb-6 text-balance">
@@ -113,10 +109,6 @@ export default function Home() {
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0" />
                 <span className="text-xs sm:text-sm font-medium text-white/90">Verifición facial biométrica</span>
-              </div>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0" />
-                <span className="text-xs sm:text-sm font-medium text-white/90">Validado</span>
               </div>
             </div>
           </div>
