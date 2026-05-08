@@ -7,9 +7,10 @@ import { Footer } from '@/components/Footer'
 import { WorkerCard } from '@/components/WorkerCard'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
 import { workers, type Worker } from '@/lib/data/workers'
 import { categories } from '@/lib/data/categories'
-import { Search, Filter, MapPin, X, ChevronDown } from 'lucide-react'
+import { Search, Filter, MapPin, X, ChevronDown, SlidersHorizontal, Users, Shield, Star } from 'lucide-react'
 
 export default function SearchPage() {
   const router = useRouter()
@@ -53,39 +54,27 @@ export default function SearchPage() {
 
   const FiltersContent = () => (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-primary" />
-          <h2 className="font-semibold text-foreground">Filtros</h2>
-        </div>
-        {activeFiltersCount > 0 && (
-          <button onClick={clearFilters} className="text-xs text-accent font-medium flex items-center gap-1">
-            <X className="w-3 h-3" /> Limpiar ({activeFiltersCount})
-          </button>
-        )}
-      </div>
-
       {/* Location */}
-      <div className="space-y-2">
-        <label className="text-sm font-medium text-foreground">Ubicacion</label>
+      <div className="space-y-3">
+        <label className="text-sm font-semibold text-foreground">Ubicacion</label>
         <div className="relative">
           <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
             placeholder="Zona, ciudad..."
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            className="bg-background pl-10"
+            className="bg-background pl-10 h-11"
           />
         </div>
       </div>
 
       {/* Category */}
-      <div className="space-y-2">
-        <label className="text-sm font-medium text-foreground">Categoria</label>
+      <div className="space-y-3">
+        <label className="text-sm font-semibold text-foreground">Categoria</label>
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="w-full px-3 py-2 border border-input rounded-md bg-background text-foreground text-sm"
+          className="w-full px-4 py-3 border border-input rounded-lg bg-background text-foreground text-sm font-medium focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-all"
         >
           <option value="">Todas las categorias</option>
           {categories.map((cat) => (
@@ -96,22 +85,27 @@ export default function SearchPage() {
 
       {/* Rating */}
       <div className="space-y-3">
-        <label className="text-sm font-medium text-foreground">Calificacion Minima</label>
+        <label className="text-sm font-semibold text-foreground">Calificacion minima</label>
         <div className="space-y-2">
-          {[4, 4.5, 4.7, 4.9].map((rating) => (
-            <label key={rating} className="flex items-center gap-3 cursor-pointer">
+          {[
+            { value: '4.9', label: '4.9+ Excelente' },
+            { value: '4.7', label: '4.7+ Muy bueno' },
+            { value: '4.5', label: '4.5+ Bueno' },
+            { value: '4', label: '4.0+ Aceptable' },
+          ].map((rating) => (
+            <label key={rating.value} className="flex items-center gap-3 cursor-pointer group">
               <input
                 type="radio"
                 name="rating"
-                value={rating}
-                checked={selectedRating === rating.toString()}
+                value={rating.value}
+                checked={selectedRating === rating.value}
                 onChange={(e) => setSelectedRating(e.target.value)}
                 className="w-4 h-4 accent-accent"
               />
-              <span className="text-sm text-foreground">{rating}★ y superior</span>
+              <span className="text-sm text-foreground group-hover:text-accent transition-colors">{rating.label}</span>
             </label>
           ))}
-          <label className="flex items-center gap-3 cursor-pointer">
+          <label className="flex items-center gap-3 cursor-pointer group">
             <input
               type="radio"
               name="rating"
@@ -120,94 +114,123 @@ export default function SearchPage() {
               onChange={() => setSelectedRating('')}
               className="w-4 h-4 accent-accent"
             />
-            <span className="text-sm text-foreground">Todos</span>
+            <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">Mostrar todos</span>
           </label>
         </div>
       </div>
 
-      <Button variant="outline" className="w-full" onClick={clearFilters}>
-        Limpiar Filtros
-      </Button>
+      {/* Clear Button */}
+      {activeFiltersCount > 0 && (
+        <Button variant="outline" className="w-full" onClick={clearFilters}>
+          <X className="w-4 h-4 mr-2" />
+          Limpiar filtros ({activeFiltersCount})
+        </Button>
+      )}
     </div>
   )
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-secondary/30">
       <Navbar />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        {/* Header */}
-        <div className="mb-6 sm:mb-10">
-          <div className="flex items-center gap-2 text-sm text-primary mb-2 sm:mb-3">
-            <Search className="w-4 h-4" />
-            <span className="font-medium">Busqueda de profesionales</span>
+      {/* Hero Header */}
+      <div className="bg-primary py-12 sm:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-2 text-accent text-sm font-medium mb-4">
+              <Search className="w-4 h-4" />
+              <span>Busqueda de profesionales</span>
+            </div>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+              Profesionales verificados cerca de ti
+            </h1>
+            <p className="text-white/70 text-lg">
+              Todos nuestros profesionales pasan por un proceso de verificacion riguroso
+            </p>
           </div>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 sm:mb-3">
-            Profesionales verificados cerca de ti
-          </h1>
-          <p className="text-muted-foreground text-sm sm:text-base">
-            {filteredWorkers.length} profesional{filteredWorkers.length !== 1 ? 'es' : ''} disponible{filteredWorkers.length !== 1 ? 's' : ''} en tu zona
-          </p>
-        </div>
 
+          {/* Stats */}
+          <div className="flex flex-wrap gap-6 mt-8">
+            {[
+              { icon: Users, label: 'profesionales disponibles', value: filteredWorkers.length },
+              { icon: Shield, label: 'verificados', value: '100%' },
+              { icon: Star, label: 'calificacion promedio', value: '4.8' },
+            ].map((stat, idx) => (
+              <div key={idx} className="flex items-center gap-3 text-white/80">
+                <stat.icon className="w-5 h-5 text-accent" />
+                <span className="text-sm"><strong className="text-white">{stat.value}</strong> {stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Mobile Filter Toggle */}
-        <div className="lg:hidden mb-4">
+        <div className="lg:hidden mb-6">
           <button
             onClick={() => setFiltersOpen(!filtersOpen)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-border bg-card text-sm font-medium text-foreground w-full justify-between"
+            className="flex items-center gap-3 px-5 py-3 rounded-xl border border-border bg-background text-sm font-semibold text-foreground w-full justify-between shadow-sm"
           >
-            <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-primary" />
-              <span>Filtros</span>
+            <div className="flex items-center gap-3">
+              <SlidersHorizontal className="w-5 h-5 text-primary" />
+              <span>Filtros y ordenamiento</span>
               {activeFiltersCount > 0 && (
-                <span className="w-5 h-5 rounded-full bg-accent text-white text-xs flex items-center justify-center font-bold">
+                <span className="w-6 h-6 rounded-full bg-accent text-white text-xs flex items-center justify-center font-bold">
                   {activeFiltersCount}
                 </span>
               )}
             </div>
-            <ChevronDown className={`w-4 h-4 transition-transform ${filtersOpen ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`w-5 h-5 transition-transform ${filtersOpen ? 'rotate-180' : ''}`} />
           </button>
 
           {/* Mobile Filters Panel */}
           {filtersOpen && (
-            <div className="mt-2 p-4 bg-card border border-border rounded-xl">
+            <Card className="mt-3 p-5 border-border shadow-lg">
               <FiltersContent />
-            </div>
+            </Card>
           )}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Desktop Filters Sidebar */}
           <div className="hidden lg:block lg:col-span-1">
-            <div className="sticky top-20">
-              <div className="bg-card border border-border rounded-xl p-6">
+            <div className="sticky top-24">
+              <Card className="p-6 border-border shadow-sm">
+                <div className="flex items-center gap-3 mb-6 pb-4 border-b border-border">
+                  <Filter className="w-5 h-5 text-primary" />
+                  <h2 className="font-bold text-foreground">Filtros</h2>
+                </div>
                 <FiltersContent />
-              </div>
+              </Card>
             </div>
           </div>
 
           {/* Results */}
-          <div className="lg:col-span-3 space-y-4 sm:space-y-6">
+          <div className="lg:col-span-3 space-y-6">
             {/* Sort Options */}
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center justify-between">
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between bg-background p-4 rounded-xl border border-border">
               <div className="text-sm text-muted-foreground">
-                Mostrando <span className="font-semibold text-foreground">{filteredWorkers.length}</span> resultado{filteredWorkers.length !== 1 ? 's' : ''}
+                Mostrando <span className="font-bold text-foreground">{filteredWorkers.length}</span> profesionales
               </div>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="px-3 py-2 border border-input rounded-md bg-card text-foreground text-sm w-full sm:w-auto"
-              >
-                <option value="distance">Mas Cercanos</option>
-                <option value="rating">Mejor Calificados</option>
-                <option value="price-low">Precio: Menor a Mayor</option>
-                <option value="price-high">Precio: Mayor a Menor</option>
-              </select>
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-muted-foreground">Ordenar por:</span>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="px-4 py-2 border border-input rounded-lg bg-background text-foreground text-sm font-medium focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent"
+                >
+                  <option value="distance">Mas cercanos</option>
+                  <option value="rating">Mejor calificados</option>
+                  <option value="price-low">Precio: menor a mayor</option>
+                  <option value="price-high">Precio: mayor a menor</option>
+                </select>
+              </div>
             </div>
 
             {/* Workers Grid */}
             {filteredWorkers.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
                 {filteredWorkers.map((worker) => (
                   <WorkerCard
                     key={worker.id}
@@ -217,16 +240,18 @@ export default function SearchPage() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-12 sm:py-16 bg-card rounded-xl border border-border">
-                <Search className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
-                <p className="text-lg font-semibold text-foreground mb-2">Sin resultados</p>
-                <p className="text-sm text-muted-foreground mb-6">
-                  No se encontraron profesionales con estos criterios.
+              <Card className="text-center py-16 px-8 border-border">
+                <div className="w-16 h-16 mx-auto bg-secondary rounded-full flex items-center justify-center mb-6">
+                  <Search className="w-8 h-8 text-muted-foreground" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-2">Sin resultados</h3>
+                <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
+                  No encontramos profesionales con estos criterios. Intenta ajustar los filtros.
                 </p>
                 <Button className="bg-accent hover:bg-accent/90 text-white" onClick={clearFilters}>
-                  Limpiar Filtros
+                  Limpiar filtros
                 </Button>
-              </div>
+              </Card>
             )}
           </div>
         </div>
