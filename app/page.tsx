@@ -237,7 +237,7 @@ export default function Home() {
               className="h-14 px-8 bg-accent hover:bg-accent/90 text-white font-semibold"
               onClick={() => router.push('/search')}
             >
-              Encontrar profesional verificado
+              Encontrar profesional
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </div>
@@ -270,7 +270,7 @@ export default function Home() {
                 Describe tu problema
               </h3>
               <p className="text-white/70 leading-relaxed">
-                Usa nuestro diagnostico asistido o busca directamente el servicio que necesitas.
+                Usá nuestro diagnostico asistido o buscá directamente el servicio que necesitas.
               </p>
             </div>
 
@@ -283,7 +283,7 @@ export default function Home() {
                 Elige un profesional
               </h3>
               <p className="text-white/70 leading-relaxed">
-                Compara perfiles, reviews y disponibilidad. Todos verificados.
+                Compará perfiles, reseñas y disponibilidad. Todos verificados.
               </p>
             </div>
 
@@ -296,7 +296,7 @@ export default function Home() {
                 Problema resuelto
               </h3>
               <p className="text-white/70 leading-relaxed">
-                Coordina la visita, recibe el servicio y califica tu experiencia.
+                Coordiná la visita, recibí el servicio y calificá tu experiencia.
               </p>
             </div>
           </div>
