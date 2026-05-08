@@ -100,8 +100,7 @@ export default function Home() {
                 className="h-12 sm:h-14 px-6 sm:px-8 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 font-semibold text-sm sm:text-base w-full sm:w-auto"
                 onClick={() => router.push('/diagnostico')}
               >
-                <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Como funciona
+                ¿Cómo funciona?
               </Button>
             </div>
 
