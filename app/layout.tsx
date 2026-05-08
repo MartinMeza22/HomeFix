@@ -4,7 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { SOS } from '@/components/SOS'
 import './globals.css'
 
-const montserrat = Montserrat({ 
+const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ['300', '400', '500', '600', '700', '800'],
   variable: '--font-montserrat'

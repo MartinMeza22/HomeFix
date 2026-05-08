@@ -10,12 +10,12 @@ import { Card } from '@/components/ui/card'
 import { ReviewCard } from '@/components/ReviewCard'
 import { reviews } from '@/lib/data/reviews'
 import { categories } from '@/lib/data/categories'
-import { 
-  Shield, 
-  Search, 
-  MapPin, 
-  CheckCircle2, 
-  MessageSquare, 
+import {
+  Shield,
+  Search,
+  MapPin,
+  CheckCircle2,
+  MessageSquare,
   Star,
   Zap,
   Users,
@@ -86,16 +86,16 @@ export default function Home() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-10">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="h-12 sm:h-14 px-6 sm:px-8 bg-accent hover:bg-accent/90 text-white font-semibold text-sm sm:text-base w-full sm:w-auto"
                 onClick={() => router.push('/search')}
               >
                 Buscar profesional
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
               </Button>
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 variant="outline"
                 className="h-12 sm:h-14 px-6 sm:px-8 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 font-semibold text-sm sm:text-base w-full sm:w-auto"
                 onClick={() => router.push('/diagnostico')}
@@ -241,8 +241,8 @@ export default function Home() {
 
           {/* CTA After Security */}
           <div className="text-center mt-12">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="h-14 px-8 bg-accent hover:bg-accent/90 text-white font-semibold"
               onClick={() => router.push('/search')}
             >
@@ -312,8 +312,8 @@ export default function Home() {
 
           {/* CTA */}
           <div className="text-center mt-16">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="h-14 px-8 bg-accent hover:bg-accent/90 text-white font-semibold"
               onClick={() => router.push('/diagnostico')}
             >
@@ -387,7 +387,7 @@ export default function Home() {
               <div className="relative">
                 <div className="absolute -inset-8 bg-accent/10 rounded-full blur-3xl" />
                 <Image
-                  src="/logo.png"
+                  src="/homefix-logo.png"
                   alt="HomeFix"
                   width={400}
                   height={400}
@@ -439,8 +439,8 @@ export default function Home() {
               </div>
 
               <div className="mt-10">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="h-14 px-8 bg-accent hover:bg-accent/90 text-white font-semibold"
                   onClick={() => router.push('/search')}
                 >
@@ -484,7 +484,7 @@ export default function Home() {
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Image
-            src="/homefix-logo.png"
+            src="/homefix-logo-negative.png"
             alt="HomeFix"
             width={200}
             height={56}
@@ -497,17 +497,17 @@ export default function Home() {
             Conecta con profesionales verificados cerca de ti. Rapido, seguro y con garantia de satisfaccion.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="h-12 sm:h-16 px-6 sm:px-10 bg-accent hover:bg-accent/90 text-white font-bold text-base sm:text-lg w-full sm:w-auto"
               onClick={() => router.push('/search')}
             >
               Buscar profesional ahora
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
+            <Button
+              size="lg"
+              variant="outline"
               className="h-12 sm:h-16 px-6 sm:px-10 bg-transparent border-2 border-white/30 text-white hover:bg-white/10 font-semibold text-base sm:text-lg w-full sm:w-auto"
               onClick={() => router.push('/diagnostico')}
             >
