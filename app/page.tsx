@@ -488,7 +488,7 @@ export default function Home() {
             alt="HomeFix"
             width={200}
             height={56}
-            className="h-10 sm:h-12 w-auto mx-auto mb-6 sm:mb-8 brightness-0 invert opacity-60"
+            className="h-10 sm:h-12 w-auto mx-auto mb-6 sm:mb-8"
           />
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 text-balance">
             Resuelve tu problema hoy mismo
