@@ -11,18 +11,15 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
           {/* Brand */}
           <div className="md:col-span-2 space-y-6">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center">
               <Image
-                src="/logo.png"
+                src="/homefix-logo.png"
                 alt="HomeFix"
-                width={48}
-                height={48}
-                className="w-12 h-12 bg-white rounded-lg p-1"
+                width={200}
+                height={56}
+                className="h-14 w-auto"
+                priority
               />
-              <span className="font-bold text-2xl tracking-tight">
-                <span className="text-primary-foreground">Home</span>
-                <span className="text-accent">Fix</span>
-              </span>
             </div>
             <p className="text-sm text-primary-foreground/70 leading-relaxed max-w-sm">
               Plataforma de confianza que conecta hogares con profesionales verificados. 

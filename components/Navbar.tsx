@@ -14,20 +14,15 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-18 py-3">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center">
             <Image
-              src="/logo.png"
+              src="/homefix-logo.png"
               alt="HomeFix"
-              width={44}
-              height={44}
-              className="w-11 h-11"
+              width={180}
+              height={50}
+              className="h-10 w-auto"
+              priority
             />
-            <div className="flex flex-col">
-              <span className="font-bold text-lg tracking-tight leading-none">
-                <span className="text-primary">Home</span>
-                <span className="text-accent">Fix</span>
-              </span>
-            </div>
           </Link>
 
           {/* Desktop Menu */}
