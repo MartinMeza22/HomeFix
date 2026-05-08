@@ -13,7 +13,7 @@ export function Footer() {
           <div className="col-span-2 md:col-span-2 space-y-4 sm:space-y-6">
             <div className="flex items-center">
               <Image
-                src="/homefix-logo.png"
+                src="/homefix-logo-negative.png"
                 alt="HomeFix"
                 width={200}
                 height={56}
@@ -116,7 +116,7 @@ export function Footer() {
 
         <div className="border-t border-primary-foreground/10 mt-8 sm:mt-12 pt-6 sm:pt-8">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-xs sm:text-sm text-primary-foreground/60">
-            <p>&copy; 2024 HomeFix. Todos los derechos reservados.</p>
+            <p>&copy; 2026 HomeFix. Todos los derechos reservados.</p>
             <div className="flex items-center gap-6">
               <Link href="#" className="hover:text-accent transition-colors">LinkedIn</Link>
               <Link href="#" className="hover:text-accent transition-colors">Twitter</Link>
