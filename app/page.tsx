@@ -50,81 +50,81 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section - Full Width Image Background */}
-      <section className="relative min-h-[90vh] flex items-center">
+      <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/hero-bg.jpg"
             alt="Profesional de HomeFix trabajando"
             fill
-            className="object-cover"
+            className="object-cover object-center"
             priority
           />
-          {/* Overlay Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/40" />
+          {/* Overlay Gradient - more opaque on mobile for readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/98 via-primary/90 to-primary/60 sm:from-primary/95 sm:via-primary/80 sm:to-primary/40" />
         </div>
 
         {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 w-full">
           <div className="max-w-2xl">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
-              <Shield className="w-4 h-4 text-accent" />
-              <span className="text-sm font-semibold text-white">Profesionales 100% Verificados</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 sm:mb-8">
+              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent" />
+              <span className="text-xs sm:text-sm font-semibold text-white">Profesionales 100% Verificados</span>
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-6">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.15] sm:leading-[1.1] tracking-tight mb-4 sm:mb-6 text-balance">
               Soluciones para tu hogar,{' '}
               <span className="text-accent">con total confianza</span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-lg sm:text-xl text-white/80 mb-8 leading-relaxed max-w-xl">
+            <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-6 sm:mb-8 leading-relaxed max-w-xl">
               Conectamos tu hogar con profesionales verificados. Cada tecnico pasa por validacion de identidad, matriculas y antecedentes.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-10">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 sm:mb-10">
               <Button 
                 size="lg" 
-                className="h-14 px-8 bg-accent hover:bg-accent/90 text-white font-semibold text-base"
+                className="h-12 sm:h-14 px-6 sm:px-8 bg-accent hover:bg-accent/90 text-white font-semibold text-sm sm:text-base w-full sm:w-auto"
                 onClick={() => router.push('/search')}
               >
                 Buscar profesional
-                <ArrowRight className="w-5 h-5 ml-2" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
               </Button>
               <Button 
                 size="lg" 
                 variant="outline"
-                className="h-14 px-8 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 font-semibold text-base"
+                className="h-12 sm:h-14 px-6 sm:px-8 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 font-semibold text-sm sm:text-base w-full sm:w-auto"
                 onClick={() => router.push('/diagnostico')}
               >
-                <Play className="w-5 h-5 mr-2" />
+                <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 Como funciona
               </Button>
             </div>
 
             {/* Trust Badges */}
-            <div className="flex flex-wrap items-center gap-6">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-accent" />
-                <span className="text-sm font-medium text-white/90">DNI verificado</span>
+            <div className="flex flex-wrap items-center gap-3 sm:gap-6">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0" />
+                <span className="text-xs sm:text-sm font-medium text-white/90">DNI verificado</span>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-accent" />
-                <span className="text-sm font-medium text-white/90">Sin antecedentes</span>
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0" />
+                <span className="text-xs sm:text-sm font-medium text-white/90">Sin antecedentes</span>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-accent" />
-                <span className="text-sm font-medium text-white/90">Matriculado</span>
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0" />
+                <span className="text-xs sm:text-sm font-medium text-white/90">Matriculado</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+        {/* Scroll Indicator - hide on very small screens */}
+        <div className="hidden sm:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2">
             <div className="w-1 h-3 bg-white/50 rounded-full animate-bounce" />
           </div>
@@ -132,15 +132,15 @@ export default function Home() {
       </section>
 
       {/* Stats Bar */}
-      <section className="bg-primary py-8 border-y border-white/10">
+      <section className="bg-primary py-6 sm:py-8 border-y border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-white mb-1">
+              <div key={index} className="text-center py-1">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-0.5 sm:mb-1">
                   {stat.value}
                 </div>
-                <div className="text-sm text-white/60 font-medium">
+                <div className="text-xs sm:text-sm text-white/60 font-medium leading-tight">
                   {stat.label}
                 </div>
               </div>
@@ -254,21 +254,21 @@ export default function Home() {
       </section>
 
       {/* How it Works Section */}
-      <section className="py-24 bg-primary">
+      <section className="py-16 sm:py-24 bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Como Funciona</p>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <p className="text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider mb-3">Como Funciona</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 text-balance">
               Simple, rapido y seguro
             </h2>
-            <p className="text-white/70 max-w-2xl mx-auto text-lg">
+            <p className="text-white/70 max-w-2xl mx-auto text-base sm:text-lg">
               Tres pasos simples para resolver cualquier problema en tu hogar
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12 relative">
-            {/* Connection Line */}
-            <div className="hidden md:block absolute top-8 left-1/4 right-1/4 h-0.5 bg-white/20" />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-12 relative">
+            {/* Connection Line - only on sm+ */}
+            <div className="hidden sm:block absolute top-8 left-1/4 right-1/4 h-0.5 bg-white/20" />
 
             {/* Step 1 */}
             <div className="relative text-center">
@@ -345,12 +345,12 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => router.push(`/search?category=${category.id}`)}
-                className="group relative h-64 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+                className="group relative h-44 sm:h-56 md:h-64 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
               >
                 {/* Background Image */}
                 <Image
@@ -362,11 +362,11 @@ export default function Home() {
                 {/* Overlay Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/60 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
                 {/* Content */}
-                <div className="absolute inset-0 flex flex-col justify-end p-5">
-                  <h3 className="font-bold text-white text-lg mb-1 drop-shadow-md">
+                <div className="absolute inset-0 flex flex-col justify-end p-3 sm:p-5">
+                  <h3 className="font-bold text-white text-sm sm:text-base md:text-lg mb-0.5 sm:mb-1 drop-shadow-md">
                     {category.name}
                   </h3>
-                  <p className="text-sm text-white/80">
+                  <p className="text-xs sm:text-sm text-white/80">
                     {category.count}+ profesionales
                   </p>
                 </div>
@@ -454,22 +454,22 @@ export default function Home() {
       </section>
 
       {/* Reviews Section */}
-      <section className="py-24 bg-background">
+      <section className="py-16 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6">
-              <Star className="w-4 h-4 text-accent fill-accent" />
-              <span className="text-sm font-semibold text-accent">4.9 de calificacion promedio</span>
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-accent/10 border border-accent/20 mb-4 sm:mb-6">
+              <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent fill-accent" />
+              <span className="text-xs sm:text-sm font-semibold text-accent">4.9 de calificacion promedio</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-3 sm:mb-4 text-balance">
               Lo que dicen nuestros usuarios
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
               Miles de hogares ya confian en HomeFix
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {reviews.slice(0, 6).map((review) => (
               <ReviewCard key={review.id} review={review} />
             ))}
@@ -478,41 +478,40 @@ export default function Home() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-24 bg-primary relative overflow-hidden">
-        {/* Decorative Elements */}
+      <section className="py-16 sm:py-24 bg-primary relative overflow-hidden">
         <div className="absolute top-0 left-0 w-96 h-96 bg-accent/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/10 rounded-full translate-x-1/2 translate-y-1/2 blur-3xl" />
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Image
-            src="/logo.png"
+            src="/homefix-logo.png"
             alt="HomeFix"
-            width={100}
-            height={100}
-            className="mx-auto mb-8 brightness-0 invert opacity-50"
+            width={200}
+            height={56}
+            className="h-10 sm:h-12 w-auto mx-auto mb-6 sm:mb-8 brightness-0 invert opacity-60"
           />
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 text-balance">
             Resuelve tu problema hoy mismo
           </h2>
-          <p className="text-white/80 text-lg mb-10 max-w-2xl mx-auto">
+          <p className="text-white/80 text-base sm:text-lg mb-8 sm:mb-10 max-w-2xl mx-auto">
             Conecta con profesionales verificados cerca de ti. Rapido, seguro y con garantia de satisfaccion.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <Button 
               size="lg" 
-              className="h-16 px-10 bg-accent hover:bg-accent/90 text-white font-bold text-lg"
+              className="h-12 sm:h-16 px-6 sm:px-10 bg-accent hover:bg-accent/90 text-white font-bold text-base sm:text-lg w-full sm:w-auto"
               onClick={() => router.push('/search')}
             >
               Buscar profesional ahora
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
-              className="h-16 px-10 bg-transparent border-2 border-white/30 text-white hover:bg-white/10 font-semibold text-lg"
+              className="h-12 sm:h-16 px-6 sm:px-10 bg-transparent border-2 border-white/30 text-white hover:bg-white/10 font-semibold text-base sm:text-lg w-full sm:w-auto"
               onClick={() => router.push('/diagnostico')}
             >
-              <MessageSquare className="w-5 h-5 mr-2" />
+              <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
               Diagnostico gratuito
             </Button>
           </div>

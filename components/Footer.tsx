@@ -7,10 +7,10 @@ import { Shield, CheckCircle2 } from 'lucide-react'
 export function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 sm:gap-12">
           {/* Brand */}
-          <div className="md:col-span-2 space-y-6">
+          <div className="col-span-2 md:col-span-2 space-y-4 sm:space-y-6">
             <div className="flex items-center">
               <Image
                 src="/homefix-logo.png"
@@ -114,8 +114,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-primary-foreground/10 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-primary-foreground/60">
+        <div className="border-t border-primary-foreground/10 mt-8 sm:mt-12 pt-6 sm:pt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-xs sm:text-sm text-primary-foreground/60">
             <p>&copy; 2024 HomeFix. Todos los derechos reservados.</p>
             <div className="flex items-center gap-6">
               <Link href="#" className="hover:text-accent transition-colors">LinkedIn</Link>

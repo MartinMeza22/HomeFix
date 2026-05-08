@@ -37,21 +37,63 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
     <main className="min-h-screen bg-background">
       <Navbar />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Back Button */}
-        <Link href="/search" className="flex items-center gap-2 text-primary hover:text-primary/80 mb-6 transition-colors">
+        <Link href="/search" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-4 sm:mb-6 transition-colors text-sm font-medium">
           <span>←</span>
-          <span className="font-medium">Volver</span>
+          <span>Volver a resultados</span>
         </Link>
 
-        {/* Header Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        {/* Mobile: Profile header card */}
+        <div className="md:hidden mb-6">
+          <Card className="overflow-hidden">
+            <div className="relative h-48 w-full">
+              <img src={worker.image} alt={worker.name} className="w-full h-full object-cover object-top" />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                <h1 className="text-2xl font-bold">{worker.name}</h1>
+                <p className="text-sm text-white/80">{worker.category}</p>
+              </div>
+              {worker.verified && (
+                <div className="absolute top-3 right-3">
+                  <VerificationBadge verified={true} />
+                </div>
+              )}
+            </div>
+            <div className="p-4 space-y-3">
+              <RatingStars rating={worker.rating} reviews={worker.reviews} size="md" />
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { label: 'Ubicacion', value: worker.location },
+                  { label: 'Distancia', value: `${worker.distance} km` },
+                  { label: 'Tarifa/Hora', value: `$${worker.hourlyRate}` },
+                  { label: 'Respuesta', value: worker.responseTime }
+                ].map((item, idx) => (
+                  <div key={idx} className="bg-secondary/50 rounded-lg p-2.5">
+                    <p className="text-xs text-muted-foreground uppercase font-medium mb-0.5">{item.label}</p>
+                    <p className="font-bold text-sm text-foreground">{item.value}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-2 pt-1">
+                <WorkerChatClient workerName={worker.name} />
+                <Button size="sm" variant="outline" className="flex-1 text-sm">
+                  Agendar Cita
+                </Button>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Desktop: Two column layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {/* Main Info */}
-          <div className="md:col-span-2 space-y-6">
-            <div className="space-y-4">
+          <div className="md:col-span-2 space-y-5 sm:space-y-6">
+            {/* Desktop header - hidden on mobile */}
+            <div className="hidden md:block space-y-4">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h1 className="text-4xl font-bold text-foreground">{worker.name}</h1>
+                  <h1 className="text-3xl lg:text-4xl font-bold text-foreground">{worker.name}</h1>
                   <p className="text-lg text-muted-foreground mt-1">{worker.category}</p>
                 </div>
                 {worker.verified && <VerificationBadge verified={true} />}
@@ -59,34 +101,35 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
               <RatingStars rating={worker.rating} reviews={worker.reviews} size="lg" />
             </div>
 
-            <Card className="p-6 bg-secondary space-y-4">
-              <h2 className="font-bold text-lg text-foreground">Sobre Mí</h2>
-              <p className="text-foreground leading-relaxed">{worker.bio}</p>
+            {/* Bio */}
+            <Card className="p-4 sm:p-6 bg-secondary/50 space-y-3">
+              <h2 className="font-bold text-base sm:text-lg text-foreground">Sobre Mi</h2>
+              <p className="text-foreground leading-relaxed text-sm sm:text-base">{worker.bio}</p>
             </Card>
 
-            {/* Quick Info */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {/* Quick Info - desktop only */}
+            <div className="hidden md:grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { label: 'Ubicación', value: worker.location },
+                { label: 'Ubicacion', value: worker.location },
                 { label: 'Distancia', value: `${worker.distance} km` },
-                { label: 'Tarifa Hora', value: `Q${worker.hourlyRate}` },
+                { label: 'Tarifa/Hora', value: `$${worker.hourlyRate}` },
                 { label: 'Respuesta', value: worker.responseTime }
               ].map((item, idx) => (
-                <Card key={idx} className="p-4 space-y-2">
+                <Card key={idx} className="p-4 space-y-1">
                   <p className="text-xs text-muted-foreground font-medium uppercase">{item.label}</p>
-                  <p className="font-bold text-foreground">{item.value}</p>
+                  <p className="font-bold text-foreground text-sm">{item.value}</p>
                 </Card>
               ))}
             </div>
 
             {/* Availability */}
-            <Card className="p-6 space-y-4">
-              <h3 className="font-bold text-lg text-foreground">Disponibilidad</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'].map((day) => (
+            <Card className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+              <h3 className="font-bold text-base sm:text-lg text-foreground">Disponibilidad</h3>
+              <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
+                {['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'].map((day) => (
                   <div
                     key={day}
-                    className={`p-3 rounded-lg text-center font-medium text-sm transition-colors ${
+                    className={`p-2 sm:p-3 rounded-lg text-center font-medium text-xs sm:text-sm transition-colors ${
                       worker.availability.includes(day)
                         ? 'bg-primary text-white'
                         : 'bg-muted text-muted-foreground'
@@ -99,58 +142,42 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
             </Card>
 
             {/* Reviews Section */}
-            <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-foreground">
-                Reseñas ({workerReviews.length})
+            <div className="space-y-4 sm:space-y-6">
+              <h2 className="text-xl sm:text-2xl font-bold text-foreground">
+                Resenas ({workerReviews.length})
               </h2>
-
               {workerReviews.length > 0 ? (
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {workerReviews.map((review) => (
                     <ReviewCard key={review.id} review={review} />
                   ))}
                 </div>
               ) : (
                 <Card className="p-8 text-center">
-                  <p className="text-muted-foreground">No hay reseñas aún</p>
+                  <p className="text-muted-foreground">No hay resenas aun</p>
                 </Card>
               )}
             </div>
           </div>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Profile Image */}
+          {/* Desktop Sidebar */}
+          <div className="hidden md:flex flex-col space-y-6">
             <Card className="overflow-hidden">
-              <img
-                src={worker.image}
-                alt={worker.name}
-                className="w-full aspect-square object-cover"
-              />
+              <img src={worker.image} alt={worker.name} className="w-full aspect-square object-cover" />
             </Card>
-
-            {/* Action Buttons */}
             <div className="space-y-3">
               <WorkerChatClient workerName={worker.name} />
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full"
-              >
-                Agendar Cita
-              </Button>
+              <Button size="lg" variant="outline" className="w-full">Agendar Cita</Button>
             </div>
-
-            {/* Stats */}
             <Card className="p-6 space-y-4">
-              <h3 className="font-bold text-foreground">Estadísticas</h3>
+              <h3 className="font-bold text-foreground">Estadisticas</h3>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Trabajos Completados</span>
                   <span className="font-semibold text-foreground">{worker.reviews * 2}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Tasa Aceptación</span>
+                  <span className="text-muted-foreground">Tasa Aceptacion</span>
                   <span className="font-semibold text-foreground">98%</span>
                 </div>
                 <div className="flex justify-between">
@@ -159,16 +186,13 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
                 </div>
               </div>
             </Card>
-
-            {/* Verification Info */}
             {worker.verified && (
               <Card className="p-6 bg-primary/5 border border-primary/20 space-y-3">
                 <h3 className="font-bold text-foreground flex items-center gap-2">
-                  <span>✓</span>
-                  Verificado
+                  <span className="text-accent">✓</span> Verificado
                 </h3>
-                <p className="text-sm text-foreground">
-                  Este profesional ha pasado nuestro proceso completo de verificación de identidad y referencias.
+                <p className="text-sm text-muted-foreground">
+                  Este profesional ha pasado nuestro proceso completo de verificacion de identidad y referencias.
                 </p>
               </Card>
             )}

@@ -57,27 +57,27 @@ export default function RegisterPage() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center p-8">
-        <div className="max-w-4xl w-full space-y-8">
+      <main className="flex-1 flex items-center justify-center p-4 sm:p-8">
+        <div className="max-w-4xl w-full space-y-6 sm:space-y-8">
           {/* Title */}
-          <div className="text-center space-y-3">
-            <h1 className="text-3xl md:text-4xl font-bold text-primary">
+          <div className="text-center space-y-2 sm:space-y-3">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary text-balance">
               Crea tu cuenta en HomeFix
             </h1>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto">
               Selecciona el tipo de cuenta que mejor se adapte a tus necesidades
             </p>
           </div>
 
           {/* Role Cards */}
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {roles.map((role) => {
               const Icon = role.icon
               return (
                 <Card
                   key={role.id}
                   onClick={() => router.push(role.href)}
-                  className={`p-8 cursor-pointer transition-all duration-300 hover:shadow-xl border-2 hover:border-${role.color} group relative overflow-hidden`}
+                  className={`p-5 sm:p-8 cursor-pointer transition-all duration-300 hover:shadow-xl border-2 hover:border-${role.color} group relative overflow-hidden`}
                 >
                   {/* Background Accent */}
                   <div className={`absolute top-0 right-0 w-32 h-32 bg-${role.color}/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500`} />
