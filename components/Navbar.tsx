@@ -43,12 +43,16 @@ export function Navbar() {
 
           {/* Desktop Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" className="text-muted-foreground hover:text-primary font-medium">
-              Iniciar Sesion
-            </Button>
-            <Button className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">
-              Registrarse
-            </Button>
+            <Link href="/login">
+              <Button variant="ghost" className="text-muted-foreground hover:text-primary font-medium">
+                Iniciar Sesion
+              </Button>
+            </Link>
+            <Link href="/register">
+              <Button className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">
+                Registrarse
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -95,8 +99,12 @@ export function Navbar() {
               </Link>
             </div>
             <div className="mt-4 pt-4 border-t border-border space-y-3 px-4">
-              <Button variant="outline" className="w-full border-primary text-primary">Iniciar Sesion</Button>
-              <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">Registrarse</Button>
+              <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                <Button variant="outline" className="w-full border-primary text-primary">Iniciar Sesion</Button>
+              </Link>
+              <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
+                <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">Registrarse</Button>
+              </Link>
             </div>
           </div>
         )}
