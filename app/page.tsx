@@ -322,7 +322,7 @@ export default function Home() {
             <div>
               <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Servicios</p>
               <h2 className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                Profesionales especializados
+                Nuestros rubros más solicitados
               </h2>
               <p className="text-muted-foreground max-w-xl">
                 Expertos verificados en todas las categorias
@@ -330,7 +330,7 @@ export default function Home() {
             </div>
             <Link href="/search" className="mt-6 md:mt-0">
               <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold">
-                Ver todos
+                Trabajá con nosotros
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
