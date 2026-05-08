@@ -81,7 +81,7 @@ export default function Home() {
 
             {/* Subheadline */}
             <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-6 sm:mb-8 leading-relaxed max-w-xl">
-              Conectamos tu hogar con profesionales verificados. Cada tecnico pasa por validacion de identidad y antecedentes.
+              Conectamos tu hogar con profesionales verificados. Cada tecnico pasa por validacion de identidad.
             </p>
 
             {/* CTA Buttons */}
