@@ -189,7 +189,7 @@ export default function Home() {
                   <Fingerprint className="w-8 h-8 text-white" />
                 </div>
                 <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold mb-4">
-                  NIVEL 1
+                  Verificado
                 </div>
                 <h3 className="text-xl font-bold text-primary mb-3">
                   Verificacion de Identidad
@@ -208,13 +208,13 @@ export default function Home() {
                   <BadgeCheck className="w-8 h-8 text-white" />
                 </div>
                 <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold mb-4">
-                  NIVEL 2
+                  Matriculado
                 </div>
                 <h3 className="text-xl font-bold text-primary mb-3">
                   Matriculas Profesionales
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Verificamos las habilitaciones profesionales y certificaciones tecnicas de cada especialidad.
+                  Ofrecemos la posibilidad de que el trabajador cargue su matricula.
                 </p>
               </div>
             </Card>
@@ -227,13 +227,13 @@ export default function Home() {
                   <FileCheck className="w-8 h-8 text-white" />
                 </div>
                 <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold mb-4">
-                  NIVEL 3
+                  Control de Antecedentes
                 </div>
                 <h3 className="text-xl font-bold text-primary mb-3">
                   Control de Antecedentes
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Realizamos verificacion de antecedentes penales para garantizar tu tranquilidad y la de tu familia.
+                  Ofrecemos la posibilidad de que el trabajador cargue sus antecedentes penales.
                 </p>
               </div>
             </Card>
