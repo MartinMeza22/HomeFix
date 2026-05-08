@@ -17,8 +17,8 @@ export default function RegisterPage() {
       description: 'Necesito reparaciones o servicios de mantenimiento para mi hogar',
       icon: User,
       features: [
-        'Publica trabajos y recibe cotizaciones',
-        'Accede a profesionales verificados',
+        'Publica trabajos',
+        'Accede a profesionales',
         'Sistema de pagos seguro',
         'Califica y deja resenas'
       ],
@@ -98,7 +98,7 @@ export default function RegisterPage() {
                 >
                   {/* Background Gradient */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${role.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-                  
+
                   <div className="relative">
                     {/* Icon */}
                     <div className={`w-14 h-14 rounded-2xl ${role.iconBg} flex items-center justify-center mb-6`}>

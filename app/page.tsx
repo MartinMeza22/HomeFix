@@ -67,11 +67,7 @@ export default function Home() {
         {/* Content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 w-full">
           <div className="max-w-2xl">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 sm:mb-8">
-              <Shield className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent" />
-              <span className="text-xs sm:text-sm font-semibold text-white">Profesionales 100% Validados</span>
-            </div>
+
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.15] sm:leading-[1.1] tracking-tight mb-4 sm:mb-6 text-balance">
@@ -81,7 +77,7 @@ export default function Home() {
 
             {/* Subheadline */}
             <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-6 sm:mb-8 leading-relaxed max-w-xl">
-              Conectamos tu hogar con profesionales verificados. Cada tecnico pasa por validacion de identidad y antecedentes.
+              Conectamos tu hogar con profesionales verificados. Cada tecnico pasa por validacion de identidad.
             </p>
 
             {/* CTA Buttons */}
@@ -100,8 +96,7 @@ export default function Home() {
                 className="h-12 sm:h-14 px-6 sm:px-8 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 font-semibold text-sm sm:text-base w-full sm:w-auto"
                 onClick={() => router.push('/diagnostico')}
               >
-                <Play className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                Como funciona
+                ¿Cómo funciona?
               </Button>
             </div>
 
@@ -113,11 +108,7 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0" />
-                <span className="text-xs sm:text-sm font-medium text-white/90">Sin antecedentes</span>
-              </div>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0" />
-                <span className="text-xs sm:text-sm font-medium text-white/90">Matriculado</span>
+                <span className="text-xs sm:text-sm font-medium text-white/90">Verifición facial biométrica</span>
               </div>
             </div>
           </div>
@@ -189,7 +180,7 @@ export default function Home() {
                   <Fingerprint className="w-8 h-8 text-white" />
                 </div>
                 <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold mb-4">
-                  NIVEL 1
+                  Verificado
                 </div>
                 <h3 className="text-xl font-bold text-primary mb-3">
                   Verificacion de Identidad
@@ -208,13 +199,13 @@ export default function Home() {
                   <BadgeCheck className="w-8 h-8 text-white" />
                 </div>
                 <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold mb-4">
-                  NIVEL 2
+                  Matriculado
                 </div>
                 <h3 className="text-xl font-bold text-primary mb-3">
                   Matriculas Profesionales
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Verificamos las habilitaciones profesionales y certificaciones tecnicas de cada especialidad.
+                  Ofrecemos la posibilidad de que el trabajador cargue su matricula.
                 </p>
               </div>
             </Card>
@@ -227,13 +218,13 @@ export default function Home() {
                   <FileCheck className="w-8 h-8 text-white" />
                 </div>
                 <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold mb-4">
-                  NIVEL 3
+                  Control de Antecedentes
                 </div>
                 <h3 className="text-xl font-bold text-primary mb-3">
                   Control de Antecedentes
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Realizamos verificacion de antecedentes penales para garantizar tu tranquilidad y la de tu familia.
+                  Ofrecemos la posibilidad de que el trabajador cargue sus antecedentes penales.
                 </p>
               </div>
             </Card>
@@ -246,7 +237,7 @@ export default function Home() {
               className="h-14 px-8 bg-accent hover:bg-accent/90 text-white font-semibold"
               onClick={() => router.push('/search')}
             >
-              Encontrar profesional verificado
+              Encontrar profesional
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </div>
@@ -279,7 +270,7 @@ export default function Home() {
                 Describe tu problema
               </h3>
               <p className="text-white/70 leading-relaxed">
-                Usa nuestro diagnostico asistido o busca directamente el servicio que necesitas.
+                Usá nuestro diagnostico asistido o buscá directamente el servicio que necesitas.
               </p>
             </div>
 
@@ -292,7 +283,7 @@ export default function Home() {
                 Elige un profesional
               </h3>
               <p className="text-white/70 leading-relaxed">
-                Compara perfiles, reviews y disponibilidad. Todos verificados.
+                Compará perfiles, reseñas y disponibilidad. Todos verificados.
               </p>
             </div>
 
@@ -305,7 +296,7 @@ export default function Home() {
                 Problema resuelto
               </h3>
               <p className="text-white/70 leading-relaxed">
-                Coordina la visita, recibe el servicio y califica tu experiencia.
+                Coordiná la visita, recibí el servicio y calificá tu experiencia.
               </p>
             </div>
           </div>
@@ -331,7 +322,7 @@ export default function Home() {
             <div>
               <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Servicios</p>
               <h2 className="text-3xl md:text-4xl font-bold text-primary mb-2">
-                Profesionales especializados
+                Nuestros rubros más solicitados
               </h2>
               <p className="text-muted-foreground max-w-xl">
                 Expertos verificados en todas las categorias
@@ -339,7 +330,7 @@ export default function Home() {
             </div>
             <Link href="/search" className="mt-6 md:mt-0">
               <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold">
-                Ver todos
+                ¿Buscás labubu?
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
@@ -389,8 +380,8 @@ export default function Home() {
                 <Image
                   src="/homefix-logo.png"
                   alt="HomeFix"
-                  width={400}
-                  height={400}
+                  width={1600}
+                  height={1600}
                   className="relative"
                 />
               </div>
