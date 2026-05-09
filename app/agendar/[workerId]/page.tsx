@@ -271,7 +271,8 @@ export default function AgendarCitaPage() {
         <BackButton href={`/worker/${worker.id}`} label="Volver al perfil" className="mb-6" />
         <div className="mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-1">Agendar cita</h1>
-          <p className="text-muted-foreground text-sm mb-8">Selecciona fecha, horario y tipo de servicio</p>
+          <p className="text-muted-foreground text-sm">Selecciona fecha, horario y tipo de servicio</p>
+        </div>
 
         <div className="space-y-6">
           {/* Calendar */}
