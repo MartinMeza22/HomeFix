@@ -7,6 +7,7 @@ import { Footer } from '@/components/Footer'
 import { DiagnosticoWizard } from '@/components/DiagnosticoWizard'
 import { Card } from '@/components/ui/card'
 import { Zap, Target, Sparkles, HelpCircle, ChevronDown } from 'lucide-react'
+import { BackButton } from '@/components/BackButton'
 
 export default function DiagnosticoPage() {
   const router = useRouter()
@@ -24,7 +25,9 @@ export default function DiagnosticoPage() {
     <main className="min-h-screen bg-background">
       <Navbar />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <BackButton className="mb-8" />
+
         {/* Header */}
         <div className="text-center space-y-6 mb-20">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary border border-border text-sm">

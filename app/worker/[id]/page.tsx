@@ -38,9 +38,11 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Back Button */}
-        <Link href="/search" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-4 sm:mb-6 transition-colors text-sm font-medium">
-          <span>←</span>
-          <span>Volver a resultados</span>
+        <Link href="/search" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors group mb-4 sm:mb-6">
+          <svg className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Volver a resultados
         </Link>
 
         {/* Mobile: Profile header card */}

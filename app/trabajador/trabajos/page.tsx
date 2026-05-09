@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
+import { BackButton } from '@/components/BackButton'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
@@ -219,13 +220,7 @@ function TrabajosContent() {
         {/* Header */}
         <section className="bg-primary py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <button 
-              onClick={() => router.push('/dashboard/trabajador')}
-              className="flex items-center text-white/70 hover:text-white mb-4 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Volver al Dashboard
-            </button>
+            <BackButton href="/dashboard/trabajador" label="Volver al Dashboard" className="mb-4 text-white/70 hover:text-white" />
             <h1 className="text-2xl sm:text-3xl font-bold text-white">Trabajos Disponibles</h1>
             <p className="text-white/70 mt-1">
               Encontramos <span className="text-accent font-semibold">{trabajosFiltrados.length} trabajos</span> de {mockTrabajador.category} en tu zona

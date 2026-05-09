@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { workers } from '@/lib/data/workers'
 import { ArrowLeft, Calendar, Clock, MapPin, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react'
+import { BackButton } from '@/components/BackButton'
 import Link from 'next/link'
 
 const HORARIOS = [
@@ -193,6 +194,7 @@ export default function AgendarCitaPage() {
       <main className="min-h-screen bg-background">
         <Navbar />
         <div className="max-w-lg mx-auto px-4 sm:px-6 py-8">
+
           <button
             onClick={() => setStep('form')}
             className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-6 text-sm font-medium transition-colors"
@@ -218,61 +220,42 @@ export default function AgendarCitaPage() {
             <div>
               <p className="font-bold text-foreground">{worker.name}</p>
               <p className="text-sm text-muted-foreground">{worker.category}</p>
-              <p className="text-xs text-muted-foreground mt-0.5">{worker.location}</p>
             </div>
           </Card>
 
-          {/* Booking details */}
-          <Card className="p-5 space-y-4 mb-5">
-            <h2 className="font-bold text-foreground">Detalle de la cita</h2>
-            <div className="space-y-3 text-sm">
-              <div className="flex items-start gap-3">
-                <Calendar className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-muted-foreground text-xs uppercase font-medium mb-0.5">Fecha</p>
-                  <p className="font-semibold text-foreground capitalize">
-                    {selectedDate?.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Clock className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-muted-foreground text-xs uppercase font-medium mb-0.5">Hora</p>
-                  <p className="font-semibold text-foreground">{selectedHora} hs</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-muted-foreground text-xs uppercase font-medium mb-0.5">Servicio</p>
-                  <p className="font-semibold text-foreground">{selectedServicio}</p>
-                </div>
-              </div>
-              {descripcion && (
-                <div className="flex items-start gap-3">
-                  <div className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="text-muted-foreground text-xs uppercase font-medium mb-0.5">Descripcion</p>
-                    <p className="text-foreground">{descripcion}</p>
-                  </div>
-                </div>
-              )}
+          {/* Details */}
+          <Card className="p-5 mb-6 space-y-3">
+            <div className="flex items-center gap-3">
+              <Calendar className="w-4 h-4 text-primary flex-shrink-0" />
+              <span className="text-sm text-foreground">
+                {selectedDate?.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+              </span>
             </div>
-          </Card>
-
-          <Card className="p-4 bg-primary/5 border-primary/20 mb-6">
-            <p className="text-xs text-muted-foreground">
-              Al confirmar, el profesional recibira una solicitud de cita. 
-              Tenes hasta <strong>2 horas antes</strong> para cancelar sin costo.
-            </p>
+            <div className="flex items-center gap-3">
+              <Clock className="w-4 h-4 text-primary flex-shrink-0" />
+              <span className="text-sm text-foreground">{selectedHora} hs</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+              <span className="text-sm text-foreground">{worker.location}</span>
+            </div>
+            {selectedServicio && (
+              <div className="flex items-center gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                <span className="text-sm text-foreground">{selectedServicio}</span>
+              </div>
+            )}
+            {descripcion && (
+              <p className="text-sm text-muted-foreground pt-2 border-t border-border">"{descripcion}"</p>
+            )}
           </Card>
 
           <Button
             size="lg"
-            className="w-full bg-accent hover:bg-accent/90 text-white font-semibold h-13"
+            className="w-full bg-accent hover:bg-accent/90 text-white font-semibold"
             onClick={handleFinalBook}
           >
+            <CheckCircle2 className="w-5 h-5 mr-2" />
             Confirmar cita
           </Button>
         </div>
@@ -284,39 +267,11 @@ export default function AgendarCitaPage() {
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
-
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-        {/* Header */}
-        <Link
-          href={`/worker/${worker.id}`}
-          className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-6 text-sm font-medium transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Volver al perfil
-        </Link>
-
-        {/* Worker mini card */}
-        <Card className="p-4 mb-6 flex items-center gap-4 bg-secondary/30">
-          <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary/20">
-            <img
-              src={worker.image}
-              alt={worker.name}
-              className="w-full h-full object-cover object-[center_15%]"
-            />
-          </div>
-          <div>
-            <p className="font-bold text-foreground">{worker.name}</p>
-            <p className="text-sm text-muted-foreground">{worker.category} · {worker.location}</p>
-          </div>
-          {worker.verified && (
-            <span className="ml-auto text-xs font-semibold text-accent border border-accent/30 rounded-full px-2 py-0.5">
-              Verificado
-            </span>
-          )}
-        </Card>
-
-        <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-1">Agendar cita</h1>
-        <p className="text-muted-foreground text-sm mb-8">Selecciona fecha, horario y tipo de servicio</p>
+      <div className="max-w-lg mx-auto px-4 sm:px-6 py-8">
+        <BackButton href={`/worker/${worker.id}`} label="Volver al perfil" className="mb-6" />
+        <div className="mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-1">Agendar cita</h1>
+          <p className="text-muted-foreground text-sm mb-8">Selecciona fecha, horario y tipo de servicio</p>
 
         <div className="space-y-6">
           {/* Calendar */}

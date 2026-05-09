@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
+import { BackButton } from '@/components/BackButton'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -119,13 +120,7 @@ export default function MiPerfilPage() {
         {/* Header */}
         <section className="bg-primary py-8">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <button 
-              onClick={() => router.push('/dashboard/trabajador')}
-              className="flex items-center text-white/70 hover:text-white mb-4 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Volver al Dashboard
-            </button>
+            <BackButton href="/dashboard/trabajador" label="Volver al Dashboard" className="mb-4 text-white/70 hover:text-white" />
             <div className="flex items-center justify-between">
               <h1 className="text-2xl sm:text-3xl font-bold text-white">Mi Perfil</h1>
               {!isEditing ? (

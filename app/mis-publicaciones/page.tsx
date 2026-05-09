@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { BackButton } from '@/components/BackButton'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { Card } from '@/components/ui/card'
@@ -259,6 +260,7 @@ export default function MisPublicacionesPage() {
       {/* Header */}
       <div className="bg-primary py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <BackButton href="/dashboard" label="Volver al inicio" className="mb-4 text-white/70 hover:text-white" />
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-white">Mis Publicaciones</h1>
