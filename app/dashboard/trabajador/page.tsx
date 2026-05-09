@@ -299,124 +299,146 @@ export default function TrabajadorDashboard() {
         </section>
 
 
-                {/* Urgencias Entrantes */}
-                <div className="lg:col-span-2">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-destructive/10">
-                        <AlertCircle className="w-5 h-5 text-destructive" />
-                      </div>
-                      <div>
-                        <h2 className="text-2xl font-bold text-foreground">Urgencias Entrantes</h2>
-                        <p className="text-sm text-muted-foreground">Solicitudes de emergencia de clientes cercanos</p>
-                      </div>
-                    </div>
-                    {disponibleUrgencia && urgencias.length > 0 && (
-                      <span className="flex items-center gap-1.5 text-xs font-semibold text-destructive bg-destructive/10 px-3 py-1.5 rounded-full">
-                        <span className="w-2 h-2 rounded-full bg-destructive animate-pulse" />
-                        {urgencias.length} nueva{urgencias.length !== 1 ? 's' : ''}
-                      </span>
-                    )}
+        {/* Urgencias Entrantes - Full Width Section */}
+        <section className="py-6 sm:py-8 bg-gradient-to-b from-destructive/5 to-transparent">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Header con toggle */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <div className="w-12 h-12 rounded-xl bg-destructive/15 flex items-center justify-center">
+                    <AlertCircle className="w-6 h-6 text-destructive" />
                   </div>
-
-                  <div className="flex items-center gap-3 mb-6 p-4 rounded-lg bg-accent/5 border border-accent/20">
-                    <button
-                      onClick={() => setDisponibleUrgencia(!disponibleUrgencia)}
-                      className={`relative w-12 h-6 rounded-full transition-colors flex-shrink-0 ${
-                        disponibleUrgencia ? 'bg-destructive' : 'bg-muted'
-                      }`}
-                      title={disponibleUrgencia ? 'Desactivar para urgencias' : 'Activar para urgencias'}
-                    >
-                      <span
-                        className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-transform ${
-                          disponibleUrgencia ? 'translate-x-6' : 'translate-x-1'
-                        }`}
-                      />
-                    </button>
-                    <div className="flex-1">
-                      <p className="text-sm font-medium text-foreground">
-                        {disponibleUrgencia ? 'Disponible para emergencias' : 'No disponible para emergencias'}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {disponibleUrgencia 
-                          ? 'Recibirás notificaciones de trabajos urgentes en tu zona'
-                          : 'Activa para recibir solicitudes de emergencia'
-                        }
-                      </p>
-                    </div>
-                  </div>
-
-                  {!disponibleUrgencia ? (
-                    <Card className="p-8 text-center border-2 border-dashed border-border/40 bg-muted/20">
-                      <AlertCircle className="w-12 h-12 text-muted-foreground/40 mx-auto mb-3" />
-                      <p className="font-semibold text-muted-foreground mb-1">No estás disponible para urgencias</p>
-                      <p className="text-sm text-muted-foreground/70">Activa el toggle arriba para recibir solicitudes de emergencia de clientes cercanos.</p>
-                    </Card>
-                  ) : urgencias.length === 0 ? (
-                    <Card className="p-8 text-center border-2 border-dashed border-accent/40 bg-accent/5">
-                      <CheckCircle className="w-12 h-12 text-accent/40 mx-auto mb-3" />
-                      <p className="font-semibold text-muted-foreground mb-1">Sin urgencias en este momento</p>
-                      <p className="text-sm text-muted-foreground/70">Cuando un cliente necesite ayuda urgente cerca de ti, aparecerá aquí.</p>
-                    </Card>
-                  ) : (
-                    <div className="space-y-4">
-                      {urgencias.map((urg) => (
-                        <Card key={urg.id} className="overflow-hidden border border-destructive/20 bg-gradient-to-r from-destructive/5 to-transparent hover:shadow-md transition-shadow">
-                          <div className="border-l-4 border-l-destructive p-5">
-                            <div className="flex items-start justify-between gap-4 mb-4">
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 mb-2 flex-wrap">
-                                  <Badge className="bg-destructive text-white border-0 text-xs font-semibold animate-pulse">
-                                    🔴 Urgente
-                                  </Badge>
-                                  <span className="text-xs text-muted-foreground font-medium flex items-center gap-1">
-                                    <Clock className="w-3 h-3" />{urg.hora}
-                                  </span>
-                                </div>
-                                <h3 className="font-bold text-foreground text-lg">{urg.tipo}</h3>
-                                <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{urg.descripcion}</p>
-                              </div>
-                              <div className="flex-shrink-0 text-right">
-                                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 font-bold text-primary text-sm">
-                                  {urg.distancia}
-                                </span>
-                                <p className="text-xs text-muted-foreground mt-1">km</p>
-                              </div>
-                            </div>
-                            
-                            <div className="flex items-center gap-3 mb-4 text-xs text-muted-foreground bg-foreground/5 p-2 rounded">
-                              <span className="flex items-center gap-1.5">
-                                <User className="w-3.5 h-3.5" />{urg.cliente}
-                              </span>
-                              <span className="flex items-center gap-1.5">
-                                <MapPin className="w-3.5 h-3.5" />{urg.ubicacion}
-                              </span>
-                            </div>
-
-                            <div className="flex gap-2 pt-2 border-t border-border/30">
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                className="flex-1 border-muted-foreground/30 text-muted-foreground hover:text-foreground hover:border-muted-foreground"
-                                onClick={() => handleUrgenciaAction(urg.id, 'rechazar')}
-                              >
-                                Rechazar
-                              </Button>
-                              <Button
-                                size="sm"
-                                className="flex-1 bg-destructive hover:bg-destructive/90 text-white font-semibold"
-                                onClick={() => handleUrgenciaAction(urg.id, 'aceptar')}
-                              >
-                                Aceptar urgencia
-                              </Button>
-                            </div>
-                          </div>
-                        </Card>
-                      ))}
-                    </div>
+                  {disponibleUrgencia && urgencias.length > 0 && (
+                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-destructive text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse">
+                      {urgencias.length}
+                    </span>
                   )}
                 </div>
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-foreground">Urgencias Entrantes</h2>
+                  <p className="text-sm text-muted-foreground">Emergencias de clientes cerca de tu ubicacion</p>
+                </div>
+              </div>
+              
+              {/* Toggle elegante */}
+              <div className={`flex items-center gap-3 px-4 py-2.5 rounded-full transition-all ${
+                disponibleUrgencia 
+                  ? 'bg-destructive/10 border border-destructive/30' 
+                  : 'bg-muted/50 border border-border'
+              }`}>
+                <span className={`text-sm font-medium ${disponibleUrgencia ? 'text-destructive' : 'text-muted-foreground'}`}>
+                  {disponibleUrgencia ? 'Activo' : 'Inactivo'}
+                </span>
+                <button
+                  onClick={() => setDisponibleUrgencia(!disponibleUrgencia)}
+                  className={`relative w-11 h-6 rounded-full transition-all duration-300 ${
+                    disponibleUrgencia ? 'bg-destructive shadow-lg shadow-destructive/25' : 'bg-muted-foreground/30'
+                  }`}
+                >
+                  <span
+                    className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow-md transition-all duration-300 ${
+                      disponibleUrgencia ? 'left-5' : 'left-0.5'
+                    }`}
+                  />
+                </button>
+              </div>
+            </div>
 
+            {/* Contenido */}
+            {!disponibleUrgencia ? (
+              <Card className="p-8 sm:p-12 text-center border border-dashed border-muted-foreground/20 bg-card/50">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/50 flex items-center justify-center">
+                  <AlertCircle className="w-8 h-8 text-muted-foreground/50" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-2">Modo urgencias desactivado</h3>
+                <p className="text-sm text-muted-foreground max-w-md mx-auto">
+                  Activa el toggle para recibir solicitudes de emergencia de clientes cercanos a tu ubicacion.
+                </p>
+              </Card>
+            ) : urgencias.length === 0 ? (
+              <Card className="p-8 sm:p-12 text-center border border-accent/30 bg-accent/5">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/20 flex items-center justify-center">
+                  <CheckCircle className="w-8 h-8 text-accent" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-2">Todo tranquilo por ahora</h3>
+                <p className="text-sm text-muted-foreground max-w-md mx-auto">
+                  No hay urgencias pendientes. Cuando un cliente necesite ayuda urgente cerca de ti, aparecera aqui.
+                </p>
+              </Card>
+            ) : (
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {urgencias.map((urg) => (
+                  <Card 
+                    key={urg.id} 
+                    className="group relative overflow-hidden border-destructive/20 hover:border-destructive/40 bg-card hover:shadow-xl transition-all duration-300"
+                  >
+                    {/* Indicador lateral */}
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-destructive" />
+                    
+                    <div className="p-5">
+                      {/* Header */}
+                      <div className="flex items-start justify-between gap-3 mb-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-destructive text-white text-xs font-semibold">
+                              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                              Urgente
+                            </span>
+                            <span className="text-xs text-muted-foreground">{urg.hora}</span>
+                          </div>
+                          <h3 className="font-bold text-foreground leading-tight">{urg.tipo}</h3>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center">
+                            <span className="text-sm font-bold text-primary">{urg.distancia}</span>
+                          </div>
+                          <span className="text-[10px] text-muted-foreground mt-0.5">km</span>
+                        </div>
+                      </div>
+                      
+                      {/* Descripcion */}
+                      <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
+                        {urg.descripcion}
+                      </p>
+                      
+                      {/* Info cliente */}
+                      <div className="flex items-center gap-4 mb-4 py-2.5 px-3 rounded-lg bg-secondary/50 text-xs">
+                        <span className="flex items-center gap-1.5 text-foreground font-medium">
+                          <User className="w-3.5 h-3.5 text-muted-foreground" />
+                          {urg.cliente}
+                        </span>
+                        <span className="flex items-center gap-1.5 text-muted-foreground">
+                          <MapPin className="w-3.5 h-3.5" />
+                          {urg.ubicacion}
+                        </span>
+                      </div>
+                      
+                      {/* Botones */}
+                      <div className="flex gap-2">
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="flex-1 h-9 text-muted-foreground hover:text-foreground border-border"
+                          onClick={() => handleUrgenciaAction(urg.id, 'rechazar')}
+                        >
+                          Rechazar
+                        </Button>
+                        <Button
+                          size="sm"
+                          className="flex-1 h-9 bg-destructive hover:bg-destructive/90 text-white font-medium shadow-lg shadow-destructive/20"
+                          onClick={() => handleUrgenciaAction(urg.id, 'aceptar')}
+                        >
+                          Aceptar
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
 
         {/* Main Content */}
         <section className="py-8 sm:py-12">
