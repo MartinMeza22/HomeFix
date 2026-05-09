@@ -72,7 +72,7 @@ export default function NuevaPublicacionPage() {
 
   // AI Prompt mode state
   const [prompt, setPrompt] = useState('')
-  const [aiMessages, setAiMessages] = useState<{role: 'user' | 'assistant', content: string}[]>([])
+  const [aiMessages, setAiMessages] = useState<{ role: 'user' | 'assistant', content: string }[]>([])
   const [aiStep, setAiStep] = useState<AIStep>('chat')
   const [aiAnalysis, setAiAnalysis] = useState<AIAnalysis | null>(null)
   const [surveyQuestions, setSurveyQuestions] = useState<SurveyQuestion[]>([])
@@ -106,7 +106,7 @@ export default function NuevaPublicacionPage() {
     const hasUrgency = ['urgente', 'rapido', 'ya', 'ahora', 'emergencia'].some(w => lower.includes(w))
     const hasLocation = ['zona', 'barrio', 'direccion', 'ubicacion', 'calle'].some(w => lower.includes(w))
     const isDetailed = message.length > 80
-    
+
     return {
       hasCategory,
       hasUrgency,
@@ -119,7 +119,7 @@ export default function NuevaPublicacionPage() {
   // Generar preguntas de encuesta basadas en el analisis
   const generateSurveyQuestions = (analysis: ReturnType<typeof analyzeMessage>, userMessage: string): SurveyQuestion[] => {
     const questions: SurveyQuestion[] = []
-    
+
     if (!analysis.hasCategory) {
       questions.push({
         id: 'category',
@@ -128,28 +128,28 @@ export default function NuevaPublicacionPage() {
         options: categories.map(c => c.name)
       })
     }
-    
+
     questions.push({
       id: 'location',
       question: 'Donde se encuentra el problema?',
       type: 'single',
       options: ['Cocina', 'Bano', 'Sala', 'Dormitorio', 'Patio/Jardin', 'Garage', 'Toda la casa', 'Otro']
     })
-    
+
     questions.push({
       id: 'urgency',
       question: 'Que tan urgente es?',
       type: 'single',
       options: ['No es urgente (puedo esperar)', 'Normal (esta semana)', 'Urgente (hoy o manana)', 'Emergencia (ahora mismo)']
     })
-    
+
     questions.push({
       id: 'date',
       question: 'Cuando te gustaria que venga el profesional?',
       type: 'single',
       options: ['Lo antes posible', 'Esta semana', 'La proxima semana', 'Fecha especifica']
     })
-    
+
     return questions
   }
 
@@ -164,44 +164,44 @@ export default function NuevaPublicacionPage() {
 
     setTimeout(() => {
       const analysis = analyzeMessage(userMessage)
-      
+
       if (analysis.needsSurvey && aiMessages.length < 2) {
         // Iniciar mini encuesta
         const questions = generateSurveyQuestions(analysis, userMessage)
         setSurveyQuestions(questions)
         setCurrentSurveyIndex(0)
-        
-        setAiMessages(prev => [...prev, { 
-          role: 'assistant', 
+
+        setAiMessages(prev => [...prev, {
+          role: 'assistant',
           content: 'Entiendo! Para encontrarte al mejor profesional, necesito algunos datos mas. Te hago unas preguntas rapidas:'
         }])
-        
+
         setTimeout(() => {
           setAiStep('survey')
         }, 1000)
       } else if (aiMessages.length >= 2 || !analysis.needsSurvey) {
         // Suficiente informacion, generar resumen
-        const detectedCategory = categories.find(cat => 
+        const detectedCategory = categories.find(cat =>
           userMessage.toLowerCase().includes(cat.name.toLowerCase())
         )?.name || 'Plomeria'
-        
+
         setAiAnalysis({
           categorias: [detectedCategory],
           descripcion: userMessage,
           urgencia: analysis.hasUrgency ? 'alta' : 'media',
           titulo: `Servicio de ${detectedCategory} - ${userMessage.slice(0, 40)}...`
         })
-        
-        setAiMessages(prev => [...prev, { 
-          role: 'assistant', 
+
+        setAiMessages(prev => [...prev, {
+          role: 'assistant',
           content: 'Perfecto! Ya tengo toda la informacion. Te muestro un resumen de tu solicitud:'
         }])
-        
+
         setTimeout(() => {
           setAiStep('summary')
         }, 500)
       }
-      
+
       setIsLoading(false)
     }, 1500)
   }
@@ -211,7 +211,7 @@ export default function NuevaPublicacionPage() {
     const updatedQuestions = [...surveyQuestions]
     updatedQuestions[currentSurveyIndex].answer = answer
     setSurveyQuestions(updatedQuestions)
-    
+
     if (currentSurveyIndex < surveyQuestions.length - 1) {
       setCurrentSurveyIndex(prev => prev + 1)
     } else {
@@ -219,16 +219,16 @@ export default function NuevaPublicacionPage() {
       const categoryAnswer = updatedQuestions.find(q => q.id === 'category')?.answer as string
       const urgencyAnswer = updatedQuestions.find(q => q.id === 'urgency')?.answer as string
       const locationAnswer = updatedQuestions.find(q => q.id === 'location')?.answer as string
-      
+
       const urgencyMap: Record<string, AIAnalysis['urgencia']> = {
         'No es urgente (puedo esperar)': 'baja',
         'Normal (esta semana)': 'media',
         'Urgente (hoy o manana)': 'alta',
         'Emergencia (ahora mismo)': 'urgente'
       }
-      
+
       const firstUserMessage = aiMessages.find(m => m.role === 'user')?.content || ''
-      
+
       setAiAnalysis({
         categorias: [categoryAnswer || 'General'],
         descripcion: firstUserMessage,
@@ -236,7 +236,7 @@ export default function NuevaPublicacionPage() {
         titulo: `Servicio de ${categoryAnswer || 'General'} - ${locationAnswer || 'Hogar'}`,
         ubicacion: locationAnswer
       })
-      
+
       setAiStep('summary')
     }
   }
@@ -244,9 +244,9 @@ export default function NuevaPublicacionPage() {
   // Buscar trabajadores recomendados
   const findRecommendedWorkers = () => {
     if (!aiAnalysis) return
-    
+
     setIsLoading(true)
-    
+
     setTimeout(() => {
       // Filtrar por categoria
       const categoryName = aiAnalysis.categorias[0]
@@ -255,7 +255,7 @@ export default function NuevaPublicacionPage() {
         const searchCat = categoryName.toLowerCase()
         return workerCat.includes(searchCat) || searchCat.includes(workerCat) || w.verified
       }).slice(0, 4)
-      
+
       setRecommendedWorkers(filtered.length > 0 ? filtered : workers.slice(0, 4))
       setAiStep('workers')
       setIsLoading(false)
@@ -264,8 +264,8 @@ export default function NuevaPublicacionPage() {
 
   // Toggle seleccion de trabajador
   const toggleWorkerSelection = (workerId: string) => {
-    setSelectedWorkers(prev => 
-      prev.includes(workerId) 
+    setSelectedWorkers(prev =>
+      prev.includes(workerId)
         ? prev.filter(id => id !== workerId)
         : [...prev, workerId]
     )
@@ -274,7 +274,7 @@ export default function NuevaPublicacionPage() {
   // Publicar y conectar con trabajadores
   const handlePublishAndConnect = async () => {
     setIsPublishing(true)
-    
+
     setTimeout(() => {
       const newId = `pub-${Date.now()}`
       // Guardar la nueva publicacion en sessionStorage para que aparezca en Mis Publicaciones
@@ -513,16 +513,15 @@ export default function NuevaPublicacionPage() {
             <div className="flex items-center justify-center gap-2 mb-6">
               {['Describir', 'Detalles', 'Confirmar', 'Conectar'].map((step, idx) => (
                 <div key={step} className="flex items-center">
-                  <div className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                    (aiStep === 'chat' && idx === 0) ||
-                    (aiStep === 'survey' && idx === 1) ||
-                    (aiStep === 'summary' && idx === 2) ||
-                    (aiStep === 'workers' && idx === 3)
+                  <div className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${(aiStep === 'chat' && idx === 0) ||
+                      (aiStep === 'survey' && idx === 1) ||
+                      (aiStep === 'summary' && idx === 2) ||
+                      (aiStep === 'workers' && idx === 3)
                       ? 'bg-accent text-white'
                       : idx < ['chat', 'survey', 'summary', 'workers'].indexOf(aiStep)
                         ? 'bg-accent/20 text-accent'
                         : 'bg-secondary text-muted-foreground'
-                  }`}>
+                    }`}>
                     {step}
                   </div>
                   {idx < 3 && <div className="w-6 h-0.5 bg-secondary mx-1" />}
@@ -569,11 +568,10 @@ export default function NuevaPublicacionPage() {
                             <Sparkles className="w-4 h-4 text-accent" />
                           </div>
                         )}
-                        <div className={`rounded-2xl px-4 py-3 max-w-[85%] ${
-                          msg.role === 'user'
+                        <div className={`rounded-2xl px-4 py-3 max-w-[85%] ${msg.role === 'user'
                             ? 'bg-primary text-white rounded-tr-none'
                             : 'bg-secondary/50 text-foreground rounded-tl-none'
-                        }`}>
+                          }`}>
                           <p className="text-sm whitespace-pre-line">{msg.content}</p>
                         </div>
                       </div>
@@ -611,7 +609,7 @@ export default function NuevaPublicacionPage() {
                             {surveyQuestions[currentSurveyIndex].question}
                           </p>
                         </div>
-                        
+
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                           {surveyQuestions[currentSurveyIndex].options?.map((option) => (
                             <button
@@ -629,7 +627,7 @@ export default function NuevaPublicacionPage() {
                     {/* Progress bar */}
                     <div className="px-4">
                       <div className="h-1.5 bg-secondary rounded-full overflow-hidden">
-                        <div 
+                        <div
                           className="h-full bg-accent transition-all duration-300"
                           style={{ width: `${((currentSurveyIndex + 1) / surveyQuestions.length) * 100}%` }}
                         />
@@ -674,12 +672,11 @@ export default function NuevaPublicacionPage() {
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-muted-foreground">Urgencia:</span>
-                          <Badge className={`border-0 ${
-                            aiAnalysis.urgencia === 'urgente' ? 'bg-red-100 text-red-700' :
-                            aiAnalysis.urgencia === 'alta' ? 'bg-orange-100 text-orange-700' :
-                            aiAnalysis.urgencia === 'media' ? 'bg-amber-100 text-amber-700' :
-                            'bg-green-100 text-green-700'
-                          }`}>
+                          <Badge className={`border-0 ${aiAnalysis.urgencia === 'urgente' ? 'bg-red-100 text-red-700' :
+                              aiAnalysis.urgencia === 'alta' ? 'bg-orange-100 text-orange-700' :
+                                aiAnalysis.urgencia === 'media' ? 'bg-amber-100 text-amber-700' :
+                                  'bg-green-100 text-green-700'
+                            }`}>
                             {aiAnalysis.urgencia.charAt(0).toUpperCase() + aiAnalysis.urgencia.slice(1)}
                           </Badge>
                         </div>
@@ -744,14 +741,13 @@ export default function NuevaPublicacionPage() {
 
                     <div className="space-y-3">
                       {recommendedWorkers.map((worker) => (
-                        <Card 
+                        <Card
                           key={worker.id}
                           onClick={() => toggleWorkerSelection(worker.id)}
-                          className={`p-4 cursor-pointer transition-all ${
-                            selectedWorkers.includes(worker.id)
+                          className={`p-4 cursor-pointer transition-all ${selectedWorkers.includes(worker.id)
                               ? 'border-accent bg-accent/5 ring-2 ring-accent/30'
                               : 'border-border hover:border-accent/50'
-                          }`}
+                            }`}
                         >
                           <div className="flex gap-4">
                             <img
@@ -770,11 +766,10 @@ export default function NuevaPublicacionPage() {
                                   </div>
                                   <p className="text-xs text-muted-foreground">{worker.category}</p>
                                 </div>
-                                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                  selectedWorkers.includes(worker.id)
+                                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${selectedWorkers.includes(worker.id)
                                     ? 'bg-accent border-accent'
                                     : 'border-border'
-                                }`}>
+                                  }`}>
                                   {selectedWorkers.includes(worker.id) && (
                                     <CheckCircle className="w-3 h-3 text-white" />
                                   )}
@@ -809,7 +804,7 @@ export default function NuevaPublicacionPage() {
 
                     <div className="bg-secondary/30 rounded-lg p-3 text-center">
                       <p className="text-xs text-muted-foreground">
-                        {selectedWorkers.length === 0 
+                        {selectedWorkers.length === 0
                           ? 'Selecciona al menos un profesional o publica para todos'
                           : `${selectedWorkers.length} profesional(es) seleccionado(s)`
                         }
@@ -894,9 +889,8 @@ export default function NuevaPublicacionPage() {
             <div className="flex items-center justify-center gap-2">
               {[1, 2, 3].map((step) => (
                 <div key={step} className="flex items-center">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-colors ${
-                    formStep >= step ? 'bg-primary text-white' : 'bg-secondary text-muted-foreground'
-                  }`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-colors ${formStep >= step ? 'bg-primary text-white' : 'bg-secondary text-muted-foreground'
+                    }`}>
                     {formStep > step ? <CheckCircle className="w-4 h-4" /> : step}
                   </div>
                   {step < 3 && (
@@ -919,11 +913,10 @@ export default function NuevaPublicacionPage() {
                         <button
                           key={cat.id}
                           onClick={() => handleCategoryToggle(cat.id)}
-                          className={`p-3 text-sm text-left rounded-lg border transition-all ${
-                            formData.categorias.includes(cat.id)
+                          className={`p-3 text-sm text-left rounded-lg border transition-all ${formData.categorias.includes(cat.id)
                               ? 'border-primary bg-primary/10 text-primary font-medium'
                               : 'border-border hover:border-primary/50'
-                          }`}
+                            }`}
                         >
                           {cat.name}
                         </button>
@@ -935,11 +928,10 @@ export default function NuevaPublicacionPage() {
                         setFormStep(1)
                         setFormData(prev => ({ ...prev, noSeQueCategoria: false, categorias: [] }))
                       }}
-                      className={`mt-3 w-full flex items-center gap-3 p-3 rounded-lg border-2 border-dashed text-sm transition-all ${
-                        formData.noSeQueCategoria
+                      className={`mt-3 w-full flex items-center gap-3 p-3 rounded-lg border-2 border-dashed text-sm transition-all ${formData.noSeQueCategoria
                           ? 'border-accent bg-accent/5 text-accent font-medium'
                           : 'border-border text-muted-foreground hover:border-accent/50 hover:text-accent'
-                      }`}
+                        }`}
                     >
                       <Sparkles className="w-4 h-4 flex-shrink-0" />
                       <span>No se que categoria necesito — Dejame que la IA me ayude a identificarlo</span>
@@ -974,11 +966,10 @@ export default function NuevaPublicacionPage() {
                         <button
                           key={opt.value}
                           onClick={() => setFormData(prev => ({ ...prev, urgencia: opt.value as FormData['urgencia'] }))}
-                          className={`p-2.5 text-sm rounded-lg border transition-all ${
-                            formData.urgencia === opt.value
+                          className={`p-2.5 text-sm rounded-lg border transition-all ${formData.urgencia === opt.value
                               ? `border-transparent ${opt.color} font-medium`
                               : 'border-border hover:border-primary/50'
-                          }`}
+                            }`}
                         >
                           {opt.label}
                         </button>
@@ -1054,7 +1045,7 @@ export default function NuevaPublicacionPage() {
                       type="text"
                       value={formData.ubicacion}
                       onChange={(e) => setFormData(prev => ({ ...prev, ubicacion: e.target.value }))}
-                      placeholder="Ej: Zona 10, Guatemala"
+                      placeholder="Villa Luzuriaga, La Matanza"
                       className="w-full px-4 py-2.5 border border-input rounded-lg bg-background text-foreground text-sm"
                     />
                   </div>
@@ -1089,8 +1080,8 @@ export default function NuevaPublicacionPage() {
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Categoria:</span>
                         <span className="text-foreground">
-                          {formData.noSeQueCategoria 
-                            ? 'Por definir' 
+                          {formData.noSeQueCategoria
+                            ? 'Por definir'
                             : formData.categorias.map(id => categories.find(c => c.id === id)?.name).join(', ')
                           }
                         </span>
