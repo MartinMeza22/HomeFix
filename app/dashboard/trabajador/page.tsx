@@ -41,6 +41,7 @@ const mockTrabajador = {
   memberSince: 'Marzo 2024',
   completedJobs: 312,
   responseRate: 98,
+  disponibleUrgencia: true,
   validaciones: {
     dni: true,
     antecedentes: true,
@@ -130,6 +131,7 @@ const mockCitas = [
 export default function TrabajadorDashboard() {
   const router = useRouter()
   const [trabajador] = useState(mockTrabajador)
+  const [disponibleUrgencia, setDisponibleUrgencia] = useState(mockTrabajador.disponibleUrgencia)
 
   const validacionesCompletadas = Object.values(trabajador.validaciones).filter(Boolean).length
   const totalValidaciones = Object.keys(trabajador.validaciones).length
@@ -368,6 +370,39 @@ export default function TrabajadorDashboard() {
               {/* Right Column - Sidebar */}
               <div className="space-y-6">
                 
+                {/* Disponibilidad Urgencias */}
+                <Card className={`p-6 border-2 transition-colors ${disponibleUrgencia ? 'border-accent bg-accent/5' : 'border-border/50'}`}>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <AlertCircle className={`w-5 h-5 ${disponibleUrgencia ? 'text-accent' : 'text-muted-foreground'}`} />
+                      <h3 className="font-bold text-foreground">Urgencias</h3>
+                    </div>
+                    <button
+                      onClick={() => setDisponibleUrgencia(!disponibleUrgencia)}
+                      className={`relative w-12 h-6 rounded-full transition-colors ${
+                        disponibleUrgencia ? 'bg-accent' : 'bg-muted'
+                      }`}
+                    >
+                      <span
+                        className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
+                          disponibleUrgencia ? 'translate-x-7' : 'translate-x-1'
+                        }`}
+                      />
+                    </button>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    {disponibleUrgencia 
+                      ? 'Estas visible para solicitudes de emergencia en tu zona'
+                      : 'No recibiras solicitudes de emergencia'
+                    }
+                  </p>
+                  {disponibleUrgencia && (
+                    <Badge className="bg-accent/10 text-accent border-0">
+                      Disponible ahora
+                    </Badge>
+                  )}
+                </Card>
+
                 {/* Validaciones */}
                 <Card className="p-6 border-border/50">
                   <div className="flex items-center justify-between mb-4">

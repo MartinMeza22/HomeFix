@@ -11,6 +11,7 @@ export interface Worker {
   verified: boolean
   responseTime: string
   availability: string[]
+  disponibleUrgencia: boolean
 }
 
 export const workers: Worker[] = [
@@ -26,7 +27,8 @@ export const workers: Worker[] = [
     image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop&crop=face',
     verified: true,
     responseTime: '< 1 hora',
-    availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+    availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+    disponibleUrgencia: true
   },
   {
     id: '2',
@@ -40,7 +42,8 @@ export const workers: Worker[] = [
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&h=500&fit=crop&crop=face',
     verified: true,
     responseTime: '< 2 horas',
-    availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
+    availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'],
+    disponibleUrgencia: true
   },
   {
     id: '3',
@@ -54,7 +57,8 @@ export const workers: Worker[] = [
     image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&h=500&fit=crop&crop=face',
     verified: true,
     responseTime: '< 3 horas',
-    availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
+    availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+    disponibleUrgencia: false
   },
   {
     id: '4',
@@ -68,7 +72,8 @@ export const workers: Worker[] = [
     image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&h=500&fit=crop&crop=face',
     verified: true,
     responseTime: '< 4 horas',
-    availability: ['Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+    availability: ['Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+    disponibleUrgencia: false
   },
   {
     id: '5',
@@ -82,7 +87,8 @@ export const workers: Worker[] = [
     image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&h=500&fit=crop&crop=face',
     verified: false,
     responseTime: '< 2 horas',
-    availability: ['Lunes', 'Miércoles', 'Viernes', 'Sábado']
+    availability: ['Lunes', 'Miércoles', 'Viernes', 'Sábado'],
+    disponibleUrgencia: true
   },
   {
     id: '6',
@@ -96,6 +102,7 @@ export const workers: Worker[] = [
     image: 'https://images.unsplash.com/photo-1598550874175-4d0ef436c909?w=500&h=500&fit=crop&crop=face',
     verified: true,
     responseTime: '< 2 horas',
-    availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+    availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+    disponibleUrgencia: false
   }
 ]
