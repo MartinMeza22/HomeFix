@@ -22,7 +22,7 @@ import {
   X,
   Sparkles
 } from 'lucide-react'
-import Navbar from '@/components/Navbar'
+import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 
 // Mock trabajador actual (simulando sesion)
