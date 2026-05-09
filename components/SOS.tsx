@@ -42,12 +42,17 @@ const emergencyConfig = {
   }
 }
 
-export function SOS() {
+export function SOS({ showForTrabajador = true }: { showForTrabajador?: boolean }) {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   const [selectedType, setSelectedType] = useState<EmergencyType>(null)
   const [isContacting, setIsContacting] = useState(false)
   const [contactedWorker, setContactedWorker] = useState<string | null>(null)
+
+  // Ocultar SOS si es trabajador
+  if (!showForTrabajador) {
+    return null
+  }
 
   const handleSelectType = (type: EmergencyType) => {
     setSelectedType(type)

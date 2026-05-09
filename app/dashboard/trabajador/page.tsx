@@ -300,91 +300,116 @@ export default function TrabajadorDashboard() {
 
 
                 {/* Urgencias Entrantes */}
-                <div>
-                  <div className="flex items-center justify-between mb-4">
+                <div className="lg:col-span-2">
+                  <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
-                      <h2 className="text-xl font-bold text-foreground">Urgencias Entrantes</h2>
-                      {disponibleUrgencia && urgencias.length > 0 && (
-                        <span className="flex items-center gap-1.5 text-xs font-medium text-destructive bg-destructive/10 px-2.5 py-1 rounded-full">
-                          <span className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse inline-block" />
-                          {urgencias.length} nueva{urgencias.length !== 1 ? 's' : ''}
-                        </span>
-                      )}
+                      <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-destructive/10">
+                        <AlertCircle className="w-5 h-5 text-destructive" />
+                      </div>
+                      <div>
+                        <h2 className="text-2xl font-bold text-foreground">Urgencias Entrantes</h2>
+                        <p className="text-sm text-muted-foreground">Solicitudes de emergencia de clientes cercanos</p>
+                      </div>
                     </div>
-                    {/* Toggle disponibilidad */}
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-muted-foreground hidden sm:inline">
-                        {disponibleUrgencia ? 'Disponible' : 'No disponible'}
+                    {disponibleUrgencia && urgencias.length > 0 && (
+                      <span className="flex items-center gap-1.5 text-xs font-semibold text-destructive bg-destructive/10 px-3 py-1.5 rounded-full">
+                        <span className="w-2 h-2 rounded-full bg-destructive animate-pulse" />
+                        {urgencias.length} nueva{urgencias.length !== 1 ? 's' : ''}
                       </span>
-                      <button
-                        onClick={() => setDisponibleUrgencia(!disponibleUrgencia)}
-                        className={`relative w-11 h-6 rounded-full transition-colors ${
-                          disponibleUrgencia ? 'bg-destructive' : 'bg-muted'
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-3 mb-6 p-4 rounded-lg bg-accent/5 border border-accent/20">
+                    <button
+                      onClick={() => setDisponibleUrgencia(!disponibleUrgencia)}
+                      className={`relative w-12 h-6 rounded-full transition-colors flex-shrink-0 ${
+                        disponibleUrgencia ? 'bg-destructive' : 'bg-muted'
+                      }`}
+                      title={disponibleUrgencia ? 'Desactivar para urgencias' : 'Activar para urgencias'}
+                    >
+                      <span
+                        className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-transform ${
+                          disponibleUrgencia ? 'translate-x-6' : 'translate-x-1'
                         }`}
-                        title={disponibleUrgencia ? 'Desactivar disponibilidad para urgencias' : 'Activar disponibilidad para urgencias'}
-                      >
-                        <span
-                          className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-transform ${
-                            disponibleUrgencia ? 'translate-x-6' : 'translate-x-1'
-                          }`}
-                        />
-                      </button>
+                      />
+                    </button>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-foreground">
+                        {disponibleUrgencia ? 'Disponible para emergencias' : 'No disponible para emergencias'}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {disponibleUrgencia 
+                          ? 'Recibirás notificaciones de trabajos urgentes en tu zona'
+                          : 'Activa para recibir solicitudes de emergencia'
+                        }
+                      </p>
                     </div>
                   </div>
 
                   {!disponibleUrgencia ? (
-                    <Card className="p-6 text-center border-dashed border-border/60">
-                      <AlertCircle className="w-10 h-10 text-muted-foreground/40 mx-auto mb-2" />
-                      <p className="font-medium text-muted-foreground">No estas disponible para urgencias</p>
-                      <p className="text-sm text-muted-foreground/70 mt-1">Activa el toggle para recibir solicitudes de emergencia de clientes cercanos.</p>
+                    <Card className="p-8 text-center border-2 border-dashed border-border/40 bg-muted/20">
+                      <AlertCircle className="w-12 h-12 text-muted-foreground/40 mx-auto mb-3" />
+                      <p className="font-semibold text-muted-foreground mb-1">No estás disponible para urgencias</p>
+                      <p className="text-sm text-muted-foreground/70">Activa el toggle arriba para recibir solicitudes de emergencia de clientes cercanos.</p>
                     </Card>
                   ) : urgencias.length === 0 ? (
-                    <Card className="p-6 text-center border-dashed border-border/60">
-                      <CheckCircle className="w-10 h-10 text-accent/40 mx-auto mb-2" />
-                      <p className="font-medium text-muted-foreground">Sin urgencias pendientes</p>
-                      <p className="text-sm text-muted-foreground/70 mt-1">Cuando un cliente necesite ayuda urgente en tu zona, apareceran aqui.</p>
+                    <Card className="p-8 text-center border-2 border-dashed border-accent/40 bg-accent/5">
+                      <CheckCircle className="w-12 h-12 text-accent/40 mx-auto mb-3" />
+                      <p className="font-semibold text-muted-foreground mb-1">Sin urgencias en este momento</p>
+                      <p className="text-sm text-muted-foreground/70">Cuando un cliente necesite ayuda urgente cerca de ti, aparecerá aquí.</p>
                     </Card>
                   ) : (
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                       {urgencias.map((urg) => (
-                        <Card key={urg.id} className="p-4 border-l-4 border-l-destructive border-border/50 bg-destructive/5">
-                          <div className="flex items-start gap-3 mb-3">
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2 mb-1 flex-wrap">
-                                <Badge className="bg-destructive/10 text-destructive border-0 text-xs">Urgente</Badge>
-                                <span className="text-xs text-muted-foreground flex items-center gap-1">
-                                  <Clock className="w-3 h-3" />{urg.hora}
-                                </span>
+                        <Card key={urg.id} className="overflow-hidden border border-destructive/20 bg-gradient-to-r from-destructive/5 to-transparent hover:shadow-md transition-shadow">
+                          <div className="border-l-4 border-l-destructive p-5">
+                            <div className="flex items-start justify-between gap-4 mb-4">
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center gap-2 mb-2 flex-wrap">
+                                  <Badge className="bg-destructive text-white border-0 text-xs font-semibold animate-pulse">
+                                    🔴 Urgente
+                                  </Badge>
+                                  <span className="text-xs text-muted-foreground font-medium flex items-center gap-1">
+                                    <Clock className="w-3 h-3" />{urg.hora}
+                                  </span>
+                                </div>
+                                <h3 className="font-bold text-foreground text-lg">{urg.tipo}</h3>
+                                <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{urg.descripcion}</p>
                               </div>
-                              <h3 className="font-semibold text-foreground">{urg.tipo}</h3>
-                              <p className="text-sm text-muted-foreground line-clamp-2 mt-1">{urg.descripcion}</p>
-                              <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
-                                <span className="flex items-center gap-1">
-                                  <User className="w-3 h-3" />{urg.cliente}
+                              <div className="flex-shrink-0 text-right">
+                                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 font-bold text-primary text-sm">
+                                  {urg.distancia}
                                 </span>
-                                <span className="flex items-center gap-1">
-                                  <MapPin className="w-3 h-3" />{urg.ubicacion}
-                                </span>
-                                <span className="font-medium text-primary">{urg.distancia} km</span>
+                                <p className="text-xs text-muted-foreground mt-1">km</p>
                               </div>
                             </div>
-                          </div>
-                          <div className="flex gap-2 pt-2 border-t border-border/40">
-                            <Button
-                              size="sm"
-                              variant="outline"
-                              className="flex-1 border-muted-foreground/30 text-muted-foreground hover:text-foreground"
-                              onClick={() => handleUrgenciaAction(urg.id, 'rechazar')}
-                            >
-                              Rechazar
-                            </Button>
-                            <Button
-                              size="sm"
-                              className="flex-1 bg-destructive hover:bg-destructive/90 text-white"
-                              onClick={() => handleUrgenciaAction(urg.id, 'aceptar')}
-                            >
-                              Aceptar urgencia
-                            </Button>
+                            
+                            <div className="flex items-center gap-3 mb-4 text-xs text-muted-foreground bg-foreground/5 p-2 rounded">
+                              <span className="flex items-center gap-1.5">
+                                <User className="w-3.5 h-3.5" />{urg.cliente}
+                              </span>
+                              <span className="flex items-center gap-1.5">
+                                <MapPin className="w-3.5 h-3.5" />{urg.ubicacion}
+                              </span>
+                            </div>
+
+                            <div className="flex gap-2 pt-2 border-t border-border/30">
+                              <Button
+                                size="sm"
+                                variant="outline"
+                                className="flex-1 border-muted-foreground/30 text-muted-foreground hover:text-foreground hover:border-muted-foreground"
+                                onClick={() => handleUrgenciaAction(urg.id, 'rechazar')}
+                              >
+                                Rechazar
+                              </Button>
+                              <Button
+                                size="sm"
+                                className="flex-1 bg-destructive hover:bg-destructive/90 text-white font-semibold"
+                                onClick={() => handleUrgenciaAction(urg.id, 'aceptar')}
+                              >
+                                Aceptar urgencia
+                              </Button>
+                            </div>
                           </div>
                         </Card>
                       ))}
