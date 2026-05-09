@@ -9,6 +9,7 @@ import Link from 'next/link'
 import { workers } from '@/lib/data/workers'
 import { reviews as allReviews } from '@/lib/data/reviews'
 import { WorkerChatClient } from '@/components/WorkerChatClient'
+import { AgendarCitaButton } from '@/components/AgendarCitaButton'
 
 export default async function WorkerProfile({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
@@ -21,9 +22,7 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
           <h1 className="text-2xl font-bold text-foreground mb-4">Profesional no encontrado</h1>
           <Link href="/search">
-            <Button className="bg-primary hover:bg-primary/90">
-              Volver a Buscar
-            </Button>
+            <Button className="bg-primary hover:bg-primary/90">Volver a Buscar</Button>
           </Link>
         </div>
         <Footer />
@@ -47,27 +46,32 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
         {/* Mobile: Profile header card */}
         <div className="md:hidden mb-6">
           <Card className="overflow-hidden">
-            <div className="relative h-48 w-full">
-              <img src={worker.image} alt={worker.name} className="w-full h-full object-cover object-top" />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                <h1 className="text-2xl font-bold">{worker.name}</h1>
-                <p className="text-sm text-white/80">{worker.category}</p>
-              </div>
+            {/* Square portrait centered on face */}
+            <div className="relative w-full aspect-square overflow-hidden">
+              <img
+                src={worker.image}
+                alt={worker.name}
+                className="w-full h-full object-cover object-[center_15%]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent" />
               {worker.verified && (
                 <div className="absolute top-3 right-3">
                   <VerificationBadge verified={true} />
                 </div>
               )}
+              <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                <h1 className="text-2xl font-bold">{worker.name}</h1>
+                <p className="text-sm text-white/80">{worker.category}</p>
+              </div>
             </div>
-            <div className="p-4 space-y-3">
+            <div className="p-4 space-y-4">
               <RatingStars rating={worker.rating} reviews={worker.reviews} size="md" />
               <div className="grid grid-cols-2 gap-2">
                 {[
                   { label: 'Ubicacion', value: worker.location },
                   { label: 'Distancia', value: `${worker.distance} km` },
-                  { label: 'Tarifa/Hora', value: `$${worker.hourlyRate}` },
-                  { label: 'Respuesta', value: worker.responseTime }
+                  { label: 'Respuesta', value: worker.responseTime },
+                  { label: 'Trabajos', value: `${worker.reviews * 2}+` }
                 ].map((item, idx) => (
                   <div key={idx} className="bg-secondary/50 rounded-lg p-2.5">
                     <p className="text-xs text-muted-foreground uppercase font-medium mb-0.5">{item.label}</p>
@@ -77,9 +81,7 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
               </div>
               <div className="flex gap-2 pt-1">
                 <WorkerChatClient workerName={worker.name} />
-                <Button size="sm" variant="outline" className="flex-1 text-sm">
-                  Agendar Cita
-                </Button>
+                <AgendarCitaButton workerId={worker.id} workerName={worker.name} />
               </div>
             </div>
           </Card>
@@ -89,7 +91,7 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {/* Main Info */}
           <div className="md:col-span-2 space-y-5 sm:space-y-6">
-            {/* Desktop header - hidden on mobile */}
+            {/* Desktop header */}
             <div className="hidden md:block space-y-4">
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -112,8 +114,8 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
               {[
                 { label: 'Ubicacion', value: worker.location },
                 { label: 'Distancia', value: `${worker.distance} km` },
-                { label: 'Tarifa/Hora', value: `$${worker.hourlyRate}` },
-                { label: 'Respuesta', value: worker.responseTime }
+                { label: 'Respuesta', value: worker.responseTime },
+                { label: 'Trabajos', value: `${worker.reviews * 2}+` }
               ].map((item, idx) => (
                 <Card key={idx} className="p-4 space-y-1">
                   <p className="text-xs text-muted-foreground font-medium uppercase">{item.label}</p>
@@ -126,25 +128,31 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
             <Card className="p-4 sm:p-6 space-y-3 sm:space-y-4">
               <h3 className="font-bold text-base sm:text-lg text-foreground">Disponibilidad</h3>
               <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
-                {['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'].map((day) => (
-                  <div
-                    key={day}
-                    className={`p-2 sm:p-3 rounded-lg text-center font-medium text-xs sm:text-sm transition-colors ${
-                      worker.availability.includes(day)
-                        ? 'bg-primary text-white'
-                        : 'bg-muted text-muted-foreground'
-                    }`}
-                  >
-                    {day.substring(0, 3)}
-                  </div>
-                ))}
+                {['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'].map((day) => {
+                  const availDays = worker.availability.map(d =>
+                    d.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                  )
+                  const isAvailable = availDays.includes(day)
+                  return (
+                    <div
+                      key={day}
+                      className={`p-2 sm:p-3 rounded-lg text-center font-medium text-xs sm:text-sm transition-colors ${
+                        isAvailable
+                          ? 'bg-primary text-white'
+                          : 'bg-muted text-muted-foreground'
+                      }`}
+                    >
+                      {day.substring(0, 3)}
+                    </div>
+                  )
+                })}
               </div>
             </Card>
 
             {/* Reviews Section */}
             <div className="space-y-4 sm:space-y-6">
               <h2 className="text-xl sm:text-2xl font-bold text-foreground">
-                Resenas ({workerReviews.length})
+                Reseñas ({workerReviews.length})
               </h2>
               {workerReviews.length > 0 ? (
                 <div className="space-y-3 sm:space-y-4">
@@ -154,22 +162,33 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
                 </div>
               ) : (
                 <Card className="p-8 text-center">
-                  <p className="text-muted-foreground">No hay resenas aun</p>
+                  <p className="text-muted-foreground">No hay reseñas aun</p>
                 </Card>
               )}
             </div>
           </div>
 
           {/* Desktop Sidebar */}
-          <div className="hidden md:flex flex-col space-y-6">
+          <div className="hidden md:flex flex-col space-y-5">
+            {/* Portrait photo - centered on face */}
             <Card className="overflow-hidden">
-              <img src={worker.image} alt={worker.name} className="w-full aspect-square object-cover" />
+              <div className="relative w-full aspect-square overflow-hidden">
+                <img
+                  src={worker.image}
+                  alt={worker.name}
+                  className="w-full h-full object-cover object-[center_15%]"
+                />
+              </div>
             </Card>
+
+            {/* Action Buttons */}
             <div className="space-y-3">
               <WorkerChatClient workerName={worker.name} />
-              <Button size="lg" variant="outline" className="w-full">Agendar Cita</Button>
+              <AgendarCitaButton workerId={worker.id} workerName={worker.name} size="lg" />
             </div>
-            <Card className="p-6 space-y-4">
+
+            {/* Stats */}
+            <Card className="p-5 space-y-4">
               <h3 className="font-bold text-foreground">Estadisticas</h3>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between">
@@ -177,22 +196,24 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
                   <span className="font-semibold text-foreground">{worker.reviews * 2}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Tasa Aceptacion</span>
+                  <span className="text-muted-foreground">Tasa de Aceptacion</span>
                   <span className="font-semibold text-foreground">98%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Tiempo Promedio</span>
-                  <span className="font-semibold text-foreground">2.5 horas</span>
+                  <span className="text-muted-foreground">Tiempo de Respuesta</span>
+                  <span className="font-semibold text-foreground">{worker.responseTime}</span>
                 </div>
               </div>
             </Card>
+
+            {/* Verified badge */}
             {worker.verified && (
-              <Card className="p-6 bg-primary/5 border border-primary/20 space-y-3">
+              <Card className="p-5 bg-primary/5 border border-primary/20 space-y-2">
                 <h3 className="font-bold text-foreground flex items-center gap-2">
-                  <span className="text-accent">✓</span> Verificado
+                  <span className="text-accent text-lg">✓</span> Identidad Verificada
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  Este profesional ha pasado nuestro proceso completo de verificacion de identidad y referencias.
+                  Este profesional completo el proceso de verificacion de identidad, matricula y antecedentes de HomeFix.
                 </p>
               </Card>
             )}
