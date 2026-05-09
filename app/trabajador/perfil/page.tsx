@@ -49,7 +49,7 @@ const mockTrabajador = {
   availability: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
   validaciones: {
     dni: { status: true, label: 'DNI Verificado', date: '2024-03-15' },
-    antecedentes: { status: true, label: 'Sin Antecedentes', date: '2024-03-18' },
+    antecedentes: { status: true, label: 'Antecedentes cargados', date: '2024-03-18' },
     matricula: { status: true, label: 'Matricula Profesional', date: '2024-03-20' },
     domicilio: { status: false, label: 'Comprobante Domicilio', date: null }
   }
