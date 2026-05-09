@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Navbar } from '@/components/Navbar'
@@ -192,6 +192,16 @@ export default function MisPublicacionesPage() {
     { sender: 'trabajador', text: 'Perfecto, entonces confirmo para el jueves a las 10hs.', time: '14:30' }
   ])
   const [filterEstado, setFilterEstado] = useState<PublicacionEstado | 'todas'>('todas')
+  const [sessionData, setSessionData] = useState<Publicacion[]>([])
+
+  useEffect(() => {
+    try {
+      const stored = JSON.parse(sessionStorage.getItem('homefix_publicaciones') || '[]')
+      setSessionData(stored as Publicacion[])
+    } catch {
+      setSessionData([])
+    }
+  }, [])
 
   const getEstadoBadge = (estado: PublicacionEstado) => {
     const styles = {
@@ -213,9 +223,10 @@ export default function MisPublicacionesPage() {
     )
   }
 
+  const allPublicaciones = [...sessionData, ...mockPublicaciones]
   const filteredPublicaciones = filterEstado === 'todas'
-    ? mockPublicaciones
-    : mockPublicaciones.filter(p => p.estado === filterEstado)
+    ? allPublicaciones
+    : allPublicaciones.filter(p => p.estado === filterEstado)
 
   const handleSendMessage = () => {
     if (chatMessage.trim()) {
@@ -269,7 +280,7 @@ export default function MisPublicacionesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex gap-1 -mb-px">
             {[
-              { id: 'publicaciones' as Tab, label: 'Publicaciones', icon: FileText, count: mockPublicaciones.length },
+              { id: 'publicaciones' as Tab, label: 'Publicaciones', icon: FileText, count: allPublicaciones.length },
               { id: 'chats' as Tab, label: 'Chats', icon: MessageSquare, count: mockChats.reduce((acc, c) => acc + c.noLeidos, 0) },
               { id: 'historial' as Tab, label: 'Historial', icon: Clock, count: 0 }
             ].map((tab) => (
@@ -336,7 +347,12 @@ export default function MisPublicacionesPage() {
                   >
                     <div className="flex items-start justify-between gap-4 mb-3">
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="flex items-center gap-2 mb-1 flex-wrap">
+                          {(pub as any).tipo === 'cita' && (
+                            <Badge variant="secondary" className="bg-accent/10 text-accent border-0 text-xs">
+                              Cita agendada
+                            </Badge>
+                          )}
                           <Badge variant="secondary" className="bg-primary/10 text-primary border-0 text-xs">
                             {pub.categoria}
                           </Badge>

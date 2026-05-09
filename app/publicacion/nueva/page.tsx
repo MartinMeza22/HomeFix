@@ -277,6 +277,22 @@ export default function NuevaPublicacionPage() {
     
     setTimeout(() => {
       const newId = `pub-${Date.now()}`
+      // Guardar la nueva publicacion en sessionStorage para que aparezca en Mis Publicaciones
+      const nuevaPublicacion = {
+        id: newId,
+        titulo: aiAnalysis?.titulo || 'Nueva solicitud',
+        descripcion: aiAnalysis?.descripcion || '',
+        categoria: aiAnalysis?.categorias[0] || 'General',
+        estado: 'pendiente',
+        fechaCreacion: new Date().toISOString().split('T')[0],
+        fechaServicio: aiAnalysis?.fecha || '',
+        ubicacion: aiAnalysis?.ubicacion || 'Buenos Aires',
+        urgencia: aiAnalysis?.urgencia || 'media',
+        solicitudes: [],
+        tipo: 'publicacion'
+      }
+      const existing = JSON.parse(sessionStorage.getItem('homefix_publicaciones') || '[]')
+      sessionStorage.setItem('homefix_publicaciones', JSON.stringify([nuevaPublicacion, ...existing]))
       setPublicacionId(newId)
       setIsPublishing(false)
       setPublicacionCreada(true)
@@ -297,6 +313,21 @@ export default function NuevaPublicacionPage() {
     setIsPublishing(true)
     setTimeout(() => {
       const newId = `pub-${Date.now()}`
+      const nuevaPublicacion = {
+        id: newId,
+        titulo: formData.titulo,
+        descripcion: formData.descripcion,
+        categoria: formData.categorias.map(id => categories.find(c => c.id === id)?.name).filter(Boolean).join(', ') || 'General',
+        estado: 'pendiente',
+        fechaCreacion: new Date().toISOString().split('T')[0],
+        fechaServicio: formData.fecha,
+        ubicacion: formData.ubicacion || 'Buenos Aires',
+        urgencia: formData.urgencia,
+        solicitudes: [],
+        tipo: 'publicacion'
+      }
+      const existing = JSON.parse(sessionStorage.getItem('homefix_publicaciones') || '[]')
+      sessionStorage.setItem('homefix_publicaciones', JSON.stringify([nuevaPublicacion, ...existing]))
       setPublicacionId(newId)
       setIsPublishing(false)
       setPublicacionCreada(true)
@@ -898,15 +929,22 @@ export default function NuevaPublicacionPage() {
                         </button>
                       ))}
                     </div>
-                    <label className="flex items-center gap-2 mt-3 text-sm text-muted-foreground cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={formData.noSeQueCategoria}
-                        onChange={(e) => setFormData(prev => ({ ...prev, noSeQueCategoria: e.target.checked }))}
-                        className="rounded border-border"
-                      />
-                      No se que categoria necesito
-                    </label>
+                    <button
+                      onClick={() => {
+                        setMode('prompt')
+                        setFormStep(1)
+                        setFormData(prev => ({ ...prev, noSeQueCategoria: false, categorias: [] }))
+                      }}
+                      className={`mt-3 w-full flex items-center gap-3 p-3 rounded-lg border-2 border-dashed text-sm transition-all ${
+                        formData.noSeQueCategoria
+                          ? 'border-accent bg-accent/5 text-accent font-medium'
+                          : 'border-border text-muted-foreground hover:border-accent/50 hover:text-accent'
+                      }`}
+                    >
+                      <Sparkles className="w-4 h-4 flex-shrink-0" />
+                      <span>No se que categoria necesito — Dejame que la IA me ayude a identificarlo</span>
+                      <ArrowRight className="w-4 h-4 ml-auto flex-shrink-0" />
+                    </button>
                   </div>
 
                   <div>
@@ -950,7 +988,7 @@ export default function NuevaPublicacionPage() {
 
                   <Button
                     onClick={() => setFormStep(2)}
-                    disabled={formData.categorias.length === 0 && !formData.noSeQueCategoria}
+                    disabled={formData.categorias.length === 0}
                     className="w-full bg-primary hover:bg-primary/90 text-white"
                   >
                     Continuar

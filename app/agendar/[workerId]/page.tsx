@@ -105,6 +105,25 @@ export default function AgendarCitaPage() {
   }
 
   const handleFinalBook = () => {
+    // Guardar la cita en sessionStorage para verla en Mis Publicaciones
+    const cita = {
+      id: `cita-${Date.now()}`,
+      titulo: `Cita con ${worker.name}`,
+      descripcion: descripcion || `${selectedServicio} - ${worker.category}`,
+      categoria: worker.category,
+      estado: 'en_progreso',
+      fechaCreacion: new Date().toISOString().split('T')[0],
+      fechaServicio: selectedDate?.toISOString().split('T')[0] || '',
+      horario: selectedHora,
+      ubicacion: worker.location,
+      urgencia: 'media',
+      solicitudes: [],
+      tipo: 'cita',
+      trabajadorNombre: worker.name,
+      trabajadorId: worker.id
+    }
+    const existing = JSON.parse(sessionStorage.getItem('homefix_publicaciones') || '[]')
+    sessionStorage.setItem('homefix_publicaciones', JSON.stringify([cita, ...existing]))
     setStep('success')
   }
 

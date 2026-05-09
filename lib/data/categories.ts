@@ -25,14 +25,6 @@ export const categories: Category[] = [
     count: 289
   },
   {
-    id: '3',
-    name: 'HVAC',
-    icon: '❄️',
-    image: '/categories/hvac.jpg',
-    description: 'Aire acondicionado y calefaccion',
-    count: 156
-  },
-  {
     id: '4',
     name: 'Carpinteria',
     icon: '🪵',
