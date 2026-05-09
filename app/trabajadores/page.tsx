@@ -203,24 +203,6 @@ export default function TrabajadoresLanding() {
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <section className="bg-primary py-6 sm:py-8 border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center py-1">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-accent mb-0.5 sm:mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-xs sm:text-sm text-white/60 font-medium leading-tight">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Benefits Section */}
       <section className="py-20 sm:py-24 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -256,6 +238,24 @@ export default function TrabajadoresLanding() {
               Unirme ahora
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Bar */}
+      <section className="bg-primary py-6 sm:py-8 border-y border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center py-1">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-accent mb-0.5 sm:mb-1">
+                  {stat.value}
+                </div>
+                <div className="text-xs sm:text-sm text-white/60 font-medium leading-tight">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -324,12 +324,12 @@ export default function TrabajadoresLanding() {
                     <Star key={i} className="w-5 h-5 text-accent fill-accent" />
                   ))}
                 </div>
-                
+
                 {/* Quote */}
                 <p className="text-foreground leading-relaxed mb-6 italic">
                   &ldquo;{testimonial.quote}&rdquo;
                 </p>
-                
+
                 {/* Author */}
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-secondary overflow-hidden relative">
@@ -342,7 +342,7 @@ export default function TrabajadoresLanding() {
                     <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                   </div>
                 </div>
-                
+
                 {/* Stats */}
                 <div className="mt-4 pt-4 border-t border-border">
                   <p className="text-sm text-muted-foreground">
@@ -368,7 +368,7 @@ export default function TrabajadoresLanding() {
               <p className="text-white/70 text-lg mb-8">
                 Nuestros profesionales mas activos ganan en promedio <span className="text-accent font-bold">$180.000</span> mensuales trabajando 30 horas semanales.
               </p>
-              
+
               <div className="space-y-4">
                 {[
                   { label: 'Electricistas', avg: '$12.500/trabajo' },
@@ -394,7 +394,7 @@ export default function TrabajadoresLanding() {
                   Empieza a ganar hoy
                 </h3>
                 <p className="text-muted-foreground mb-8">
-                  El registro es gratuito y solo toma 5 minutos. Comienza a recibir solicitudes de trabajo de inmediato.
+                  El registro es gratuito y solo toma 2 minutos. Comienza a recibir solicitudes de trabajo de inmediato.
                 </p>
                 <Button
                   size="lg"
