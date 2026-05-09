@@ -32,7 +32,7 @@ const stats = [
   { value: '15,000+', label: 'Servicios completados' },
   { value: '2,500+', label: 'Profesionales verificados' },
   { value: '4.9', label: 'Calificacion promedio' },
-  { value: '< 30min', label: 'Tiempo de respuesta' },
+  { value: '< 1hs', label: 'Tiempo de respuesta' },
 ]
 
 const trustedBy = [
@@ -122,41 +122,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <section className="bg-primary py-6 sm:py-8 border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center py-1">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-0.5 sm:mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-xs sm:text-sm text-white/60 font-medium leading-tight">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Trusted By Section */}
-      <section className="py-12 bg-secondary/30 border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
-            <p className="text-sm text-muted-foreground font-medium uppercase tracking-wider">
-              Respaldados por
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-              {trustedBy.map((name, idx) => (
-                <span key={idx} className="text-sm font-semibold text-muted-foreground/70 hover:text-primary transition-colors">
-                  {name}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Security Section */}
       <section className="py-24 bg-background">
@@ -364,6 +329,25 @@ export default function Home() {
                 {/* Hover Accent Border */}
                 <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-accent transition-colors" />
               </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+     {/* Stats Bar */}
+      <section className="bg-primary py-6 sm:py-8 border-y border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center py-1">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-0.5 sm:mb-1">
+                  {stat.value}
+                </div>
+                <div className="text-xs sm:text-sm text-white/60 font-medium leading-tight">
+                  {stat.label}
+                </div>
+              </div>
             ))}
           </div>
         </div>
