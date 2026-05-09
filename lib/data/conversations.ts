@@ -54,7 +54,7 @@ export const conversations: Conversation[] = [
     id: 'c2',
     workerId: '2',
     workerName: 'María González',
-    lastMessage: 'Consultaré precios y te aviso',
+    lastMessage: 'Consulto y te aviso',
     lastMessageTime: '2024-04-15T12:00:00',
     unread: 1,
     messages: [
@@ -79,7 +79,7 @@ export const conversations: Conversation[] = [
       {
         id: 'm8',
         sender: 'worker',
-        text: 'Consultaré precios y te aviso',
+        text: 'Consulto y te aviso',
         timestamp: '2024-04-15T12:00:00'
       }
     ]

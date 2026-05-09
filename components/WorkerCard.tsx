@@ -49,11 +49,7 @@ export function WorkerCard({ worker, onSelect }: WorkerCardProps) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-2 border-t border-border">
-          <div>
-            <span className="text-xl font-bold text-foreground">Q{worker.hourlyRate}</span>
-            <span className="text-sm text-muted-foreground">/hora</span>
-          </div>
+        <div className="flex items-center justify-end pt-2 border-t border-border">
           <Button
             size="sm"
             className="bg-primary hover:bg-primary/90 text-primary-foreground"

@@ -32,7 +32,7 @@ const stats = [
   { value: '15,000+', label: 'Servicios completados' },
   { value: '2,500+', label: 'Profesionales verificados' },
   { value: '4.9', label: 'Calificacion promedio' },
-  { value: '< 30min', label: 'Tiempo de respuesta' },
+  { value: '< 1hs', label: 'Tiempo de respuesta' },
 ]
 
 const trustedBy = [
@@ -122,41 +122,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <section className="bg-primary py-6 sm:py-8 border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center py-1">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-0.5 sm:mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-xs sm:text-sm text-white/60 font-medium leading-tight">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Trusted By Section */}
-      <section className="py-12 bg-secondary/30 border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
-            <p className="text-sm text-muted-foreground font-medium uppercase tracking-wider">
-              Respaldados por
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-              {trustedBy.map((name, idx) => (
-                <span key={idx} className="text-sm font-semibold text-muted-foreground/70 hover:text-primary transition-colors">
-                  {name}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Security Section */}
       <section className="py-24 bg-background">
@@ -214,7 +179,7 @@ export default function Home() {
             <Card className="p-8 bg-card border-border hover:border-accent hover:shadow-xl transition-all duration-300 group relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-500" />
               <div className="relative">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <FileCheck className="w-8 h-8 text-white" />
                 </div>
                 <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-bold mb-4">
@@ -369,8 +334,27 @@ export default function Home() {
         </div>
       </section>
 
+
+     {/* Stats Bar */}
+      <section className="bg-primary py-6 sm:py-8 border-y border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center py-1">
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-0.5 sm:mb-1">
+                  {stat.value}
+                </div>
+                <div className="text-xs sm:text-sm text-white/60 font-medium leading-tight">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
-      <section className="py-24 bg-secondary/30">
+      <section className="pt-20 pb-0 bg-secondary/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left - Image/Logo */}
@@ -445,7 +429,7 @@ export default function Home() {
       </section>
 
       {/* Reviews Section */}
-      <section className="py-16 sm:py-24 bg-background">
+      <section className="pt-14 pb-16 sm:pb-24 bg-secondary/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 sm:mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-accent/10 border border-accent/20 mb-4 sm:mb-6">

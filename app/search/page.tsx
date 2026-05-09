@@ -37,8 +37,7 @@ export default function SearchPage() {
     switch (sortBy) {
       case 'distance': result.sort((a, b) => a.distance - b.distance); break
       case 'rating': result.sort((a, b) => b.rating - a.rating); break
-      case 'price-low': result.sort((a, b) => a.hourlyRate - b.hourlyRate); break
-      case 'price-high': result.sort((a, b) => b.hourlyRate - a.hourlyRate); break
+      case 'reviews': result.sort((a, b) => b.reviews - a.reviews); break
     }
     setFilteredWorkers(result)
   }, [selectedCategory, location, selectedRating, sortBy])
