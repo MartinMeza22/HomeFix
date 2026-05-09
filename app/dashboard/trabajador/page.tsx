@@ -298,84 +298,6 @@ export default function TrabajadorDashboard() {
           </div>
         </section>
 
-        {/* Main Content */}
-        <section className="py-8 sm:py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              
-              {/* Left Column - Trabajos y Postulaciones */}
-              <div className="lg:col-span-2 space-y-8">
-                
-                {/* Trabajos Disponibles */}
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-bold text-foreground">Trabajos en tu zona</h2>
-                    <Button variant="ghost" size="sm" onClick={() => router.push('/trabajador/trabajos')}>
-                      Ver todos
-                      <ChevronRight className="w-4 h-4 ml-1" />
-                    </Button>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    {mockTrabajosDisponibles.slice(0, 3).map((trabajo) => (
-                      <Card 
-                        key={trabajo.id} 
-                        className="p-4 hover:shadow-lg transition-shadow cursor-pointer border-border/50"
-                        onClick={() => router.push(`/trabajador/trabajos?id=${trabajo.id}`)}
-                      >
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-1">
-                              {getUrgenciaBadge(trabajo.urgencia)}
-                              <span className="text-xs text-muted-foreground">{trabajo.fechaPublicacion}</span>
-                            </div>
-                            <h3 className="font-semibold text-foreground truncate">{trabajo.titulo}</h3>
-                            <p className="text-sm text-muted-foreground line-clamp-1 mt-1">{trabajo.descripcion}</p>
-                            <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
-                              <span className="flex items-center gap-1">
-                                <MapPin className="w-3 h-3" />
-                                {trabajo.ubicacion}
-                              </span>
-                              <span>{trabajo.distancia} km</span>
-                            </div>
-                          </div>
-                          <Button size="sm" className="bg-primary hover:bg-primary/90 text-white flex-shrink-0">
-                            <Eye className="w-4 h-4 mr-1" />
-                            Ver
-                          </Button>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Mis Postulaciones Recientes */}
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-bold text-foreground">Mis Postulaciones</h2>
-                    <Button variant="ghost" size="sm" onClick={() => router.push('/trabajador/mis-postulaciones')}>
-                      Ver todas
-                      <ChevronRight className="w-4 h-4 ml-1" />
-                    </Button>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    {mockPostulaciones.map((post) => (
-                      <Card key={post.id} className="p-4 border-border/50">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <h3 className="font-semibold text-foreground">{post.trabajo}</h3>
-                            <p className="text-sm text-muted-foreground">Cliente: {post.cliente}</p>
-                          </div>
-                          <div className="text-right">
-                            {getEstadoBadge(post.estado)}
-                            <p className="text-xs text-muted-foreground mt-1">{post.fechaPostulacion}</p>
-                          </div>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
 
                 {/* Urgencias Entrantes */}
                 <div>
@@ -468,6 +390,87 @@ export default function TrabajadorDashboard() {
                       ))}
                     </div>
                   )}
+                </div>
+
+
+        {/* Main Content */}
+        <section className="py-8 sm:py-12">
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              
+              {/* Left Column - Trabajos y Postulaciones */}
+              <div className="lg:col-span-2 space-y-8">
+                
+                {/* Trabajos Disponibles */}
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-xl font-bold text-foreground">Trabajos en tu zona</h2>
+                    <Button variant="ghost" size="sm" onClick={() => router.push('/trabajador/trabajos')}>
+                      Ver todos
+                      <ChevronRight className="w-4 h-4 ml-1" />
+                    </Button>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    {mockTrabajosDisponibles.slice(0, 3).map((trabajo) => (
+                      <Card 
+                        key={trabajo.id} 
+                        className="p-4 hover:shadow-lg transition-shadow cursor-pointer border-border/50"
+                        onClick={() => router.push(`/trabajador/trabajos?id=${trabajo.id}`)}
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 mb-1">
+                              {getUrgenciaBadge(trabajo.urgencia)}
+                              <span className="text-xs text-muted-foreground">{trabajo.fechaPublicacion}</span>
+                            </div>
+                            <h3 className="font-semibold text-foreground truncate">{trabajo.titulo}</h3>
+                            <p className="text-sm text-muted-foreground line-clamp-1 mt-1">{trabajo.descripcion}</p>
+                            <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
+                              <span className="flex items-center gap-1">
+                                <MapPin className="w-3 h-3" />
+                                {trabajo.ubicacion}
+                              </span>
+                              <span>{trabajo.distancia} km</span>
+                            </div>
+                          </div>
+                          <Button size="sm" className="bg-primary hover:bg-primary/90 text-white flex-shrink-0">
+                            <Eye className="w-4 h-4 mr-1" />
+                            Ver
+                          </Button>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Mis Postulaciones Recientes */}
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-xl font-bold text-foreground">Mis Postulaciones</h2>
+                    <Button variant="ghost" size="sm" onClick={() => router.push('/trabajador/mis-postulaciones')}>
+                      Ver todas
+                      <ChevronRight className="w-4 h-4 ml-1" />
+                    </Button>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    {mockPostulaciones.map((post) => (
+                      <Card key={post.id} className="p-4 border-border/50">
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <h3 className="font-semibold text-foreground">{post.trabajo}</h3>
+                            <p className="text-sm text-muted-foreground">Cliente: {post.cliente}</p>
+                          </div>
+                          <div className="text-right">
+                            {getEstadoBadge(post.estado)}
+                            <p className="text-xs text-muted-foreground mt-1">{post.fechaPostulacion}</p>
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Proximas Citas */}
