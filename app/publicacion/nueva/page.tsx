@@ -31,7 +31,7 @@ import {
 } from 'lucide-react'
 
 type CreationMode = 'select' | 'prompt' | 'form'
-type AIStep = 'chat' | 'survey' | 'summary' | 'workers' | 'confirm'
+type AIStep = 'chat' | 'survey' | 'summary' | 'confirm'
 
 interface SurveyQuestion {
   id: string
@@ -77,9 +77,9 @@ export default function NuevaPublicacionPage() {
   const [aiAnalysis, setAiAnalysis] = useState<AIAnalysis | null>(null)
   const [surveyQuestions, setSurveyQuestions] = useState<SurveyQuestion[]>([])
   const [currentSurveyIndex, setCurrentSurveyIndex] = useState(0)
+  const chatEndRef = useRef<HTMLDivElement>(null)
   const [recommendedWorkers, setRecommendedWorkers] = useState<typeof workers>([])
   const [selectedWorkers, setSelectedWorkers] = useState<string[]>([])
-  const chatEndRef = useRef<HTMLDivElement>(null)
 
   // Form mode state
   const [formData, setFormData] = useState<FormData>({
@@ -257,22 +257,13 @@ export default function NuevaPublicacionPage() {
       }).slice(0, 4)
 
       setRecommendedWorkers(filtered.length > 0 ? filtered : workers.slice(0, 4))
-      setAiStep('workers')
+      setAiStep('confirm')
       setIsLoading(false)
     }, 1500)
   }
 
-  // Toggle seleccion de trabajador
-  const toggleWorkerSelection = (workerId: string) => {
-    setSelectedWorkers(prev =>
-      prev.includes(workerId)
-        ? prev.filter(id => id !== workerId)
-        : [...prev, workerId]
-    )
-  }
-
-  // Publicar y conectar con trabajadores
-  const handlePublishAndConnect = async () => {
+  // Publicar publicacion para todos
+  const handlePublish = async () => {
     setIsPublishing(true)
 
     setTimeout(() => {
@@ -374,15 +365,8 @@ export default function NuevaPublicacionPage() {
               Publicacion Creada Exitosamente
             </h1>
             <p className="text-muted-foreground mb-4 max-w-md mx-auto">
-              Tu solicitud ya esta visible para los profesionales.
+              Tu solicitud ya esta visible para los profesionales verificados en tu zona. Pronto te contactaran.
             </p>
-            {selectedWorkers.length > 0 && (
-              <div className="bg-accent/5 border border-accent/20 rounded-lg p-4 mb-6">
-                <p className="text-sm text-foreground">
-                  <span className="font-semibold text-accent">{selectedWorkers.length} profesionales</span> han sido notificados de tu solicitud. Te contactaran pronto.
-                </p>
-              </div>
-            )}
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
                 onClick={() => router.push('/mis-publicaciones')}
@@ -725,92 +709,74 @@ export default function NuevaPublicacionPage() {
                   </div>
                 )}
 
-                {/* Workers Recommendations Step */}
-                {aiStep === 'workers' && (
+                {/* Confirmation Step */}
+                {aiStep === 'confirm' && aiAnalysis && (
                   <div className="space-y-4">
                     <div className="flex gap-3">
                       <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
-                        <Sparkles className="w-4 h-4 text-accent" />
+                        <CheckCircle className="w-4 h-4 text-accent" />
                       </div>
                       <div className="bg-secondary/50 rounded-2xl rounded-tl-none px-4 py-3">
                         <p className="text-sm text-foreground">
-                          Encontre {recommendedWorkers.length} profesionales ideales para tu problema. Selecciona a quienes quieras contactar:
+                          Perfecto! Aqui esta tu publicacion. Confirmala para publicarla para todos los profesionales.
                         </p>
                       </div>
                     </div>
 
-                    <div className="space-y-3">
-                      {recommendedWorkers.map((worker) => (
-                        <Card
-                          key={worker.id}
-                          onClick={() => toggleWorkerSelection(worker.id)}
-                          className={`p-4 cursor-pointer transition-all ${selectedWorkers.includes(worker.id)
-                              ? 'border-accent bg-accent/5 ring-2 ring-accent/30'
-                              : 'border-border hover:border-accent/50'
-                            }`}
-                        >
-                          <div className="flex gap-4">
-                            <img
-                              src={worker.image}
-                              alt={worker.name}
-                              className="w-14 h-14 rounded-full object-cover flex-shrink-0"
-                            />
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-start justify-between gap-2">
-                                <div>
-                                  <div className="flex items-center gap-2">
-                                    <h4 className="font-semibold text-foreground text-sm">{worker.name}</h4>
-                                    {worker.verified && (
-                                      <Shield className="w-4 h-4 text-accent" />
-                                    )}
-                                  </div>
-                                  <p className="text-xs text-muted-foreground">{worker.category}</p>
-                                </div>
-                                <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${selectedWorkers.includes(worker.id)
-                                    ? 'bg-accent border-accent'
-                                    : 'border-border'
-                                  }`}>
-                                  {selectedWorkers.includes(worker.id) && (
-                                    <CheckCircle className="w-3 h-3 text-white" />
-                                  )}
-                                </div>
-                              </div>
-                              <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
-                                <span className="flex items-center gap-1">
-                                  <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-                                  {worker.rating} ({worker.reviews})
-                                </span>
-                                <span className="flex items-center gap-1">
-                                  <MapPin className="w-3 h-3" />
-                                  {worker.distance} km
-                                </span>
-                                <span className="flex items-center gap-1">
-                                  <Clock className="w-3 h-3" />
-                                  {worker.responseTime}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                          <Link
-                            href={`/worker/${worker.id}`}
-                            onClick={(e) => e.stopPropagation()}
-                            className="text-xs text-accent hover:underline mt-2 inline-block"
-                          >
-                            Ver perfil completo
-                          </Link>
-                        </Card>
-                      ))}
-                    </div>
+                    {/* Publication Details */}
+                    <Card className="p-6 space-y-5 border-border bg-card">
+                      <div>
+                        <h3 className="text-lg font-bold text-foreground mb-3">{aiAnalysis.titulo}</h3>
+                        <p className="text-muted-foreground text-sm leading-relaxed">{aiAnalysis.descripcion}</p>
+                      </div>
 
-                    <div className="bg-secondary/30 rounded-lg p-3 text-center">
-                      <p className="text-xs text-muted-foreground">
-                        {selectedWorkers.length === 0
-                          ? 'Selecciona al menos un profesional o publica para todos'
-                          : `${selectedWorkers.length} profesional(es) seleccionado(s)`
-                        }
+                      <div className="border-t border-border pt-5 space-y-3">
+                        <div className="flex items-start justify-between gap-4">
+                          <span className="text-sm text-muted-foreground">Categoria</span>
+                          <Badge className="bg-primary/10 text-primary border-0">
+                            {aiAnalysis.categorias[0]}
+                          </Badge>
+                        </div>
+                        <div className="flex items-center justify-between gap-4">
+                          <span className="text-sm text-muted-foreground">Urgencia</span>
+                          <Badge className={`border-0 capitalize ${
+                            aiAnalysis.urgencia === 'urgente' ? 'bg-destructive text-white' :
+                            aiAnalysis.urgencia === 'alta' ? 'bg-orange-500/10 text-orange-700' :
+                            aiAnalysis.urgencia === 'media' ? 'bg-amber-500/10 text-amber-700' :
+                            'bg-green-500/10 text-green-700'
+                          }`}>
+                            {aiAnalysis.urgencia}
+                          </Badge>
+                        </div>
+                        {aiAnalysis.fecha && (
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="text-sm text-muted-foreground flex items-center gap-2">
+                              <Calendar className="w-4 h-4" />
+                              Fecha requerida
+                            </span>
+                            <span className="text-sm font-medium text-foreground">{aiAnalysis.fecha}</span>
+                          </div>
+                        )}
+                        {aiAnalysis.ubicacion && (
+                          <div className="flex items-center justify-between gap-4">
+                            <span className="text-sm text-muted-foreground flex items-center gap-2">
+                              <MapPin className="w-4 h-4" />
+                              Ubicacion
+                            </span>
+                            <span className="text-sm font-medium text-foreground">{aiAnalysis.ubicacion}</span>
+                          </div>
+                        )}
+                      </div>
+                    </Card>
+
+                    {/* Info */}
+                    <div className="bg-accent/5 border border-accent/20 rounded-lg p-4">
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        Esta publicacion sera visible para todos los profesionales {aiAnalysis.categorias[0]}s verificados de tu zona. Podran postularse y contactarte directamente.
                       </p>
                     </div>
 
+                    {/* Buttons */}
                     <div className="flex gap-3">
                       <Button
                         variant="outline"
@@ -821,7 +787,7 @@ export default function NuevaPublicacionPage() {
                         Volver
                       </Button>
                       <Button
-                        onClick={handlePublishAndConnect}
+                        onClick={handlePublish}
                         disabled={isPublishing}
                         className="flex-1 bg-accent hover:bg-accent/90 text-white"
                       >
@@ -833,7 +799,7 @@ export default function NuevaPublicacionPage() {
                         ) : (
                           <>
                             <CheckCircle className="w-4 h-4 mr-2" />
-                            {selectedWorkers.length > 0 ? 'Publicar y contactar' : 'Publicar para todos'}
+                            Confirmar y publicar
                           </>
                         )}
                       </Button>
