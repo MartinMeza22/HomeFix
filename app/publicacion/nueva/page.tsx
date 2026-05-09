@@ -1016,29 +1016,6 @@ export default function NuevaPublicacionPage() {
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      Presupuesto aproximado (opcional)
-                    </label>
-                    <div className="flex gap-3">
-                      <input
-                        type="number"
-                        value={formData.presupuestoMin}
-                        onChange={(e) => setFormData(prev => ({ ...prev, presupuestoMin: e.target.value }))}
-                        placeholder="Min"
-                        className="flex-1 px-4 py-2.5 border border-input rounded-lg bg-background text-foreground text-sm"
-                      />
-                      <span className="flex items-center text-muted-foreground">-</span>
-                      <input
-                        type="number"
-                        value={formData.presupuestoMax}
-                        onChange={(e) => setFormData(prev => ({ ...prev, presupuestoMax: e.target.value }))}
-                        placeholder="Max"
-                        className="flex-1 px-4 py-2.5 border border-input rounded-lg bg-background text-foreground text-sm"
-                      />
-                    </div>
-                  </div>
-
                   {/* Summary */}
                   <Card className="p-4 bg-secondary/30 border-border">
                     <h4 className="font-medium text-foreground mb-3 text-sm">Resumen</h4>
