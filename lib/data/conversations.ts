@@ -79,7 +79,7 @@ export const conversations: Conversation[] = [
       {
         id: 'm8',
         sender: 'worker',
-        text: 'Consultaré precios y te aviso',
+        text: 'Consulto y te aviso',
         timestamp: '2024-04-15T12:00:00'
       }
     ]
