@@ -61,6 +61,14 @@ export default function LoginPage() {
       return
     }
 
+    // Guardar sesion en sessionStorage para el Navbar
+    const sessionRole = user.role === 'WORKER' ? 'trabajador' : 'cliente'
+    sessionStorage.setItem('homefix_session', JSON.stringify({
+      role: sessionRole,
+      name: user.name,
+      email: user.email
+    }))
+
     if (user.role === 'WORKER') {
       if (user.kycStatus === 'PENDING_KYC') {
         router.push('/verificacion')

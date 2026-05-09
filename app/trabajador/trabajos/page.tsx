@@ -45,7 +45,6 @@ const allTrabajos = [
     urgencia: 'media',
     fechaPublicacion: '2026-05-08',
     fechaServicio: '2026-05-15',
-    presupuestoEstimado: '$15,000 - $25,000',
     cliente: {
       nombre: 'Maria Gonzalez',
       inicial: 'MG',
@@ -63,7 +62,6 @@ const allTrabajos = [
     urgencia: 'alta',
     fechaPublicacion: '2026-05-09',
     fechaServicio: '2026-05-10',
-    presupuestoEstimado: '$10,000 - $20,000',
     cliente: {
       nombre: 'Juan Perez',
       inicial: 'JP',
@@ -81,7 +79,6 @@ const allTrabajos = [
     urgencia: 'baja',
     fechaPublicacion: '2026-05-07',
     fechaServicio: '2026-05-20',
-    presupuestoEstimado: '$50,000 - $80,000',
     cliente: {
       nombre: 'Laura Martinez',
       inicial: 'LM',
@@ -99,7 +96,6 @@ const allTrabajos = [
     urgencia: 'media',
     fechaPublicacion: '2026-05-06',
     fechaServicio: '2026-05-18',
-    presupuestoEstimado: '$20,000 - $35,000',
     cliente: {
       nombre: 'Roberto Sanchez',
       inicial: 'RS',
@@ -117,7 +113,6 @@ const allTrabajos = [
     urgencia: 'alta',
     fechaPublicacion: '2026-05-09',
     fechaServicio: '2026-05-09',
-    presupuestoEstimado: '$8,000 - $15,000',
     cliente: {
       nombre: 'Ana Fernandez',
       inicial: 'AF',
