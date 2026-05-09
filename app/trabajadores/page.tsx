@@ -426,7 +426,6 @@ export default function TrabajadoresLanding() {
           <div className="space-y-4">
             {[
               { q: 'Cuanto cuesta registrarse?', a: 'El registro es 100% gratuito. No hay costos ocultos para crear tu perfil.' },
-              { q: 'Que comision cobra HomeFix?', a: 'Cobramos una comision del 10% por trabajo completado. Sin cargos mensuales ni sorpresas.' },
               { q: 'Como recibo los pagos?', a: 'Los clientes te pagan directamente. HomeFix no retiene tu dinero.' },
               { q: 'Necesito estar matriculado?', a: 'No es obligatorio, pero los profesionales matriculados reciben un badge especial y mas visibilidad.' }
             ].map((faq, idx) => (
