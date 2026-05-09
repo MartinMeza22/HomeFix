@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -108,6 +108,40 @@ const mockPostulaciones = [
   }
 ]
 
+// Mock urgencias entrantes
+const mockUrgencias = [
+  {
+    id: 'urg-1',
+    tipo: 'Problema Electrico',
+    descripcion: 'Se fue la luz en todo el departamento, saltaron los diferenciales y no suben.',
+    cliente: 'Maria Gomez',
+    ubicacion: 'Palermo, Buenos Aires',
+    distancia: 1.2,
+    hora: 'Hace 3 min',
+    estado: 'pendiente' as const
+  },
+  {
+    id: 'urg-2',
+    tipo: 'Cortocircuito',
+    descripcion: 'Hay un cable que chispea en la cocina, olor a quemado. Necesito ayuda urgente.',
+    cliente: 'Roberto Perez',
+    ubicacion: 'Villa Crespo, Buenos Aires',
+    distancia: 2.4,
+    hora: 'Hace 8 min',
+    estado: 'pendiente' as const
+  },
+  {
+    id: 'urg-3',
+    tipo: 'Sin suministro electrico',
+    descripcion: 'Corte de luz solo en mi unidad, los vecinos tienen luz. Tablero personal.',
+    cliente: 'Laura Sanchez',
+    ubicacion: 'Recoleta, Buenos Aires',
+    distancia: 3.1,
+    hora: 'Hace 15 min',
+    estado: 'pendiente' as const
+  }
+]
+
 // Mock citas proximas
 const mockCitas = [
   {
@@ -132,6 +166,18 @@ export default function TrabajadorDashboard() {
   const router = useRouter()
   const [trabajador] = useState(mockTrabajador)
   const [disponibleUrgencia, setDisponibleUrgencia] = useState(mockTrabajador.disponibleUrgencia)
+  const [urgencias, setUrgencias] = useState(mockUrgencias)
+
+  const handleUrgenciaAction = (urgenciaId: string, action: 'aceptar' | 'rechazar') => {
+    setUrgencias(prev => prev.filter(u => u.id !== urgenciaId))
+    
+    if (action === 'aceptar') {
+      // Aqui se integraria con backend para notificar al cliente
+      console.log('[v0] Urgencia aceptada:', urgenciaId)
+    } else {
+      console.log('[v0] Urgencia rechazada:', urgenciaId)
+    }
+  }
 
   const validacionesCompletadas = Object.values(trabajador.validaciones).filter(Boolean).length
   const totalValidaciones = Object.keys(trabajador.validaciones).length
@@ -331,6 +377,99 @@ export default function TrabajadorDashboard() {
                   </div>
                 </div>
 
+                {/* Urgencias Entrantes */}
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <h2 className="text-xl font-bold text-foreground">Urgencias Entrantes</h2>
+                      {disponibleUrgencia && urgencias.length > 0 && (
+                        <span className="flex items-center gap-1.5 text-xs font-medium text-destructive bg-destructive/10 px-2.5 py-1 rounded-full">
+                          <span className="w-1.5 h-1.5 rounded-full bg-destructive animate-pulse inline-block" />
+                          {urgencias.length} nueva{urgencias.length !== 1 ? 's' : ''}
+                        </span>
+                      )}
+                    </div>
+                    {/* Toggle disponibilidad */}
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-muted-foreground hidden sm:inline">
+                        {disponibleUrgencia ? 'Disponible' : 'No disponible'}
+                      </span>
+                      <button
+                        onClick={() => setDisponibleUrgencia(!disponibleUrgencia)}
+                        className={`relative w-11 h-6 rounded-full transition-colors ${
+                          disponibleUrgencia ? 'bg-destructive' : 'bg-muted'
+                        }`}
+                        title={disponibleUrgencia ? 'Desactivar disponibilidad para urgencias' : 'Activar disponibilidad para urgencias'}
+                      >
+                        <span
+                          className={`absolute top-1 w-4 h-4 rounded-full bg-white shadow transition-transform ${
+                            disponibleUrgencia ? 'translate-x-6' : 'translate-x-1'
+                          }`}
+                        />
+                      </button>
+                    </div>
+                  </div>
+
+                  {!disponibleUrgencia ? (
+                    <Card className="p-6 text-center border-dashed border-border/60">
+                      <AlertCircle className="w-10 h-10 text-muted-foreground/40 mx-auto mb-2" />
+                      <p className="font-medium text-muted-foreground">No estas disponible para urgencias</p>
+                      <p className="text-sm text-muted-foreground/70 mt-1">Activa el toggle para recibir solicitudes de emergencia de clientes cercanos.</p>
+                    </Card>
+                  ) : urgencias.length === 0 ? (
+                    <Card className="p-6 text-center border-dashed border-border/60">
+                      <CheckCircle className="w-10 h-10 text-accent/40 mx-auto mb-2" />
+                      <p className="font-medium text-muted-foreground">Sin urgencias pendientes</p>
+                      <p className="text-sm text-muted-foreground/70 mt-1">Cuando un cliente necesite ayuda urgente en tu zona, apareceran aqui.</p>
+                    </Card>
+                  ) : (
+                    <div className="space-y-3">
+                      {urgencias.map((urg) => (
+                        <Card key={urg.id} className="p-4 border-l-4 border-l-destructive border-border/50 bg-destructive/5">
+                          <div className="flex items-start gap-3 mb-3">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 mb-1 flex-wrap">
+                                <Badge className="bg-destructive/10 text-destructive border-0 text-xs">Urgente</Badge>
+                                <span className="text-xs text-muted-foreground flex items-center gap-1">
+                                  <Clock className="w-3 h-3" />{urg.hora}
+                                </span>
+                              </div>
+                              <h3 className="font-semibold text-foreground">{urg.tipo}</h3>
+                              <p className="text-sm text-muted-foreground line-clamp-2 mt-1">{urg.descripcion}</p>
+                              <div className="flex items-center gap-3 mt-2 text-xs text-muted-foreground">
+                                <span className="flex items-center gap-1">
+                                  <User className="w-3 h-3" />{urg.cliente}
+                                </span>
+                                <span className="flex items-center gap-1">
+                                  <MapPin className="w-3 h-3" />{urg.ubicacion}
+                                </span>
+                                <span className="font-medium text-primary">{urg.distancia} km</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex gap-2 pt-2 border-t border-border/40">
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="flex-1 border-muted-foreground/30 text-muted-foreground hover:text-foreground"
+                              onClick={() => handleUrgenciaAction(urg.id, 'rechazar')}
+                            >
+                              Rechazar
+                            </Button>
+                            <Button
+                              size="sm"
+                              className="flex-1 bg-destructive hover:bg-destructive/90 text-white"
+                              onClick={() => handleUrgenciaAction(urg.id, 'aceptar')}
+                            >
+                              Aceptar urgencia
+                            </Button>
+                          </div>
+                        </Card>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
                 {/* Proximas Citas */}
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -370,39 +509,6 @@ export default function TrabajadorDashboard() {
               {/* Right Column - Sidebar */}
               <div className="space-y-6">
                 
-                {/* Disponibilidad Urgencias */}
-                <Card className={`p-6 border-2 transition-colors ${disponibleUrgencia ? 'border-accent bg-accent/5' : 'border-border/50'}`}>
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                      <AlertCircle className={`w-5 h-5 ${disponibleUrgencia ? 'text-accent' : 'text-muted-foreground'}`} />
-                      <h3 className="font-bold text-foreground">Urgencias</h3>
-                    </div>
-                    <button
-                      onClick={() => setDisponibleUrgencia(!disponibleUrgencia)}
-                      className={`relative w-12 h-6 rounded-full transition-colors ${
-                        disponibleUrgencia ? 'bg-accent' : 'bg-muted'
-                      }`}
-                    >
-                      <span
-                        className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-transform ${
-                          disponibleUrgencia ? 'translate-x-7' : 'translate-x-1'
-                        }`}
-                      />
-                    </button>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    {disponibleUrgencia 
-                      ? 'Estas visible para solicitudes de emergencia en tu zona'
-                      : 'No recibiras solicitudes de emergencia'
-                    }
-                  </p>
-                  {disponibleUrgencia && (
-                    <Badge className="bg-accent/10 text-accent border-0">
-                      Disponible ahora
-                    </Badge>
-                  )}
-                </Card>
-
                 {/* Validaciones */}
                 <Card className="p-6 border-border/50">
                   <div className="flex items-center justify-between mb-4">
