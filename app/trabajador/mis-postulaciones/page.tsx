@@ -19,7 +19,7 @@ import {
   Inbox
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import { Footer } from '@/components/Footer'
 
 interface Postulacion {
   id: string

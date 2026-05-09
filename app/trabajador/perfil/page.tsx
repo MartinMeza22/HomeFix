@@ -26,7 +26,7 @@ import {
   Clock
 } from 'lucide-react'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import { Footer } from '@/components/Footer'
 
 // Mock trabajador data
 const mockTrabajador = {
