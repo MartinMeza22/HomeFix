@@ -29,7 +29,8 @@ export default function ClientRegisterPage() {
     confirmPassword: ''
   })
 
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+  // Password validation: min 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char (any non-alphanumeric)
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
@@ -101,7 +102,7 @@ export default function ClientRegisterPage() {
     if (/[a-z]/.test(p)) strength++
     if (/[A-Z]/.test(p)) strength++
     if (/\d/.test(p)) strength++
-    if (/[@$!%*?&]/.test(p)) strength++
+    if (/[^A-Za-z\d]/.test(p)) strength++
     return strength
   }
 
