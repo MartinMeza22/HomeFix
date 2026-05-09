@@ -26,21 +26,21 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             <Link href="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               Inicio
             </Link>
             <Link href="/search" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
               Buscar Profesionales
             </Link>
-            <Link href="/diagnostico" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              Diagnostico
+            <Link href="/publicacion/nueva" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              Publicar Solicitud
             </Link>
-            <Link href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              Dashboard
+            <Link href="/mis-publicaciones" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              Mis Publicaciones
             </Link>
-            <Link href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-              Trabajá con nosotros
+            <Link href="/trabajadores" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+              Soy Profesional
             </Link>
           </div>
 
@@ -87,18 +87,25 @@ export function Navbar() {
                 Buscar Profesionales
               </Link>
               <Link
-                href="/diagnostico"
+                href="/publicacion/nueva"
                 className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Diagnostico
+                Publicar Solicitud
               </Link>
               <Link
-                href="/dashboard"
+                href="/mis-publicaciones"
                 className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors font-medium"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Dashboard
+                Mis Publicaciones
+              </Link>
+              <Link
+                href="/trabajadores"
+                className="block px-4 py-3 rounded-lg text-foreground hover:bg-secondary transition-colors font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Soy Profesional
               </Link>
             </div>
             <div className="mt-4 pt-4 border-t border-border space-y-3 px-4">

@@ -173,9 +173,9 @@ export default function PostulantesPage() {
       <main className="min-h-screen bg-secondary/30">
         <div className="bg-primary py-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Link href="/dashboard" className="inline-flex items-center text-white/70 hover:text-white mb-4 transition-colors">
+            <Link href="/mis-publicaciones" className="inline-flex items-center text-white/70 hover:text-white mb-4 transition-colors">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Volver al dashboard
+              Volver a mis publicaciones
             </Link>
             <h1 className="text-2xl sm:text-3xl font-bold text-white">Postulantes</h1>
           </div>

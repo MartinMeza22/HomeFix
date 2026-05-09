@@ -411,6 +411,16 @@ export default function MisPublicacionesPage() {
                     Solicitudes ({selectedPublicacion.solicitudes.length})
                   </h4>
 
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full mb-4"
+                    onClick={() => router.push(`/publicacion/${selectedPublicacion.id}`)}
+                  >
+                    Ver detalle completo
+                    <ChevronRight className="w-4 h-4 ml-1" />
+                  </Button>
+
                   {selectedPublicacion.solicitudes.length > 0 ? (
                     <div className="space-y-3 max-h-96 overflow-y-auto">
                       {selectedPublicacion.solicitudes.map((sol) => (
