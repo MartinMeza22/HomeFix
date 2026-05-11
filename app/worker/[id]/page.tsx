@@ -189,25 +189,6 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
               <AgendarCitaButton workerId={worker.id} workerName={worker.name} size="lg" />
             </div>
 
-            {/* Stats */}
-            <Card className="p-5 space-y-4">
-              <h3 className="font-bold text-foreground">Estadisticas</h3>
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Trabajos Completados</span>
-                  <span className="font-semibold text-foreground">{worker.reviews * 2}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Tasa de Aceptacion</span>
-                  <span className="font-semibold text-foreground">98%</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Tiempo de Respuesta</span>
-                  <span className="font-semibold text-foreground">{worker.responseTime}</span>
-                </div>
-              </div>
-            </Card>
-
             {/* Verified badge */}
             {worker.verified && (
               <Card className="p-5 bg-primary/5 border border-primary/20 space-y-2">
