@@ -242,23 +242,6 @@ export default function TrabajadoresLanding() {
         </div>
       </section>
 
-      {/* Stats Bar */}
-      <section className="bg-primary py-6 sm:py-8 border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center py-1">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-accent mb-0.5 sm:mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-xs sm:text-sm text-white/60 font-medium leading-tight">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* How it Works */}
       <section className="py-20 sm:py-24 bg-secondary/30">
