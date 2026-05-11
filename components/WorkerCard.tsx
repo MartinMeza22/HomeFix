@@ -14,11 +14,11 @@ interface WorkerCardProps {
 export function WorkerCard({ worker, onSelect }: WorkerCardProps) {
   return (
     <Card className="group overflow-hidden bg-card border-border hover:border-primary/30 transition-all duration-300">
-      <div className="aspect-[4/3] overflow-hidden bg-secondary relative">
+      <div className="aspect-square overflow-hidden bg-secondary relative">
         <img
           src={worker.image}
           alt={worker.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
         />
         {worker.verified && (
           <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/90 text-primary-foreground text-xs font-medium">

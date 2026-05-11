@@ -113,7 +113,7 @@ export default function MiPerfilPage() {
   const totalValidaciones = Object.keys(mockTrabajador.validaciones).length
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#D9D9D9' }}>
       <Navbar />
       
       <main className="flex-1">

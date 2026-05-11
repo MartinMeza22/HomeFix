@@ -128,10 +128,10 @@ export default function TrabajadoresLanding() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/hero-bg.jpg"
-            alt="Profesional de HomeFix"
+            src="/hero-workers.jpg"
+            alt="Profesional de HomeFix trabajando"
             fill
-            className="object-cover object-center"
+            className="object-cover object-top"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/98 via-primary/90 to-primary/60 sm:from-primary/95 sm:via-primary/80 sm:to-primary/40" />

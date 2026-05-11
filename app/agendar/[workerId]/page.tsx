@@ -214,7 +214,7 @@ export default function AgendarCitaPage() {
               <img
                 src={worker.image}
                 alt={worker.name}
-                className="w-full h-full object-cover object-[center_15%]"
+                className="w-full h-full object-cover object-top"
               />
             </div>
             <div>

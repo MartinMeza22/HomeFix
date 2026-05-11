@@ -53,7 +53,7 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
               <img
                 src={worker.image}
                 alt={worker.name}
-                className="w-full h-full object-cover object-[center_15%]"
+                className="w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent" />
               {worker.verified && (
@@ -178,7 +178,7 @@ export default async function WorkerProfile({ params }: { params: Promise<{ id: 
                 <img
                   src={worker.image}
                   alt={worker.name}
-                  className="w-full h-full object-cover object-[center_15%]"
+                  className="w-full h-full object-cover object-top"
                 />
               </div>
             </Card>
