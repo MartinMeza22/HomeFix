@@ -144,7 +144,7 @@ export default function ResenaPage() {
 
       <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
         {/* Resumen del trabajo */}
-        <Card className="p-4 text-sm">
+        <Card className="p-4 text-base">
           <div className="flex items-center gap-3">
             <img
               src={trabajo.trabajador.imagen}
