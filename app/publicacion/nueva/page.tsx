@@ -57,8 +57,6 @@ interface FormData {
   noSeQueCategoria: boolean
   fecha: string
   urgencia: 'baja' | 'media' | 'alta' | 'urgente'
-  presupuestoMin: string
-  presupuestoMax: string
   ubicacion: string
 }
 
@@ -89,8 +87,6 @@ export default function NuevaPublicacionPage() {
     noSeQueCategoria: false,
     fecha: '',
     urgencia: 'media',
-    presupuestoMin: '',
-    presupuestoMax: '',
     ubicacion: ''
   })
   const [formStep, setFormStep] = useState(1)
@@ -344,8 +340,6 @@ export default function NuevaPublicacionPage() {
       noSeQueCategoria: false,
       fecha: '',
       urgencia: 'media',
-      presupuestoMin: '',
-      presupuestoMax: '',
       ubicacion: ''
     })
     setFormStep(1)

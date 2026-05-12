@@ -24,7 +24,7 @@ const MESES = [
 ]
 
 const SERVICIOS = [
-  'Presupuesto / Diagnóstico',
+  'Diagnóstico / Inspección',
   'Reparación urgente',
   'Instalación nueva',
   'Mantenimiento preventivo',

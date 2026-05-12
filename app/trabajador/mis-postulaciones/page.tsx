@@ -33,7 +33,6 @@ interface Postulacion {
   estado: 'pendiente' | 'aceptada' | 'rechazada' | 'expirada'
   fechaPostulacion: string
   fechaServicio?: string
-  presupuesto?: string
 }
 
 // Mock postulaciones
@@ -48,8 +47,7 @@ const mockPostulaciones: Postulacion[] = [
     mensaje: 'Hola, tengo amplia experiencia en instalacion de luces LED. Puedo ir el viernes.',
     estado: 'pendiente',
     fechaPostulacion: '2026-05-08',
-    fechaServicio: '2026-05-15',
-    presupuesto: '$18,000'
+    fechaServicio: '2026-05-15'
   },
   {
     id: '2',
@@ -61,8 +59,7 @@ const mockPostulaciones: Postulacion[] = [
     mensaje: 'Puedo ir hoy mismo a revisar el tablero. Trabajo con garantia.',
     estado: 'aceptada',
     fechaPostulacion: '2026-05-06',
-    fechaServicio: '2026-05-10',
-    presupuesto: '$12,000'
+    fechaServicio: '2026-05-10'
   },
   {
     id: '3',
@@ -74,8 +71,7 @@ const mockPostulaciones: Postulacion[] = [
     mensaje: 'Tengo disponibilidad la proxima semana.',
     estado: 'rechazada',
     fechaPostulacion: '2026-05-04',
-    fechaServicio: '2026-05-20',
-    presupuesto: '$65,000'
+    fechaServicio: '2026-05-20'
   },
   {
     id: '4',
@@ -87,8 +83,7 @@ const mockPostulaciones: Postulacion[] = [
     mensaje: 'Puedo instalar los 3 ventiladores en un solo dia.',
     estado: 'aceptada',
     fechaPostulacion: '2026-05-02',
-    fechaServicio: '2026-05-08',
-    presupuesto: '$25,000'
+    fechaServicio: '2026-05-08'
   }
 ]
 
@@ -283,13 +278,6 @@ export default function MisPostulacionesPage() {
                                 {postulacion.mensaje}
                               </p>
                             </div>
-
-                            {postulacion.presupuesto && (
-                              <div className="flex items-center justify-between">
-                                <span className="text-sm text-muted-foreground">Presupuesto:</span>
-                                <span className="font-bold text-primary">{postulacion.presupuesto}</span>
-                              </div>
-                            )}
 
                             {postulacion.estado === 'aceptada' && (
                               <div className="flex gap-2">

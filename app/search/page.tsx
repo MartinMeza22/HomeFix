@@ -223,8 +223,6 @@ export default function SearchPage() {
                 >
                   <option value="distance">Mas cercanos</option>
                   <option value="rating">Mejor calificados</option>
-                  <option value="price-low">Precio: menor a mayor</option>
-                  <option value="price-high">Precio: mayor a menor</option>
                 </select>
               </div>
             </div>

@@ -61,7 +61,6 @@ const mockTrabajosDisponibles = [
     distancia: 3.2,
     urgencia: 'media',
     fechaPublicacion: '2026-05-08',
-    presupuestoEstimado: '$15,000 - $25,000',
     cliente: 'Maria G.'
   },
   {
@@ -73,7 +72,6 @@ const mockTrabajosDisponibles = [
     distancia: 1.5,
     urgencia: 'alta',
     fechaPublicacion: '2026-05-09',
-    presupuestoEstimado: '$10,000 - $20,000',
     cliente: 'Juan P.'
   },
   {
@@ -85,7 +83,6 @@ const mockTrabajosDisponibles = [
     distancia: 2.8,
     urgencia: 'baja',
     fechaPublicacion: '2026-05-07',
-    presupuestoEstimado: '$50,000 - $80,000',
     cliente: 'Laura M.'
   }
 ]

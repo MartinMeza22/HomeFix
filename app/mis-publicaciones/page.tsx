@@ -40,7 +40,6 @@ interface Solicitud {
   trabajadorReviews: number
   trabajadorVerificado: boolean
   mensaje: string
-  presupuesto: string
   fechaPropuesta: string
   estado: 'pendiente' | 'aceptada' | 'rechazada'
 }
@@ -54,7 +53,6 @@ interface Publicacion {
   fechaCreacion: string
   fechaServicio: string
   ubicacion: string
-  presupuesto: string
   urgencia: string
   solicitudes: Solicitud[]
 }
@@ -82,7 +80,6 @@ const mockPublicaciones: Publicacion[] = [
     fechaCreacion: '2024-01-15',
     fechaServicio: '2024-01-20',
     ubicacion: 'Buenos Aires, Palermo',
-    presupuesto: '$15.000 - $30.000',
     urgencia: 'Alta',
     solicitudes: [
       {
@@ -94,7 +91,6 @@ const mockPublicaciones: Publicacion[] = [
         trabajadorReviews: 47,
         trabajadorVerificado: true,
         mensaje: 'Hola, tengo disponibilidad para ir esta semana. Cuento con todas las herramientas necesarias.',
-        presupuesto: '$18.000',
         fechaPropuesta: '2024-01-18',
         estado: 'pendiente'
       },
@@ -106,8 +102,7 @@ const mockPublicaciones: Publicacion[] = [
         trabajadorCalificacion: 4.5,
         trabajadorReviews: 23,
         trabajadorVerificado: true,
-        mensaje: 'Puedo revisar el problema manana. Presupuesto sin compromiso.',
-        presupuesto: '$22.000',
+        mensaje: 'Puedo revisar el problema manana.',
         fechaPropuesta: '2024-01-19',
         estado: 'pendiente'
       }
@@ -122,7 +117,6 @@ const mockPublicaciones: Publicacion[] = [
     fechaCreacion: '2024-01-10',
     fechaServicio: '2024-01-22',
     ubicacion: 'Buenos Aires, Belgrano',
-    presupuesto: '$25.000 - $40.000',
     urgencia: 'Media',
     solicitudes: [
       {
@@ -134,7 +128,6 @@ const mockPublicaciones: Publicacion[] = [
         trabajadorReviews: 89,
         trabajadorVerificado: true,
         mensaje: 'Trabajo aceptado. Confirmo visita para el 22/01.',
-        presupuesto: '$35.000',
         fechaPropuesta: '2024-01-22',
         estado: 'aceptada'
       }
@@ -149,7 +142,6 @@ const mockPublicaciones: Publicacion[] = [
     fechaCreacion: '2024-01-05',
     fechaServicio: '2024-01-12',
     ubicacion: 'Buenos Aires, Recoleta',
-    presupuesto: '$30.000 - $45.000',
     urgencia: 'Baja',
     solicitudes: []
   }
@@ -381,7 +373,6 @@ export default function MisPublicacionesPage() {
                         <MapPin className="w-3.5 h-3.5" />
                         {pub.ubicacion}
                       </span>
-                      <span className="font-medium text-foreground">{pub.presupuesto}</span>
                     </div>
                   </Card>
                 ))
@@ -471,11 +462,6 @@ export default function MisPublicacionesPage() {
                           </div>
 
                           <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{sol.mensaje}</p>
-
-                          <div className="flex items-center justify-between text-xs mb-3">
-                            <span className="text-muted-foreground">Presupuesto:</span>
-                            <span className="font-bold text-foreground">{sol.presupuesto}</span>
-                          </div>
 
                           {sol.estado === 'pendiente' && (
                             <div className="flex gap-2">
