@@ -91,8 +91,8 @@ const mockTrabajosDisponibles = [
 const mockPostulaciones = [
   {
     id: '1',
-    trabajo: 'Reparacion de inodoro con perdida',
-    cliente: 'Roberto S.',
+    trabajo: 'Reparacion de tuberia en cocina',
+    cliente: 'Marta Ocampo',
     estado: 'pendiente',
     fechaPostulacion: '2026-05-08'
   },
