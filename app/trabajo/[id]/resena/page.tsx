@@ -90,30 +90,32 @@ export default function ResenaPage() {
       <main className="min-h-screen bg-background">
         <Navbar />
         
-        <div className="max-w-2xl mx-auto px-4 py-16 sm:py-24">
-          <Card className="p-8 sm:p-12 text-center">
-            <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="w-10 h-10 text-accent" />
+        <div className="max-w-2xl mx-auto px-4 py-12">
+          <Card className="p-6 sm:p-8 text-center">
+            <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <CheckCircle className="w-8 h-8 text-accent" />
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
               Gracias por tu resena
             </h1>
-            <p className="text-muted-foreground mb-8">
-              Tu opinion ayuda a otros usuarios a encontrar los mejores profesionales y a {trabajo.trabajador.nombre} a seguir mejorando.
+            <p className="text-sm text-muted-foreground mb-6">
+              Tu opinion ayuda a {trabajo.trabajador.nombre} a mejorar su servicio.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button 
+                size="sm"
                 onClick={() => router.push('/dashboard')}
                 className="bg-primary hover:bg-primary/90"
               >
                 Volver al Dashboard
               </Button>
               <Button 
+                size="sm"
                 variant="outline"
                 onClick={() => router.push(`/worker/${trabajo.trabajador.id}`)}
               >
-                Ver perfil de {trabajo.trabajador.nombre.split(' ')[0]}
+                Ver perfil
               </Button>
             </div>
           </Card>
@@ -129,74 +131,62 @@ export default function ResenaPage() {
       <Navbar />
       
       {/* Header */}
-      <div className="bg-primary py-8 sm:py-12">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6">
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+      <div className="bg-primary py-4 sm:py-6">
+        <div className="max-w-2xl mx-auto px-4">
+          <h1 className="text-xl sm:text-2xl font-bold text-white">
             Trabajo Finalizado
           </h1>
-          <p className="text-white/70">
-            Dejanos tu opinion sobre el servicio recibido
+          <p className="text-white/70 text-sm">
+            Dejanos tu opinion sobre el servicio
           </p>
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+      <div className="max-w-2xl mx-auto px-4 py-6 space-y-4">
         {/* Resumen del trabajo */}
-        <Card className="p-5 sm:p-6 mb-6">
-          <div className="flex items-start gap-4">
+        <Card className="p-4">
+          <div className="flex items-center gap-3">
             <img
               src={trabajo.trabajador.imagen}
               alt={trabajo.trabajador.nombre}
-              className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl object-cover object-top"
+              className="w-14 h-14 rounded-lg object-cover object-top flex-shrink-0"
             />
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
-                <h2 className="font-bold text-foreground text-lg truncate">
+              <div className="flex items-center gap-2 mb-0.5">
+                <h2 className="font-bold text-foreground text-base truncate">
                   {trabajo.trabajador.nombre}
                 </h2>
                 {trabajo.trabajador.verificado && (
-                  <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
+                  <CheckCircle className="w-3.5 h-3.5 text-accent flex-shrink-0" />
                 )}
               </div>
-              <p className="text-sm text-muted-foreground mb-3">
+              <p className="text-xs text-muted-foreground mb-1">
                 {trabajo.trabajador.categoria}
               </p>
-              
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Wrench className="w-4 h-4" />
-                  <span className="truncate">{trabajo.titulo}</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Calendar className="w-4 h-4" />
-                  <span>{new Date(trabajo.fecha).toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' })}</span>
-                </div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <MapPin className="w-4 h-4" />
-                  <span>{trabajo.ubicacion}</span>
-                </div>
-              </div>
+              <p className="text-xs text-muted-foreground truncate">
+                {trabajo.titulo}
+              </p>
             </div>
           </div>
         </Card>
 
         {/* Calificacion con estrellas */}
-        <Card className="p-5 sm:p-6 mb-6">
-          <h3 className="font-bold text-foreground mb-4">
+        <Card className="p-4">
+          <h3 className="font-bold text-foreground text-sm mb-3">
             Como calificarias el servicio?
           </h3>
           
-          <div className="flex items-center justify-center gap-2 mb-4">
+          <div className="flex items-center justify-center gap-2 mb-2">
             {[1, 2, 3, 4, 5].map((star) => (
               <button
                 key={star}
                 onClick={() => setRating(star)}
                 onMouseEnter={() => setHoverRating(star)}
                 onMouseLeave={() => setHoverRating(0)}
-                className="p-1 transition-transform hover:scale-110"
+                className="p-0.5 transition-transform hover:scale-110"
               >
                 <Star
-                  className={`w-10 h-10 sm:w-12 sm:h-12 transition-colors ${
+                  className={`w-7 h-7 sm:w-8 sm:h-8 transition-colors ${
                     star <= (hoverRating || rating)
                       ? 'fill-amber-400 text-amber-400'
                       : 'text-muted-foreground/30'
@@ -206,7 +196,7 @@ export default function ResenaPage() {
             ))}
           </div>
           
-          <p className="text-center text-sm text-muted-foreground">
+          <p className="text-center text-xs text-muted-foreground">
             {rating === 0 && 'Toca las estrellas para calificar'}
             {rating === 1 && 'Muy malo'}
             {rating === 2 && 'Malo'}
@@ -217,35 +207,32 @@ export default function ResenaPage() {
         </Card>
 
         {/* Comentario */}
-        <Card className="p-5 sm:p-6 mb-6">
-          <h3 className="font-bold text-foreground mb-4">
-            Contanos tu experiencia
+        <Card className="p-4">
+          <h3 className="font-bold text-foreground text-sm mb-2">
+            Tu opinion
           </h3>
           
           <textarea
             value={comentario}
             onChange={(e) => setComentario(e.target.value)}
-            placeholder="Describe como fue el servicio, la puntualidad, la calidad del trabajo, el trato del profesional..."
-            className="w-full h-32 sm:h-40 p-4 border border-border rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-foreground placeholder:text-muted-foreground"
+            placeholder="Describe tu experiencia con el servicio..."
+            className="w-full h-20 sm:h-24 p-3 border border-border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-foreground placeholder:text-muted-foreground text-sm"
           />
           
-          <p className="text-xs text-muted-foreground mt-2 text-right">
-            {comentario.length}/500 caracteres
+          <p className="text-xs text-muted-foreground mt-1 text-right">
+            {comentario.length}/500
           </p>
         </Card>
 
         {/* Fotos */}
-        <Card className="p-5 sm:p-6 mb-8">
-          <h3 className="font-bold text-foreground mb-2">
-            Agrega fotos del trabajo (opcional)
+        <Card className="p-4">
+          <h3 className="font-bold text-foreground text-sm mb-2">
+            Fotos (opcional)
           </h3>
-          <p className="text-sm text-muted-foreground mb-4">
-            Las fotos ayudan a otros usuarios a ver la calidad del trabajo
-          </p>
           
-          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
+          <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
             {fotos.map((foto, index) => (
-              <div key={index} className="relative aspect-square rounded-xl overflow-hidden group">
+              <div key={index} className="relative aspect-square rounded-lg overflow-hidden group">
                 <img
                   src={foto}
                   alt={`Foto ${index + 1}`}
@@ -253,7 +240,7 @@ export default function ResenaPage() {
                 />
                 <button
                   onClick={() => removePhoto(index)}
-                  className="absolute top-1 right-1 w-6 h-6 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
                 >
                   <X className="w-4 h-4 text-white" />
                 </button>
@@ -263,10 +250,9 @@ export default function ResenaPage() {
             {fotos.length < 5 && (
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="aspect-square rounded-xl border-2 border-dashed border-border hover:border-primary/50 flex flex-col items-center justify-center gap-1 text-muted-foreground hover:text-primary transition-colors"
+                className="aspect-square rounded-lg border-2 border-dashed border-border hover:border-primary/50 flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
               >
-                <Camera className="w-6 h-6" />
-                <span className="text-xs">Agregar</span>
+                <Camera className="w-5 h-5" />
               </button>
             )}
           </div>
@@ -279,34 +265,25 @@ export default function ResenaPage() {
             onChange={handleFileSelect}
             className="hidden"
           />
-          
-          <p className="text-xs text-muted-foreground mt-3">
-            Maximo 5 fotos. Formatos: JPG, PNG
-          </p>
         </Card>
 
         {/* Botones */}
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex gap-3">
           <Button
             variant="outline"
+            size="sm"
             onClick={() => router.back()}
-            className="flex-1 sm:flex-none"
+            className="flex-1"
           >
             Cancelar
           </Button>
           <Button
+            size="sm"
             onClick={handleSubmit}
             disabled={rating === 0 || isSubmitting}
             className="flex-1 bg-primary hover:bg-primary/90 disabled:opacity-50"
           >
-            {isSubmitting ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
-                Enviando...
-              </>
-            ) : (
-              'Enviar Resena'
-            )}
+            {isSubmitting ? 'Enviando...' : 'Enviar'}
           </Button>
         </div>
       </div>
