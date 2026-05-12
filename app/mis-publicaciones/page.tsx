@@ -105,6 +105,30 @@ const mockPublicaciones: Publicacion[] = [
         mensaje: 'Puedo revisar el problema manana.',
         fechaPropuesta: '2024-01-19',
         estado: 'pendiente'
+      },
+      {
+        id: '4',
+        trabajadorId: '4',
+        trabajadorNombre: 'Roberto Sanchez',
+        trabajadorCategoria: 'Plomeria',
+        trabajadorCalificacion: 4.7,
+        trabajadorReviews: 56,
+        trabajadorVerificado: true,
+        mensaje: 'Tengo experiencia con este tipo de reparaciones. Puedo ir hoy mismo.',
+        fechaPropuesta: '2024-01-17',
+        estado: 'pendiente'
+      },
+      {
+        id: '5',
+        trabajadorId: '5',
+        trabajadorNombre: 'Miguel Torres',
+        trabajadorCategoria: 'Plomeria',
+        trabajadorCalificacion: 4.3,
+        trabajadorReviews: 18,
+        trabajadorVerificado: false,
+        mensaje: 'Trabajo disponible para esta zona. Cuento con herramientas propias.',
+        fechaPropuesta: '2024-01-20',
+        estado: 'pendiente'
       }
     ]
   },
@@ -130,6 +154,18 @@ const mockPublicaciones: Publicacion[] = [
         mensaje: 'Trabajo aceptado. Confirmo visita para el 22/01.',
         fechaPropuesta: '2024-01-22',
         estado: 'aceptada'
+      },
+      {
+        id: '6',
+        trabajadorId: '6',
+        trabajadorNombre: 'Fernando Lopez',
+        trabajadorCategoria: 'HVAC',
+        trabajadorCalificacion: 4.6,
+        trabajadorReviews: 34,
+        trabajadorVerificado: true,
+        mensaje: 'Especialista en instalacion de splits. Garantia de 1 ano.',
+        fechaPropuesta: '2024-01-21',
+        estado: 'rechazada'
       }
     ]
   },

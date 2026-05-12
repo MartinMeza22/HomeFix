@@ -78,6 +78,7 @@ export default function NuevaPublicacionPage() {
   const chatEndRef = useRef<HTMLDivElement>(null)
   const [recommendedWorkers, setRecommendedWorkers] = useState<typeof workers>([])
   const [selectedWorkers, setSelectedWorkers] = useState<string[]>([])
+  const [initialAnalysis, setInitialAnalysis] = useState<ReturnType<typeof analyzeMessage> | null>(null)
 
   // Form mode state
   const [formData, setFormData] = useState<FormData>({
@@ -98,24 +99,49 @@ export default function NuevaPublicacionPage() {
   // Detectar si el mensaje necesita mas informacion
   const analyzeMessage = (message: string) => {
     const lower = message.toLowerCase()
-    const hasCategory = categories.some(cat => lower.includes(cat.name.toLowerCase()))
+    
+    // Detectar categoria por palabras clave del problema
+    const plomeroKeywords = ['canilla', 'grifo', 'tuberia', 'cano', 'agua', 'gotea', 'pierde', 'fuga', 'desague', 'inodoro', 'bide']
+    const electricistaKeywords = ['luz', 'enchufe', 'cable', 'cortocircuito', 'electricidad', 'lampara', 'interruptor', 'fusible', 'tablero']
+    const cerrajeroKeywords = ['cerradura', 'llave', 'puerta', 'traba', 'candado']
+    const pintorKeywords = ['pintar', 'pintura', 'pared', 'techo', 'humedad', 'mancha']
+    const aireKeywords = ['aire', 'split', 'acondicionado', 'calefaccion', 'estufa', 'ventilacion']
+    
+    let detectedCategory = ''
+    if (plomeroKeywords.some(w => lower.includes(w))) detectedCategory = 'Plomeria'
+    else if (electricistaKeywords.some(w => lower.includes(w))) detectedCategory = 'Electricista'
+    else if (cerrajeroKeywords.some(w => lower.includes(w))) detectedCategory = 'Cerrajeria'
+    else if (pintorKeywords.some(w => lower.includes(w))) detectedCategory = 'Pintura'
+    else if (aireKeywords.some(w => lower.includes(w))) detectedCategory = 'Instalador de aire acondicionado'
+    
+    const hasCategory = detectedCategory !== '' || categories.some(cat => lower.includes(cat.name.toLowerCase()))
+    
+    // Detectar ubicacion dentro de la casa
+    const roomKeywords = ['cocina', 'bano', 'sala', 'living', 'dormitorio', 'habitacion', 'pieza', 'patio', 'jardin', 'garage', 'balcon', 'terraza', 'lavadero']
+    const detectedRoom = roomKeywords.find(room => lower.includes(room)) || ''
+    const hasRoom = detectedRoom !== ''
+    
     const hasUrgency = ['urgente', 'rapido', 'ya', 'ahora', 'emergencia'].some(w => lower.includes(w))
     const hasLocation = ['zona', 'barrio', 'direccion', 'ubicacion', 'calle'].some(w => lower.includes(w))
-    const isDetailed = message.length > 80
+    const isDetailed = message.length > 30
 
     return {
       hasCategory,
+      detectedCategory,
       hasUrgency,
       hasLocation,
+      hasRoom,
+      detectedRoom,
       isDetailed,
-      needsSurvey: !hasCategory || !isDetailed
+      needsSurvey: true // Siempre hacer encuesta pero omitir preguntas ya respondidas
     }
   }
 
-  // Generar preguntas de encuesta basadas en el analisis
+  // Generar preguntas de encuesta basadas en el analisis (omite las ya respondidas)
   const generateSurveyQuestions = (analysis: ReturnType<typeof analyzeMessage>, userMessage: string): SurveyQuestion[] => {
     const questions: SurveyQuestion[] = []
 
+    // Solo preguntar categoria si no fue detectada
     if (!analysis.hasCategory) {
       questions.push({
         id: 'category',
@@ -125,19 +151,25 @@ export default function NuevaPublicacionPage() {
       })
     }
 
-    questions.push({
-      id: 'location',
-      question: 'Donde se encuentra el problema?',
-      type: 'single',
-      options: ['Cocina', 'Bano', 'Sala', 'Dormitorio', 'Patio/Jardin', 'Garage', 'Toda la casa', 'Otro']
-    })
+    // Solo preguntar ubicacion si no fue detectada en el mensaje
+    if (!analysis.hasRoom) {
+      questions.push({
+        id: 'location',
+        question: 'Donde se encuentra el problema?',
+        type: 'single',
+        options: ['Cocina', 'Bano', 'Sala', 'Dormitorio', 'Patio/Jardin', 'Garage', 'Toda la casa', 'Otro']
+      })
+    }
 
-    questions.push({
-      id: 'urgency',
-      question: 'Que tan urgente es?',
-      type: 'single',
-      options: ['No es urgente (puedo esperar)', 'Normal (esta semana)', 'Urgente (hoy o manana)', 'Emergencia (ahora mismo)']
-    })
+    // Solo preguntar urgencia si no fue mencionada
+    if (!analysis.hasUrgency) {
+      questions.push({
+        id: 'urgency',
+        question: 'Que tan urgente es?',
+        type: 'single',
+        options: ['No es urgente (puedo esperar)', 'Normal (esta semana)', 'Urgente (hoy o manana)', 'Emergencia (ahora mismo)']
+      })
+    }
 
     questions.push({
       id: 'date',
@@ -160,6 +192,7 @@ export default function NuevaPublicacionPage() {
 
     setTimeout(() => {
       const analysis = analyzeMessage(userMessage)
+      setInitialAnalysis(analysis) // Guardar el analisis para usarlo despues
 
       if (analysis.needsSurvey && aiMessages.length < 2) {
         // Iniciar mini encuesta
@@ -167,9 +200,21 @@ export default function NuevaPublicacionPage() {
         setSurveyQuestions(questions)
         setCurrentSurveyIndex(0)
 
+        // Mensaje personalizado segun lo que ya detectamos
+        let responseMsg = 'Entiendo! '
+        if (analysis.detectedCategory) {
+          responseMsg += `Veo que necesitas un profesional de ${analysis.detectedCategory}. `
+        }
+        if (analysis.detectedRoom) {
+          responseMsg += `El problema esta en ${analysis.detectedRoom}. `
+        }
+        responseMsg += questions.length === 1 
+          ? 'Solo necesito un dato mas:'
+          : 'Te hago unas preguntas rapidas:'
+
         setAiMessages(prev => [...prev, {
           role: 'assistant',
-          content: 'Entiendo! Para encontrarte al mejor profesional, necesito algunos datos mas. Te hago unas preguntas rapidas:'
+          content: responseMsg
         }])
 
         setTimeout(() => {
@@ -212,9 +257,16 @@ export default function NuevaPublicacionPage() {
       setCurrentSurveyIndex(prev => prev + 1)
     } else {
       // Encuesta completada, generar analisis
+      // Usar valores detectados automaticamente o los de la encuesta
       const categoryAnswer = updatedQuestions.find(q => q.id === 'category')?.answer as string
       const urgencyAnswer = updatedQuestions.find(q => q.id === 'urgency')?.answer as string
       const locationAnswer = updatedQuestions.find(q => q.id === 'location')?.answer as string
+
+      // Priorizar valores detectados automaticamente del mensaje inicial
+      const finalCategory = initialAnalysis?.detectedCategory || categoryAnswer || 'General'
+      const finalLocation = initialAnalysis?.detectedRoom 
+        ? initialAnalysis.detectedRoom.charAt(0).toUpperCase() + initialAnalysis.detectedRoom.slice(1)
+        : locationAnswer || 'Hogar'
 
       const urgencyMap: Record<string, AIAnalysis['urgencia']> = {
         'No es urgente (puedo esperar)': 'baja',
@@ -223,14 +275,19 @@ export default function NuevaPublicacionPage() {
         'Emergencia (ahora mismo)': 'urgente'
       }
 
+      // Si ya detectamos urgencia en el mensaje, usarla
+      const finalUrgency = initialAnalysis?.hasUrgency 
+        ? 'alta' 
+        : (urgencyMap[urgencyAnswer] || 'media')
+
       const firstUserMessage = aiMessages.find(m => m.role === 'user')?.content || ''
 
       setAiAnalysis({
-        categorias: [categoryAnswer || 'General'],
+        categorias: [finalCategory],
         descripcion: firstUserMessage,
-        urgencia: urgencyMap[urgencyAnswer] || 'media',
-        titulo: `Servicio de ${categoryAnswer || 'General'} - ${locationAnswer || 'Hogar'}`,
-        ubicacion: locationAnswer
+        urgencia: finalUrgency,
+        titulo: `Servicio de ${finalCategory} - ${finalLocation}`,
+        ubicacion: finalLocation
       })
 
       setAiStep('summary')
