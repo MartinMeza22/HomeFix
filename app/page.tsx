@@ -336,7 +336,7 @@ export default function Home() {
 
 
       {/* Features Section */}
-      <section className="pt-20 pb-0 bg-secondary/30">
+      <section className="pt-20 pb-0 bg-primary/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left - Image/Logo */}

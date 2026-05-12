@@ -34,11 +34,11 @@ export const categories: Category[] = [
   },
   {
     id: '5',
-    name: 'Electronica',
-    icon: '📱',
-    image: '/categories/electronica.jpg',
-    description: 'Reparacion de electrodomesticos',
-    count: 147
+    name: 'Instalador de aire acondicionado',
+    icon: '❄️',
+    image: '/categories/aire-acondicionado.jpg',
+    description: 'Instalacion y servicio de aires acondicionados',
+    count: 156
   },
   {
     id: '6',
@@ -63,5 +63,13 @@ export const categories: Category[] = [
     image: '/categories/cerrajeria.jpg',
     description: 'Cerraduras y seguridad',
     count: 134
+  },
+  {
+    id: '9',
+    name: 'Climatizacion',
+    icon: '💨',
+    image: '/categories/climatizacion.jpg',
+    description: 'Sistemas de calefaccion y ventilacion',
+    count: 112
   }
 ]
