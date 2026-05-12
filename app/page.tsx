@@ -295,7 +295,7 @@ export default function Home() {
             </div>
             <Link href="/search" className="mt-6 md:mt-0">
               <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold">
-                ¿Buscás labubu?
+                ¿Buscás trabajo?
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
