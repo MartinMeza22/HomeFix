@@ -40,23 +40,23 @@ const mockPostulaciones: Postulacion[] = [
   {
     id: '1',
     trabajoId: 'job-1',
-    trabajo: 'Instalacion de luces LED en cocina',
-    cliente: 'Maria Gonzalez',
-    clienteInicial: 'MG',
+    trabajo: 'Reparacion de tuberia en cocina',
+    cliente: 'Marta Ocampo',
+    clienteInicial: 'MO',
     ubicacion: 'Recoleta, Buenos Aires',
-    mensaje: 'Hola, tengo amplia experiencia en instalacion de luces LED. Puedo ir el viernes.',
-    estado: 'pendiente',
+    mensaje: 'Hola, tengo 8 anos de experiencia en reparacion de tuberias. Puedo ir el viernes.',
+    estado: 'aceptada',
     fechaPostulacion: '2026-05-08',
     fechaServicio: '2026-05-15'
   },
   {
     id: '2',
     trabajoId: 'job-2',
-    trabajo: 'Reparacion de tablero electrico',
+    trabajo: 'Destape de caneria en bano',
     cliente: 'Juan Perez',
     clienteInicial: 'JP',
     ubicacion: 'Palermo, Buenos Aires',
-    mensaje: 'Puedo ir hoy mismo a revisar el tablero. Trabajo con garantia.',
+    mensaje: 'Puedo ir hoy mismo con la maquina destapadora. Trabajo con garantia.',
     estado: 'aceptada',
     fechaPostulacion: '2026-05-06',
     fechaServicio: '2026-05-10'
@@ -64,11 +64,11 @@ const mockPostulaciones: Postulacion[] = [
   {
     id: '3',
     trabajoId: 'job-3',
-    trabajo: 'Cambio de cableado en departamento',
+    trabajo: 'Instalacion de calefon a gas',
     cliente: 'Laura Martinez',
     clienteInicial: 'LM',
     ubicacion: 'Villa Crespo, Buenos Aires',
-    mensaje: 'Tengo disponibilidad la proxima semana.',
+    mensaje: 'Tengo disponibilidad la proxima semana. Cuento con matricula de gasista.',
     estado: 'rechazada',
     fechaPostulacion: '2026-05-04',
     fechaServicio: '2026-05-20'
@@ -76,11 +76,11 @@ const mockPostulaciones: Postulacion[] = [
   {
     id: '4',
     trabajoId: 'job-4',
-    trabajo: 'Instalacion de ventiladores de techo',
+    trabajo: 'Cambio de griferia completa en bano',
     cliente: 'Roberto Sanchez',
     clienteInicial: 'RS',
     ubicacion: 'Belgrano, Buenos Aires',
-    mensaje: 'Puedo instalar los 3 ventiladores en un solo dia.',
+    mensaje: 'Puedo hacer el cambio completo en un solo dia. Traigo herramientas y materiales.',
     estado: 'aceptada',
     fechaPostulacion: '2026-05-02',
     fechaServicio: '2026-05-08'

@@ -68,7 +68,7 @@ const benefits = [
 
 const testimonials = [
   {
-    name: 'Carlos Rodriguez',
+    name: 'Pedro Picapiedra',
     role: 'Electricista Matriculado',
     image: '/workers/worker-1.jpg',
     rating: 5,

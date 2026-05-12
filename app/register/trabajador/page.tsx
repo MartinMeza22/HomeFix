@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card } from '@/components/ui/card'
 import { categories } from '@/lib/data/categories'
-import { 
+import {
   Eye, EyeOff, Mail, Lock, User, Phone, Briefcase,
   AlertCircle, ArrowRight, ArrowLeft, CheckCircle, Shield, Check
 } from 'lucide-react'
@@ -38,7 +38,7 @@ export default function WorkerRegisterPage() {
 
     if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es requerido'
     if (!formData.apellido.trim()) newErrors.apellido = 'El apellido es requerido'
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'El email es requerido'
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
@@ -84,7 +84,7 @@ export default function WorkerRegisterPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!validateStep2()) return
 
     setIsLoading(true)
@@ -151,8 +151,8 @@ export default function WorkerRegisterPage() {
             priority
           />
         </Link>
-        <Link 
-          href="/register" 
+        <Link
+          href="/register"
           className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -166,18 +166,16 @@ export default function WorkerRegisterPage() {
           {/* Progress Steps */}
           <div className="flex items-center justify-center gap-4">
             <div className={`flex items-center gap-2 ${step >= 1 ? 'text-accent' : 'text-muted-foreground'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                step >= 1 ? 'bg-accent text-white' : 'bg-muted text-muted-foreground'
-              }`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${step >= 1 ? 'bg-accent text-white' : 'bg-muted text-muted-foreground'
+                }`}>
                 {step > 1 ? <Check className="w-4 h-4" /> : '1'}
               </div>
               <span className="text-sm font-medium hidden sm:inline">Datos personales</span>
             </div>
             <div className={`w-12 h-0.5 ${step > 1 ? 'bg-accent' : 'bg-muted'}`} />
             <div className={`flex items-center gap-2 ${step >= 2 ? 'text-accent' : 'text-muted-foreground'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                step >= 2 ? 'bg-accent text-white' : 'bg-muted text-muted-foreground'
-              }`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${step >= 2 ? 'bg-accent text-white' : 'bg-muted text-muted-foreground'
+                }`}>
                 2
               </div>
               <span className="text-sm font-medium hidden sm:inline">Especialidades</span>
@@ -194,7 +192,7 @@ export default function WorkerRegisterPage() {
               {step === 1 ? 'Ingresa tus datos' : 'Selecciona tus especialidades'}
             </h1>
             <p className="text-muted-foreground">
-              {step === 1 
+              {step === 1
                 ? 'Completa tu informacion personal para crear tu cuenta'
                 : 'Elige las categorias en las que te especializas'
               }
@@ -291,9 +289,8 @@ export default function WorkerRegisterPage() {
                           {[...Array(5)].map((_, i) => (
                             <div
                               key={i}
-                              className={`h-1 flex-1 rounded-full ${
-                                i < passwordStrength() ? strengthColors[passwordStrength() - 1] : 'bg-muted'
-                              }`}
+                              className={`h-1 flex-1 rounded-full ${i < passwordStrength() ? strengthColors[passwordStrength() - 1] : 'bg-muted'
+                                }`}
                             />
                           ))}
                         </div>
@@ -329,7 +326,7 @@ export default function WorkerRegisterPage() {
                   </div>
 
                   {/* Next Button */}
-                  <Button 
+                  <Button
                     type="button"
                     onClick={handleNext}
                     className="w-full h-12 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
@@ -347,7 +344,7 @@ export default function WorkerRegisterPage() {
                     <p className="text-sm text-muted-foreground">
                       Selecciona una o mas categorias donde ofreces tus servicios:
                     </p>
-                    
+
                     {errors.categorias && (
                       <div className="flex items-center gap-2 p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive">
                         <AlertCircle className="w-4 h-4" />
@@ -363,11 +360,10 @@ export default function WorkerRegisterPage() {
                             key={category.id}
                             type="button"
                             onClick={() => toggleCategory(category.id)}
-                            className={`relative p-4 rounded-xl border-2 text-left transition-all ${
-                              isSelected 
-                                ? 'border-accent bg-accent/5' 
+                            className={`relative p-4 rounded-xl border-2 text-left transition-all ${isSelected
+                                ? 'border-accent bg-accent/5'
                                 : 'border-border hover:border-muted-foreground/30'
-                            }`}
+                              }`}
                           >
                             {isSelected && (
                               <div className="absolute top-2 right-2 w-5 h-5 bg-accent rounded-full flex items-center justify-center">
@@ -402,7 +398,7 @@ export default function WorkerRegisterPage() {
 
                   {/* Buttons */}
                   <div className="flex gap-3">
-                    <Button 
+                    <Button
                       type="button"
                       variant="outline"
                       onClick={() => setStep(1)}
@@ -411,8 +407,8 @@ export default function WorkerRegisterPage() {
                       <ArrowLeft className="w-4 h-4 mr-2" />
                       Atras
                     </Button>
-                    <Button 
-                      type="submit" 
+                    <Button
+                      type="submit"
                       className="flex-1 h-12 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
                       disabled={isLoading}
                     >
