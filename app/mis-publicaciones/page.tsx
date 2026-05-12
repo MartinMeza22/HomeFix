@@ -74,7 +74,7 @@ const mockPublicaciones: Publicacion[] = [
   {
     id: '1',
     titulo: 'Reparacion de tuberia en cocina',
-    descripcion: 'Tengo una fuga debajo del lavabo de la cocina que necesita reparacion urgente.',
+    descripcion: 'Hola, tengo un problema en la cocina, me pierde la canilla.',
     categoria: 'Plomeria',
     estado: 'pendiente',
     fechaCreacion: '2024-01-15',
