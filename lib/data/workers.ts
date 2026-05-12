@@ -17,13 +17,13 @@ export interface Worker {
 export const workers: Worker[] = [
   {
     id: '1',
-    name: 'Carlos Méndez',
-    category: 'Electricista',
+    name: 'Pedro Picapiedra',
+    category: 'Plomero',
     rating: 4.9,
     reviews: 247,
     location: 'Palermo, Buenos Aires',
     distance: 2.3,
-    bio: 'Electricista matriculado con 15 años de experiencia en instalaciones residenciales y comerciales. Especialista en tableros eléctricos, cableado estructurado y domótica.',
+    bio: 'Hola, soy Pedro, plomero especializado con más de 8 años de experiencia, solucionando urgencias y realizando instalaciones integrales.',
     image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop&crop=face',
     verified: true,
     responseTime: '< 1 hora',

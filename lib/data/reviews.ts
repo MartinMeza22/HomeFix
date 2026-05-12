@@ -13,9 +13,9 @@ export const reviews: Review[] = [
   {
     id: '1',
     workerId: '1',
-    author: 'Juan Bautista García',
+    author: 'Carlos',
     rating: 5,
-    text: 'Carlos llegó puntual y resolvió el problema del tablero en tiempo récord. Muy prolijo y explicó cada paso. Sin dudas lo vuelvo a contratar.',
+    text: 'Pedro llegó puntual y resolvió el problema. Muy prolijo y explicó cada paso. Sin dudas lo vuelvo a contratar.',
     date: '2026-04-18',
     verified: true
   },
