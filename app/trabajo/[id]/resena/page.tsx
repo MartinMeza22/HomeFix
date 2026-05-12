@@ -10,14 +10,7 @@ import {
   Star, 
   Camera, 
   X, 
-  CheckCircle, 
-  MapPin, 
-  Calendar, 
-  Clock,
-  User,
-  Wrench,
-  Upload,
-  ImageIcon
+  CheckCircle
 } from 'lucide-react'
 
 // Mock trabajo finalizado
@@ -206,65 +199,57 @@ export default function ResenaPage() {
           </p>
         </Card>
 
-        {/* Comentario */}
-        <Card className="p-4">
-          <h3 className="font-bold text-foreground text-sm mb-2">
-            Tu opinion
-          </h3>
-          
-          <textarea
-            value={comentario}
-            onChange={(e) => setComentario(e.target.value)}
-            placeholder="Describe tu experiencia con el servicio..."
-            className="w-full h-20 sm:h-24 p-3 border border-border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-foreground placeholder:text-muted-foreground text-sm"
-          />
-          
-          <p className="text-xs text-muted-foreground mt-1 text-right">
-            {comentario.length}/500
-          </p>
-        </Card>
-
-        {/* Fotos */}
-        <Card className="p-4">
-          <h3 className="font-bold text-foreground text-sm mb-2">
-            Fotos (opcional)
-          </h3>
-          
-          <div className="grid grid-cols-4 sm:grid-cols-5 gap-2">
-            {fotos.map((foto, index) => (
-              <div key={index} className="relative aspect-square rounded-lg overflow-hidden group">
-                <img
-                  src={foto}
-                  alt={`Foto ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-                <button
-                  onClick={() => removePhoto(index)}
-                  className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
-                >
-                  <X className="w-4 h-4 text-white" />
-                </button>
-              </div>
-            ))}
-            
-            {fotos.length < 5 && (
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                className="aspect-square rounded-lg border-2 border-dashed border-border hover:border-primary/50 flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Camera className="w-5 h-5" />
-              </button>
-            )}
+        {/* Comentario + Fotos */}
+        <Card className="p-4 space-y-3">
+          <div>
+            <h3 className="font-bold text-foreground text-sm mb-2">Tu opinion</h3>
+            <textarea
+              value={comentario}
+              onChange={(e) => setComentario(e.target.value)}
+              placeholder="Describe tu experiencia con el servicio..."
+              className="w-full h-20 p-3 border border-border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-foreground placeholder:text-muted-foreground text-sm"
+            />
+            <p className="text-xs text-muted-foreground mt-1 text-right">
+              {comentario.length}/500
+            </p>
           </div>
-          
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={handleFileSelect}
-            className="hidden"
-          />
+
+          <div className="border-t border-border pt-3">
+            <h3 className="font-bold text-foreground text-sm mb-2">Fotos (opcional)</h3>
+            <div className="grid grid-cols-5 gap-2">
+              {fotos.map((foto, index) => (
+                <div key={index} className="relative aspect-square rounded-lg overflow-hidden group">
+                  <img
+                    src={foto}
+                    alt={`Foto ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                  <button
+                    onClick={() => removePhoto(index)}
+                    className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
+                  >
+                    <X className="w-4 h-4 text-white" />
+                  </button>
+                </div>
+              ))}
+              {fotos.length < 5 && (
+                <button
+                  onClick={() => fileInputRef.current?.click()}
+                  className="aspect-square rounded-lg border-2 border-dashed border-border hover:border-primary/50 flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <Camera className="w-5 h-5" />
+                </button>
+              )}
+            </div>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleFileSelect}
+              className="hidden"
+            />
+          </div>
         </Card>
 
         {/* Botones */}
