@@ -29,24 +29,24 @@ import { Footer } from '@/components/Footer'
 
 // Mock trabajador data (simulando sesion)
 const mockTrabajador = {
-  id: '1',
-  name: 'Carlos Mendez',
-  email: 'trabajador@demo.com',
-  category: 'Electricista',
-  image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop&crop=face',
+  id: '7',
+  name: 'Pedro Picapiedra',
+  email: 'pedro.picapiedra@demo.com',
+  category: 'Plomero',
+  image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop&crop=face',
   rating: 4.9,
-  reviews: 247,
-  location: 'Palermo, Buenos Aires',
+  reviews: 312,
+  location: 'Recoleta, Buenos Aires',
   verified: true,
-  memberSince: 'Marzo 2024',
-  completedJobs: 312,
-  responseRate: 98,
+  memberSince: 'Mayo 2018',
+  completedJobs: 847,
+  responseRate: 99,
   disponibleUrgencia: true,
   validaciones: {
     dni: true,
     antecedentes: true,
     matricula: true,
-    domicilio: false
+    domicilio: true
   }
 }
 
@@ -54,33 +54,33 @@ const mockTrabajador = {
 const mockTrabajosDisponibles = [
   {
     id: '1',
-    titulo: 'Instalacion de luces LED en cocina',
-    descripcion: 'Necesito instalar 6 spots LED en la cocina. Ya tengo las luces.',
-    categoria: 'Electricista',
-    ubicacion: 'Recoleta, Buenos Aires',
-    distancia: 3.2,
+    titulo: 'Reparacion de canilla que gotea',
+    descripcion: 'La canilla de la cocina gotea constantemente. Necesito que la reparen o cambien.',
+    categoria: 'Plomeria',
+    ubicacion: 'Palermo, Buenos Aires',
+    distancia: 1.8,
     urgencia: 'media',
     fechaPublicacion: '2026-05-08',
     cliente: 'Maria G.'
   },
   {
     id: '2',
-    titulo: 'Revision de tablero electrico',
-    descripcion: 'El tablero salta cada vez que prendo el aire. Necesito una revision urgente.',
-    categoria: 'Electricista',
-    ubicacion: 'Palermo, Buenos Aires',
-    distancia: 1.5,
+    titulo: 'Destape de caneria en bano',
+    descripcion: 'El desague de la ducha esta tapado, el agua no baja. Necesito solucion urgente.',
+    categoria: 'Plomeria',
+    ubicacion: 'Belgrano, Buenos Aires',
+    distancia: 2.5,
     urgencia: 'alta',
     fechaPublicacion: '2026-05-09',
     cliente: 'Juan P.'
   },
   {
     id: '3',
-    titulo: 'Cambio de cableado en departamento',
-    descripcion: 'Depto de 2 ambientes, cableado viejo. Quiero cambiar todo.',
-    categoria: 'Electricista',
+    titulo: 'Instalacion de calefon nuevo',
+    descripcion: 'Compre un calefon nuevo y necesito instalarlo. Tengo todos los materiales.',
+    categoria: 'Plomeria',
     ubicacion: 'Villa Crespo, Buenos Aires',
-    distancia: 2.8,
+    distancia: 3.1,
     urgencia: 'baja',
     fechaPublicacion: '2026-05-07',
     cliente: 'Laura M.'
@@ -91,14 +91,14 @@ const mockTrabajosDisponibles = [
 const mockPostulaciones = [
   {
     id: '1',
-    trabajo: 'Reparacion de toma corrientes',
+    trabajo: 'Reparacion de inodoro con perdida',
     cliente: 'Roberto S.',
     estado: 'pendiente',
     fechaPostulacion: '2026-05-08'
   },
   {
     id: '2',
-    trabajo: 'Instalacion de ventiladores de techo',
+    trabajo: 'Cambio de griferia completa en bano',
     cliente: 'Ana K.',
     estado: 'aceptada',
     fechaPostulacion: '2026-05-06'
@@ -109,8 +109,8 @@ const mockPostulaciones = [
 const mockUrgencias = [
   {
     id: 'urg-1',
-    tipo: 'Problema Electrico',
-    descripcion: 'Se fue la luz en todo el departamento, saltaron los diferenciales y no suben.',
+    tipo: 'Cano roto',
+    descripcion: 'Se rompio un cano debajo de la pileta de la cocina, esta inundando todo. Urgente!',
     cliente: 'Maria Gomez',
     ubicacion: 'Palermo, Buenos Aires',
     distancia: 1.2,
@@ -119,8 +119,8 @@ const mockUrgencias = [
   },
   {
     id: 'urg-2',
-    tipo: 'Cortocircuito',
-    descripcion: 'Hay un cable que chispea en la cocina, olor a quemado. Necesito ayuda urgente.',
+    tipo: 'Perdida de agua',
+    descripcion: 'Hay una perdida grande en el bano, el agua no para de salir del inodoro.',
     cliente: 'Roberto Perez',
     ubicacion: 'Villa Crespo, Buenos Aires',
     distancia: 2.4,
@@ -129,8 +129,8 @@ const mockUrgencias = [
   },
   {
     id: 'urg-3',
-    tipo: 'Sin suministro electrico',
-    descripcion: 'Corte de luz solo en mi unidad, los vecinos tienen luz. Tablero personal.',
+    tipo: 'Caneria tapada',
+    descripcion: 'Se tapo la caneria principal, todos los desagues del depto estan colapsados.',
     cliente: 'Laura Sanchez',
     ubicacion: 'Recoleta, Buenos Aires',
     distancia: 3.1,
@@ -144,15 +144,15 @@ const mockCitas = [
   {
     id: '1',
     cliente: 'Sofia Martinez',
-    servicio: 'Instalacion electrica',
+    servicio: 'Reparacion de canilla',
     fecha: '2026-05-10',
     hora: '10:00',
     ubicacion: 'Belgrano, Buenos Aires'
   },
   {
     id: '2',
-    cliente: 'Pedro Gonzalez',
-    servicio: 'Revision de tablero',
+    cliente: 'Carlos Gonzalez',
+    servicio: 'Destape de caneria',
     fecha: '2026-05-11',
     hora: '14:30',
     ubicacion: 'Palermo, Buenos Aires'
