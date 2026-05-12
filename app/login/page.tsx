@@ -20,8 +20,8 @@ export default function LoginPage() {
   })
 
   const mockUsers = [
-    { email: 'cliente@demo.com', password: 'Demo123!', role: 'CLIENT', name: 'Juan Cliente', verified: true },
-    { email: 'trabajador@demo.com', password: 'Demo123!', role: 'WORKER', name: 'Carlos Electricista', verified: true, kycStatus: 'VERIFIED' },
+    { email: 'cliente@demo.com', password: 'Demo123!', role: 'CLIENT', name: 'Marta Ocampo', verified: true },
+    { email: 'trabajador@demo.com', password: 'Demo123!', role: 'WORKER', name: 'Pedro Picapiedra', verified: true, kycStatus: 'VERIFIED' },
     { email: 'pendiente@demo.com', password: 'Demo123!', role: 'WORKER', name: 'Maria Plomera', verified: true, kycStatus: 'PENDING_KYC' },
   ]
 
@@ -145,8 +145,8 @@ export default function LoginPage() {
                 <label htmlFor="password" className="text-sm font-semibold text-foreground">
                   Contrasena
                 </label>
-                <Link 
-                  href="/forgot-password" 
+                <Link
+                  href="/forgot-password"
                   className="text-sm text-accent hover:text-accent/80 font-medium transition-colors"
                 >
                   Olvidaste tu contrasena?
@@ -173,8 +173,8 @@ export default function LoginPage() {
             </div>
 
             {/* Submit Button */}
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full h-14 bg-accent hover:bg-accent/90 text-white font-semibold text-base shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30 transition-all"
               disabled={isLoading}
             >
@@ -231,7 +231,7 @@ export default function LoginPage() {
           className="object-cover opacity-30"
           priority
         />
-        
+
         {/* Content Overlay */}
         <div className="relative z-10 flex flex-col justify-between p-12 xl:p-16 w-full">
           {/* Top Badge */}
@@ -248,7 +248,7 @@ export default function LoginPage() {
             <p className="text-lg text-white/70 leading-relaxed mb-10">
               Conectamos a mas de 15,000 profesionales verificados con familias que buscan soluciones confiables para su hogar.
             </p>
-            
+
             {/* Stats */}
             <div className="grid grid-cols-3 gap-6">
               {[
