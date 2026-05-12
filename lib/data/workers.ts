@@ -24,7 +24,7 @@ export const workers: Worker[] = [
     location: 'Palermo, Buenos Aires',
     distance: 2.3,
     bio: 'Hola, soy Pedro, plomero especializado con más de 8 años de experiencia, solucionando urgencias y realizando instalaciones integrales.',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop&crop=face',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop&crop=face',
     verified: true,
     responseTime: '< 1 hora',
     availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
