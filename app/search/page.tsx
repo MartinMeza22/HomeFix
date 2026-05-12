@@ -11,6 +11,7 @@ import { Card } from '@/components/ui/card'
 import { workers, type Worker } from '@/lib/data/workers'
 import { categories } from '@/lib/data/categories'
 import { Search, Filter, MapPin, X, ChevronDown, SlidersHorizontal, Users, Shield, Star } from 'lucide-react'
+import { BackButton } from '@/components/BackButton'
 
 export default function SearchPage() {
   const router = useRouter()
@@ -135,6 +136,7 @@ export default function SearchPage() {
       {/* Hero Header */}
       <div className="bg-primary py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <BackButton className="mb-6 text-white/70 hover:text-white" />
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 text-accent text-sm font-medium mb-4">
               <Search className="w-4 h-4" />
@@ -221,8 +223,6 @@ export default function SearchPage() {
                 >
                   <option value="distance">Mas cercanos</option>
                   <option value="rating">Mejor calificados</option>
-                  <option value="price-low">Precio: menor a mayor</option>
-                  <option value="price-high">Precio: mayor a menor</option>
                 </select>
               </div>
             </div>

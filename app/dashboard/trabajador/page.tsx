@@ -61,7 +61,6 @@ const mockTrabajosDisponibles = [
     distancia: 3.2,
     urgencia: 'media',
     fechaPublicacion: '2026-05-08',
-    presupuestoEstimado: '$15,000 - $25,000',
     cliente: 'Maria G.'
   },
   {
@@ -73,7 +72,6 @@ const mockTrabajosDisponibles = [
     distancia: 1.5,
     urgencia: 'alta',
     fechaPublicacion: '2026-05-09',
-    presupuestoEstimado: '$10,000 - $20,000',
     cliente: 'Juan P.'
   },
   {
@@ -85,7 +83,6 @@ const mockTrabajosDisponibles = [
     distancia: 2.8,
     urgencia: 'baja',
     fechaPublicacion: '2026-05-07',
-    presupuestoEstimado: '$50,000 - $80,000',
     cliente: 'Laura M.'
   }
 ]
@@ -207,7 +204,7 @@ export default function TrabajadorDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#D9D9D9' }}>
       <Navbar />
       
       <main className="flex-1">
@@ -222,7 +219,7 @@ export default function TrabajadorDashboard() {
                   alt={trabajador.name}
                   width={100}
                   height={100}
-                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-4 border-white/20"
+                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover object-top border-4 border-white/20"
                 />
                 {trabajador.verified && (
                   <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-accent rounded-full flex items-center justify-center border-2 border-primary">

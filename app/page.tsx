@@ -295,7 +295,7 @@ export default function Home() {
             </div>
             <Link href="/search" className="mt-6 md:mt-0">
               <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-semibold">
-                ¿Buscás labubu?
+                ¿Buscás trabajo?
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
@@ -335,26 +335,8 @@ export default function Home() {
       </section>
 
 
-     {/* Stats Bar */}
-      <section className="bg-primary py-6 sm:py-8 border-y border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center py-1">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-0.5 sm:mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-xs sm:text-sm text-white/60 font-medium leading-tight">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Features Section */}
-      <section className="pt-20 pb-0 bg-secondary/30">
+      <section className="pt-20 pb-0 bg-primary/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left - Image/Logo */}

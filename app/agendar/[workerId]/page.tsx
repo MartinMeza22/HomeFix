@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { workers } from '@/lib/data/workers'
 import { ArrowLeft, Calendar, Clock, MapPin, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react'
+import { BackButton } from '@/components/BackButton'
 import Link from 'next/link'
 
 const HORARIOS = [
@@ -23,13 +24,38 @@ const MESES = [
 ]
 
 const SERVICIOS = [
-  'Presupuesto / Diagnóstico',
+  'Diagnóstico / Inspección',
   'Reparación urgente',
   'Instalación nueva',
   'Mantenimiento preventivo',
   'Consulta técnica',
   'Otro'
 ]
+
+// Horarios ocupados por worker (simulacion de agenda real)
+const HORARIOS_OCUPADOS: Record<string, Record<string, string[]>> = {
+  '1': { // Carlos Mendez - Electricista
+    '2026-05-12': ['09:00', '10:00', '14:00'],
+    '2026-05-13': ['08:00', '11:00', '15:00', '16:00'],
+    '2026-05-14': ['10:00', '14:00', '17:00'],
+    '2026-05-15': ['09:00', '12:00', '18:00'],
+    '2026-05-16': ['08:00', '09:00', '10:00', '11:00'], // Manana ocupada
+    '2026-05-19': ['14:00', '15:00', '16:00', '17:00'], // Tarde ocupada
+  },
+  '7': { // Pedro Picapiedra - Plomero
+    '2026-05-12': ['08:00', '09:00', '15:00'],
+    '2026-05-13': ['10:00', '11:00', '12:00'],
+    '2026-05-14': ['14:00', '15:00', '16:00', '17:00'],
+    '2026-05-15': ['08:00', '10:00', '18:00', '19:00'],
+    '2026-05-20': ['09:00', '10:00', '11:00', '14:00', '15:00'],
+  }
+}
+
+// Dias completamente ocupados
+const DIAS_OCUPADOS: Record<string, string[]> = {
+  '1': ['2026-05-17', '2026-05-24'], // Carlos tiene estos dias full
+  '7': ['2026-05-21', '2026-05-28'], // Pedro tiene estos dias full
+}
 
 function getDaysInMonth(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate()
@@ -90,9 +116,31 @@ export default function AgendarCitaPage() {
     return date < todayClean
   }
 
+  // Verificar si un dia esta completamente ocupado
+  const isFullyBookedDay = (day: number) => {
+    const date = new Date(viewYear, viewMonth, day)
+    const dateStr = date.toISOString().split('T')[0]
+    return DIAS_OCUPADOS[worker.id]?.includes(dateStr) || false
+  }
+
+  // Verificar si un horario esta ocupado para la fecha seleccionada
+  const isTimeBooked = (time: string) => {
+    if (!selectedDate) return false
+    const dateStr = selectedDate.toISOString().split('T')[0]
+    return HORARIOS_OCUPADOS[worker.id]?.[dateStr]?.includes(time) || false
+  }
+
+  // Contar horarios disponibles para un dia
+  const getAvailableTimesCount = (day: number) => {
+    const date = new Date(viewYear, viewMonth, day)
+    const dateStr = date.toISOString().split('T')[0]
+    const bookedTimes = HORARIOS_OCUPADOS[worker.id]?.[dateStr] || []
+    return HORARIOS.length - bookedTimes.length
+  }
+
   const handleDayClick = (day: number) => {
     const date = new Date(viewYear, viewMonth, day)
-    if (isPastDay(day) || !isAvailableDay(date)) return
+    if (isPastDay(day) || !isAvailableDay(date) || isFullyBookedDay(day)) return
     setSelectedDate(date)
     setSelectedHora(null)
   }
@@ -193,6 +241,7 @@ export default function AgendarCitaPage() {
       <main className="min-h-screen bg-background">
         <Navbar />
         <div className="max-w-lg mx-auto px-4 sm:px-6 py-8">
+
           <button
             onClick={() => setStep('form')}
             className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-6 text-sm font-medium transition-colors"
@@ -212,67 +261,48 @@ export default function AgendarCitaPage() {
               <img
                 src={worker.image}
                 alt={worker.name}
-                className="w-full h-full object-cover object-[center_15%]"
+                className="w-full h-full object-cover object-top"
               />
             </div>
             <div>
               <p className="font-bold text-foreground">{worker.name}</p>
               <p className="text-sm text-muted-foreground">{worker.category}</p>
-              <p className="text-xs text-muted-foreground mt-0.5">{worker.location}</p>
             </div>
           </Card>
 
-          {/* Booking details */}
-          <Card className="p-5 space-y-4 mb-5">
-            <h2 className="font-bold text-foreground">Detalle de la cita</h2>
-            <div className="space-y-3 text-sm">
-              <div className="flex items-start gap-3">
-                <Calendar className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-muted-foreground text-xs uppercase font-medium mb-0.5">Fecha</p>
-                  <p className="font-semibold text-foreground capitalize">
-                    {selectedDate?.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Clock className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-muted-foreground text-xs uppercase font-medium mb-0.5">Hora</p>
-                  <p className="font-semibold text-foreground">{selectedHora} hs</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <div>
-                  <p className="text-muted-foreground text-xs uppercase font-medium mb-0.5">Servicio</p>
-                  <p className="font-semibold text-foreground">{selectedServicio}</p>
-                </div>
-              </div>
-              {descripcion && (
-                <div className="flex items-start gap-3">
-                  <div className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="text-muted-foreground text-xs uppercase font-medium mb-0.5">Descripcion</p>
-                    <p className="text-foreground">{descripcion}</p>
-                  </div>
-                </div>
-              )}
+          {/* Details */}
+          <Card className="p-5 mb-6 space-y-3">
+            <div className="flex items-center gap-3">
+              <Calendar className="w-4 h-4 text-primary flex-shrink-0" />
+              <span className="text-sm text-foreground">
+                {selectedDate?.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+              </span>
             </div>
-          </Card>
-
-          <Card className="p-4 bg-primary/5 border-primary/20 mb-6">
-            <p className="text-xs text-muted-foreground">
-              Al confirmar, el profesional recibira una solicitud de cita. 
-              Tenes hasta <strong>2 horas antes</strong> para cancelar sin costo.
-            </p>
+            <div className="flex items-center gap-3">
+              <Clock className="w-4 h-4 text-primary flex-shrink-0" />
+              <span className="text-sm text-foreground">{selectedHora} hs</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <MapPin className="w-4 h-4 text-primary flex-shrink-0" />
+              <span className="text-sm text-foreground">{worker.location}</span>
+            </div>
+            {selectedServicio && (
+              <div className="flex items-center gap-3">
+                <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                <span className="text-sm text-foreground">{selectedServicio}</span>
+              </div>
+            )}
+            {descripcion && (
+              <p className="text-sm text-muted-foreground pt-2 border-t border-border">"{descripcion}"</p>
+            )}
           </Card>
 
           <Button
             size="lg"
-            className="w-full bg-accent hover:bg-accent/90 text-white font-semibold h-13"
+            className="w-full bg-accent hover:bg-accent/90 text-white font-semibold"
             onClick={handleFinalBook}
           >
+            <CheckCircle2 className="w-5 h-5 mr-2" />
             Confirmar cita
           </Button>
         </div>
@@ -284,39 +314,12 @@ export default function AgendarCitaPage() {
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
-
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-        {/* Header */}
-        <Link
-          href={`/worker/${worker.id}`}
-          className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-6 text-sm font-medium transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Volver al perfil
-        </Link>
-
-        {/* Worker mini card */}
-        <Card className="p-4 mb-6 flex items-center gap-4 bg-secondary/30">
-          <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-primary/20">
-            <img
-              src={worker.image}
-              alt={worker.name}
-              className="w-full h-full object-cover object-[center_15%]"
-            />
-          </div>
-          <div>
-            <p className="font-bold text-foreground">{worker.name}</p>
-            <p className="text-sm text-muted-foreground">{worker.category} · {worker.location}</p>
-          </div>
-          {worker.verified && (
-            <span className="ml-auto text-xs font-semibold text-accent border border-accent/30 rounded-full px-2 py-0.5">
-              Verificado
-            </span>
-          )}
-        </Card>
-
-        <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-1">Agendar cita</h1>
-        <p className="text-muted-foreground text-sm mb-8">Selecciona fecha, horario y tipo de servicio</p>
+      <div className="max-w-lg mx-auto px-4 sm:px-6 py-8">
+        <BackButton href={`/worker/${worker.id}`} label="Volver al perfil" className="mb-6" />
+        <div className="mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-1">Agendar cita</h1>
+          <p className="text-muted-foreground text-sm">Selecciona fecha, horario y tipo de servicio</p>
+        </div>
 
         <div className="space-y-6">
           {/* Calendar */}
@@ -359,6 +362,9 @@ export default function AgendarCitaPage() {
                 const date = new Date(viewYear, viewMonth, day)
                 const past = isPastDay(day)
                 const available = isAvailableDay(date)
+                const fullyBooked = isFullyBookedDay(day)
+                const availableTimes = getAvailableTimesCount(day)
+                const hasLimitedSlots = availableTimes <= 3 && availableTimes > 0 && !fullyBooked
                 const isSelected =
                   selectedDate?.getDate() === day &&
                   selectedDate?.getMonth() === viewMonth &&
@@ -368,32 +374,41 @@ export default function AgendarCitaPage() {
                   <button
                     key={day}
                     onClick={() => handleDayClick(day)}
-                    disabled={past || !available}
+                    disabled={past || !available || fullyBooked}
                     className={`
-                      aspect-square rounded-lg text-sm font-medium transition-all
+                      aspect-square rounded-lg text-sm font-medium transition-all relative
                       ${isSelected
                         ? 'bg-primary text-white shadow-md'
-                        : available && !past
-                          ? 'hover:bg-primary/10 text-foreground'
-                          : 'text-muted-foreground/40 cursor-not-allowed'
+                        : fullyBooked
+                          ? 'bg-destructive/10 text-destructive/50 cursor-not-allowed line-through'
+                          : available && !past
+                            ? 'hover:bg-primary/10 text-foreground'
+                            : 'text-muted-foreground/40 cursor-not-allowed'
                       }
                     `}
                   >
                     {day}
+                    {hasLimitedSlots && !past && available && (
+                      <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-amber-500 rounded-full" />
+                    )}
                   </button>
                 )
               })}
             </div>
 
             {/* Legend */}
-            <div className="flex items-center gap-4 mt-4 pt-4 border-t border-border">
+            <div className="flex flex-wrap items-center gap-3 mt-4 pt-4 border-t border-border">
               <div className="flex items-center gap-1.5">
                 <div className="w-3 h-3 rounded-full bg-primary" />
                 <span className="text-xs text-muted-foreground">Disponible</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-muted" />
-                <span className="text-xs text-muted-foreground">No disponible</span>
+                <div className="w-3 h-3 rounded-full bg-amber-500" />
+                <span className="text-xs text-muted-foreground">Pocos turnos</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <div className="w-3 h-3 rounded-full bg-destructive/30" />
+                <span className="text-xs text-muted-foreground">Ocupado</span>
               </div>
             </div>
           </Card>
@@ -409,20 +424,32 @@ export default function AgendarCitaPage() {
                 </span>
               </h3>
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-                {HORARIOS.map(hora => (
-                  <button
-                    key={hora}
-                    onClick={() => setSelectedHora(hora)}
-                    className={`py-2.5 rounded-lg text-sm font-semibold border transition-all ${
-                      selectedHora === hora
-                        ? 'bg-primary text-white border-primary shadow-md'
-                        : 'border-border text-foreground hover:border-primary/50 hover:bg-primary/5'
-                    }`}
-                  >
-                    {hora}
-                  </button>
-                ))}
+                {HORARIOS.map(hora => {
+                  const booked = isTimeBooked(hora)
+                  return (
+                    <button
+                      key={hora}
+                      onClick={() => !booked && setSelectedHora(hora)}
+                      disabled={booked}
+                      className={`py-2.5 rounded-lg text-sm font-semibold border transition-all ${
+                        booked
+                          ? 'bg-muted/50 text-muted-foreground/50 border-muted cursor-not-allowed line-through'
+                          : selectedHora === hora
+                            ? 'bg-primary text-white border-primary shadow-md'
+                            : 'border-border text-foreground hover:border-primary/50 hover:bg-primary/5'
+                      }`}
+                    >
+                      {hora}
+                      {booked && <span className="block text-[10px] font-normal">Ocupado</span>}
+                    </button>
+                  )
+                })}
               </div>
+              {HORARIOS.some(h => isTimeBooked(h)) && (
+                <p className="text-xs text-muted-foreground mt-3">
+                  Los horarios tachados ya estan reservados por otros clientes.
+                </p>
+              )}
             </Card>
           )}
 

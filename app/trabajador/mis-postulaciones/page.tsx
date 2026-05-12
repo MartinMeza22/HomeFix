@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
+import { BackButton } from '@/components/BackButton'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { 
@@ -32,7 +33,6 @@ interface Postulacion {
   estado: 'pendiente' | 'aceptada' | 'rechazada' | 'expirada'
   fechaPostulacion: string
   fechaServicio?: string
-  presupuesto?: string
 }
 
 // Mock postulaciones
@@ -47,8 +47,7 @@ const mockPostulaciones: Postulacion[] = [
     mensaje: 'Hola, tengo amplia experiencia en instalacion de luces LED. Puedo ir el viernes.',
     estado: 'pendiente',
     fechaPostulacion: '2026-05-08',
-    fechaServicio: '2026-05-15',
-    presupuesto: '$18,000'
+    fechaServicio: '2026-05-15'
   },
   {
     id: '2',
@@ -60,8 +59,7 @@ const mockPostulaciones: Postulacion[] = [
     mensaje: 'Puedo ir hoy mismo a revisar el tablero. Trabajo con garantia.',
     estado: 'aceptada',
     fechaPostulacion: '2026-05-06',
-    fechaServicio: '2026-05-10',
-    presupuesto: '$12,000'
+    fechaServicio: '2026-05-10'
   },
   {
     id: '3',
@@ -73,8 +71,7 @@ const mockPostulaciones: Postulacion[] = [
     mensaje: 'Tengo disponibilidad la proxima semana.',
     estado: 'rechazada',
     fechaPostulacion: '2026-05-04',
-    fechaServicio: '2026-05-20',
-    presupuesto: '$65,000'
+    fechaServicio: '2026-05-20'
   },
   {
     id: '4',
@@ -86,8 +83,7 @@ const mockPostulaciones: Postulacion[] = [
     mensaje: 'Puedo instalar los 3 ventiladores en un solo dia.',
     estado: 'aceptada',
     fechaPostulacion: '2026-05-02',
-    fechaServicio: '2026-05-08',
-    presupuesto: '$25,000'
+    fechaServicio: '2026-05-08'
   }
 ]
 
@@ -151,20 +147,14 @@ export default function MisPostulacionesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#D9D9D9' }}>
       <Navbar />
       
       <main className="flex-1">
         {/* Header */}
         <section className="bg-primary py-8">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <button 
-              onClick={() => router.push('/dashboard/trabajador')}
-              className="flex items-center text-white/70 hover:text-white mb-4 transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Volver al Dashboard
-            </button>
+            <BackButton href="/dashboard/trabajador" label="Volver al Dashboard" className="mb-4 text-white/70 hover:text-white" />
             <div className="flex items-center gap-3 mb-2">
               <FileText className="w-8 h-8 text-accent" />
               <h1 className="text-2xl sm:text-3xl font-bold text-white">Mis Postulaciones</h1>
@@ -288,13 +278,6 @@ export default function MisPostulacionesPage() {
                                 {postulacion.mensaje}
                               </p>
                             </div>
-
-                            {postulacion.presupuesto && (
-                              <div className="flex items-center justify-between">
-                                <span className="text-sm text-muted-foreground">Presupuesto:</span>
-                                <span className="font-bold text-primary">{postulacion.presupuesto}</span>
-                              </div>
-                            )}
 
                             {postulacion.estado === 'aceptada' && (
                               <div className="flex gap-2">

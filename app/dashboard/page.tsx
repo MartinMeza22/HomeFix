@@ -148,11 +148,10 @@ export default function DashboardPage() {
                         </span>
                       </div>
 
-                      <div className="grid grid-cols-3 gap-4 mb-4 p-4 bg-secondary/50 rounded-xl">
+                      <div className="grid grid-cols-2 gap-4 mb-4 p-4 bg-secondary/50 rounded-xl">
                         {[
                           { label: 'Fecha', value: booking.date },
                           { label: 'Hora', value: booking.time },
-                          { label: 'Precio', value: `$${booking.price}` },
                         ].map((item, idx) => (
                           <div key={idx}>
                             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1">{item.label}</p>

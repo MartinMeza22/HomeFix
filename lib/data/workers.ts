@@ -104,5 +104,50 @@ export const workers: Worker[] = [
     responseTime: '< 2 horas',
     availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
     disponibleUrgencia: false
+  },
+  {
+    id: '7',
+    name: 'Pedro Picapiedra',
+    category: 'Plomería',
+    rating: 4.9,
+    reviews: 312,
+    location: 'Recoleta, Buenos Aires',
+    distance: 2.5,
+    bio: 'Plomero profesional con mas de 20 años de experiencia. Especialista en reparacion de canillas, destape de canerias y trabajos de gas. Atencion rapida y garantizada.',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop&crop=face',
+    verified: true,
+    responseTime: '< 1 hora',
+    availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+    disponibleUrgencia: true
+  },
+  {
+    id: '8',
+    name: 'Marcelo Gutierrez',
+    category: 'Plomería',
+    rating: 4.6,
+    reviews: 89,
+    location: 'Flores, Buenos Aires',
+    distance: 4.2,
+    bio: 'Gasista y plomero matriculado. Realizo instalaciones completas, reparaciones y mantenimiento. Trabajo prolijo y garantizado.',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&h=500&fit=crop&crop=face',
+    verified: true,
+    responseTime: '< 3 horas',
+    availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'],
+    disponibleUrgencia: false
+  },
+  {
+    id: '9',
+    name: 'Diego Ramirez',
+    category: 'Plomería',
+    rating: 4.4,
+    reviews: 45,
+    location: 'Boedo, Buenos Aires',
+    distance: 3.1,
+    bio: 'Plomero con experiencia en reparaciones domesticas e industriales. Disponibilidad inmediata para urgencias.',
+    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&h=500&fit=crop&crop=face',
+    verified: false,
+    responseTime: '< 2 horas',
+    availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+    disponibleUrgencia: true
   }
 ]

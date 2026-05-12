@@ -32,8 +32,7 @@ const mockPublicacion = {
   categoria: 'Plomeria',
   estado: 'Pendiente',
   fechaPublicacion: '2024-01-15',
-  ubicacion: 'Lima, Peru',
-  presupuesto: 'S/ 150 - S/ 300'
+  ubicacion: 'Lima, Peru'
 }
 
 // Mock data for applicants
@@ -228,7 +227,6 @@ export default function PostulantesPage() {
               <span className="text-muted-foreground flex items-center gap-1">
                 <MapPin className="w-4 h-4" /> {mockPublicacion.ubicacion}
               </span>
-              <span className="font-semibold text-foreground">{mockPublicacion.presupuesto}</span>
             </div>
           </div>
         </Card>

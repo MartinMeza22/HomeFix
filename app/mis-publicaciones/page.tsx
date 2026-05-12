@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { BackButton } from '@/components/BackButton'
 import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { Card } from '@/components/ui/card'
@@ -39,7 +40,6 @@ interface Solicitud {
   trabajadorReviews: number
   trabajadorVerificado: boolean
   mensaje: string
-  presupuesto: string
   fechaPropuesta: string
   estado: 'pendiente' | 'aceptada' | 'rechazada'
 }
@@ -53,7 +53,6 @@ interface Publicacion {
   fechaCreacion: string
   fechaServicio: string
   ubicacion: string
-  presupuesto: string
   urgencia: string
   solicitudes: Solicitud[]
 }
@@ -81,7 +80,6 @@ const mockPublicaciones: Publicacion[] = [
     fechaCreacion: '2024-01-15',
     fechaServicio: '2024-01-20',
     ubicacion: 'Buenos Aires, Palermo',
-    presupuesto: '$15.000 - $30.000',
     urgencia: 'Alta',
     solicitudes: [
       {
@@ -93,7 +91,6 @@ const mockPublicaciones: Publicacion[] = [
         trabajadorReviews: 47,
         trabajadorVerificado: true,
         mensaje: 'Hola, tengo disponibilidad para ir esta semana. Cuento con todas las herramientas necesarias.',
-        presupuesto: '$18.000',
         fechaPropuesta: '2024-01-18',
         estado: 'pendiente'
       },
@@ -105,9 +102,32 @@ const mockPublicaciones: Publicacion[] = [
         trabajadorCalificacion: 4.5,
         trabajadorReviews: 23,
         trabajadorVerificado: true,
-        mensaje: 'Puedo revisar el problema manana. Presupuesto sin compromiso.',
-        presupuesto: '$22.000',
+        mensaje: 'Puedo revisar el problema manana.',
         fechaPropuesta: '2024-01-19',
+        estado: 'pendiente'
+      },
+      {
+        id: '4',
+        trabajadorId: '4',
+        trabajadorNombre: 'Roberto Sanchez',
+        trabajadorCategoria: 'Plomeria',
+        trabajadorCalificacion: 4.7,
+        trabajadorReviews: 56,
+        trabajadorVerificado: true,
+        mensaje: 'Tengo experiencia con este tipo de reparaciones. Puedo ir hoy mismo.',
+        fechaPropuesta: '2024-01-17',
+        estado: 'pendiente'
+      },
+      {
+        id: '5',
+        trabajadorId: '5',
+        trabajadorNombre: 'Miguel Torres',
+        trabajadorCategoria: 'Plomeria',
+        trabajadorCalificacion: 4.3,
+        trabajadorReviews: 18,
+        trabajadorVerificado: false,
+        mensaje: 'Trabajo disponible para esta zona. Cuento con herramientas propias.',
+        fechaPropuesta: '2024-01-20',
         estado: 'pendiente'
       }
     ]
@@ -121,7 +141,6 @@ const mockPublicaciones: Publicacion[] = [
     fechaCreacion: '2024-01-10',
     fechaServicio: '2024-01-22',
     ubicacion: 'Buenos Aires, Belgrano',
-    presupuesto: '$25.000 - $40.000',
     urgencia: 'Media',
     solicitudes: [
       {
@@ -133,9 +152,20 @@ const mockPublicaciones: Publicacion[] = [
         trabajadorReviews: 89,
         trabajadorVerificado: true,
         mensaje: 'Trabajo aceptado. Confirmo visita para el 22/01.',
-        presupuesto: '$35.000',
         fechaPropuesta: '2024-01-22',
         estado: 'aceptada'
+      },
+      {
+        id: '6',
+        trabajadorId: '6',
+        trabajadorNombre: 'Fernando Lopez',
+        trabajadorCategoria: 'HVAC',
+        trabajadorCalificacion: 4.6,
+        trabajadorReviews: 34,
+        trabajadorVerificado: true,
+        mensaje: 'Especialista en instalacion de splits. Garantia de 1 ano.',
+        fechaPropuesta: '2024-01-21',
+        estado: 'rechazada'
       }
     ]
   },
@@ -148,9 +178,57 @@ const mockPublicaciones: Publicacion[] = [
     fechaCreacion: '2024-01-05',
     fechaServicio: '2024-01-12',
     ubicacion: 'Buenos Aires, Recoleta',
-    presupuesto: '$30.000 - $45.000',
     urgencia: 'Baja',
     solicitudes: []
+  },
+  {
+    id: '4',
+    titulo: 'Servicio de Plomeria - Cocina',
+    descripcion: 'Me pierde la canilla de la cocina, necesito que la revisen y reparen.',
+    categoria: 'Plomeria',
+    estado: 'pendiente',
+    fechaCreacion: '2024-01-18',
+    fechaServicio: '2024-01-25',
+    ubicacion: 'Buenos Aires, Recoleta',
+    urgencia: 'Media',
+    solicitudes: [
+      {
+        id: '7',
+        trabajadorId: '7',
+        trabajadorNombre: 'Pedro Picapiedra',
+        trabajadorCategoria: 'Plomeria',
+        trabajadorCalificacion: 4.9,
+        trabajadorReviews: 312,
+        trabajadorVerificado: true,
+        mensaje: 'Hola! Soy especialista en canillas y griferia. Puedo ir manana mismo a revisarla. Trabajo con garantia.',
+        fechaPropuesta: '2024-01-19',
+        estado: 'pendiente'
+      },
+      {
+        id: '8',
+        trabajadorId: '8',
+        trabajadorNombre: 'Marcelo Gutierrez',
+        trabajadorCategoria: 'Plomeria',
+        trabajadorCalificacion: 4.6,
+        trabajadorReviews: 89,
+        trabajadorVerificado: true,
+        mensaje: 'Buenas tardes, tengo disponibilidad esta semana. Cuento con repuestos de todas las marcas.',
+        fechaPropuesta: '2024-01-22',
+        estado: 'pendiente'
+      },
+      {
+        id: '9',
+        trabajadorId: '9',
+        trabajadorNombre: 'Diego Ramirez',
+        trabajadorCategoria: 'Plomeria',
+        trabajadorCalificacion: 4.4,
+        trabajadorReviews: 45,
+        trabajadorVerificado: false,
+        mensaje: 'Puedo pasar hoy a la tarde si te sirve. Trabajo rapido y prolijo.',
+        fechaPropuesta: '2024-01-18',
+        estado: 'pendiente'
+      }
+    ]
   }
 ]
 
@@ -259,6 +337,7 @@ export default function MisPublicacionesPage() {
       {/* Header */}
       <div className="bg-primary py-8 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <BackButton href="/dashboard" label="Volver al inicio" className="mb-4 text-white/70 hover:text-white" />
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-white">Mis Publicaciones</h1>
@@ -379,7 +458,6 @@ export default function MisPublicacionesPage() {
                         <MapPin className="w-3.5 h-3.5" />
                         {pub.ubicacion}
                       </span>
-                      <span className="font-medium text-foreground">{pub.presupuesto}</span>
                     </div>
                   </Card>
                 ))
@@ -469,11 +547,6 @@ export default function MisPublicacionesPage() {
                           </div>
 
                           <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{sol.mensaje}</p>
-
-                          <div className="flex items-center justify-between text-xs mb-3">
-                            <span className="text-muted-foreground">Presupuesto:</span>
-                            <span className="font-bold text-foreground">{sol.presupuesto}</span>
-                          </div>
 
                           {sol.estado === 'pendiente' && (
                             <div className="flex gap-2">
