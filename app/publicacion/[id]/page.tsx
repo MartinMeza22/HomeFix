@@ -39,7 +39,7 @@ const mockPublicacion = {
 const mockPostulantes = [
   {
     id: '1',
-    nombre: 'Carlos Rodriguez',
+    nombre: 'Pedro Picapiedra',
     categoriaPrincipal: 'Plomeria',
     categorias: ['Plomeria', 'Gasfiteria'],
     calificacion: 4.8,
@@ -157,8 +157,8 @@ export default function PostulantesPage() {
           <Star
             key={star}
             className={`w-4 h-4 ${star <= calificacion
-                ? 'fill-amber-400 text-amber-400'
-                : 'text-muted-foreground/30'
+              ? 'fill-amber-400 text-amber-400'
+              : 'text-muted-foreground/30'
               }`}
           />
         ))}
@@ -476,8 +476,8 @@ export default function PostulantesPage() {
                   {chatMessages.map((msg, idx) => (
                     <div key={idx} className={`flex ${msg.sender === 'cliente' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`px-4 py-2.5 rounded-2xl max-w-[85%] text-sm ${msg.sender === 'cliente'
-                          ? 'bg-primary text-white rounded-br-md'
-                          : 'bg-background border border-border text-foreground rounded-bl-md'
+                        ? 'bg-primary text-white rounded-br-md'
+                        : 'bg-background border border-border text-foreground rounded-bl-md'
                         }`}>
                         {msg.text}
                       </div>

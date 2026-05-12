@@ -85,7 +85,7 @@ const mockPublicaciones: Publicacion[] = [
       {
         id: '1',
         trabajadorId: '1',
-        trabajadorNombre: 'Carlos Rodriguez',
+        trabajadorNombre: 'Pedro Picapiedra',
         trabajadorCategoria: 'Plomeria',
         trabajadorCalificacion: 4.8,
         trabajadorReviews: 47,
@@ -238,7 +238,7 @@ const mockChats: Chat[] = [
     publicacionId: '1',
     publicacionTitulo: 'Reparacion de tuberia en cocina',
     trabajadorId: '1',
-    trabajadorNombre: 'Carlos Rodriguez',
+    trabajadorNombre: 'Pedro Picapiedra',
     trabajadorCategoria: 'Plomeria',
     ultimoMensaje: 'Perfecto, entonces confirmo para el jueves a las 10hs.',
     fechaUltimoMensaje: '2024-01-16 14:30',
@@ -319,9 +319,8 @@ export default function MisPublicacionesPage() {
       {[1, 2, 3, 4, 5].map((star) => (
         <Star
           key={star}
-          className={`w-3.5 h-3.5 ${
-            star <= rating ? 'fill-amber-400 text-amber-400' : 'text-muted-foreground/30'
-          }`}
+          className={`w-3.5 h-3.5 ${star <= rating ? 'fill-amber-400 text-amber-400' : 'text-muted-foreground/30'
+            }`}
         />
       ))}
     </div>
@@ -367,18 +366,16 @@ export default function MisPublicacionesPage() {
                   setSelectedPublicacion(null)
                   setSelectedChat(null)
                 }}
-                className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
-                  activeTab === tab.id
-                    ? 'border-primary text-primary'
-                    : 'border-transparent text-muted-foreground hover:text-foreground'
-                }`}
+                className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${activeTab === tab.id
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-muted-foreground hover:text-foreground'
+                  }`}
               >
                 <tab.icon className="w-4 h-4" />
                 <span className="hidden sm:inline">{tab.label}</span>
                 {tab.count > 0 && (
-                  <span className={`px-1.5 py-0.5 rounded-full text-xs font-semibold ${
-                    activeTab === tab.id ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground'
-                  }`}>
+                  <span className={`px-1.5 py-0.5 rounded-full text-xs font-semibold ${activeTab === tab.id ? 'bg-primary/10 text-primary' : 'bg-muted text-muted-foreground'
+                    }`}>
                     {tab.count}
                   </span>
                 )}
@@ -401,11 +398,10 @@ export default function MisPublicacionesPage() {
                   <button
                     key={estado}
                     onClick={() => setFilterEstado(estado as PublicacionEstado | 'todas')}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                      filterEstado === estado
-                        ? 'bg-primary text-white'
-                        : 'bg-secondary text-muted-foreground hover:bg-secondary/80'
-                    }`}
+                    className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${filterEstado === estado
+                      ? 'bg-primary text-white'
+                      : 'bg-secondary text-muted-foreground hover:bg-secondary/80'
+                      }`}
                   >
                     {estado === 'todas' ? 'Todas' : estado === 'en_progreso' ? 'En Progreso' : estado.charAt(0).toUpperCase() + estado.slice(1)}
                   </button>
@@ -416,9 +412,8 @@ export default function MisPublicacionesPage() {
                 filteredPublicaciones.map((pub) => (
                   <Card
                     key={pub.id}
-                    className={`p-5 border-border hover:shadow-md transition-all cursor-pointer ${
-                      selectedPublicacion?.id === pub.id ? 'ring-2 ring-primary/30 border-primary/50' : ''
-                    }`}
+                    className={`p-5 border-border hover:shadow-md transition-all cursor-pointer ${selectedPublicacion?.id === pub.id ? 'ring-2 ring-primary/30 border-primary/50' : ''
+                      }`}
                     onClick={() => setSelectedPublicacion(pub)}
                   >
                     <div className="flex items-start justify-between gap-4 mb-3">
@@ -463,7 +458,7 @@ export default function MisPublicacionesPage() {
                   <FileText className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
                   <h3 className="font-bold text-foreground mb-2">No hay publicaciones</h3>
                   <p className="text-sm text-muted-foreground mb-4">
-                    {filterEstado === 'todas' 
+                    {filterEstado === 'todas'
                       ? 'Crea tu primera publicacion para recibir ofertas de profesionales.'
                       : 'No hay publicaciones con este estado.'}
                   </p>
@@ -517,13 +512,12 @@ export default function MisPublicacionesPage() {
                       {selectedPublicacion.solicitudes.map((sol) => (
                         <div
                           key={sol.id}
-                          className={`p-4 rounded-xl border transition-colors ${
-                            sol.estado === 'aceptada' 
-                              ? 'bg-green-50 border-green-200' 
-                              : sol.estado === 'rechazada'
+                          className={`p-4 rounded-xl border transition-colors ${sol.estado === 'aceptada'
+                            ? 'bg-green-50 border-green-200'
+                            : sol.estado === 'rechazada'
                               ? 'bg-red-50 border-red-200 opacity-60'
                               : 'bg-secondary/30 border-border hover:border-primary/30'
-                          }`}
+                            }`}
                         >
                           <div className="flex items-start gap-3 mb-3">
                             <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -603,9 +597,8 @@ export default function MisPublicacionesPage() {
                 mockChats.map((chat) => (
                   <Card
                     key={chat.id}
-                    className={`p-4 border-border hover:shadow-md transition-all cursor-pointer ${
-                      selectedChat?.id === chat.id ? 'ring-2 ring-primary/30 border-primary/50' : ''
-                    }`}
+                    className={`p-4 border-border hover:shadow-md transition-all cursor-pointer ${selectedChat?.id === chat.id ? 'ring-2 ring-primary/30 border-primary/50' : ''
+                      }`}
                     onClick={() => setSelectedChat(chat)}
                   >
                     <div className="flex items-start gap-3">
@@ -673,11 +666,10 @@ export default function MisPublicacionesPage() {
                         className={`flex ${msg.sender === 'cliente' ? 'justify-end' : 'justify-start'}`}
                       >
                         <div
-                          className={`max-w-[75%] rounded-2xl px-4 py-2.5 ${
-                            msg.sender === 'cliente'
-                              ? 'bg-primary text-white rounded-tr-none'
-                              : 'bg-background border border-border text-foreground rounded-tl-none'
-                          }`}
+                          className={`max-w-[75%] rounded-2xl px-4 py-2.5 ${msg.sender === 'cliente'
+                            ? 'bg-primary text-white rounded-tr-none'
+                            : 'bg-background border border-border text-foreground rounded-tl-none'
+                            }`}
                         >
                           <p className="text-sm">{msg.text}</p>
                           <p className={`text-xs mt-1 ${msg.sender === 'cliente' ? 'text-white/70' : 'text-muted-foreground'}`}>
