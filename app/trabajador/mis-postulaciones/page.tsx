@@ -44,8 +44,8 @@ const mockPostulaciones: Postulacion[] = [
     cliente: 'Marta Ocampo',
     clienteInicial: 'MO',
     ubicacion: 'Recoleta, Buenos Aires',
-    mensaje: 'Hola, tengo 8 anos de experiencia en reparacion de griferia. Puedo ir el viernes.',
-    estado: 'pendiente',
+    mensaje: 'Hola, tengo 8 anos de experiencia en reparacion de tuberias. Puedo ir el viernes.',
+    estado: 'aceptada',
     fechaPostulacion: '2026-05-08',
     fechaServicio: '2026-05-15'
   },
