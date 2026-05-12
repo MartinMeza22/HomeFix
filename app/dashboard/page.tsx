@@ -8,7 +8,7 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { bookings, type Booking } from '@/lib/data/bookings'
 import { conversations, type Conversation } from '@/lib/data/conversations'
-import { Calendar, MessageSquare, CheckCircle, Clock, Send, ArrowRight, Search } from 'lucide-react'
+import { Calendar, MessageSquare, CheckCircle, Clock, Send, ArrowRight, Search, Star } from 'lucide-react'
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -163,19 +163,46 @@ export default function DashboardPage() {
                       <p className="text-sm text-muted-foreground mb-4 line-clamp-2">{booking.notes}</p>
 
                       <div className="flex gap-3 flex-wrap">
-                        <Button variant="outline" size="sm">Reagendar</Button>
-                        <Button variant="outline" size="sm" className="text-destructive hover:text-destructive">Cancelar</Button>
-                        <Button
-                          size="sm"
-                          className="bg-primary hover:bg-primary/90 ml-auto"
-                          onClick={() => {
-                            const conv = conversations.find(c => c.workerId === booking.workerId)
-                            if (conv) handleSelectConversation(conv)
-                          }}
-                        >
-                          <MessageSquare className="w-4 h-4 mr-2" />
-                          Chat
-                        </Button>
+                        {booking.status === 'completed' ? (
+                          <>
+                            <Button 
+                              size="sm"
+                              className="bg-accent hover:bg-accent/90"
+                              onClick={() => router.push(`/trabajo/${booking.id}/resena`)}
+                            >
+                              <Star className="w-4 h-4 mr-2" />
+                              Dejar Resena
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              className="ml-auto"
+                              onClick={() => {
+                                const conv = conversations.find(c => c.workerId === booking.workerId)
+                                if (conv) handleSelectConversation(conv)
+                              }}
+                            >
+                              <MessageSquare className="w-4 h-4 mr-2" />
+                              Chat
+                            </Button>
+                          </>
+                        ) : (
+                          <>
+                            <Button variant="outline" size="sm">Reagendar</Button>
+                            <Button variant="outline" size="sm" className="text-destructive hover:text-destructive">Cancelar</Button>
+                            <Button
+                              size="sm"
+                              className="bg-primary hover:bg-primary/90 ml-auto"
+                              onClick={() => {
+                                const conv = conversations.find(c => c.workerId === booking.workerId)
+                                if (conv) handleSelectConversation(conv)
+                              }}
+                            >
+                              <MessageSquare className="w-4 h-4 mr-2" />
+                              Chat
+                            </Button>
+                          </>
+                        )}
                       </div>
                     </Card>
                   )
