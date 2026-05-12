@@ -273,12 +273,9 @@ export default function MisPublicacionesPage() {
   const [sessionData, setSessionData] = useState<Publicacion[]>([])
 
   useEffect(() => {
-    try {
-      const stored = JSON.parse(sessionStorage.getItem('homefix_publicaciones') || '[]')
-      setSessionData(stored as Publicacion[])
-    } catch {
-      setSessionData([])
-    }
+    // Limpiar publicaciones de prueba del sessionStorage
+    sessionStorage.removeItem('homefix_publicaciones')
+    setSessionData([])
   }, [])
 
   const getEstadoBadge = (estado: PublicacionEstado) => {
