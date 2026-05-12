@@ -40,9 +40,9 @@ const mockPostulaciones: Postulacion[] = [
   {
     id: '1',
     trabajoId: 'job-1',
-    trabajo: 'Reparacion de canilla que gotea en cocina',
-    cliente: 'Maria Gonzalez',
-    clienteInicial: 'MG',
+    trabajo: 'Reparacion de tuberia en cocina',
+    cliente: 'Marta Ocampo',
+    clienteInicial: 'MO',
     ubicacion: 'Recoleta, Buenos Aires',
     mensaje: 'Hola, tengo 8 anos de experiencia en reparacion de griferia. Puedo ir el viernes.',
     estado: 'pendiente',
