@@ -6,10 +6,10 @@ import { Navbar } from '@/components/Navbar'
 import { Footer } from '@/components/Footer'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { 
-  Star, 
-  Camera, 
-  X, 
+import {
+  Star,
+  Camera,
+  X,
   CheckCircle
 } from 'lucide-react'
 
@@ -22,7 +22,7 @@ const mockTrabajoFinalizado = {
     id: '7',
     nombre: 'Pedro Picapiedra',
     categoria: 'Plomeria',
-    imagen: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop&crop=face',
+    imagen: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1000&h=1000&fit=crop&crop=face',
     verificado: true
   },
   fecha: '2026-05-10',
@@ -35,7 +35,7 @@ export default function ResenaPage() {
   const router = useRouter()
   const params = useParams()
   const fileInputRef = useRef<HTMLInputElement>(null)
-  
+
   const [rating, setRating] = useState(0)
   const [hoverRating, setHoverRating] = useState(0)
   const [comentario, setComentario] = useState('')
@@ -68,12 +68,12 @@ export default function ResenaPage() {
 
   const handleSubmit = async () => {
     if (rating === 0) return
-    
+
     setIsSubmitting(true)
-    
+
     // Simular envio
     await new Promise(resolve => setTimeout(resolve, 1500))
-    
+
     setSubmitted(true)
     setIsSubmitting(false)
   }
@@ -82,7 +82,7 @@ export default function ResenaPage() {
     return (
       <main className="min-h-screen bg-background">
         <Navbar />
-        
+
         <div className="max-w-2xl mx-auto px-4 py-12">
           <Card className="p-6 sm:p-8 text-center">
             <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -94,16 +94,16 @@ export default function ResenaPage() {
             <p className="text-sm text-muted-foreground mb-6">
               Tu opinion ayuda a {trabajo.trabajador.nombre} a mejorar su servicio.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button 
+              <Button
                 size="sm"
                 onClick={() => router.push('/dashboard')}
                 className="bg-primary hover:bg-primary/90"
               >
                 Volver al Dashboard
               </Button>
-              <Button 
+              <Button
                 size="sm"
                 variant="outline"
                 onClick={() => router.push(`/worker/${trabajo.trabajador.id}`)}
@@ -113,7 +113,7 @@ export default function ResenaPage() {
             </div>
           </Card>
         </div>
-        
+
         <Footer />
       </main>
     )
@@ -122,7 +122,7 @@ export default function ResenaPage() {
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
-      
+
       {/* Header */}
       <div className="bg-primary py-4 sm:py-6">
         <div className="max-w-2xl mx-auto px-4">
@@ -168,7 +168,7 @@ export default function ResenaPage() {
           <h3 className="font-bold text-foreground text-sm mb-3">
             Como calificarias el servicio?
           </h3>
-          
+
           <div className="flex items-center justify-center gap-2 mb-2">
             {[1, 2, 3, 4, 5].map((star) => (
               <button
@@ -179,16 +179,15 @@ export default function ResenaPage() {
                 className="p-0.5 transition-transform hover:scale-110"
               >
                 <Star
-                  className={`w-7 h-7 sm:w-8 sm:h-8 transition-colors ${
-                    star <= (hoverRating || rating)
-                      ? 'fill-amber-400 text-amber-400'
-                      : 'text-muted-foreground/30'
-                  }`}
+                  className={`w-7 h-7 sm:w-8 sm:h-8 transition-colors ${star <= (hoverRating || rating)
+                    ? 'fill-amber-400 text-amber-400'
+                    : 'text-muted-foreground/30'
+                    }`}
                 />
               </button>
             ))}
           </div>
-          
+
           <p className="text-center text-xs text-muted-foreground">
             {rating === 0 && 'Toca las estrellas para calificar'}
             {rating === 1 && 'Muy malo'}
@@ -272,7 +271,7 @@ export default function ResenaPage() {
           </Button>
         </div>
       </div>
-      
+
       <Footer />
     </main>
   )
