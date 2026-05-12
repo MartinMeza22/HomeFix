@@ -180,6 +180,55 @@ const mockPublicaciones: Publicacion[] = [
     ubicacion: 'Buenos Aires, Recoleta',
     urgencia: 'Baja',
     solicitudes: []
+  },
+  {
+    id: '4',
+    titulo: 'Servicio de Plomeria - Cocina',
+    descripcion: 'Me pierde la canilla de la cocina, necesito que la revisen y reparen.',
+    categoria: 'Plomeria',
+    estado: 'pendiente',
+    fechaCreacion: '2024-01-18',
+    fechaServicio: '2024-01-25',
+    ubicacion: 'Buenos Aires, Recoleta',
+    urgencia: 'Media',
+    solicitudes: [
+      {
+        id: '7',
+        trabajadorId: '7',
+        trabajadorNombre: 'Pedro Picapiedra',
+        trabajadorCategoria: 'Plomeria',
+        trabajadorCalificacion: 4.9,
+        trabajadorReviews: 312,
+        trabajadorVerificado: true,
+        mensaje: 'Hola! Soy especialista en canillas y griferia. Puedo ir manana mismo a revisarla. Trabajo con garantia.',
+        fechaPropuesta: '2024-01-19',
+        estado: 'pendiente'
+      },
+      {
+        id: '8',
+        trabajadorId: '8',
+        trabajadorNombre: 'Marcelo Gutierrez',
+        trabajadorCategoria: 'Plomeria',
+        trabajadorCalificacion: 4.6,
+        trabajadorReviews: 89,
+        trabajadorVerificado: true,
+        mensaje: 'Buenas tardes, tengo disponibilidad esta semana. Cuento con repuestos de todas las marcas.',
+        fechaPropuesta: '2024-01-22',
+        estado: 'pendiente'
+      },
+      {
+        id: '9',
+        trabajadorId: '9',
+        trabajadorNombre: 'Diego Ramirez',
+        trabajadorCategoria: 'Plomeria',
+        trabajadorCalificacion: 4.4,
+        trabajadorReviews: 45,
+        trabajadorVerificado: false,
+        mensaje: 'Puedo pasar hoy a la tarde si te sirve. Trabajo rapido y prolijo.',
+        fechaPropuesta: '2024-01-18',
+        estado: 'pendiente'
+      }
+    ]
   }
 ]
 

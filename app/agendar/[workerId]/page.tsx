@@ -32,6 +32,31 @@ const SERVICIOS = [
   'Otro'
 ]
 
+// Horarios ocupados por worker (simulacion de agenda real)
+const HORARIOS_OCUPADOS: Record<string, Record<string, string[]>> = {
+  '1': { // Carlos Mendez - Electricista
+    '2026-05-12': ['09:00', '10:00', '14:00'],
+    '2026-05-13': ['08:00', '11:00', '15:00', '16:00'],
+    '2026-05-14': ['10:00', '14:00', '17:00'],
+    '2026-05-15': ['09:00', '12:00', '18:00'],
+    '2026-05-16': ['08:00', '09:00', '10:00', '11:00'], // Manana ocupada
+    '2026-05-19': ['14:00', '15:00', '16:00', '17:00'], // Tarde ocupada
+  },
+  '7': { // Pedro Picapiedra - Plomero
+    '2026-05-12': ['08:00', '09:00', '15:00'],
+    '2026-05-13': ['10:00', '11:00', '12:00'],
+    '2026-05-14': ['14:00', '15:00', '16:00', '17:00'],
+    '2026-05-15': ['08:00', '10:00', '18:00', '19:00'],
+    '2026-05-20': ['09:00', '10:00', '11:00', '14:00', '15:00'],
+  }
+}
+
+// Dias completamente ocupados
+const DIAS_OCUPADOS: Record<string, string[]> = {
+  '1': ['2026-05-17', '2026-05-24'], // Carlos tiene estos dias full
+  '7': ['2026-05-21', '2026-05-28'], // Pedro tiene estos dias full
+}
+
 function getDaysInMonth(year: number, month: number) {
   return new Date(year, month + 1, 0).getDate()
 }
@@ -91,9 +116,31 @@ export default function AgendarCitaPage() {
     return date < todayClean
   }
 
+  // Verificar si un dia esta completamente ocupado
+  const isFullyBookedDay = (day: number) => {
+    const date = new Date(viewYear, viewMonth, day)
+    const dateStr = date.toISOString().split('T')[0]
+    return DIAS_OCUPADOS[worker.id]?.includes(dateStr) || false
+  }
+
+  // Verificar si un horario esta ocupado para la fecha seleccionada
+  const isTimeBooked = (time: string) => {
+    if (!selectedDate) return false
+    const dateStr = selectedDate.toISOString().split('T')[0]
+    return HORARIOS_OCUPADOS[worker.id]?.[dateStr]?.includes(time) || false
+  }
+
+  // Contar horarios disponibles para un dia
+  const getAvailableTimesCount = (day: number) => {
+    const date = new Date(viewYear, viewMonth, day)
+    const dateStr = date.toISOString().split('T')[0]
+    const bookedTimes = HORARIOS_OCUPADOS[worker.id]?.[dateStr] || []
+    return HORARIOS.length - bookedTimes.length
+  }
+
   const handleDayClick = (day: number) => {
     const date = new Date(viewYear, viewMonth, day)
-    if (isPastDay(day) || !isAvailableDay(date)) return
+    if (isPastDay(day) || !isAvailableDay(date) || isFullyBookedDay(day)) return
     setSelectedDate(date)
     setSelectedHora(null)
   }
@@ -315,6 +362,9 @@ export default function AgendarCitaPage() {
                 const date = new Date(viewYear, viewMonth, day)
                 const past = isPastDay(day)
                 const available = isAvailableDay(date)
+                const fullyBooked = isFullyBookedDay(day)
+                const availableTimes = getAvailableTimesCount(day)
+                const hasLimitedSlots = availableTimes <= 3 && availableTimes > 0 && !fullyBooked
                 const isSelected =
                   selectedDate?.getDate() === day &&
                   selectedDate?.getMonth() === viewMonth &&
@@ -324,32 +374,41 @@ export default function AgendarCitaPage() {
                   <button
                     key={day}
                     onClick={() => handleDayClick(day)}
-                    disabled={past || !available}
+                    disabled={past || !available || fullyBooked}
                     className={`
-                      aspect-square rounded-lg text-sm font-medium transition-all
+                      aspect-square rounded-lg text-sm font-medium transition-all relative
                       ${isSelected
                         ? 'bg-primary text-white shadow-md'
-                        : available && !past
-                          ? 'hover:bg-primary/10 text-foreground'
-                          : 'text-muted-foreground/40 cursor-not-allowed'
+                        : fullyBooked
+                          ? 'bg-destructive/10 text-destructive/50 cursor-not-allowed line-through'
+                          : available && !past
+                            ? 'hover:bg-primary/10 text-foreground'
+                            : 'text-muted-foreground/40 cursor-not-allowed'
                       }
                     `}
                   >
                     {day}
+                    {hasLimitedSlots && !past && available && (
+                      <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-amber-500 rounded-full" />
+                    )}
                   </button>
                 )
               })}
             </div>
 
             {/* Legend */}
-            <div className="flex items-center gap-4 mt-4 pt-4 border-t border-border">
+            <div className="flex flex-wrap items-center gap-3 mt-4 pt-4 border-t border-border">
               <div className="flex items-center gap-1.5">
                 <div className="w-3 h-3 rounded-full bg-primary" />
                 <span className="text-xs text-muted-foreground">Disponible</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-muted" />
-                <span className="text-xs text-muted-foreground">No disponible</span>
+                <div className="w-3 h-3 rounded-full bg-amber-500" />
+                <span className="text-xs text-muted-foreground">Pocos turnos</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <div className="w-3 h-3 rounded-full bg-destructive/30" />
+                <span className="text-xs text-muted-foreground">Ocupado</span>
               </div>
             </div>
           </Card>
@@ -365,20 +424,32 @@ export default function AgendarCitaPage() {
                 </span>
               </h3>
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-                {HORARIOS.map(hora => (
-                  <button
-                    key={hora}
-                    onClick={() => setSelectedHora(hora)}
-                    className={`py-2.5 rounded-lg text-sm font-semibold border transition-all ${
-                      selectedHora === hora
-                        ? 'bg-primary text-white border-primary shadow-md'
-                        : 'border-border text-foreground hover:border-primary/50 hover:bg-primary/5'
-                    }`}
-                  >
-                    {hora}
-                  </button>
-                ))}
+                {HORARIOS.map(hora => {
+                  const booked = isTimeBooked(hora)
+                  return (
+                    <button
+                      key={hora}
+                      onClick={() => !booked && setSelectedHora(hora)}
+                      disabled={booked}
+                      className={`py-2.5 rounded-lg text-sm font-semibold border transition-all ${
+                        booked
+                          ? 'bg-muted/50 text-muted-foreground/50 border-muted cursor-not-allowed line-through'
+                          : selectedHora === hora
+                            ? 'bg-primary text-white border-primary shadow-md'
+                            : 'border-border text-foreground hover:border-primary/50 hover:bg-primary/5'
+                      }`}
+                    >
+                      {hora}
+                      {booked && <span className="block text-[10px] font-normal">Ocupado</span>}
+                    </button>
+                  )
+                })}
               </div>
+              {HORARIOS.some(h => isTimeBooked(h)) && (
+                <p className="text-xs text-muted-foreground mt-3">
+                  Los horarios tachados ya estan reservados por otros clientes.
+                </p>
+              )}
             </Card>
           )}
 
