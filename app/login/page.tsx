@@ -1,0 +1,214 @@
+'use client'
+
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Card } from '@/components/ui/card'
+import { Eye, EyeOff, Mail, Lock, AlertCircle, ArrowRight, Shield, CheckCircle } from 'lucide-react'
+
+export default function LoginPage() {
+  const router = useRouter()
+  const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
+  
+  // CAMBIO 1: Valores hardcodeados en el estado inicial
+  const [formData, setFormData] = useState({
+    email: 'cliente@demo.com',
+    password: 'Demo123!'
+  })
+
+  const mockUsers = [
+    { email: 'cliente@demo.com', password: 'Demo123!', role: 'CLIENT', name: 'Marta Ocampo', verified: true },
+    { email: 'trabajador@demo.com', password: 'Demo123!', role: 'WORKER', name: 'Pedro Picapiedra', verified: true, kycStatus: 'VERIFIED' },
+    { email: 'pendiente@demo.com', password: 'Demo123!', role: 'WORKER', name: 'Maria Plomera', verified: true, kycStatus: 'PENDING_KYC' },
+  ]
+
+  const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return regex.test(email)
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError('')
+
+    if (!formData.email || !formData.password) {
+      setError('Por favor completá todos los campos')
+      return
+    }
+
+    if (!validateEmail(formData.email)) {
+      setError('Por favor ingresá un email válido')
+      return
+    }
+
+    setIsLoading(true)
+    await new Promise(resolve => setTimeout(resolve, 1000))
+
+    const user = mockUsers.find(u => u.email === formData.email)
+
+    if (!user) {
+      setError('El email no está registrado')
+      setIsLoading(false)
+      return
+    }
+
+    if (user.password !== formData.password) {
+      setError('Contraseña incorrecta')
+      setIsLoading(false)
+      return
+    }
+
+    const sessionRole = user.role === 'WORKER' ? 'trabajador' : 'cliente'
+    sessionStorage.setItem('homefix_session', JSON.stringify({
+      role: sessionRole,
+      name: user.name,
+      email: user.email
+    }))
+
+    if (user.role === 'WORKER') {
+      if (user.kycStatus === 'PENDING_KYC') {
+        router.push('/verificacion')
+      } else if (user.kycStatus === 'REJECTED') {
+        setError('Tu cuenta ha sido rechazada. Contactá soporte.')
+        setIsLoading(false)
+        return
+      } else {
+        router.push('/dashboard/trabajador')
+      }
+    } else {
+      router.push('/dashboard')
+    }
+  }
+
+  return (
+    <div className="min-h-screen flex bg-background">
+      <div className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-12 xl:px-24">
+        <div className="w-full max-w-md mx-auto">
+          <Link href="/" className="inline-block mb-12">
+            <Image
+              src="/homefix-logo.png"
+              alt="HomeFix"
+              width={180}
+              height={50}
+              className="h-12 w-auto"
+              priority
+            />
+          </Link>
+
+          <div className="mb-10">
+            <h1 className="text-3xl sm:text-4xl font-bold text-primary tracking-tight">
+              Bienvenido de vuelta
+            </h1>
+            <p className="mt-3 text-muted-foreground">
+              Ingresá tus credenciales para acceder a tu cuenta
+            </p>
+          </div>
+
+          {error && (
+            <div className="flex items-center gap-3 p-4 mb-6 bg-destructive/10 border border-destructive/20 rounded-xl text-destructive">
+              <AlertCircle className="w-5 h-5 flex-shrink-0" />
+              <p className="text-sm font-medium">{error}</p>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-sm font-semibold text-foreground">
+                Correo electrónico
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Input
+                  id="email"
+                  name="email" // CAMBIO 2
+                  type="email"
+                  autoComplete="username" // CAMBIO 3
+                  placeholder="tu@email.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="pl-12 h-14 text-base bg-secondary/30 border-border/50 focus:border-accent focus:ring-accent/20"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <label htmlFor="password" className="text-sm font-semibold text-foreground">
+                  Contraseña
+                </label>
+                <Link
+                  href="/forgot-password"
+                  className="text-sm text-accent hover:text-accent/80 font-medium transition-colors"
+                >
+                  ¿Te olvidaste tu contraseña?
+                </Link>
+              </div>
+              <div className="relative">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Input
+                  id="password"
+                  name="password" // CAMBIO 2
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete="current-password" // CAMBIO 3
+                  placeholder="Tu contraseña"
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  className="pl-12 pr-12 h-14 text-base bg-secondary/30 border-border/50 focus:border-accent focus:ring-accent/20"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              className="w-full h-14 bg-accent hover:bg-accent/90 text-white font-semibold text-base shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30 transition-all"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <span className="flex items-center gap-3">
+                  <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Iniciando sesión...
+                </span>
+              ) : (
+                <span className="flex items-center gap-2">
+                  Iniciar Sesión
+                  <ArrowRight className="w-5 h-5" />
+                </span>
+              )}
+            </Button>
+          </form>
+
+          {/* ... El resto del código se mantiene igual ... */}
+          <div className="relative my-8">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-border/50" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-4 text-muted-foreground font-medium">o</span>
+            </div>
+          </div>
+
+          <p className="text-center text-muted-foreground">
+            ¿No tenés una cuenta?{' '}
+            <Link href="/register" className="text-accent hover:text-accent/80 font-semibold transition-colors">
+              Registrate gratis
+            </Link>
+          </p>
+        </div>
+      </div>
+      
+      {/* Visual Right Side (Omitido por brevedad pero se mantiene igual) */}
+    </div>
+  )
+}
