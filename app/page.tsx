@@ -31,14 +31,14 @@ import {
 const stats = [
   { value: '15,000+', label: 'Servicios completados' },
   { value: '2,500+', label: 'Profesionales verificados' },
-  { value: '4.9', label: 'Calificacion promedio' },
+  { value: '4.9', label: 'Calificación promedio' },
   { value: '< 1hs', label: 'Tiempo de respuesta' },
 ]
 
 const trustedBy = [
   'Gobierno de la Ciudad',
   'Consejo Profesional',
-  'Camara de Comercio',
+  'Cámara de Comercio',
   'Defensa al Consumidor'
 ]
 
@@ -77,7 +77,7 @@ export default function Home() {
 
             {/* Subheadline */}
             <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-6 sm:mb-8 leading-relaxed max-w-xl">
-              Conectamos tu hogar con profesionales verificados. Cada tecnico pasa por validacion de identidad.
+              Conectamos tu hogar con profesionales verificados. Cada técnico pasa por validación de identidad.
             </p>
 
             {/* CTA Buttons */}
@@ -108,7 +108,7 @@ export default function Home() {
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-accent flex-shrink-0" />
-                <span className="text-xs sm:text-sm font-medium text-white/90">Verifición facial biométrica</span>
+                <span className="text-xs sm:text-sm font-medium text-white/90">Verificación facial biométrica</span>
               </div>
             </div>
           </div>
@@ -132,7 +132,7 @@ export default function Home() {
               Tu seguridad es nuestra prioridad
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Cada profesional en HomeFix pasa por un proceso de verificacion exhaustivo.
+              Cada profesional en HomeFix pasa por un proceso de verificación exhaustivo.
             </p>
           </div>
 
@@ -148,10 +148,10 @@ export default function Home() {
                   Verificado
                 </div>
                 <h3 className="text-xl font-bold text-primary mb-3">
-                  Verificacion de Identidad
+                  Verificación de Identidad
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Validamos el DNI de cada profesional con bases de datos oficiales. Sabes exactamente quien entrara a tu hogar.
+                  Validamos el DNI de cada profesional con bases de datos oficiales. Sabés exactamente quién va a entrar a tu casa.
                 </p>
               </div>
             </Card>
@@ -167,10 +167,10 @@ export default function Home() {
                   Matriculado
                 </div>
                 <h3 className="text-xl font-bold text-primary mb-3">
-                  Matriculas Profesionales
+                  Matrículas Profesionales
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Ofrecemos la posibilidad de que el trabajador cargue su matricula.
+                  Ofrecemos la posibilidad de que el trabajador cargue su matrícula.
                 </p>
               </div>
             </Card>
@@ -213,9 +213,9 @@ export default function Home() {
       <section className="py-16 sm:py-24 bg-primary">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <p className="text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider mb-3">Como Funciona</p>
+            <p className="text-xs sm:text-sm font-semibold text-accent uppercase tracking-wider mb-3">Cómo Funciona</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 text-balance">
-              Simple, rapido y seguro
+              Simple, rápido y seguro
             </h2>
             <p className="text-white/70 max-w-2xl mx-auto text-base sm:text-lg">
               Tres pasos simples para resolver cualquier problema en tu hogar
@@ -232,10 +232,10 @@ export default function Home() {
                 1
               </div>
               <h3 className="text-xl font-bold text-white mb-3">
-                Describe tu problema
+                Describí tu problema
               </h3>
               <p className="text-white/70 leading-relaxed">
-                Usá nuestro diagnostico asistido o buscá directamente el servicio que necesitas.
+                Usá nuestro diagnóstico asistido o buscá directamente el servicio que necesitás.
               </p>
             </div>
 
@@ -245,7 +245,7 @@ export default function Home() {
                 2
               </div>
               <h3 className="text-xl font-bold text-white mb-3">
-                Elige un profesional
+                Elegí un profesional
               </h3>
               <p className="text-white/70 leading-relaxed">
                 Compará perfiles, reseñas y disponibilidad. Todos verificados.
@@ -273,7 +273,7 @@ export default function Home() {
               className="h-14 px-8 bg-accent hover:bg-accent/90 text-white font-semibold"
               onClick={() => router.push('/diagnostico')}
             >
-              Iniciar diagnostico gratuito
+              Iniciar diagnóstico gratuito
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </div>
@@ -290,7 +290,7 @@ export default function Home() {
                 Nuestros rubros más solicitados
               </h2>
               <p className="text-muted-foreground max-w-xl">
-                Expertos verificados en todas las categorias
+                Expertos verificados en todas las categorías
               </p>
             </div>
             <Link href="/search" className="mt-6 md:mt-0">
@@ -355,32 +355,32 @@ export default function Home() {
 
             {/* Right - Features */}
             <div>
-              <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Por que HomeFix</p>
+              <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Por qué HomeFix</p>
               <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">
-                Todo lo que necesitas en un solo lugar
+                Todo lo que necesitás en un solo lugar
               </h2>
 
               <div className="space-y-6">
                 {[
                   {
                     icon: MapPin,
-                    title: 'Busqueda Geolocalizada',
-                    description: 'Profesionales cerca de ti con filtros avanzados.'
+                    title: 'Búsqueda Geolocalizada',
+                    description: 'Profesionales cerca tuyo con filtros avanzados.'
                   },
                   {
                     icon: Zap,
-                    title: 'Diagnostico Inteligente',
-                    description: 'Sistema que identifica exactamente que necesitas.'
+                    title: 'Diagnóstico Inteligente',
+                    description: 'Sistema que identifica exactamente qué necesitás.'
                   },
                   {
                     icon: Shield,
-                    title: 'Verificacion Triple',
-                    description: 'Identidad, matriculas y antecedentes verificados.'
+                    title: 'Verificación Triple',
+                    description: 'Identidad, matrículas y antecedentes verificados.'
                   },
                   {
                     icon: MessageSquare,
                     title: 'Chat Directo',
-                    description: 'Comunicacion directa sin intermediarios.'
+                    description: 'Comunicación directa sin intermediarios.'
                   },
                 ].map((feature, idx) => (
                   <div key={idx} className="flex gap-4 group">
@@ -416,13 +416,13 @@ export default function Home() {
           <div className="text-center mb-8 sm:mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-accent/10 border border-accent/20 mb-4 sm:mb-6">
               <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-accent fill-accent" />
-              <span className="text-xs sm:text-sm font-semibold text-accent">4.9 de calificacion promedio</span>
+              <span className="text-xs sm:text-sm font-semibold text-accent">4.9 de calificación promedio</span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-3 sm:mb-4 text-balance">
               Lo que dicen nuestros usuarios
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
-              Miles de hogares ya confian en HomeFix
+              Miles de hogares ya confían en HomeFix
             </p>
           </div>
 
@@ -448,10 +448,10 @@ export default function Home() {
             className="h-10 sm:h-12 w-auto mx-auto mb-6 sm:mb-8"
           />
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 text-balance">
-            Resuelve tu problema hoy mismo
+            Resolvé tu problema hoy mismo
           </h2>
           <p className="text-white/80 text-base sm:text-lg mb-8 sm:mb-10 max-w-2xl mx-auto">
-            Conecta con profesionales verificados cerca de ti. Rapido, seguro y con garantia de satisfaccion.
+            Conectá con profesionales verificados cerca de vos. Rápido, seguro y con garantía de satisfacción.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <Button
@@ -469,7 +469,7 @@ export default function Home() {
               onClick={() => router.push('/diagnostico')}
             >
               <MessageSquare className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-              Diagnostico gratuito
+              Diagnóstico gratuito
             </Button>
           </div>
         </div>

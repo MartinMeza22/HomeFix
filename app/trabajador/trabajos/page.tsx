@@ -28,36 +28,36 @@ import { Footer } from '@/components/Footer'
 
 // Mock trabajador actual (simulando sesion)
 const mockTrabajador = {
-  id: '1',
-  name: 'Carlos Mendez',
-  category: 'Electricista',
-  location: 'Palermo, Buenos Aires'
+  id: '7',
+  name: 'Pedro Picapiedra',
+  category: 'Plomería',
+  location: 'Recoleta, Buenos Aires'
 }
 
 // Mock trabajos disponibles - filtrados por categoria del trabajador
 const allTrabajos = [
   {
     id: '1',
-    titulo: 'Instalacion de luces LED en cocina',
-    descripcion: 'Necesito instalar 6 spots LED en la cocina. Ya tengo las luces compradas, solo necesito la mano de obra. La cocina tiene falso techo de durlock.',
-    categoria: 'Electricista',
+    titulo: 'Reparacion de canilla que gotea en cocina',
+    descripcion: 'La canilla de la cocina gotea constantemente y se esta arruinando el mueble. Necesito que la reparen o cambien. Ya tengo la griferia de repuesto.',
+    categoria: 'Plomería',
     ubicacion: 'Recoleta, Buenos Aires',
     distancia: 3.2,
     urgencia: 'media',
     fechaPublicacion: '2026-05-08',
     fechaServicio: '2026-05-15',
     cliente: {
-      nombre: 'Maria Gonzalez',
-      inicial: 'MG',
+      nombre: 'Marta Ocampo',
+      inicial: 'MO',
       trabajosAnteriores: 5,
       calificacion: 4.8
     }
   },
   {
     id: '2',
-    titulo: 'Revision de tablero electrico urgente',
-    descripcion: 'El tablero salta cada vez que prendo el aire acondicionado. Necesito una revision urgente porque hace mucho calor. El edificio es antiguo.',
-    categoria: 'Electricista',
+    titulo: 'Destape de cañeria en baño urgente',
+    descripcion: 'El desague de la ducha esta tapado, el agua no baja y se inunda todo. Necesito una solucion urgente porque no podemos bañarnos.',
+    categoria: 'Plomería',
     ubicacion: 'Palermo, Buenos Aires',
     distancia: 1.5,
     urgencia: 'alta',
@@ -72,9 +72,9 @@ const allTrabajos = [
   },
   {
     id: '3',
-    titulo: 'Cambio de cableado completo',
-    descripcion: 'Departamento de 2 ambientes con cableado muy viejo (mas de 40 anos). Quiero cambiar todo el cableado y poner llaves termicas nuevas.',
-    categoria: 'Electricista',
+    titulo: 'Instalacion de calefon nuevo',
+    descripcion: 'Compre un calefon nuevo a gas y necesito instalarlo. El departamento tiene la conexion estandar pero hace falta sacar el viejo (mas de 15 años).',
+    categoria: 'Plomería',
     ubicacion: 'Villa Crespo, Buenos Aires',
     distancia: 2.8,
     urgencia: 'baja',
@@ -89,9 +89,9 @@ const allTrabajos = [
   },
   {
     id: '4',
-    titulo: 'Instalar enchufes adicionales',
-    descripcion: 'Necesito agregar 4 enchufes en el living y 2 en el dormitorio. El departamento tiene instalacion electrica relativamente nueva.',
-    categoria: 'Electricista',
+    titulo: 'Cambio de flexibles de lavamanos',
+    descripcion: 'Necesito cambiar los dos flexibles del lavamanos del baño principal. Tienen perdida de agua y uno esta a punto de romperse.',
+    categoria: 'Plomería',
     ubicacion: 'Belgrano, Buenos Aires',
     distancia: 5.1,
     urgencia: 'media',
@@ -106,9 +106,9 @@ const allTrabajos = [
   },
   {
     id: '5',
-    titulo: 'Reparar cortocircuito en habitacion',
-    descripcion: 'Hay un cortocircuito en una de las habitaciones. No funciona ninguna luz ni enchufe de ese cuarto desde ayer.',
-    categoria: 'Electricista',
+    titulo: 'Reparar perdida en caño principal',
+    descripcion: 'Hay una perdida grande en el baño, parece venir de la pared. Esta mojando el piso y me va a arruinar el techo del vecino.',
+    categoria: 'Plomería',
     ubicacion: 'Caballito, Buenos Aires',
     distancia: 4.2,
     urgencia: 'alta',
@@ -366,13 +366,13 @@ function TrabajosContent() {
                       </div>
 
                       <div>
-                        <p className="text-sm font-medium text-foreground mb-1">Descripcion</p>
+                        <p className="text-sm font-medium text-foreground mb-1">Descripción</p>
                         <p className="text-sm text-muted-foreground">{selectedTrabajo.descripcion}</p>
                       </div>
 
                       <div className="grid grid-cols-2 gap-3">
                         <div className="p-3 bg-secondary/30 rounded-lg">
-                          <p className="text-xs text-muted-foreground">Ubicacion</p>
+                          <p className="text-xs text-muted-foreground">Ubicación</p>
                           <p className="text-sm font-medium text-foreground">{selectedTrabajo.ubicacion}</p>
                         </div>
                         <div className="p-3 bg-secondary/30 rounded-lg">
@@ -413,7 +413,7 @@ function TrabajosContent() {
                         <div className="p-4 bg-accent/10 rounded-lg text-center">
                           <CheckCircle className="w-8 h-8 text-accent mx-auto mb-2" />
                           <p className="font-semibold text-accent">Ya te postulaste</p>
-                          <p className="text-sm text-muted-foreground">El cliente revisara tu postulacion</p>
+                          <p className="text-sm text-muted-foreground">El cliente revisará tu postulación</p>
                         </div>
                       ) : (
                         <Button 
@@ -429,7 +429,7 @@ function TrabajosContent() {
                 ) : (
                   <Card className="p-8 text-center border-border/50">
                     <Briefcase className="w-12 h-12 text-muted-foreground/30 mx-auto mb-3" />
-                    <p className="text-muted-foreground">Selecciona un trabajo para ver los detalles</p>
+                    <p className="text-muted-foreground">Seleccioná un trabajo para ver los detalles</p>
                   </Card>
                 )}
               </div>
@@ -465,14 +465,14 @@ function TrabajosContent() {
                     <textarea
                       value={postulacionMensaje}
                       onChange={(e) => setPostulacionMensaje(e.target.value)}
-                      placeholder="Presentate brevemente, menciona tu experiencia o haz preguntas sobre el trabajo..."
+                      placeholder="Presentate brevemente, mencioná tu experiencia o hacé preguntas sobre el trabajo..."
                       className="w-full h-32 p-3 rounded-lg border border-border bg-background text-foreground resize-none"
                     />
                   </div>
 
                   <div className="bg-secondary/30 p-4 rounded-lg">
-                    <p className="text-sm font-medium text-foreground mb-1">Tu perfil sera visible</p>
-                    <p className="text-xs text-muted-foreground">El cliente podra ver tu nombre, calificacion, resenas y validaciones.</p>
+                    <p className="text-sm font-medium text-foreground mb-1">Tu perfil será visible</p>
+                    <p className="text-xs text-muted-foreground">El cliente podrá ver tu nombre, calificación, reseñas y validaciones.</p>
                   </div>
 
                   <div className="flex gap-3">
@@ -491,7 +491,7 @@ function TrabajosContent() {
                       onClick={handlePostular}
                     >
                       <Send className="w-4 h-4 mr-2" />
-                      Enviar Postulacion
+                      Enviar Postulación
                     </Button>
                   </div>
                 </div>
@@ -501,9 +501,9 @@ function TrabajosContent() {
                 <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle className="w-8 h-8 text-accent" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-2">Postulacion Enviada</h3>
+                <h3 className="text-xl font-bold text-foreground mb-2">Postulación Enviada</h3>
                 <p className="text-muted-foreground">
-                  El cliente recibira tu postulacion y podra contactarte si le interesa.
+                  El cliente recibirá tu postulación y podrá contactarte si le interesa.
                 </p>
               </div>
             )}

@@ -25,7 +25,7 @@ export function SearchForm({ onSearch, categories = [] }: SearchFormProps) {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="space-y-2">
           <label className="text-sm font-medium text-foreground">
-            Que necesitas?
+            ¿Qué necesitás?
           </label>
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -40,14 +40,14 @@ export function SearchForm({ onSearch, categories = [] }: SearchFormProps) {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-foreground">
-            Categoria
+            Categoría
           </label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="w-full h-12 px-3 border border-border rounded-md bg-secondary text-foreground"
           >
-            <option value="">Todas las categorias</option>
+            <option value="">Todas las categorías</option>
             {categories.map((cat) => (
               <option key={cat.id} value={cat.id}>
                 {cat.name}
@@ -58,7 +58,7 @@ export function SearchForm({ onSearch, categories = [] }: SearchFormProps) {
 
         <div className="space-y-2">
           <label className="text-sm font-medium text-foreground">
-            Ubicacion
+            Ubicación
           </label>
           <div className="relative">
             <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />

@@ -29,7 +29,7 @@ const mockPublicacion = {
   id: '1',
   titulo: 'Reparacion de tuberia en cocina',
   descripcion: 'Necesito reparar una tuberia que tiene fuga debajo del lavabo de la cocina. Es urgente.',
-  categoria: 'Plomeria',
+  categoria: 'Plomería',
   estado: 'Pendiente',
   fechaPublicacion: '2024-01-15',
   ubicacion: 'Lima, Peru'
@@ -40,8 +40,8 @@ const mockPostulantes = [
   {
     id: '1',
     nombre: 'Pedro Picapiedra',
-    categoriaPrincipal: 'Plomeria',
-    categorias: ['Plomeria', 'Gasfiteria'],
+    categoriaPrincipal: 'Plomería',
+    categorias: ['Plomería', 'Gasfiteria'],
     calificacion: 4.8,
     totalReviews: 47,
     descripcion: 'Plomero profesional con mas de 10 anos de experiencia. Especializado en reparaciones de emergencia y mantenimiento preventivo.',
@@ -57,8 +57,8 @@ const mockPostulantes = [
   {
     id: '2',
     nombre: 'Luis Fernandez',
-    categoriaPrincipal: 'Plomeria',
-    categorias: ['Plomeria', 'Instalaciones Sanitarias'],
+    categoriaPrincipal: 'Plomería',
+    categorias: ['Plomería', 'Instalaciones Sanitarias'],
     calificacion: 4.5,
     totalReviews: 23,
     descripcion: 'Tecnico en plomeria y gasfiteria. Trabajo con garantia de satisfaccion.',
@@ -73,8 +73,8 @@ const mockPostulantes = [
   {
     id: '3',
     nombre: 'Pedro Martinez',
-    categoriaPrincipal: 'Plomeria',
-    categorias: ['Plomeria'],
+    categoriaPrincipal: 'Plomería',
+    categorias: ['Plomería'],
     calificacion: 4.2,
     totalReviews: 12,
     descripcion: 'Plomero con 5 anos de experiencia. Disponible para trabajos de emergencia.',

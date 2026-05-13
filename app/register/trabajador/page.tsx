@@ -42,23 +42,23 @@ export default function WorkerRegisterPage() {
     if (!formData.email.trim()) {
       newErrors.email = 'El email es requerido'
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Email invalido'
+      newErrors.email = 'Email inválido'
     }
 
     if (!formData.telefono.trim()) {
-      newErrors.telefono = 'El telefono es requerido'
+      newErrors.telefono = 'El teléfono es requerido'
     } else if (!/^\d{10,}$/.test(formData.telefono.replace(/\D/g, ''))) {
-      newErrors.telefono = 'Telefono invalido (min 10 digitos)'
+      newErrors.telefono = 'Teléfono inválido (min 10 dígitos)'
     }
 
     if (!formData.password) {
-      newErrors.password = 'La contrasena es requerida'
+      newErrors.password = 'La contraseña es requerida'
     } else if (!passwordRegex.test(formData.password)) {
-      newErrors.password = 'Min 8 caracteres, mayuscula, minuscula, numero y simbolo'
+      newErrors.password = 'Min 8 caracteres, mayúscula, minúscula, número y símbolo'
     }
 
     if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Las contrasenas no coinciden'
+      newErrors.confirmPassword = 'Las contraseñas no coinciden'
     }
 
     setErrors(newErrors)
@@ -69,7 +69,7 @@ export default function WorkerRegisterPage() {
     const newErrors: Record<string, string> = {}
 
     if (formData.categorias.length === 0) {
-      newErrors.categorias = 'Debes seleccionar al menos una categoria'
+      newErrors.categorias = 'Debés seleccionar al menos una categoría'
     }
 
     setErrors(newErrors)
@@ -94,13 +94,17 @@ export default function WorkerRegisterPage() {
 
     // Mock: verificar si email ya existe
     if (formData.email === 'trabajador@demo.com') {
-      setErrors({ email: 'Este email ya esta registrado' })
+      setErrors({ email: 'Este email ya está registrado' })
       setStep(1)
       setIsLoading(false)
       return
     }
 
     // Exito - redirigir a verificacion KYC
+    sessionStorage.setItem('homefix_session', JSON.stringify({
+      role: 'trabajador',
+      name: formData.nombre
+    }))
     router.push('/verificacion')
   }
 
@@ -135,7 +139,7 @@ export default function WorkerRegisterPage() {
   }
 
   const strengthColors = ['bg-destructive', 'bg-destructive', 'bg-yellow-500', 'bg-yellow-500', 'bg-accent']
-  const strengthLabels = ['Muy debil', 'Debil', 'Regular', 'Buena', 'Excelente']
+  const strengthLabels = ['Muy débil', 'Débil', 'Regular', 'Buena', 'Excelente']
 
   return (
     <div className="min-h-screen flex flex-col bg-secondary/30">
@@ -189,12 +193,12 @@ export default function WorkerRegisterPage() {
               Registro de Profesional
             </div>
             <h1 className="text-2xl md:text-3xl font-bold text-primary">
-              {step === 1 ? 'Ingresa tus datos' : 'Selecciona tus especialidades'}
+              {step === 1 ? 'Ingresá tus datos' : 'Seleccioná tus especialidades'}
             </h1>
             <p className="text-muted-foreground">
               {step === 1
-                ? 'Completa tu informacion personal para crear tu cuenta'
-                : 'Elige las categorias en las que te especializas'
+                ? 'Completá tu información personal para crear tu cuenta'
+                : 'Elegí las categorías en las que te especializás'
               }
             </p>
           </div>
@@ -249,7 +253,7 @@ export default function WorkerRegisterPage() {
 
                   {/* Telefono */}
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Telefono</label>
+                    <label className="text-sm font-medium text-foreground">Teléfono</label>
                     <div className="relative">
                       <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                       <Input
@@ -265,7 +269,7 @@ export default function WorkerRegisterPage() {
 
                   {/* Password */}
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Contrasena</label>
+                    <label className="text-sm font-medium text-foreground">Contraseña</label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                       <Input
@@ -295,7 +299,7 @@ export default function WorkerRegisterPage() {
                           ))}
                         </div>
                         <p className="text-xs text-muted-foreground">
-                          Fortaleza: {strengthLabels[passwordStrength() - 1] || 'Muy debil'}
+                          Fortaleza: {strengthLabels[passwordStrength() - 1] || 'Muy débil'}
                         </p>
                       </div>
                     )}
@@ -304,12 +308,12 @@ export default function WorkerRegisterPage() {
 
                   {/* Confirm Password */}
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">Confirmar contrasena</label>
+                    <label className="text-sm font-medium text-foreground">Confirmar contraseña</label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                       <Input
                         type={showConfirmPassword ? 'text' : 'password'}
-                        placeholder="Repite tu contrasena"
+                        placeholder="Repetí tu contraseña"
                         value={formData.confirmPassword}
                         onChange={(e) => handleChange('confirmPassword', e.target.value)}
                         className={`pl-10 pr-10 h-11 ${errors.confirmPassword ? 'border-destructive' : ''}`}
@@ -342,7 +346,7 @@ export default function WorkerRegisterPage() {
                   {/* Categories Selection */}
                   <div className="space-y-3">
                     <p className="text-sm text-muted-foreground">
-                      Selecciona una o mas categorias donde ofreces tus servicios:
+                      Seleccioná una o más categorías donde ofrecés tus servicios:
                     </p>
 
                     {errors.categorias && (
@@ -391,7 +395,7 @@ export default function WorkerRegisterPage() {
 
                     {formData.categorias.length > 0 && (
                       <p className="text-sm text-accent font-medium">
-                        {formData.categorias.length} categoria{formData.categorias.length > 1 ? 's' : ''} seleccionada{formData.categorias.length > 1 ? 's' : ''}
+                        {formData.categorias.length} categorí{formData.categorias.length > 1 ? 'as' : 'a'} seleccionada{formData.categorias.length > 1 ? 's' : ''}
                       </p>
                     )}
                   </div>
@@ -405,7 +409,7 @@ export default function WorkerRegisterPage() {
                       className="flex-1 h-12"
                     >
                       <ArrowLeft className="w-4 h-4 mr-2" />
-                      Atras
+                      Atrás
                     </Button>
                     <Button
                       type="submit"
@@ -436,9 +440,9 @@ export default function WorkerRegisterPage() {
               <div className="flex gap-3">
                 <Shield className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
                 <div className="text-sm">
-                  <p className="font-medium text-primary">Verificacion requerida</p>
+                  <p className="font-medium text-primary">Verificación requerida</p>
                   <p className="text-muted-foreground mt-1">
-                    Despues de crear tu cuenta, deberas verificar tu identidad para comenzar a recibir trabajos.
+                    Después de crear tu cuenta, deberás verificar tu identidad para comenzar a recibir trabajos.
                   </p>
                 </div>
               </div>
@@ -447,9 +451,9 @@ export default function WorkerRegisterPage() {
 
           {/* Login Link */}
           <p className="text-center text-muted-foreground text-sm">
-            Ya tienes cuenta?{' '}
+            ¿Ya tenés cuenta?{' '}
             <Link href="/login" className="text-accent hover:text-accent/80 font-semibold">
-              Inicia sesion
+              Iniciá sesión
             </Link>
           </p>
         </div>

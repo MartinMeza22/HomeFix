@@ -56,7 +56,7 @@ export default function SearchPage() {
     <div className="space-y-6">
       {/* Location */}
       <div className="space-y-3">
-        <label className="text-sm font-semibold text-foreground">Ubicacion</label>
+        <label className="text-sm font-semibold text-foreground">Ubicación</label>
         <div className="relative">
           <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input
@@ -70,13 +70,13 @@ export default function SearchPage() {
 
       {/* Category */}
       <div className="space-y-3">
-        <label className="text-sm font-semibold text-foreground">Categoria</label>
+        <label className="text-sm font-semibold text-foreground">Categoría</label>
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
           className="w-full px-4 py-3 border border-input rounded-lg bg-background text-foreground text-sm font-medium focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-all"
         >
-          <option value="">Todas las categorias</option>
+          <option value="">Todas las categorías</option>
           {categories.map((cat) => (
             <option key={cat.id} value={cat.id}>{cat.name}</option>
           ))}
@@ -85,7 +85,7 @@ export default function SearchPage() {
 
       {/* Rating */}
       <div className="space-y-3">
-        <label className="text-sm font-semibold text-foreground">Calificacion minima</label>
+        <label className="text-sm font-semibold text-foreground">Calificación mínima</label>
         <div className="space-y-2">
           {[
             { value: '4.9', label: '4.9+ Excelente' },
@@ -140,13 +140,13 @@ export default function SearchPage() {
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 text-accent text-sm font-medium mb-4">
               <Search className="w-4 h-4" />
-              <span>Busqueda de profesionales</span>
+              <span>Búsqueda de profesionales</span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
               Profesionales verificados cerca de ti
             </h1>
             <p className="text-white/70 text-lg">
-              Todos nuestros profesionales pasan por un proceso de verificacion riguroso
+              Todos nuestros profesionales pasan por un proceso de verificación riguroso
             </p>
           </div>
 
@@ -155,7 +155,7 @@ export default function SearchPage() {
             {[
               { icon: Users, label: 'profesionales disponibles', value: filteredWorkers.length },
               { icon: Shield, label: 'verificados', value: '100%' },
-              { icon: Star, label: 'calificacion promedio', value: '4.8' },
+              { icon: Star, label: 'calificación promedio', value: '4.8' },
             ].map((stat, idx) => (
               <div key={idx} className="flex items-center gap-3 text-white/80">
                 <stat.icon className="w-5 h-5 text-accent" />
@@ -221,7 +221,7 @@ export default function SearchPage() {
                   onChange={(e) => setSortBy(e.target.value)}
                   className="px-4 py-2 border border-input rounded-lg bg-background text-foreground text-sm font-medium focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent"
                 >
-                  <option value="distance">Mas cercanos</option>
+                  <option value="distance">Más cercanos</option>
                   <option value="rating">Mejor calificados</option>
                 </select>
               </div>
@@ -245,7 +245,7 @@ export default function SearchPage() {
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-2">Sin resultados</h3>
                 <p className="text-muted-foreground mb-6 max-w-sm mx-auto">
-                  No encontramos profesionales con estos criterios. Intenta ajustar los filtros.
+                  No encontramos profesionales con estos criterios. Intentá ajustar los filtros.
                 </p>
                 <Button className="bg-accent hover:bg-accent/90 text-white" onClick={clearFilters}>
                   Limpiar filtros

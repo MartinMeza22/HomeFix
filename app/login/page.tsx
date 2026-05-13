@@ -35,12 +35,12 @@ export default function LoginPage() {
     setError('')
 
     if (!formData.email || !formData.password) {
-      setError('Por favor completa todos los campos')
+      setError('Por favor completá todos los campos')
       return
     }
 
     if (!validateEmail(formData.email)) {
-      setError('Por favor ingresa un email valido')
+      setError('Por favor ingresá un email válido')
       return
     }
 
@@ -50,13 +50,13 @@ export default function LoginPage() {
     const user = mockUsers.find(u => u.email === formData.email)
 
     if (!user) {
-      setError('El email no esta registrado')
+      setError('El email no está registrado')
       setIsLoading(false)
       return
     }
 
     if (user.password !== formData.password) {
-      setError('Contrasena incorrecta')
+      setError('Contraseña incorrecta')
       setIsLoading(false)
       return
     }
@@ -73,7 +73,7 @@ export default function LoginPage() {
       if (user.kycStatus === 'PENDING_KYC') {
         router.push('/verificacion')
       } else if (user.kycStatus === 'REJECTED') {
-        setError('Tu cuenta ha sido rechazada. Contacta soporte.')
+        setError('Tu cuenta ha sido rechazada. Contactá soporte.')
         setIsLoading(false)
         return
       } else {
@@ -107,7 +107,7 @@ export default function LoginPage() {
               Bienvenido de vuelta
             </h1>
             <p className="mt-3 text-muted-foreground">
-              Ingresa tus credenciales para acceder a tu cuenta
+              Ingresá tus credenciales para acceder a tu cuenta
             </p>
           </div>
 
@@ -124,7 +124,7 @@ export default function LoginPage() {
             {/* Email */}
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-semibold text-foreground">
-                Correo electronico
+                Correo electrónico
               </label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -143,13 +143,13 @@ export default function LoginPage() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <label htmlFor="password" className="text-sm font-semibold text-foreground">
-                  Contrasena
+                  Contraseña
                 </label>
                 <Link
                   href="/forgot-password"
                   className="text-sm text-accent hover:text-accent/80 font-medium transition-colors"
                 >
-                  Olvidaste tu contrasena?
+                  ¿Te olvidaste tu contraseña?
                 </Link>
               </div>
               <div className="relative">
@@ -157,7 +157,7 @@ export default function LoginPage() {
                 <Input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Tu contrasena"
+                  placeholder="Tu contraseña"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   className="pl-12 pr-12 h-14 text-base bg-secondary/30 border-border/50 focus:border-accent focus:ring-accent/20"
@@ -181,11 +181,11 @@ export default function LoginPage() {
               {isLoading ? (
                 <span className="flex items-center gap-3">
                   <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Iniciando sesion...
+                  Iniciando sesión...
                 </span>
               ) : (
                 <span className="flex items-center gap-2">
-                  Iniciar Sesion
+                  Iniciar Sesión
                   <ArrowRight className="w-5 h-5" />
                 </span>
               )}
@@ -204,7 +204,7 @@ export default function LoginPage() {
 
           {/* Register Link */}
           <p className="text-center text-muted-foreground">
-            No tienes una cuenta?{' '}
+            ¿No tenés una cuenta?{' '}
             <Link href="/register" className="text-accent hover:text-accent/80 font-semibold transition-colors">
               Registrate gratis
             </Link>
@@ -246,7 +246,7 @@ export default function LoginPage() {
               Tu hogar merece las mejores manos
             </h2>
             <p className="text-lg text-white/70 leading-relaxed mb-10">
-              Conectamos a mas de 15,000 profesionales verificados con familias que buscan soluciones confiables para su hogar.
+              Conectamos a más de 15,000 profesionales verificados con familias que buscan soluciones confiables para su hogar.
             </p>
 
             {/* Stats */}
@@ -254,7 +254,7 @@ export default function LoginPage() {
               {[
                 { value: '15K+', label: 'Profesionales' },
                 { value: '50K+', label: 'Trabajos' },
-                { value: '4.9', label: 'Calificacion' },
+                { value: '4.9', label: 'Calificación' },
               ].map((stat, idx) => (
                 <div key={idx} className="text-center">
                   <p className="text-3xl xl:text-4xl font-bold text-white">{stat.value}</p>
@@ -267,7 +267,7 @@ export default function LoginPage() {
           {/* Bottom Testimonial */}
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
             <p className="text-white/90 italic mb-4">
-              &quot;Encontre un electricista verificado en minutos. El proceso fue simple y el trabajo impecable.&quot;
+              &quot;Encontré un electricista verificado en minutos. El proceso fue simple y el trabajo impecable.&quot;
             </p>
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">

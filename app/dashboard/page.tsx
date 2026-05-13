@@ -40,7 +40,7 @@ export default function DashboardPage() {
           {
             id: `m${Date.now()}`,
             sender: 'worker',
-            text: 'Gracias por tu mensaje. Lo verificare y te respondere pronto.',
+            text: 'Gracias por tu mensaje. Lo verificaré y te responderé pronto.',
             timestamp: new Date().toISOString()
           }
         ])
@@ -74,7 +74,7 @@ export default function DashboardPage() {
       <div className="bg-primary py-10 sm:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2">Mi Dashboard</h1>
-          <p className="text-white/70">Gestiona tus turnos y conversaciones</p>
+          <p className="text-white/70">Gestioná tus turnos y conversaciones</p>
         </div>
       </div>
 
@@ -100,17 +100,15 @@ export default function DashboardPage() {
         <div className="flex lg:hidden border border-border rounded-xl overflow-hidden mb-6 bg-background shadow-sm">
           <button
             onClick={() => setActiveTab('bookings')}
-            className={`flex-1 py-3.5 text-sm font-semibold transition-colors ${
-              activeTab === 'bookings' ? 'bg-primary text-white' : 'text-muted-foreground'
-            }`}
+            className={`flex-1 py-3.5 text-sm font-semibold transition-colors ${activeTab === 'bookings' ? 'bg-primary text-white' : 'text-muted-foreground'
+              }`}
           >
             Mis Turnos
           </button>
           <button
             onClick={() => setActiveTab('messages')}
-            className={`flex-1 py-3.5 text-sm font-semibold transition-colors relative ${
-              activeTab === 'messages' ? 'bg-primary text-white' : 'text-muted-foreground'
-            }`}
+            className={`flex-1 py-3.5 text-sm font-semibold transition-colors relative ${activeTab === 'messages' ? 'bg-primary text-white' : 'text-muted-foreground'
+              }`}
           >
             Mensajes
             {conversations.reduce((s, c) => s + c.unread, 0) > 0 && (
@@ -165,13 +163,13 @@ export default function DashboardPage() {
                       <div className="flex gap-3 flex-wrap">
                         {booking.status === 'completed' ? (
                           <>
-                            <Button 
+                            <Button
                               size="sm"
                               className="bg-accent hover:bg-accent/90"
                               onClick={() => router.push(`/trabajo/${booking.id}/resena`)}
                             >
                               <Star className="w-4 h-4 mr-2" />
-                              Dejar Resena
+                              Dejar Reseña
                             </Button>
                             <Button
                               size="sm"
@@ -213,8 +211,8 @@ export default function DashboardPage() {
                 <div className="w-16 h-16 mx-auto bg-secondary rounded-full flex items-center justify-center mb-4">
                   <Calendar className="w-8 h-8 text-muted-foreground" />
                 </div>
-                <h3 className="font-bold text-foreground mb-2">No tienes turnos programados</h3>
-                <p className="text-muted-foreground mb-6">Busca profesionales verificados para tu proximo trabajo</p>
+                <h3 className="font-bold text-foreground mb-2">No tenés turnos programados</h3>
+                <p className="text-muted-foreground mb-6">Buscá profesionales verificados para tu próximo trabajo</p>
                 <Button className="bg-accent hover:bg-accent/90" onClick={() => router.push('/search')}>
                   Buscar profesionales
                   <ArrowRight className="w-4 h-4 ml-2" />
@@ -233,11 +231,10 @@ export default function DashboardPage() {
                 <Card
                   key={conv.id}
                   onClick={() => handleSelectConversation(conv)}
-                  className={`p-4 cursor-pointer transition-all border-border ${
-                    selectedConversation?.id === conv.id
-                      ? 'bg-accent/5 border-accent shadow-sm'
-                      : 'bg-background hover:bg-secondary/50'
-                  }`}
+                  className={`p-4 cursor-pointer transition-all border-border ${selectedConversation?.id === conv.id
+                    ? 'bg-accent/5 border-accent shadow-sm'
+                    : 'bg-background hover:bg-secondary/50'
+                    }`}
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -278,11 +275,10 @@ export default function DashboardPage() {
                 <div className="bg-secondary/30 rounded-xl h-64 overflow-y-auto p-4 space-y-3 mb-4">
                   {chatMessages.map((msg) => (
                     <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                      <div className={`px-4 py-2.5 rounded-2xl max-w-[85%] text-sm ${
-                        msg.sender === 'user'
-                          ? 'bg-primary text-white rounded-br-md'
-                          : 'bg-background border border-border text-foreground rounded-bl-md'
-                      }`}>
+                      <div className={`px-4 py-2.5 rounded-2xl max-w-[85%] text-sm ${msg.sender === 'user'
+                        ? 'bg-primary text-white rounded-br-md'
+                        : 'bg-background border border-border text-foreground rounded-bl-md'
+                        }`}>
                         {msg.text}
                       </div>
                     </div>
@@ -292,7 +288,7 @@ export default function DashboardPage() {
                 <div className="flex gap-2">
                   <input
                     type="text"
-                    placeholder="Escribe un mensaje..."
+                    placeholder="Escribí un mensaje..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}

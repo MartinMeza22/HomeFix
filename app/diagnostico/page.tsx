@@ -35,10 +35,10 @@ export default function DiagnosticoPage() {
             <span className="text-muted-foreground">Asistido por Inteligencia Artificial</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-foreground text-balance">
-            Diagnostico Inteligente
+            Diagnóstico Inteligente
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-balance">
-            Responde algunas preguntas simples y nuestro sistema te conectara con el profesional perfecto para tu problema.
+            Respondé algunas preguntas simples y nuestro sistema te conectará con el profesional perfecto para tu problema.
           </p>
         </div>
 
@@ -46,18 +46,18 @@ export default function DiagnosticoPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
           {[
             {
-              title: 'Rapido',
-              description: 'Solo 2 minutos para completar el diagnostico completo',
+              title: 'Rápido',
+              description: 'Solo 2 minutos para completar el diagnóstico completo',
               icon: Zap,
             },
             {
               title: 'Preciso',
-              description: 'Tecnologia IA para identificar exactamente que necesitas',
+              description: 'Tecnología IA para identificar exactamente qué necesitás',
               icon: Target,
             },
             {
               title: 'Personalizado',
-              description: 'Recomendaciones basadas en tu ubicacion y urgencia',
+              description: 'Recomendaciones basadas en tu ubicación y urgencia',
               icon: Sparkles,
             }
           ].map((card, idx) => (
@@ -91,20 +91,20 @@ export default function DiagnosticoPage() {
           <div className="space-y-3">
             {[
               {
-                q: 'Como funciona el diagnostico de IA?',
-                a: 'Nuestro sistema analiza tus respuestas para identificar exactamente que tipo de profesional necesitas. Usa machine learning para conectarte con los mejores especialistas.'
+                q: '¿Cómo funciona el diagnóstico de IA?',
+                a: 'Nuestro sistema analiza tus respuestas para identificar exactamente qué tipo de profesional necesitás. Usa machine learning para conectarte con los mejores especialistas.'
               },
               {
-                q: 'Es realmente gratis?',
-                a: 'Si, el diagnostico es completamente gratis. Solo pagas cuando contratas a un profesional.'
+                q: '¿Es realmente gratis?',
+                a: 'Sí, el diagnóstico es completamente gratis. Solo pagás cuando contratás a un profesional.'
               },
               {
-                q: 'Cuanto tarda en responder un profesional?',
+                q: '¿Cuánto tarda en responder un profesional?',
                 a: 'El tiempo promedio de respuesta es de 2 horas. Algunos profesionales responden en minutos, especialmente si la solicitud es urgente.'
               },
               {
-                q: 'Que pasa si no estoy satisfecho?',
-                a: 'Tenemos un proceso completo de resolucion de disputas. Si el trabajo no cumple con tus expectativas, podemos ayudarte a resolverlo.'
+                q: '¿Qué pasa si no estoy satisfecho?',
+                a: 'Tenemos un proceso completo de resolución de disputas. Si el trabajo no cumple con tus expectativas, podemos ayudarte a resolverlo.'
               }
             ].map((item, idx) => (
               <button

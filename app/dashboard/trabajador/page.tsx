@@ -46,7 +46,7 @@ const mockTrabajador = {
     dni: true,
     antecedentes: true,
     matricula: true,
-    domicilio: true
+    domicilio: false
   }
 }
 
@@ -56,18 +56,18 @@ const mockTrabajosDisponibles = [
     id: '1',
     titulo: 'Reparacion de canilla que gotea',
     descripcion: 'La canilla de la cocina gotea constantemente. Necesito que la reparen o cambien.',
-    categoria: 'Plomeria',
-    ubicacion: 'Palermo, Buenos Aires',
+    categoria: 'Plomería',
+    ubicacion: 'Recoleta, Buenos Aires',
     distancia: 1.8,
     urgencia: 'media',
     fechaPublicacion: '2026-05-08',
-    cliente: 'Maria G.'
+    cliente: 'Marta Ocampo'
   },
   {
     id: '2',
-    titulo: 'Destape de caneria en bano',
+    titulo: 'Destape de cañeria en baño',
     descripcion: 'El desague de la ducha esta tapado, el agua no baja. Necesito solucion urgente.',
-    categoria: 'Plomeria',
+    categoria: 'Plomería',
     ubicacion: 'Belgrano, Buenos Aires',
     distancia: 2.5,
     urgencia: 'alta',
@@ -78,7 +78,7 @@ const mockTrabajosDisponibles = [
     id: '3',
     titulo: 'Instalacion de calefon nuevo',
     descripcion: 'Compre un calefon nuevo y necesito instalarlo. Tengo todos los materiales.',
-    categoria: 'Plomeria',
+    categoria: 'Plomería',
     ubicacion: 'Villa Crespo, Buenos Aires',
     distancia: 3.1,
     urgencia: 'baja',
@@ -98,7 +98,7 @@ const mockPostulaciones = [
   },
   {
     id: '2',
-    trabajo: 'Cambio de griferia completa en bano',
+    trabajo: 'Cambio de griferia completa en baño',
     cliente: 'Ana K.',
     estado: 'aceptada',
     fechaPostulacion: '2026-05-06'
@@ -109,8 +109,8 @@ const mockPostulaciones = [
 const mockUrgencias = [
   {
     id: 'urg-1',
-    tipo: 'Cano roto',
-    descripcion: 'Se rompio un cano debajo de la pileta de la cocina, esta inundando todo. Urgente!',
+    tipo: 'Caño roto',
+    descripcion: 'Se rompio un caño debajo de la pileta de la cocina, esta inundando todo. ¡Urgente!',
     cliente: 'Maria Gomez',
     ubicacion: 'Palermo, Buenos Aires',
     distancia: 1.2,
@@ -120,7 +120,7 @@ const mockUrgencias = [
   {
     id: 'urg-2',
     tipo: 'Perdida de agua',
-    descripcion: 'Hay una perdida grande en el bano, el agua no para de salir del inodoro.',
+    descripcion: 'Hay una perdida grande en el baño, el agua no para de salir del inodoro.',
     cliente: 'Roberto Perez',
     ubicacion: 'Villa Crespo, Buenos Aires',
     distancia: 2.4,
@@ -129,8 +129,8 @@ const mockUrgencias = [
   },
   {
     id: 'urg-3',
-    tipo: 'Caneria tapada',
-    descripcion: 'Se tapo la caneria principal, todos los desagues del depto estan colapsados.',
+    tipo: 'Cañeria tapada',
+    descripcion: 'Se tapo la cañeria principal, todos los desagues del depto estan colapsados.',
     cliente: 'Laura Sanchez',
     ubicacion: 'Recoleta, Buenos Aires',
     distancia: 3.1,
@@ -152,7 +152,7 @@ const mockCitas = [
   {
     id: '2',
     cliente: 'Carlos Gonzalez',
-    servicio: 'Destape de caneria',
+    servicio: 'Destape de cañeria',
     fecha: '2026-05-11',
     hora: '14:30',
     ubicacion: 'Palermo, Buenos Aires'
@@ -169,7 +169,7 @@ export default function TrabajadorDashboard() {
     setUrgencias(prev => prev.filter(u => u.id !== urgenciaId))
     
     if (action === 'aceptar') {
-      // Aqui se integraria con backend para notificar al cliente
+      // Aquí se integraría con backend para notificar al cliente
       console.log('[v0] Urgencia aceptada:', urgenciaId)
     } else {
       console.log('[v0] Urgencia rechazada:', urgenciaId)
@@ -230,15 +230,21 @@ export default function TrabajadorDashboard() {
 
               {/* Info */}
               <div className="flex-1">
-                <div className="flex items-center gap-3 mb-1">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
                   <h1 className="text-2xl sm:text-3xl font-bold text-white">Hola, {trabajador.name.split(' ')[0]}</h1>
+                  {trabajador.verified && (
+                    <Badge className="bg-accent text-white border-0 flex items-center gap-1.5 w-fit px-2 py-0.5">
+                      <CheckCircle className="w-3.5 h-3.5" />
+                      Verificado
+                    </Badge>
+                  )}
                 </div>
                 <p className="text-white/70 mb-2">{trabajador.category} - {trabajador.location}</p>
                 <div className="flex items-center gap-4 text-sm">
                   <div className="flex items-center gap-1 text-white/80">
                     <Star className="w-4 h-4 text-accent fill-accent" />
                     <span className="font-semibold">{trabajador.rating}</span>
-                    <span className="text-white/60">({trabajador.reviews} resenas)</span>
+                    <span className="text-white/60">({trabajador.reviews} reseñas)</span>
                   </div>
                   <div className="flex items-center gap-1 text-white/60">
                     <Briefcase className="w-4 h-4" />
@@ -276,7 +282,7 @@ export default function TrabajadorDashboard() {
               {[
                 { label: 'Trabajos Nuevos', value: mockTrabajosDisponibles.length, icon: Briefcase, color: 'text-accent' },
                 { label: 'Postulaciones', value: mockPostulaciones.length, icon: Send, color: 'text-blue-400' },
-                { label: 'Citas Proximas', value: mockCitas.length, icon: Calendar, color: 'text-yellow-400' },
+                { label: 'Citas Próximas', value: mockCitas.length, icon: Calendar, color: 'text-yellow-400' },
                 { label: 'Tasa Respuesta', value: `${trabajador.responseRate}%`, icon: TrendingUp, color: 'text-green-400' }
               ].map((stat, idx) => (
                 <Card key={idx} className="bg-white/5 border-white/10 p-4">
@@ -296,146 +302,7 @@ export default function TrabajadorDashboard() {
         </section>
 
 
-        {/* Urgencias Entrantes - Full Width Section */}
-        <section className="py-6 sm:py-8 bg-gradient-to-b from-destructive/5 to-transparent">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Header con toggle */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-              <div className="flex items-center gap-4">
-                <div className="relative">
-                  <div className="w-12 h-12 rounded-xl bg-destructive/15 flex items-center justify-center">
-                    <AlertCircle className="w-6 h-6 text-destructive" />
-                  </div>
-                  {disponibleUrgencia && urgencias.length > 0 && (
-                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-destructive text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse">
-                      {urgencias.length}
-                    </span>
-                  )}
-                </div>
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-foreground">Urgencias Entrantes</h2>
-                  <p className="text-sm text-muted-foreground">Emergencias de clientes cerca de tu ubicacion</p>
-                </div>
-              </div>
-              
-              {/* Toggle elegante */}
-              <div className={`flex items-center gap-3 px-4 py-2.5 rounded-full transition-all ${
-                disponibleUrgencia 
-                  ? 'bg-destructive/10 border border-destructive/30' 
-                  : 'bg-muted/50 border border-border'
-              }`}>
-                <span className={`text-sm font-medium ${disponibleUrgencia ? 'text-destructive' : 'text-muted-foreground'}`}>
-                  {disponibleUrgencia ? 'Activo' : 'Inactivo'}
-                </span>
-                <button
-                  onClick={() => setDisponibleUrgencia(!disponibleUrgencia)}
-                  className={`relative w-11 h-6 rounded-full transition-all duration-300 ${
-                    disponibleUrgencia ? 'bg-destructive shadow-lg shadow-destructive/25' : 'bg-muted-foreground/30'
-                  }`}
-                >
-                  <span
-                    className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow-md transition-all duration-300 ${
-                      disponibleUrgencia ? 'left-5' : 'left-0.5'
-                    }`}
-                  />
-                </button>
-              </div>
-            </div>
-
-            {/* Contenido */}
-            {!disponibleUrgencia ? (
-              <Card className="p-8 sm:p-12 text-center border border-dashed border-muted-foreground/20 bg-card/50">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/50 flex items-center justify-center">
-                  <AlertCircle className="w-8 h-8 text-muted-foreground/50" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Modo urgencias desactivado</h3>
-                <p className="text-sm text-muted-foreground max-w-md mx-auto">
-                  Activa el toggle para recibir solicitudes de emergencia de clientes cercanos a tu ubicacion.
-                </p>
-              </Card>
-            ) : urgencias.length === 0 ? (
-              <Card className="p-8 sm:p-12 text-center border border-accent/30 bg-accent/5">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-accent/20 flex items-center justify-center">
-                  <CheckCircle className="w-8 h-8 text-accent" />
-                </div>
-                <h3 className="font-semibold text-foreground mb-2">Todo tranquilo por ahora</h3>
-                <p className="text-sm text-muted-foreground max-w-md mx-auto">
-                  No hay urgencias pendientes. Cuando un cliente necesite ayuda urgente cerca de ti, aparecera aqui.
-                </p>
-              </Card>
-            ) : (
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {urgencias.map((urg) => (
-                  <Card 
-                    key={urg.id} 
-                    className="group relative overflow-hidden border-destructive/20 hover:border-destructive/40 bg-card hover:shadow-xl transition-all duration-300"
-                  >
-                    {/* Indicador lateral */}
-                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-destructive" />
-                    
-                    <div className="p-5">
-                      {/* Header */}
-                      <div className="flex items-start justify-between gap-3 mb-4">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-destructive text-white text-xs font-semibold">
-                              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-                              Urgente
-                            </span>
-                            <span className="text-xs text-muted-foreground">{urg.hora}</span>
-                          </div>
-                          <h3 className="font-bold text-foreground leading-tight">{urg.tipo}</h3>
-                        </div>
-                        <div className="flex flex-col items-center">
-                          <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center">
-                            <span className="text-sm font-bold text-primary">{urg.distancia}</span>
-                          </div>
-                          <span className="text-[10px] text-muted-foreground mt-0.5">km</span>
-                        </div>
-                      </div>
-                      
-                      {/* Descripcion */}
-                      <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
-                        {urg.descripcion}
-                      </p>
-                      
-                      {/* Info cliente */}
-                      <div className="flex items-center gap-4 mb-4 py-2.5 px-3 rounded-lg bg-secondary/50 text-xs">
-                        <span className="flex items-center gap-1.5 text-foreground font-medium">
-                          <User className="w-3.5 h-3.5 text-muted-foreground" />
-                          {urg.cliente}
-                        </span>
-                        <span className="flex items-center gap-1.5 text-muted-foreground">
-                          <MapPin className="w-3.5 h-3.5" />
-                          {urg.ubicacion}
-                        </span>
-                      </div>
-                      
-                      {/* Botones */}
-                      <div className="flex gap-2">
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="flex-1 h-9 text-muted-foreground hover:text-foreground border-border"
-                          onClick={() => handleUrgenciaAction(urg.id, 'rechazar')}
-                        >
-                          Rechazar
-                        </Button>
-                        <Button
-                          size="sm"
-                          className="flex-1 h-9 bg-destructive hover:bg-destructive/90 text-white font-medium shadow-lg shadow-destructive/20"
-                          onClick={() => handleUrgenciaAction(urg.id, 'aceptar')}
-                        >
-                          Aceptar
-                        </Button>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            )}
-          </div>
-        </section>
+        {/* Urgencias Entrantes - Full Width Section (Oculto para el MVP) */}
 
         {/* Main Content */}
         <section className="py-8 sm:py-12">
@@ -517,10 +384,10 @@ export default function TrabajadorDashboard() {
                   </div>
                 </div>
 
-                {/* Proximas Citas */}
+                {/* Próximas Citas */}
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-bold text-foreground">Proximas Citas</h2>
+                    <h2 className="text-xl font-bold text-foreground">Próximas Citas</h2>
                   </div>
                   
                   {mockCitas.length > 0 ? (
@@ -547,7 +414,7 @@ export default function TrabajadorDashboard() {
                   ) : (
                     <Card className="p-8 text-center border-border/50">
                       <Calendar className="w-12 h-12 text-muted-foreground/50 mx-auto mb-3" />
-                      <p className="text-muted-foreground">No tienes citas proximas</p>
+                      <p className="text-muted-foreground">No tenés citas próximas</p>
                     </Card>
                   )}
                 </div>
@@ -590,9 +457,9 @@ export default function TrabajadorDashboard() {
                   )}
                 </Card>
 
-                {/* Accesos Rapidos */}
+                {/* Accesos Rápidos */}
                 <Card className="p-6 border-border/50">
-                  <h3 className="font-bold text-foreground mb-4">Accesos Rapidos</h3>
+                  <h3 className="font-bold text-foreground mb-4">Accesos Rápidos</h3>
                   <div className="space-y-2">
                     {[
                       { label: 'Buscar Trabajos', href: '/trabajador/trabajos', icon: Briefcase },
@@ -616,9 +483,9 @@ export default function TrabajadorDashboard() {
 
                 {/* Tips */}
                 <Card className="p-6 bg-accent/5 border-accent/20">
-                  <h3 className="font-bold text-foreground mb-2">Mejora tu perfil</h3>
+                  <h3 className="font-bold text-foreground mb-2">Mejorá tu perfil</h3>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Los perfiles completos reciben hasta 3x mas solicitudes de trabajo.
+                    Los perfiles completos reciben hasta 3x más solicitudes de trabajo.
                   </p>
                   <Button 
                     size="sm" 

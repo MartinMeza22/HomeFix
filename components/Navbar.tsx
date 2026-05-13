@@ -43,7 +43,17 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const pathname = usePathname()
-  const { role, name, logout } = useSession()
+  let { role, name, logout } = useSession()
+
+  // Forzar rol según la URL para la demostración
+  if (pathname.includes('/trabajador') || pathname.includes('/verificacion') || pathname === '/dashboard/trabajador') {
+    role = 'trabajador'
+  } else if (pathname === '/dashboard' || pathname.includes('/publicacion/nueva')) {
+    role = 'cliente'
+  }
+
+  const displayName = role === 'trabajador' ? 'Pedro Picapiedra' : (name || 'Mi cuenta')
+  const displayInitials = role === 'trabajador' ? 'P' : (name ? name[0].toUpperCase() : <User className="w-3.5 h-3.5" />)
 
   const clienteLinks = [
     { href: '/dashboard', label: 'Inicio', icon: Home },
@@ -110,7 +120,7 @@ export function Navbar() {
               <>
                 <Link href="/login">
                   <Button variant="ghost" className="text-muted-foreground hover:text-primary font-medium">
-                    Iniciar Sesion
+                    Iniciar Sesión
                   </Button>
                 </Link>
                 <Link href="/register">
@@ -126,9 +136,9 @@ export function Navbar() {
                   className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border hover:bg-secondary/50 transition-colors"
                 >
                   <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-xs font-bold">
-                    {name ? name[0].toUpperCase() : <User className="w-3.5 h-3.5" />}
+                    {displayInitials}
                   </div>
-                  <span className="text-sm font-medium text-foreground max-w-[120px] truncate">{name || 'Mi cuenta'}</span>
+                  <span className="text-sm font-medium text-foreground max-w-[120px] truncate">{displayName}</span>
                   <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${userMenuOpen ? 'rotate-180' : ''}`} />
                 </button>
 
@@ -168,7 +178,7 @@ export function Navbar() {
                       className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-destructive hover:bg-destructive/5 transition-colors w-full text-left"
                     >
                       <LogOut className="w-4 h-4" />
-                      Cerrar Sesion
+                      Cerrar Sesión
                     </button>
                   </div>
                 )}
@@ -211,7 +221,7 @@ export function Navbar() {
               {role === 'guest' ? (
                 <>
                   <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
-                    <Button variant="outline" className="w-full border-primary text-primary">Iniciar Sesion</Button>
+                    <Button variant="outline" className="w-full border-primary text-primary">Iniciar Sesión</Button>
                   </Link>
                   <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
                     <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-semibold">Registrarse</Button>
@@ -234,7 +244,7 @@ export function Navbar() {
                     onClick={() => { setMobileMenuOpen(false); logout() }}
                   >
                     <LogOut className="w-4 h-4" />
-                    Cerrar Sesion
+                    Cerrar Sesión
                   </Button>
                 </>
               )}

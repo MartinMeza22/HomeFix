@@ -75,7 +75,7 @@ const mockPublicaciones: Publicacion[] = [
     id: '1',
     titulo: 'Reparacion de tuberia en cocina',
     descripcion: 'Hola, tengo un problema en la cocina, me pierde la canilla.',
-    categoria: 'Plomeria',
+    categoria: 'Plomería',
     estado: 'pendiente',
     fechaCreacion: '2024-01-15',
     fechaServicio: '2024-01-20',
@@ -86,7 +86,7 @@ const mockPublicaciones: Publicacion[] = [
         id: '1',
         trabajadorId: '1',
         trabajadorNombre: 'Pedro Picapiedra',
-        trabajadorCategoria: 'Plomeria',
+        trabajadorCategoria: 'Plomería',
         trabajadorCalificacion: 4.8,
         trabajadorReviews: 47,
         trabajadorVerificado: true,
@@ -98,11 +98,11 @@ const mockPublicaciones: Publicacion[] = [
         id: '2',
         trabajadorId: '2',
         trabajadorNombre: 'Luis Fernandez',
-        trabajadorCategoria: 'Plomeria',
+        trabajadorCategoria: 'Plomería',
         trabajadorCalificacion: 4.5,
         trabajadorReviews: 23,
         trabajadorVerificado: true,
-        mensaje: 'Puedo revisar el problema manana.',
+        mensaje: 'Puedo revisar el problema mañana.',
         fechaPropuesta: '2024-01-19',
         estado: 'pendiente'
       },
@@ -110,7 +110,7 @@ const mockPublicaciones: Publicacion[] = [
         id: '4',
         trabajadorId: '4',
         trabajadorNombre: 'Roberto Sanchez',
-        trabajadorCategoria: 'Plomeria',
+        trabajadorCategoria: 'Plomería',
         trabajadorCalificacion: 4.7,
         trabajadorReviews: 56,
         trabajadorVerificado: true,
@@ -122,7 +122,7 @@ const mockPublicaciones: Publicacion[] = [
         id: '5',
         trabajadorId: '5',
         trabajadorNombre: 'Miguel Torres',
-        trabajadorCategoria: 'Plomeria',
+        trabajadorCategoria: 'Plomería',
         trabajadorCalificacion: 4.3,
         trabajadorReviews: 18,
         trabajadorVerificado: false,
@@ -163,7 +163,7 @@ const mockPublicaciones: Publicacion[] = [
         trabajadorCalificacion: 4.6,
         trabajadorReviews: 34,
         trabajadorVerificado: true,
-        mensaje: 'Especialista en instalacion de splits. Garantia de 1 ano.',
+        mensaje: 'Especialista en instalacion de splits. Garantia de 1 año.',
         fechaPropuesta: '2024-01-21',
         estado: 'rechazada'
       }
@@ -185,7 +185,7 @@ const mockPublicaciones: Publicacion[] = [
     id: '4',
     titulo: 'Servicio de Plomeria - Cocina',
     descripcion: 'Me pierde la canilla de la cocina, necesito que la revisen y reparen.',
-    categoria: 'Plomeria',
+    categoria: 'Plomería',
     estado: 'pendiente',
     fechaCreacion: '2024-01-18',
     fechaServicio: '2024-01-25',
@@ -196,11 +196,11 @@ const mockPublicaciones: Publicacion[] = [
         id: '7',
         trabajadorId: '7',
         trabajadorNombre: 'Pedro Picapiedra',
-        trabajadorCategoria: 'Plomeria',
+        trabajadorCategoria: 'Plomería',
         trabajadorCalificacion: 4.9,
         trabajadorReviews: 312,
         trabajadorVerificado: true,
-        mensaje: 'Hola! Soy especialista en canillas y griferia. Puedo ir manana mismo a revisarla. Trabajo con garantia.',
+        mensaje: 'Hola! Soy especialista en canillas y griferia. Puedo ir mañana mismo a revisarla. Trabajo con garantia.',
         fechaPropuesta: '2024-01-19',
         estado: 'pendiente'
       },
@@ -208,7 +208,7 @@ const mockPublicaciones: Publicacion[] = [
         id: '8',
         trabajadorId: '8',
         trabajadorNombre: 'Marcelo Gutierrez',
-        trabajadorCategoria: 'Plomeria',
+        trabajadorCategoria: 'Plomería',
         trabajadorCalificacion: 4.6,
         trabajadorReviews: 89,
         trabajadorVerificado: true,
@@ -220,7 +220,7 @@ const mockPublicaciones: Publicacion[] = [
         id: '9',
         trabajadorId: '9',
         trabajadorNombre: 'Diego Ramirez',
-        trabajadorCategoria: 'Plomeria',
+        trabajadorCategoria: 'Plomería',
         trabajadorCalificacion: 4.4,
         trabajadorReviews: 45,
         trabajadorVerificado: false,
@@ -239,7 +239,7 @@ const mockChats: Chat[] = [
     publicacionTitulo: 'Reparacion de tuberia en cocina',
     trabajadorId: '1',
     trabajadorNombre: 'Pedro Picapiedra',
-    trabajadorCategoria: 'Plomeria',
+    trabajadorCategoria: 'Plomería',
     ultimoMensaje: 'Perfecto, entonces confirmo para el jueves a las 10hs.',
     fechaUltimoMensaje: '2024-01-16 14:30',
     noLeidos: 2
@@ -264,9 +264,9 @@ export default function MisPublicacionesPage() {
   const [selectedChat, setSelectedChat] = useState<Chat | null>(null)
   const [chatMessage, setChatMessage] = useState('')
   const [chatMessages, setChatMessages] = useState<{ sender: string; text: string; time: string }[]>([
-    { sender: 'trabajador', text: 'Hola! Vi tu publicacion y me interesa el trabajo.', time: '14:20' },
-    { sender: 'cliente', text: 'Hola Carlos! Gracias por responder. Cuando podrias venir?', time: '14:25' },
-    { sender: 'trabajador', text: 'Puedo ir el jueves por la manana, te parece bien?', time: '14:28' },
+    { sender: 'trabajador', text: '¡Hola! Vi tu publicación y me interesa el trabajo.', time: '14:20' },
+    { sender: 'cliente', text: '¡Hola Carlos! Gracias por responder. ¿Cuándo podrías venir?', time: '14:25' },
+    { sender: 'trabajador', text: 'Puedo ir el jueves por la mañana, ¿te parece bien?', time: '14:28' },
     { sender: 'trabajador', text: 'Perfecto, entonces confirmo para el jueves a las 10hs.', time: '14:30' }
   ])
   const [filterEstado, setFilterEstado] = useState<PublicacionEstado | 'todas'>('todas')
@@ -337,14 +337,14 @@ export default function MisPublicacionesPage() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-white">Mis Publicaciones</h1>
-              <p className="text-white/70 mt-1">Gestiona tus solicitudes y conversaciones</p>
+              <p className="text-white/70 mt-1">Gestioná tus solicitudes y conversaciones</p>
             </div>
             <Button
               onClick={() => router.push('/publicacion/nueva')}
               className="bg-accent hover:bg-accent/90 text-white"
             >
               <Plus className="w-4 h-4 mr-2" />
-              Nueva Publicacion
+              Nueva Publicación
             </Button>
           </div>
         </div>
@@ -459,7 +459,7 @@ export default function MisPublicacionesPage() {
                   <h3 className="font-bold text-foreground mb-2">No hay publicaciones</h3>
                   <p className="text-sm text-muted-foreground mb-4">
                     {filterEstado === 'todas'
-                      ? 'Crea tu primera publicacion para recibir ofertas de profesionales.'
+                      ? 'Creá tu primera publicación para recibir ofertas de profesionales.'
                       : 'No hay publicaciones con este estado.'}
                   </p>
                   {filterEstado === 'todas' && (
@@ -468,7 +468,7 @@ export default function MisPublicacionesPage() {
                       className="bg-primary hover:bg-primary/90 text-white"
                     >
                       <Plus className="w-4 h-4 mr-2" />
-                      Crear publicacion
+                      Crear publicación
                     </Button>
                   )}
                 </Card>
@@ -571,7 +571,7 @@ export default function MisPublicacionesPage() {
                     <div className="text-center py-8">
                       <User className="w-10 h-10 mx-auto text-muted-foreground mb-3" />
                       <p className="text-sm text-muted-foreground">
-                        Aun no hay solicitudes.<br />Los profesionales veran tu publicacion pronto.
+                        Aún no hay solicitudes.<br />Los profesionales verán tu publicación pronto.
                       </p>
                     </div>
                   )}
@@ -580,7 +580,7 @@ export default function MisPublicacionesPage() {
                 <Card className="p-8 border-border text-center">
                   <FileText className="w-10 h-10 mx-auto text-muted-foreground mb-3" />
                   <p className="text-sm text-muted-foreground">
-                    Selecciona una publicacion para ver las solicitudes
+                    Seleccioná una publicación para ver las solicitudes
                   </p>
                 </Card>
               )}
@@ -706,7 +706,7 @@ export default function MisPublicacionesPage() {
                   <div className="text-center">
                     <MessageSquare className="w-12 h-12 mx-auto text-muted-foreground mb-3" />
                     <p className="text-muted-foreground">
-                      Selecciona una conversacion para ver los mensajes
+                      Seleccioná una conversación para ver los mensajes
                     </p>
                   </div>
                 </Card>
@@ -747,7 +747,7 @@ export default function MisPublicacionesPage() {
                       {pub.estado === 'completada' && (
                         <Button variant="outline" size="sm">
                           <Star className="w-4 h-4 mr-2" />
-                          Dejar resena
+                          Dejar reseña
                         </Button>
                       )}
                     </div>
@@ -758,7 +758,7 @@ export default function MisPublicacionesPage() {
                 <Clock className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
                 <h3 className="font-bold text-foreground mb-2">Sin historial</h3>
                 <p className="text-sm text-muted-foreground">
-                  Aqui apareceran tus publicaciones completadas y canceladas.
+                  Aquí aparecerán tus publicaciones completadas y canceladas.
                 </p>
               </Card>
             )}

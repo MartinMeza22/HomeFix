@@ -14,7 +14,7 @@ interface DiagnosticoStep {
 const diagnosticoSteps: DiagnosticoStep[] = [
   {
     step: 1,
-    question: '¿Qué tipo de reparación necesitas?',
+    question: '¿Qué tipo de reparación necesitás?',
     icon: '🔧',
     options: [
       { label: 'Eléctrica', value: 'electrical' },
@@ -28,7 +28,7 @@ const diagnosticoSteps: DiagnosticoStep[] = [
   },
   {
     step: 2,
-    question: 'Describe más específicamente el problema',
+    question: 'Describí más específicamente el problema',
     icon: '📝',
     options: [
       { label: 'No funciona / Está dañado', value: 'broken' },
@@ -41,7 +41,7 @@ const diagnosticoSteps: DiagnosticoStep[] = [
   },
   {
     step: 3,
-    question: '¿Cuándo necesitas que se resuelva?',
+    question: '¿Cuándo necesitás que se resuelva?',
     icon: '⏰',
     options: [
       { label: 'Hoy - Urgente', value: 'today' },
@@ -102,7 +102,7 @@ export function DiagnosticoWizard({ onComplete }: DiagnosticoWizardProps) {
         <div className="text-5xl">✓</div>
         <h2 className="text-3xl font-bold text-foreground">Diagnóstico Completado</h2>
         <p className="text-lg text-muted-foreground">
-          Hemos identificado exactamente qué necesitas. Ahora te mostraremos los mejores profesionales para tu caso.
+          Hemos identificado exactamente qué necesitás. Ahora te mostraremos los mejores profesionales para tu caso.
         </p>
         <Button
           size="lg"
@@ -148,11 +148,10 @@ export function DiagnosticoWizard({ onComplete }: DiagnosticoWizardProps) {
             <button
               key={option.value}
               onClick={() => handleSelectAnswer(currentStep, option.value)}
-              className={`p-4 rounded-lg border-2 transition-all text-left font-medium ${
-                selectedAnswers[currentStep] === option.value
-                  ? 'border-primary bg-primary/10 text-primary'
-                  : 'border-border bg-card text-foreground hover:border-primary/50'
-              }`}
+              className={`p-4 rounded-lg border-2 transition-all text-left font-medium ${selectedAnswers[currentStep] === option.value
+                ? 'border-primary bg-primary/10 text-primary'
+                : 'border-border bg-card text-foreground hover:border-primary/50'
+                }`}
             >
               {option.label}
             </button>
@@ -204,9 +203,8 @@ export function DiagnosticoWizard({ onComplete }: DiagnosticoWizardProps) {
         {[...Array(diagnosticoSteps.length + 1)].map((_, idx) => (
           <div
             key={idx}
-            className={`w-2 h-2 rounded-full transition-colors ${
-              idx <= currentStep ? 'bg-primary' : 'bg-border'
-            }`}
+            className={`w-2 h-2 rounded-full transition-colors ${idx <= currentStep ? 'bg-primary' : 'bg-border'
+              }`}
           />
         ))}
       </div>

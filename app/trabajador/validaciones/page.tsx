@@ -39,8 +39,8 @@ const validaciones: Validacion[] = [
   {
     id: 'dni',
     tipo: 'identidad',
-    label: 'Verificacion de Identidad (DNI)',
-    descripcion: 'Sube fotos del frente y dorso de tu DNI para verificar tu identidad.',
+    label: 'Verificación de Identidad (DNI)',
+    descripcion: 'Subí fotos del frente y dorso de tu DNI para verificar tu identidad.',
     status: 'completado',
     fechaCompletado: '2024-03-15',
     icon: FileText,
@@ -60,12 +60,12 @@ const validaciones: Validacion[] = [
   {
     id: 'matricula',
     tipo: 'profesional',
-    label: 'Matricula Profesional',
-    descripcion: 'Matricula habilitante para ejercer tu profesion (si aplica).',
+    label: 'Matrícula Profesional',
+    descripcion: 'Matrícula habilitante para ejercer tu profesión (si aplica).',
     status: 'completado',
     fechaCompletado: '2024-03-20',
     icon: Award,
-    documentos: ['Matricula PDF', 'Certificado de Habilitacion']
+    documentos: ['Matrícula PDF', 'Certificado de Habilitación']
   },
   {
     id: 'domicilio',
@@ -96,7 +96,7 @@ export default function MisValidacionesPage() {
       case 'pendiente':
         return <Badge className="bg-yellow-500/10 text-yellow-600 border-0">Pendiente</Badge>
       case 'en_revision':
-        return <Badge className="bg-blue-500/10 text-blue-600 border-0">En Revision</Badge>
+        return <Badge className="bg-blue-500/10 text-blue-600 border-0">En Revisión</Badge>
       case 'rechazado':
         return <Badge className="bg-red-500/10 text-red-600 border-0">Rechazado</Badge>
       default:
@@ -146,7 +146,7 @@ export default function MisValidacionesPage() {
               <h1 className="text-2xl sm:text-3xl font-bold text-white">Mis Validaciones</h1>
             </div>
             <p className="text-white/70">
-              Completa todas las validaciones para obtener el sello de profesional verificado
+              Completá todas las validaciones para obtener el sello de profesional verificado
             </p>
           </div>
         </section>
@@ -155,7 +155,7 @@ export default function MisValidacionesPage() {
         <section className="bg-primary/95 border-t border-white/10 py-6">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-white/70 text-sm">Progreso de verificacion</span>
+              <span className="text-white/70 text-sm">Progreso de verificación</span>
               <span className="text-white font-bold">{completadas} de {total} completadas</span>
             </div>
             <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden">
@@ -184,10 +184,10 @@ export default function MisValidacionesPage() {
                   <Shield className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-foreground mb-1">Por que verificarte?</h3>
+                  <h3 className="font-bold text-foreground mb-1">¿Por qué verificarte?</h3>
                   <p className="text-sm text-muted-foreground">
-                    Los profesionales verificados reciben <strong>3x mas solicitudes</strong> de trabajo y generan mayor confianza en los clientes. 
-                    Tu informacion es tratada de forma confidencial y segura.
+                    Los profesionales verificados reciben <strong>3x más solicitudes</strong> de trabajo y generan mayor confianza en los clientes. 
+                    Tu información es tratada de forma confidencial y segura.
                   </p>
                 </div>
               </div>
@@ -273,16 +273,16 @@ export default function MisValidacionesPage() {
               <div className="space-y-4">
                 {[
                   {
-                    q: 'Cuanto tarda el proceso de verificacion?',
-                    a: 'La verificacion de documentos tarda entre 24 y 48 horas habiles.'
+                    q: '¿Cuánto tarda el proceso de verificación?',
+                    a: 'La verificación de documentos tarda entre 24 y 48 horas hábiles.'
                   },
                   {
-                    q: 'Mis documentos son confidenciales?',
-                    a: 'Si, toda tu informacion es tratada de forma segura y no se comparte con terceros.'
+                    q: '¿Mis documentos son confidenciales?',
+                    a: 'Sí, toda tu información es tratada de forma segura y no se comparte con terceros.'
                   },
                   {
-                    q: 'Que pasa si mi documento es rechazado?',
-                    a: 'Recibiras un email con el motivo del rechazo y podras subir un nuevo documento.'
+                    q: '¿Qué pasa si mi documento es rechazado?',
+                    a: 'Recibirás un email con el motivo del rechazo y podrás subir un nuevo documento.'
                   }
                 ].map((faq, idx) => (
                   <div key={idx}>
@@ -326,9 +326,9 @@ export default function MisValidacionesPage() {
                   <div className="w-16 h-16 bg-secondary/50 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Camera className="w-8 h-8 text-muted-foreground" />
                   </div>
-                  <p className="font-medium text-foreground mb-1">Arrastra tu archivo aqui</p>
-                  <p className="text-sm text-muted-foreground mb-3">o haz click para seleccionar</p>
-                  <p className="text-xs text-muted-foreground">PDF, JPG o PNG (max 5MB)</p>
+                  <p className="font-medium text-foreground mb-1">Arrastrá tu archivo aquí</p>
+                  <p className="text-sm text-muted-foreground mb-3">o hacé click para seleccionar</p>
+                  <p className="text-xs text-muted-foreground">PDF, JPG o PNG (máx 5MB)</p>
                 </div>
 
                 <div className="flex gap-3">
@@ -368,7 +368,7 @@ export default function MisValidacionesPage() {
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-2">Documento Enviado</h3>
                 <p className="text-muted-foreground">
-                  Tu documento sera revisado en las proximas 24-48 horas.
+                  Tu documento será revisado en las próximas 24-48 horas.
                 </p>
               </div>
             )}

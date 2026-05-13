@@ -20,7 +20,7 @@ export default function RegisterPage() {
         'Publica trabajos',
         'Accede a profesionales',
         'Sistema de pagos seguro',
-        'Califica y deja resenas'
+        'Calificá y dejá reseñas'
       ],
       href: '/register/cliente',
       gradient: 'from-accent/10 to-accent/5',
@@ -32,12 +32,12 @@ export default function RegisterPage() {
       id: 'trabajador',
       title: 'Soy Profesional',
       subtitle: 'Ofrezco mis servicios',
-      description: 'Quiero ofrecer mis servicios de reparacion y mantenimiento',
+      description: 'Quiero ofrecer mis servicios de reparación y mantenimiento',
       icon: Briefcase,
       features: [
-        'Recibe solicitudes de trabajo',
-        'Construye tu reputacion',
-        'Verificacion de identidad',
+        'Recibí solicitudes de trabajo',
+        'Construí tu reputación',
+        'Verificación de identidad',
         'Cobranza simplificada'
       ],
       href: '/register/trabajador',
@@ -76,13 +76,13 @@ export default function RegisterPage() {
           <div className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-secondary rounded-full mb-6">
               <Zap className="w-4 h-4 text-accent" />
-              <span className="text-sm font-medium text-muted-foreground">Registro rapido en 2 minutos</span>
+              <span className="text-sm font-medium text-muted-foreground">Registro rápido en 2 minutos</span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary tracking-tight mb-4">
-              Crea tu cuenta en HomeFix
+              Creá tu cuenta en HomeFix
             </h1>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              Selecciona el tipo de cuenta que mejor se adapte a tus necesidades
+              Seleccioná el tipo de cuenta que mejor se adapte a tus necesidades
             </p>
           </div>
 
@@ -149,7 +149,7 @@ export default function RegisterPage() {
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-accent" />
-              <span>Verificacion segura</span>
+              <span>Verificación segura</span>
             </div>
           </div>
         </div>

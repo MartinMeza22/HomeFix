@@ -32,25 +32,25 @@ import { Footer } from '@/components/Footer'
 // Mock trabajador data
 const mockTrabajador = {
   id: '1',
-  name: 'Carlos Mendez',
-  email: 'trabajador@demo.com',
-  phone: '+54 11 5555-1234',
-  category: 'Electricista',
-  image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&h=500&fit=crop&crop=face',
+  name: 'Pedro Picapiedra',
+  email: 'pedro.picapiedra@demo.com',
+  phone: '+54 11 4444-5555',
+  category: 'Plomería',
+  image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop&crop=face',
   rating: 4.9,
-  reviews: 247,
-  location: 'Palermo, Buenos Aires',
-  bio: 'Electricista matriculado con 15 años de experiencia en instalaciones residenciales y comerciales. Especialista en tableros electricos, cableado estructurado y domotica.',
+  reviews: 312,
+  location: 'Recoleta, Buenos Aires',
+  bio: 'Plomero matriculado con más de 10 años de experiencia en instalaciones residenciales y comerciales. Especialista en reparación de cañerías, griferías y emergencias por pérdidas de agua.',
   verified: true,
-  memberSince: 'Marzo 2024',
-  completedJobs: 312,
-  responseRate: 98,
+  memberSince: 'Mayo 2018',
+  completedJobs: 847,
+  responseRate: 99,
   responseTime: '< 1 hora',
-  availability: ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+  availability: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
   validaciones: {
     dni: { status: true, label: 'DNI Verificado', date: '2024-03-15' },
     antecedentes: { status: true, label: 'Antecedentes cargados', date: '2024-03-18' },
-    matricula: { status: true, label: 'Matricula Profesional', date: '2024-03-20' },
+    matricula: { status: true, label: 'Matrícula Profesional', date: '2024-03-20' },
     domicilio: { status: false, label: 'Comprobante Domicilio', date: null }
   }
 }
@@ -59,27 +59,27 @@ const mockTrabajador = {
 const mockResenas = [
   {
     id: '1',
-    cliente: 'Maria G.',
+    cliente: 'Marta Ocampo',
     rating: 5,
-    comment: 'Excelente trabajo, muy profesional y puntual. Resolvio el problema del tablero en menos de 2 horas.',
+    comment: 'Excelente trabajo, muy profesional y puntual. Resolvió la pérdida de agua en menos de 1 hora.',
     date: '2026-04-28',
-    trabajo: 'Revision de tablero electrico'
+    trabajo: 'Reparación de cañería rota'
   },
   {
     id: '2',
     cliente: 'Juan P.',
     rating: 5,
-    comment: 'Muy recomendable. Explico todo el proceso y dejo todo impecable.',
+    comment: 'Muy recomendable. Explicó todo el proceso y dejó todo impecable. Destapó la cañería rápido.',
     date: '2026-04-15',
-    trabajo: 'Instalacion de luces LED'
+    trabajo: 'Destape de desagüe'
   },
   {
     id: '3',
     cliente: 'Laura M.',
     rating: 4,
-    comment: 'Buen trabajo, llego un poco tarde pero cumplio con todo lo acordado.',
+    comment: 'Buen trabajo, llegó un poco tarde pero cumplió con todo lo acordado e instaló la grifería perfecta.',
     date: '2026-03-22',
-    trabajo: 'Cambio de enchufes'
+    trabajo: 'Instalación de grifería'
   }
 ]
 
@@ -94,7 +94,7 @@ export default function MiPerfilPage() {
   })
   const [availability, setAvailability] = useState(mockTrabajador.availability)
 
-  const diasSemana = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']
+  const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
 
   const toggleDay = (day: string) => {
     if (availability.includes(day)) {
@@ -105,7 +105,7 @@ export default function MiPerfilPage() {
   }
 
   const handleSave = () => {
-    // En una app real, aqui se guardarian los datos
+    // En una app real, aquí se guardarían los datos
     setIsEditing(false)
   }
 
@@ -200,7 +200,7 @@ export default function MiPerfilPage() {
                             />
                           </div>
                           <div>
-                            <label className="text-sm font-medium text-foreground">Telefono</label>
+                            <label className="text-sm font-medium text-foreground">Teléfono</label>
                             <Input
                               value={editData.phone}
                               onChange={(e) => setEditData({ ...editData, phone: e.target.value })}
@@ -208,7 +208,7 @@ export default function MiPerfilPage() {
                             />
                           </div>
                           <div>
-                            <label className="text-sm font-medium text-foreground">Ubicacion</label>
+                            <label className="text-sm font-medium text-foreground">Ubicación</label>
                             <Input
                               value={editData.location}
                               onChange={(e) => setEditData({ ...editData, location: e.target.value })}
@@ -252,7 +252,7 @@ export default function MiPerfilPage() {
 
                 {/* Bio */}
                 <Card className="p-6 border-border/50">
-                  <h3 className="font-bold text-foreground mb-3">Sobre mi</h3>
+                  <h3 className="font-bold text-foreground mb-3">Sobre mí</h3>
                   {isEditing ? (
                     <textarea
                       value={editData.bio}
@@ -288,7 +288,7 @@ export default function MiPerfilPage() {
                 {/* Resenas */}
                 <Card className="p-6 border-border/50">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-bold text-foreground">Resenas Recientes</h3>
+                    <h3 className="font-bold text-foreground">Reseñas Recientes</h3>
                     <div className="flex items-center gap-1">
                       <Star className="w-5 h-5 text-accent fill-accent" />
                       <span className="font-bold text-foreground">{mockTrabajador.rating}</span>
@@ -326,11 +326,11 @@ export default function MiPerfilPage() {
                 
                 {/* Stats */}
                 <Card className="p-6 border-border/50">
-                  <h3 className="font-bold text-foreground mb-4">Estadisticas</h3>
+                  <h3 className="font-bold text-foreground mb-4">Estadísticas</h3>
                   <div className="space-y-4">
                     {[
                       { label: 'Trabajos Completados', value: mockTrabajador.completedJobs, icon: Briefcase },
-                      { label: 'Calificacion', value: mockTrabajador.rating, icon: Star },
+                      { label: 'Calificación', value: mockTrabajador.rating, icon: Star },
                       { label: 'Tasa de Respuesta', value: `${mockTrabajador.responseRate}%`, icon: CheckCircle },
                       { label: 'Tiempo de Respuesta', value: mockTrabajador.responseTime, icon: Clock },
                     ].map((stat, idx) => (
@@ -393,14 +393,14 @@ export default function MiPerfilPage() {
                 <Card className="p-6 bg-primary/5 border-primary/20">
                   <h3 className="font-bold text-foreground mb-2">Vista previa</h3>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Asi ven los clientes tu perfil publico.
+                    Así ven los clientes tu perfil público.
                   </p>
                   <Button 
                     variant="outline" 
                     className="w-full border-primary text-primary hover:bg-primary/10"
                     onClick={() => router.push(`/worker/${mockTrabajador.id}`)}
                   >
-                    Ver mi perfil publico
+                    Ver mi perfil público
                   </Button>
                 </Card>
               </div>

@@ -6,10 +6,10 @@ import { Button } from '@/components/ui/button'
 import { BackButton } from '@/components/BackButton'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { 
-  FileText, 
-  MapPin, 
-  Clock, 
+import {
+  FileText,
+  MapPin,
+  Clock,
   CheckCircle,
   X,
   ArrowLeft,
@@ -44,7 +44,7 @@ const mockPostulaciones: Postulacion[] = [
     cliente: 'Marta Ocampo',
     clienteInicial: 'MO',
     ubicacion: 'Recoleta, Buenos Aires',
-    mensaje: 'Hola, tengo 8 anos de experiencia en reparacion de tuberias. Puedo ir el viernes.',
+    mensaje: 'Hola, tengo 8 años de experiencia en reparacion de tuberias. Puedo ir el viernes.',
     estado: 'aceptada',
     fechaPostulacion: '2026-05-08',
     fechaServicio: '2026-05-15'
@@ -52,7 +52,7 @@ const mockPostulaciones: Postulacion[] = [
   {
     id: '2',
     trabajoId: 'job-2',
-    trabajo: 'Destape de caneria en bano',
+    trabajo: 'Destape de cañeria en baño',
     cliente: 'Juan Perez',
     clienteInicial: 'JP',
     ubicacion: 'Palermo, Buenos Aires',
@@ -76,7 +76,7 @@ const mockPostulaciones: Postulacion[] = [
   {
     id: '4',
     trabajoId: 'job-4',
-    trabajo: 'Cambio de griferia completa en bano',
+    trabajo: 'Cambio de griferia completa en baño',
     cliente: 'Roberto Sanchez',
     clienteInicial: 'RS',
     ubicacion: 'Belgrano, Buenos Aires',
@@ -107,8 +107,8 @@ export default function MisPostulacionesPage() {
     }
   }, [])
 
-  const filteredPostulaciones = filterEstado === 'todas' 
-    ? postulaciones 
+  const filteredPostulaciones = filterEstado === 'todas'
+    ? postulaciones
     : postulaciones.filter(p => p.estado === filterEstado)
 
   const stats = {
@@ -149,7 +149,7 @@ export default function MisPostulacionesPage() {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#D9D9D9' }}>
       <Navbar />
-      
+
       <main className="flex-1">
         {/* Header */}
         <section className="bg-primary py-8">
@@ -160,7 +160,7 @@ export default function MisPostulacionesPage() {
               <h1 className="text-2xl sm:text-3xl font-bold text-white">Mis Postulaciones</h1>
             </div>
             <p className="text-white/70">
-              Revisa el estado de tus postulaciones a trabajos
+              Revisá el estado de tus postulaciones a trabajos
             </p>
           </div>
         </section>
@@ -199,8 +199,8 @@ export default function MisPostulacionesPage() {
                   variant={filterEstado === filter.id ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setFilterEstado(filter.id)}
-                  className={filterEstado === filter.id 
-                    ? 'bg-primary hover:bg-primary/90 text-white' 
+                  className={filterEstado === filter.id
+                    ? 'bg-primary hover:bg-primary/90 text-white'
                     : 'text-muted-foreground'
                   }
                 >
@@ -217,22 +217,20 @@ export default function MisPostulacionesPage() {
             {filteredPostulaciones.length > 0 ? (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {filteredPostulaciones.map((postulacion) => (
-                  <Card 
+                  <Card
                     key={postulacion.id}
-                    className={`p-5 border-border/50 transition-all hover:shadow-md cursor-pointer ${
-                      selectedPostulacion?.id === postulacion.id ? 'ring-2 ring-accent' : ''
-                    }`}
+                    className={`p-5 border-border/50 transition-all hover:shadow-md cursor-pointer ${selectedPostulacion?.id === postulacion.id ? 'ring-2 ring-accent' : ''
+                      }`}
                     onClick={() => setSelectedPostulacion(
                       selectedPostulacion?.id === postulacion.id ? null : postulacion
                     )}
                   >
                     <div className="flex items-start gap-4">
                       {/* Status Icon */}
-                      <div className={`p-3 rounded-xl flex-shrink-0 ${
-                        postulacion.estado === 'aceptada' ? 'bg-accent/10' :
-                        postulacion.estado === 'pendiente' ? 'bg-yellow-500/10' :
-                        'bg-red-500/10'
-                      }`}>
+                      <div className={`p-3 rounded-xl flex-shrink-0 ${postulacion.estado === 'aceptada' ? 'bg-accent/10' :
+                          postulacion.estado === 'pendiente' ? 'bg-yellow-500/10' :
+                            'bg-red-500/10'
+                        }`}>
                         {getEstadoIcon(postulacion.estado)}
                       </div>
 
@@ -242,7 +240,7 @@ export default function MisPostulacionesPage() {
                           <h3 className="font-bold text-foreground truncate pr-2">{postulacion.trabajo}</h3>
                           {getEstadoBadge(postulacion.estado)}
                         </div>
-                        
+
                         <div className="flex items-center gap-3 text-sm text-muted-foreground mb-2">
                           <span className="flex items-center gap-1">
                             <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
@@ -281,15 +279,15 @@ export default function MisPostulacionesPage() {
 
                             {postulacion.estado === 'aceptada' && (
                               <div className="flex gap-2">
-                                <Button 
-                                  size="sm" 
+                                <Button
+                                  size="sm"
                                   className="flex-1 bg-accent hover:bg-accent/90 text-white"
                                 >
                                   <MessageSquare className="w-4 h-4 mr-2" />
                                   Contactar Cliente
                                 </Button>
-                                <Button 
-                                  size="sm" 
+                                <Button
+                                  size="sm"
                                   variant="outline"
                                   className="flex-1"
                                 >
@@ -303,7 +301,7 @@ export default function MisPostulacionesPage() {
                               <div className="p-3 bg-yellow-500/10 rounded-lg">
                                 <p className="text-xs text-yellow-700 flex items-center gap-2">
                                   <Clock className="w-4 h-4" />
-                                  El cliente esta revisando tu postulacion
+                                  El cliente está revisando tu postulación
                                 </p>
                               </div>
                             )}
@@ -311,7 +309,7 @@ export default function MisPostulacionesPage() {
                             {postulacion.estado === 'rechazada' && (
                               <div className="p-3 bg-red-500/10 rounded-lg">
                                 <p className="text-xs text-red-700">
-                                  El cliente eligio a otro profesional para este trabajo.
+                                  El cliente eligió a otro profesional para este trabajo.
                                 </p>
                               </div>
                             )}
@@ -327,12 +325,12 @@ export default function MisPostulacionesPage() {
                 <Inbox className="w-16 h-16 text-muted-foreground/30 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-foreground mb-2">No hay postulaciones</h3>
                 <p className="text-muted-foreground mb-6">
-                  {filterEstado === 'todas' 
-                    ? 'Aun no te has postulado a ningun trabajo.' 
-                    : `No tienes postulaciones ${filterEstado}s.`
+                  {filterEstado === 'todas'
+                    ? 'Aún no te postulaste a ningún trabajo.'
+                    : `No tenés postulaciones ${filterEstado}s.`
                   }
                 </p>
-                <Button 
+                <Button
                   className="bg-accent hover:bg-accent/90 text-white"
                   onClick={() => router.push('/trabajador/trabajos')}
                 >
@@ -348,15 +346,15 @@ export default function MisPostulacionesPage() {
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                    Responde rapido a las publicaciones nuevas para tener mas chances.
+                    Respondé rápido a las publicaciones nuevas para tener más chances.
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                    Personaliza tu mensaje mencionando tu experiencia relevante.
+                    Personalizá tu mensaje mencionando tu experiencia relevante.
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-                    Completa tu perfil y validaciones para generar mas confianza.
+                    Completá tu perfil y validaciones para generar más confianza.
                   </li>
                 </ul>
               </Card>

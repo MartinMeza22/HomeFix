@@ -14,7 +14,7 @@ type EmergencyType = 'electrico' | 'agua' | 'gas' | 'cerrajeria' | null
 const emergencyConfig = {
   electrico: { 
     icon: Zap, 
-    label: 'Problema Electrico', 
+    label: 'Problema Eléctrico', 
     desc: 'Apagones, cortocircuitos', 
     color: 'text-yellow-500',
     categories: ['Electricista', 'Electrónica']
@@ -22,7 +22,7 @@ const emergencyConfig = {
   agua: { 
     icon: Droplets, 
     label: 'Fuga de Agua', 
-    desc: 'Tuberias rotas, inundaciones', 
+    desc: 'Tuberías rotas, inundaciones', 
     color: 'text-blue-500',
     categories: ['Plomería']
   },
@@ -35,7 +35,7 @@ const emergencyConfig = {
   },
   cerrajeria: { 
     icon: Lock, 
-    label: 'Cerrajeria Urgente', 
+    label: 'Cerrajería Urgente', 
     desc: 'Llaves perdidas, cerraduras', 
     color: 'text-purple-500',
     categories: ['Cerrajería']
@@ -122,11 +122,11 @@ export function SOS({ showForTrabajador = true }: { showForTrabajador?: boolean 
                 </div>
                 <h2 className="text-2xl font-bold text-foreground">Solicitud enviada</h2>
                 <p className="text-muted-foreground">
-                  Hemos notificado al profesional de tu emergencia. Te contactara en los proximos minutos.
+                  Hemos notificado al profesional de tu emergencia. Te contactará en los próximos minutos.
                 </p>
                 <div className="p-3 rounded-lg bg-secondary">
                   <p className="text-sm text-muted-foreground">
-                    Codigo de referencia: <span className="font-bold text-primary">EM{Date.now().toString().slice(-8)}</span>
+                    Código de referencia: <span className="font-bold text-primary">EM{Date.now().toString().slice(-8)}</span>
                   </p>
                 </div>
                 <Button onClick={handleClose} className="mt-4 bg-primary hover:bg-primary/90">
@@ -162,7 +162,7 @@ export function SOS({ showForTrabajador = true }: { showForTrabajador?: boolean 
                         Profesionales disponibles
                       </h2>
                       <p className="text-sm text-muted-foreground">
-                        {emergencyConfig[selectedType].label} - Ordenados por cercania
+                        {emergencyConfig[selectedType].label} - Ordenados por cercanía
                       </p>
                     </div>
                   </div>
@@ -237,14 +237,14 @@ export function SOS({ showForTrabajador = true }: { showForTrabajador?: boolean 
                     <AlertTriangle className="w-12 h-12 text-muted-foreground/50 mx-auto mb-3" />
                     <p className="text-muted-foreground font-medium">No hay profesionales disponibles</p>
                     <p className="text-sm text-muted-foreground mt-1">
-                      En este momento no hay profesionales de esta categoria disponibles para urgencias.
+                      En este momento no hay profesionales de esta categoría disponibles para urgencias.
                     </p>
                     <Button 
                       variant="outline" 
                       className="mt-4"
                       onClick={handleBack}
                     >
-                      Elegir otra categoria
+                      Elegir otra categoría
                     </Button>
                   </div>
                 )}
@@ -267,7 +267,7 @@ export function SOS({ showForTrabajador = true }: { showForTrabajador?: boolean 
                       Solicitud de Emergencia
                     </h2>
                     <p className="text-sm text-muted-foreground mt-1">
-                      Selecciona el tipo de emergencia para ver profesionales disponibles
+                      Seleccioná el tipo de emergencia para ver profesionales disponibles
                     </p>
                   </div>
                   <button 
@@ -304,7 +304,7 @@ export function SOS({ showForTrabajador = true }: { showForTrabajador?: boolean 
 
                 <div className="pt-2 border-t border-border">
                   <p className="text-xs text-muted-foreground text-center">
-                    Solo se mostraran profesionales con disponibilidad para urgencias en este momento
+                    Solo se mostrarán profesionales con disponibilidad para urgencias en este momento
                   </p>
                 </div>
               </div>

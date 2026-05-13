@@ -108,7 +108,7 @@ export default function NuevaPublicacionPage() {
     const aireKeywords = ['aire', 'split', 'acondicionado', 'calefaccion', 'estufa', 'ventilacion']
     
     let detectedCategory = ''
-    if (plomeroKeywords.some(w => lower.includes(w))) detectedCategory = 'Plomeria'
+    if (plomeroKeywords.some(w => lower.includes(w))) detectedCategory = 'Plomería'
     else if (electricistaKeywords.some(w => lower.includes(w))) detectedCategory = 'Electricista'
     else if (cerrajeroKeywords.some(w => lower.includes(w))) detectedCategory = 'Cerrajeria'
     else if (pintorKeywords.some(w => lower.includes(w))) detectedCategory = 'Pintura'
@@ -145,7 +145,7 @@ export default function NuevaPublicacionPage() {
     if (!analysis.hasCategory) {
       questions.push({
         id: 'category',
-        question: 'Cual de estas categorias describe mejor tu problema?',
+        question: '¿Cuál de estas categorías describe mejor tu problema?',
         type: 'single',
         options: categories.map(c => c.name)
       })
@@ -155,7 +155,7 @@ export default function NuevaPublicacionPage() {
     if (!analysis.hasRoom) {
       questions.push({
         id: 'location',
-        question: 'Donde se encuentra el problema?',
+        question: '¿Dónde se encuentra el problema?',
         type: 'single',
         options: ['Cocina', 'Bano', 'Sala', 'Dormitorio', 'Patio/Jardin', 'Garage', 'Toda la casa', 'Otro']
       })
@@ -165,17 +165,17 @@ export default function NuevaPublicacionPage() {
     if (!analysis.hasUrgency) {
       questions.push({
         id: 'urgency',
-        question: 'Que tan urgente es?',
+        question: '¿Qué tan urgente es?',
         type: 'single',
-        options: ['No es urgente (puedo esperar)', 'Normal (esta semana)', 'Urgente (hoy o manana)', 'Emergencia (ahora mismo)']
+        options: ['No es urgente (puedo esperar)', 'Normal (esta semana)', 'Urgente (hoy o mañana)', 'Emergencia (ahora mismo)']
       })
     }
 
     questions.push({
       id: 'date',
-      question: 'Cuando te gustaria que venga el profesional?',
+      question: '¿Cuándo te gustaría que venga el profesional?',
       type: 'single',
-      options: ['Lo antes posible', 'Esta semana', 'La proxima semana', 'Fecha especifica']
+      options: ['Lo antes posible', 'Esta semana', 'La próxima semana', 'Fecha especifica']
     })
 
     return questions
@@ -201,16 +201,16 @@ export default function NuevaPublicacionPage() {
         setCurrentSurveyIndex(0)
 
         // Mensaje personalizado segun lo que ya detectamos
-        let responseMsg = 'Entiendo! '
+        let responseMsg = '¡Entiendo! '
         if (analysis.detectedCategory) {
-          responseMsg += `Veo que necesitas un profesional de ${analysis.detectedCategory}. `
+          responseMsg += `Veo que necesitás un profesional de ${analysis.detectedCategory}. `
         }
         if (analysis.detectedRoom) {
-          responseMsg += `El problema esta en ${analysis.detectedRoom}. `
+          responseMsg += `El problema está en ${analysis.detectedRoom}. `
         }
         responseMsg += questions.length === 1 
-          ? 'Solo necesito un dato mas:'
-          : 'Te hago unas preguntas rapidas:'
+          ? 'Solo necesito un dato más:'
+          : 'Te hago unas preguntas rápidas:'
 
         setAiMessages(prev => [...prev, {
           role: 'assistant',
@@ -224,7 +224,7 @@ export default function NuevaPublicacionPage() {
         // Suficiente informacion, generar resumen
         const detectedCategory = categories.find(cat =>
           userMessage.toLowerCase().includes(cat.name.toLowerCase())
-        )?.name || 'Plomeria'
+        )?.name || 'Plomería'
 
         setAiAnalysis({
           categorias: [detectedCategory],
@@ -235,7 +235,7 @@ export default function NuevaPublicacionPage() {
 
         setAiMessages(prev => [...prev, {
           role: 'assistant',
-          content: 'Perfecto! Ya tengo toda la informacion. Te muestro un resumen de tu solicitud:'
+          content: '¡Perfecto! Ya tengo toda la información. Te muestro un resumen de tu solicitud:'
         }])
 
         setTimeout(() => {
@@ -413,7 +413,7 @@ export default function NuevaPublicacionPage() {
               <CheckCircle className="w-10 h-10 text-accent" />
             </div>
             <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-              Publicacion Creada Exitosamente
+              Publicación Creada Exitosamente
             </h1>
             <p className="text-muted-foreground mb-4 max-w-md mx-auto">
               Tu solicitud ya esta visible para los profesionales verificados en tu zona. Pronto te contactaran.
@@ -426,7 +426,7 @@ export default function NuevaPublicacionPage() {
                 Ver mis publicaciones
               </Button>
               <Button variant="outline" onClick={resetAll}>
-                Crear otra publicacion
+                Crear otra publicación
               </Button>
             </div>
           </Card>
@@ -450,7 +450,7 @@ export default function NuevaPublicacionPage() {
             <ArrowLeft className="w-4 h-4 mr-2" />
             Volver a mis publicaciones
           </Link>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white">Nueva Publicacion</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">Nueva Publicación</h1>
           <p className="text-white/70 mt-2">Describe tu problema y conecta con profesionales verificados</p>
         </div>
       </div>
@@ -461,10 +461,10 @@ export default function NuevaPublicacionPage() {
           <div className="space-y-8">
             <div className="text-center space-y-3">
               <h2 className="text-xl sm:text-2xl font-bold text-foreground">
-                Como queres crear tu publicacion?
+                ¿Cómo querés crear tu publicación?
               </h2>
               <p className="text-muted-foreground">
-                Elige la opcion que te resulte mas comoda
+                Elegí la opción que te resulte más cómoda
               </p>
             </div>
 
@@ -481,7 +481,7 @@ export default function NuevaPublicacionPage() {
                   Asistente Inteligente
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Describe tu problema en tus propias palabras y nuestra IA te guiara para crear la publicacion perfecta.
+                  Describe tu problema en tus propias palabras y nuestra IA te guiará para crear la publicación perfecta.
                 </p>
                 <div className="flex items-center text-accent text-sm font-medium">
                   Comenzar con IA
@@ -501,7 +501,7 @@ export default function NuevaPublicacionPage() {
                   Formulario Guiado
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Completa un formulario paso a paso con fecha, categoria y descripcion de tu problema.
+                  Completa un formulario paso a paso con fecha, categoría y descripción de tu problema.
                 </p>
                 <div className="flex items-center text-primary text-sm font-medium">
                   Completar formulario
@@ -513,14 +513,14 @@ export default function NuevaPublicacionPage() {
             {/* Link to diagnostic */}
             <div className="text-center pt-4">
               <p className="text-sm text-muted-foreground mb-2">
-                No sabes exactamente que necesitas?
+                ¿No sabés exactamente qué necesitás?
               </p>
               <Link
                 href="/diagnostico"
                 className="inline-flex items-center text-accent hover:text-accent/80 font-medium text-sm"
               >
                 <HelpCircle className="w-4 h-4 mr-2" />
-                Usa nuestro diagnostico inteligente
+                Usá nuestro diagnóstico inteligente
               </Link>
             </div>
           </div>
@@ -541,7 +541,7 @@ export default function NuevaPublicacionPage() {
               className="inline-flex items-center text-muted-foreground hover:text-foreground text-sm transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Cambiar metodo
+              Cambiar método
             </button>
 
             {/* Progress indicator for AI flow */}
@@ -573,7 +573,7 @@ export default function NuevaPublicacionPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground text-sm">Asistente HomeFix</h3>
-                    <p className="text-xs text-muted-foreground">Te ayudo a crear tu publicacion</p>
+                    <p className="text-xs text-muted-foreground">Te ayudo a crear tu publicación</p>
                   </div>
                 </div>
               </div>
@@ -590,7 +590,7 @@ export default function NuevaPublicacionPage() {
                         </div>
                         <div className="bg-secondary/50 rounded-2xl rounded-tl-none px-4 py-3 max-w-[85%]">
                           <p className="text-sm text-foreground">
-                            Hola! Soy tu asistente de HomeFix. Contame con tus palabras que problema tenes en tu hogar y te ayudo a encontrar al profesional ideal.
+                            ¡Hola! Soy tu asistente de HomeFix. Contame con tus palabras qué problema tenés en tu hogar y te ayudo a encontrar al profesional ideal.
                           </p>
                         </div>
                       </div>
@@ -680,7 +680,7 @@ export default function NuevaPublicacionPage() {
                       </div>
                       <div className="bg-secondary/50 rounded-2xl rounded-tl-none px-4 py-3">
                         <p className="text-sm text-foreground">
-                          Perfecto! Este es el resumen de tu solicitud. Confirma que todo este correcto:
+                          ¡Perfecto! Este es el resumen de tu solicitud. Confirmá que todo esté correcto:
                         </p>
                       </div>
                     </div>
@@ -692,11 +692,11 @@ export default function NuevaPublicacionPage() {
                       </h4>
                       <div className="space-y-3 text-sm">
                         <div className="flex justify-between items-start gap-4">
-                          <span className="text-muted-foreground">Titulo:</span>
+                          <span className="text-muted-foreground">Título:</span>
                           <span className="font-medium text-foreground text-right">{aiAnalysis.titulo}</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-muted-foreground">Categoria:</span>
+                          <span className="text-muted-foreground">Categoría:</span>
                           <div className="flex gap-1">
                             {aiAnalysis.categorias.map(cat => (
                               <Badge key={cat} className="bg-primary/10 text-primary border-0">
@@ -717,12 +717,12 @@ export default function NuevaPublicacionPage() {
                         </div>
                         {aiAnalysis.ubicacion && (
                           <div className="flex justify-between items-center">
-                            <span className="text-muted-foreground">Ubicacion:</span>
+                            <span className="text-muted-foreground">Ubicación:</span>
                             <span className="font-medium text-foreground">{aiAnalysis.ubicacion}</span>
                           </div>
                         )}
                         <div className="pt-3 border-t border-border">
-                          <span className="text-muted-foreground block mb-1">Descripcion:</span>
+                          <span className="text-muted-foreground block mb-1">Descripción:</span>
                           <p className="text-foreground">{aiAnalysis.descripcion}</p>
                         </div>
                       </div>
@@ -769,7 +769,7 @@ export default function NuevaPublicacionPage() {
                       </div>
                       <div className="bg-secondary/50 rounded-2xl rounded-tl-none px-4 py-3">
                         <p className="text-sm text-foreground">
-                          Perfecto! Aqui esta tu publicacion. Confirmala para publicarla para todos los profesionales.
+                          ¡Perfecto! Aquí está tu publicación. Confirmala para publicarla para todos los profesionales.
                         </p>
                       </div>
                     </div>
@@ -783,7 +783,7 @@ export default function NuevaPublicacionPage() {
 
                       <div className="border-t border-border pt-5 space-y-3">
                         <div className="flex items-start justify-between gap-4">
-                          <span className="text-sm text-muted-foreground">Categoria</span>
+                          <span className="text-sm text-muted-foreground">Categoría</span>
                           <Badge className="bg-primary/10 text-primary border-0">
                             {aiAnalysis.categorias[0]}
                           </Badge>

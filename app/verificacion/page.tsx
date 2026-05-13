@@ -71,14 +71,14 @@ export default function VerificacionPage() {
   }
 
   const stepTitles: Record<Step, string> = {
-    'method': 'Elige tu metodo de verificacion',
-    'document-front': 'Captura el frente de tu DNI',
-    'document-back': 'Captura el dorso de tu DNI',
-    'selfie': 'Captura una selfie',
-    'manual-dni': 'Ingresa tu numero de DNI',
+    'method': 'Elegí tu método de verificación',
+    'document-front': 'Capturá el frente de tu DNI',
+    'document-back': 'Capturá el dorso de tu DNI',
+    'selfie': 'Capturá una selfie',
+    'manual-dni': 'Ingresá tu número de DNI',
     'liveness': 'Prueba de vida',
     'processing': 'Verificando tu identidad',
-    'result': 'Resultado de verificacion'
+    'result': 'Resultado de verificación'
   }
 
   return (
@@ -125,7 +125,7 @@ export default function VerificacionPage() {
           <div className="text-center space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium">
               <Shield className="w-4 h-4" />
-              Verificacion KYC
+              Verificación KYC
             </div>
             <h1 className="text-2xl md:text-3xl font-bold text-primary">
               {stepTitles[step]}
@@ -154,14 +154,14 @@ export default function VerificacionPage() {
                     <div className="flex-1">
                       <h3 className="font-semibold text-primary mb-1">DNI + Reconocimiento Facial</h3>
                       <p className="text-sm text-muted-foreground">
-                        Sube fotos de tu DNI (frente y dorso) y una selfie para verificacion automatica.
+                        Subí fotos de tu DNI (frente y dorso) y una selfie para verificación automática.
                       </p>
                       <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground">
                         <span className="flex items-center gap-1">
-                          <CheckCircle className="w-3 h-3 text-accent" /> Rapido
+                          <CheckCircle className="w-3 h-3 text-accent" /> Rápido
                         </span>
                         <span className="flex items-center gap-1">
-                          <CheckCircle className="w-3 h-3 text-accent" /> Automatico
+                          <CheckCircle className="w-3 h-3 text-accent" /> Automático
                         </span>
                       </div>
                     </div>
@@ -185,7 +185,7 @@ export default function VerificacionPage() {
                     <div className="flex-1">
                       <h3 className="font-semibold text-primary mb-1">DNI Manual + Prueba de Vida</h3>
                       <p className="text-sm text-muted-foreground">
-                        Ingresa tu numero de DNI manualmente y completa una prueba de vida en video.
+                        Ingresá tu número de DNI manualmente y completá una prueba de vida en video.
                       </p>
                       <div className="mt-3 flex items-center gap-4 text-xs text-muted-foreground">
                         <span className="flex items-center gap-1">
@@ -203,17 +203,27 @@ export default function VerificacionPage() {
                 </Card>
               </div>
 
-              <Button 
-                onClick={() => {
-                  if (method === 'document') setStep('document-front')
-                  else if (method === 'manual') setStep('manual-dni')
-                }}
-                disabled={!method}
-                className="w-full h-12 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
-              >
-                Continuar con verificacion
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
+              <div className="space-y-3">
+                <Button 
+                  onClick={() => {
+                    if (method === 'document') setStep('document-front')
+                    else if (method === 'manual') setStep('manual-dni')
+                  }}
+                  disabled={!method}
+                  className="w-full h-12 bg-accent hover:bg-accent/90 text-accent-foreground font-semibold"
+                >
+                  Continuar con la verificación
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={() => router.back()}
+                  className="w-full h-12"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Volver
+                </Button>
+              </div>
             </div>
           )}
 
@@ -245,8 +255,17 @@ export default function VerificacionPage() {
                   <Camera className="w-5 h-5 mr-2" />
                   Capturar foto
                 </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={() => setStep('method')}
+                  disabled={isLoading}
+                  className="w-full"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Volver al método
+                </Button>
                 <p className="text-xs text-center text-muted-foreground">
-                  Asegurate de que el documento sea legible y este bien iluminado
+                  Asegurate de que el documento sea legible y esté bien iluminado
                 </p>
               </div>
             </Card>
@@ -319,8 +338,17 @@ export default function VerificacionPage() {
                   <Camera className="w-5 h-5 mr-2" />
                   Tomar selfie
                 </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={() => setStep('document-back')}
+                  disabled={isLoading}
+                  className="w-full"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Volver
+                </Button>
                 <p className="text-xs text-center text-muted-foreground">
-                  Mira directamente a la camara con buena iluminacion
+                  Mirá directamente a la cámara con buena iluminación
                 </p>
               </div>
             </Card>
@@ -331,7 +359,7 @@ export default function VerificacionPage() {
             <Card className="p-6 space-y-6">
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Numero de DNI</label>
+                  <label className="text-sm font-medium">Número de DNI</label>
                   <Input
                     placeholder="12345678"
                     value={documents.manualDni}
@@ -340,7 +368,7 @@ export default function VerificacionPage() {
                     maxLength={8}
                   />
                   <p className="text-xs text-muted-foreground text-center">
-                    Ingresa los 8 digitos de tu DNI sin puntos ni espacios
+                    Ingresá los 8 dígitos de tu DNI sin puntos ni espacios
                   </p>
                 </div>
               </div>
@@ -360,7 +388,7 @@ export default function VerificacionPage() {
                   className="w-full"
                 >
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Cambiar metodo
+                  Cambiar método
                 </Button>
               </div>
             </Card>
@@ -381,7 +409,7 @@ export default function VerificacionPage() {
                   <div className="text-center space-y-3">
                     <User className="w-20 h-20 text-muted-foreground mx-auto" />
                     <p className="text-sm text-muted-foreground px-4">
-                      Seguiras instrucciones para mover tu cabeza y parpadear
+                      Seguirás instrucciones para mover la cabeza y parpadear
                     </p>
                   </div>
                 )}
@@ -406,6 +434,15 @@ export default function VerificacionPage() {
                       </>
                     )}
                   </Button>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setStep('manual-dni')}
+                    disabled={isLoading}
+                    className="w-full"
+                  >
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Volver
+                  </Button>
                 </div>
               )}
             </Card>
@@ -418,9 +455,9 @@ export default function VerificacionPage() {
                 <Loader2 className="w-10 h-10 text-accent animate-spin" />
               </div>
               <div className="space-y-2">
-                <h3 className="font-semibold text-primary">Procesando verificacion</h3>
+                <h3 className="font-semibold text-primary">Procesando verificación</h3>
                 <p className="text-sm text-muted-foreground">
-                  Estamos validando tu informacion. Esto puede tomar unos segundos...
+                  Estamos validando tu información. Esto puede tomar unos segundos...
                 </p>
               </div>
               {!verificationResult && (
@@ -443,9 +480,9 @@ export default function VerificacionPage() {
                     <CheckCircle className="w-10 h-10 text-accent" />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-xl font-bold text-primary">Verificacion exitosa</h3>
+                    <h3 className="text-xl font-bold text-primary">Verificación exitosa</h3>
                     <p className="text-muted-foreground">
-                      Tu identidad ha sido verificada correctamente. Ya puedes acceder a todas las funcionalidades.
+                      Tu identidad ha sido verificada correctamente. Ya podés acceder a todas las funcionalidades.
                     </p>
                   </div>
                   <Button 
@@ -462,9 +499,9 @@ export default function VerificacionPage() {
                     <AlertCircle className="w-10 h-10 text-yellow-500" />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-xl font-bold text-primary">Verificacion en revision</h3>
+                    <h3 className="text-xl font-bold text-primary">Verificación en revisión</h3>
                     <p className="text-muted-foreground">
-                      Tu informacion esta siendo revisada manualmente. Te notificaremos cuando este lista.
+                      Tu información está siendo revisada manualmente. Te notificaremos cuando esté lista.
                     </p>
                   </div>
                   <Button 
@@ -481,9 +518,9 @@ export default function VerificacionPage() {
                     <X className="w-10 h-10 text-destructive" />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-xl font-bold text-primary">Verificacion fallida</h3>
+                    <h3 className="text-xl font-bold text-primary">Verificación fallida</h3>
                     <p className="text-muted-foreground">
-                      No pudimos verificar tu identidad. Por favor, intenta nuevamente con documentos mas claros.
+                      No pudimos verificar tu identidad. Por favor, intentá nuevamente con documentos más claros.
                     </p>
                   </div>
                   <Button 
@@ -512,7 +549,7 @@ export default function VerificacionPage() {
           {step === 'method' && (
             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
               <Shield className="w-4 h-4" />
-              <span>Integracion con Didit KYC - Datos encriptados de extremo a extremo</span>
+              <span>Integración con Didit KYC - Datos encriptados de extremo a extremo</span>
             </div>
           )}
         </div>

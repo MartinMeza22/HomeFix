@@ -13,20 +13,20 @@ export const categories: Category[] = [
     name: 'Electricidad',
     icon: '⚡',
     image: '/categories/electricidad.jpg',
-    description: 'Instalaciones y reparaciones electricas',
+    description: 'Instalaciones y reparaciones eléctricas',
     count: 342
   },
   {
     id: '2',
-    name: 'Plomeria',
+    name: 'Plomería',
     icon: '🔧',
     image: '/categories/plomeria.jpg',
-    description: 'Tuberias y sistemas de agua',
+    description: 'Tuberías y sistemas de agua',
     count: 289
   },
   {
     id: '4',
-    name: 'Carpinteria',
+    name: 'Carpintería',
     icon: '🪵',
     image: '/categories/carpinteria.jpg',
     description: 'Muebles y trabajos en madera',
@@ -36,8 +36,8 @@ export const categories: Category[] = [
     id: '5',
     name: 'Instalador de aire acondicionado',
     icon: '❄️',
-    image: '/categories/aire-acondicionado.jpg',
-    description: 'Instalacion y servicio de aires acondicionados',
+    image: '/categories/aire-acondicionado.png',
+    description: 'Instalación y servicio de aires acondicionados',
     count: 156
   },
   {
@@ -50,15 +50,15 @@ export const categories: Category[] = [
   },
   {
     id: '7',
-    name: 'Albanileria',
+    name: 'Albañilería',
     icon: '🧱',
     image: '/categories/albanileria.jpg',
-    description: 'Construccion y reparaciones',
+    description: 'Construcción y reparaciones',
     count: 198
   },
   {
     id: '8',
-    name: 'Cerrajeria',
+    name: 'Cerrajería',
     icon: '🔐',
     image: '/categories/cerrajeria.jpg',
     description: 'Cerraduras y seguridad',
@@ -66,10 +66,10 @@ export const categories: Category[] = [
   },
   {
     id: '9',
-    name: 'Climatizacion',
+    name: 'Climatización',
     icon: '💨',
-    image: '/categories/climatizacion.jpg',
-    description: 'Sistemas de calefaccion y ventilacion',
+    image: '/categories/climatizacion.png',
+    description: 'Sistemas de calefacción y ventilación',
     count: 112
   }
 ]

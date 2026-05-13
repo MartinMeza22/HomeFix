@@ -16,12 +16,12 @@ import {
 // Mock trabajo finalizado
 const mockTrabajoFinalizado = {
   id: '1',
-  titulo: 'Reparacion de tuberia en cocina',
-  descripcion: 'Reparacion de canilla que goteaba y cambio de cuerito',
+  titulo: 'Reparación de tubería en cocina',
+  descripcion: 'Reparación de canilla que goteaba y cambio de cuerito',
   trabajador: {
-    id: '7',
+    id: '1',
     nombre: 'Pedro Picapiedra',
-    categoria: 'Plomeria',
+    categoria: 'Plomería',
     imagen: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1000&h=1000&fit=crop&crop=face',
     verificado: true
   },
@@ -89,10 +89,10 @@ export default function ResenaPage() {
               <CheckCircle className="w-8 h-8 text-accent" />
             </div>
             <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
-              Gracias por tu resena
+              Gracias por tu reseña
             </h1>
             <p className="text-sm text-muted-foreground mb-6">
-              Tu opinion ayuda a {trabajo.trabajador.nombre} a mejorar su servicio.
+              Tu opinión ayuda a {trabajo.trabajador.nombre} a mejorar su servicio.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -130,7 +130,7 @@ export default function ResenaPage() {
             Trabajo Finalizado
           </h1>
           <p className="text-white/70 text-sm">
-            Dejanos tu opinion sobre el servicio
+            Dejanos tu opinión sobre el servicio
           </p>
         </div>
       </div>
@@ -166,7 +166,7 @@ export default function ResenaPage() {
         {/* Calificacion con estrellas */}
         <Card className="p-4">
           <h3 className="font-bold text-foreground text-sm mb-3">
-            Como calificarias el servicio?
+            ¿Cómo calificarías el servicio?
           </h3>
 
           <div className="flex items-center justify-center gap-2 mb-2">
@@ -189,7 +189,7 @@ export default function ResenaPage() {
           </div>
 
           <p className="text-center text-xs text-muted-foreground">
-            {rating === 0 && 'Toca las estrellas para calificar'}
+            {rating === 0 && 'Tocá las estrellas para calificar'}
             {rating === 1 && 'Muy malo'}
             {rating === 2 && 'Malo'}
             {rating === 3 && 'Regular'}
@@ -201,11 +201,11 @@ export default function ResenaPage() {
         {/* Comentario + Fotos */}
         <Card className="p-4 space-y-3">
           <div>
-            <h3 className="font-bold text-foreground text-sm mb-2">Tu opinion</h3>
+            <h3 className="font-bold text-foreground text-sm mb-2">Tu opinión</h3>
             <textarea
               value={comentario}
               onChange={(e) => setComentario(e.target.value)}
-              placeholder="Describe tu experiencia con el servicio..."
+              placeholder="Describí tu experiencia con el servicio..."
               className="w-full h-20 p-3 border border-border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-foreground placeholder:text-muted-foreground text-sm"
             />
             <p className="text-xs text-muted-foreground mt-1 text-right">

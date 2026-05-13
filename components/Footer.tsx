@@ -28,7 +28,7 @@ export function Footer() {
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/20 text-accent text-xs font-semibold">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                Verificacion Triple
+                Verificación Triple
               </div>
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary-foreground/10 text-primary-foreground/80 text-xs font-semibold">
                 <Shield className="w-3.5 h-3.5" />
@@ -48,7 +48,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/diagnostico" className="text-primary-foreground/70 hover:text-accent transition-colors">
-                  Diagnostico Asistido
+                  Diagnóstico Asistido
                 </Link>
               </li>
               <li>
@@ -75,7 +75,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="#" className="text-primary-foreground/70 hover:text-accent transition-colors">
-                  Como Funciona
+                  Cómo Funciona
                 </Link>
               </li>
               <li>
@@ -97,7 +97,7 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               <li>
                 <Link href="#" className="text-primary-foreground/70 hover:text-accent transition-colors">
-                  Terminos de Servicio
+                  Términos y Condiciones
                 </Link>
               </li>
               <li>

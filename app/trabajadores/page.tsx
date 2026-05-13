@@ -30,39 +30,39 @@ const stats = [
   { value: '$850K+', label: 'Pagados a profesionales' },
   { value: '2,500+', label: 'Profesionales activos' },
   { value: '15+', label: 'Trabajos por semana promedio' },
-  { value: '98%', label: 'Tasa de satisfaccion' },
+  { value: '98%', label: 'Tasa de satisfacción' },
 ]
 
 const benefits = [
   {
     icon: Wallet,
     title: 'Ingresos estables',
-    description: 'Accede a un flujo constante de clientes verificados que buscan tus servicios.'
+    description: 'Accedé a un flujo constante de clientes verificados que buscan tus servicios.'
   },
   {
     icon: Calendar,
-    title: 'Maneja tu agenda',
-    description: 'Tu decides cuando trabajar. Acepta o rechaza trabajos segun tu disponibilidad.'
+    title: 'Manejá tu agenda',
+    description: 'Vos decidís cuándo trabajar. Aceptá o rechazá trabajos según tu disponibilidad.'
   },
   {
     icon: Shield,
     title: 'Clientes verificados',
-    description: 'Todos los clientes pasan por verificacion. Trabaja con tranquilidad.'
+    description: 'Todos los clientes pasan por verificación. Trabajá con tranquilidad.'
   },
   {
     icon: TrendingUp,
-    title: 'Crece tu reputacion',
-    description: 'Construi un perfil con resenas y calificaciones que atraigan mas clientes.'
+    title: 'Crecé tu reputación',
+    description: 'Construí un perfil con reseñas y calificaciones que atraigan más clientes.'
   },
   {
     icon: MessageSquare,
-    title: 'Comunicacion directa',
+    title: 'Comunicación directa',
     description: 'Chat integrado para coordinar detalles sin intermediarios.'
   },
   {
     icon: Award,
     title: 'Sin comisiones ocultas',
-    description: 'Transparencia total. Sabes exactamente cuanto ganas por cada trabajo.'
+    description: 'Transparencia total. Sabés exactamente cuánto ganás por cada trabajo.'
   }
 ]
 
@@ -72,7 +72,7 @@ const testimonials = [
     role: 'Electricista Matriculado',
     image: '/workers/worker-1.jpg',
     rating: 5,
-    quote: 'Desde que me uni a HomeFix, mis ingresos aumentaron un 40%. Los clientes llegan solos y son serios.',
+    quote: 'Desde que me uní a HomeFix, mis ingresos aumentaron un 40%. Los clientes llegan solos y son serios.',
     jobs: 234
   },
   {
@@ -80,12 +80,12 @@ const testimonials = [
     role: 'Plomera Profesional',
     image: '/workers/worker-2.jpg',
     rating: 5,
-    quote: 'La verificacion me da credibilidad. Los clientes confian en mi desde el primer momento.',
+    quote: 'La verificación me da credibilidad. Los clientes confían en mí desde el primer momento.',
     jobs: 189
   },
   {
     name: 'Juan Martinez',
-    role: 'Tecnico en Refrigeracion',
+    role: 'Técnico en Refrigeración',
     image: '/workers/worker-3.jpg',
     rating: 5,
     quote: 'Manejo mi propia agenda y trabajo cuando quiero. Mejor que cualquier empleo fijo.',
@@ -97,21 +97,21 @@ const steps = [
   {
     number: '1',
     title: 'Registrate gratis',
-    description: 'Crea tu cuenta en minutos con tus datos basicos.'
+    description: 'Creá tu cuenta en minutos con tus datos básicos.'
   },
   {
     number: '2',
-    title: 'Verifica tu identidad',
-    description: 'Completa la verificacion KYC para generar confianza.'
+    title: 'Verificá tu identidad',
+    description: 'Completá la verificación KYC para generar confianza.'
   },
   {
     number: '3',
-    title: 'Arma tu perfil',
-    description: 'Agrega tus servicios, tarifas y disponibilidad.'
+    title: 'Armá tu perfil',
+    description: 'Agregá tus servicios, tarifas y disponibilidad.'
   },
   {
     number: '4',
-    title: 'Recibe solicitudes',
+    title: 'Recibí solicitudes',
     description: 'Los clientes te contactan directamente.'
   }
 ]
@@ -148,13 +148,13 @@ export default function TrabajadoresLanding() {
 
             {/* Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.15] sm:leading-[1.1] tracking-tight mb-4 sm:mb-6 text-balance">
-              Consegui mas clientes,{' '}
+              Conseguí más clientes,{' '}
               <span className="text-accent">sin buscarlos</span>
             </h1>
 
             {/* Subheadline */}
             <p className="text-base sm:text-lg lg:text-xl text-white/80 mb-6 sm:mb-8 leading-relaxed max-w-xl">
-              Unite a la red de profesionales verificados de HomeFix. Los clientes te encuentran, vos solo trabajas.
+              Unite a la red de profesionales verificados de HomeFix. Los clientes te encuentran, vos solo trabajás.
             </p>
 
             {/* CTA Buttons */}
@@ -209,10 +209,10 @@ export default function TrabajadoresLanding() {
           <div className="text-center mb-12 sm:mb-16">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Beneficios</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 text-balance">
-              Por que los profesionales eligen HomeFix
+              Por qué los profesionales eligen HomeFix
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg">
-              Herramientas diseñadas para que te enfoques en lo que mejor haces: tu trabajo.
+              Herramientas diseñadas para que te enfoques en lo que mejor hacés: tu trabajo.
             </p>
           </div>
 
@@ -247,12 +247,12 @@ export default function TrabajadoresLanding() {
       <section className="py-20 sm:py-24 bg-secondary/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Como funciona</p>
+            <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Cómo funciona</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 text-balance">
-              Empeza a trabajar en 4 pasos
+              Empezá a trabajar en 4 pasos
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg">
-              Un proceso simple para que comiences a recibir clientes rapidamente.
+              Un proceso simple para que comiences a recibir clientes rápidamente.
             </p>
           </div>
 
@@ -346,10 +346,10 @@ export default function TrabajadoresLanding() {
             <div>
               <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Potencial de ingresos</p>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6 text-balance">
-                Calcula cuanto podrias ganar
+                Calculá cuánto podrías ganar
               </h2>
               <p className="text-white/70 text-lg mb-8">
-                Nuestros profesionales mas activos ganan en promedio <span className="text-accent font-bold">$180.000</span> mensuales trabajando 30 horas semanales.
+                Nuestros profesionales más activos ganan en promedio <span className="text-accent font-bold">$180.000</span> mensuales trabajando 30 horas semanales.
               </p>
 
               <div className="space-y-4">
@@ -357,7 +357,7 @@ export default function TrabajadoresLanding() {
                   { label: 'Electricistas', avg: '$12.500/trabajo' },
                   { label: 'Plomeros', avg: '$10.800/trabajo' },
                   { label: 'Gasistas', avg: '$15.200/trabajo' },
-                  { label: 'Tecnicos AC', avg: '$14.000/trabajo' }
+                  { label: 'Técnicos AC', avg: '$14.000/trabajo' }
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/10">
                     <span className="text-white font-medium">{item.label}</span>
@@ -374,7 +374,7 @@ export default function TrabajadoresLanding() {
                   <TrendingUp className="w-10 h-10 text-accent" />
                 </div>
                 <h3 className="text-2xl font-bold text-primary mb-4">
-                  Empieza a ganar hoy
+                  Empezá a ganar hoy
                 </h3>
                 <p className="text-muted-foreground mb-8">
                   El registro es gratuito y solo toma 2 minutos. Comienza a recibir solicitudes de trabajo de inmediato.
@@ -388,7 +388,7 @@ export default function TrabajadoresLanding() {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
                 <p className="text-xs text-muted-foreground mt-4">
-                  Sin tarjeta de credito. Sin compromisos.
+                  Sin tarjeta de crédito. Sin compromisos.
                 </p>
               </div>
             </Card>
@@ -408,9 +408,9 @@ export default function TrabajadoresLanding() {
 
           <div className="space-y-4">
             {[
-              { q: 'Cuanto cuesta registrarse?', a: 'El registro es 100% gratuito. No hay costos ocultos para crear tu perfil.' },
-              { q: 'Como recibo los pagos?', a: 'Los clientes te pagan directamente. HomeFix no retiene tu dinero.' },
-              { q: 'Necesito estar matriculado?', a: 'No es obligatorio, pero los profesionales matriculados reciben un badge especial y mas visibilidad.' }
+              { q: '¿Cuánto cuesta registrarse?', a: 'El registro es 100% gratuito. No hay costos ocultos para crear tu perfil.' },
+              { q: '¿Cómo recibo los pagos?', a: 'Los clientes te pagan directamente. HomeFix no retiene tu dinero.' },
+              { q: '¿Necesito estar matriculado?', a: 'No es obligatorio, pero los profesionales matriculados reciben un badge especial y más visibilidad.' }
             ].map((faq, idx) => (
               <Card key={idx} className="p-6 border-border">
                 <h3 className="font-bold text-primary mb-2">{faq.q}</h3>
@@ -428,10 +428,10 @@ export default function TrabajadoresLanding() {
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 text-balance">
-            Los clientes te estan buscando
+            Los clientes te están buscando
           </h2>
           <p className="text-white/80 text-lg mb-10 max-w-2xl mx-auto">
-            Cada dia, cientos de personas buscan profesionales como vos en HomeFix. No te quedes afuera.
+            Cada día, cientos de personas buscan profesionales como vos en HomeFix. No te quedes afuera.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
