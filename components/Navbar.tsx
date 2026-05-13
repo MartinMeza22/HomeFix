@@ -46,7 +46,7 @@ export function Navbar() {
   let { role, name, logout } = useSession()
 
   // Forzar rol según la URL para la demostración
-  if (pathname.includes('/trabajador') || pathname.includes('/verificacion') || pathname === '/dashboard/trabajador') {
+  if ((pathname.includes('/trabajador') && !pathname.includes('/trabajadores')) || pathname.includes('/verificacion') || pathname === '/dashboard/trabajador') {
     role = 'trabajador'
   } else if (pathname === '/dashboard' || pathname.includes('/publicacion/nueva')) {
     role = 'cliente'
