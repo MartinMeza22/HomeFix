@@ -1,0 +1,11 @@
+# Reglas de Proyecto HomeFix
+
+Este proyecto es una plataforma de servicios de reparación a domicilio.
+Para entender la arquitectura, el stack tecnológico, los modelos de datos y las convenciones, el contexto completo está en el archivo `AGENTS.md` ubicado en la raíz del proyecto.
+
+## Instrucciones Críticas para el IDE:
+1. **Contexto de Arquitectura:** Revisa siempre `AGENTS.md` para asegurar que el código generado sigue la estructura de Next.js 16 (App Router), el uso de Prisma y las directrices de Server Components.
+2. **Strict TypeScript:** No uses `any`. Utiliza siempre los tipos generados por Prisma (`@/lib/prisma`).
+3. **Estilos:** Usa exclusivamente las clases de Tailwind definidas y los tokens de `shadcn/ui`.
+4. **Server Actions:** Toda mutación de datos debe ir en `app/actions/` usando la directiva `"use server"`.
+5. **BDD:** Realiza consultas directamente en Server Components y envuélvelas siempre en bloques `try/catch`.
