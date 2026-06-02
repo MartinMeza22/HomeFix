@@ -19,15 +19,106 @@ import {
   Lock,
   ChevronRight,
   Star,
-  Shield
+  Shield,
+  Paintbrush,
+  Home,
+  Layers,
+  Sparkles,
+  HelpCircle
 } from 'lucide-react'
 
 // Tipos de urgencia disponibles
 const TIPOS_URGENCIA = [
-  { id: 'plomeria', nombre: 'Plomeria', icono: Droplets, color: 'text-blue-500', bgColor: 'bg-blue-500/10', ejemplos: ['Cano roto', 'Perdida de agua', 'Inundacion'] },
-  { id: 'electricidad', nombre: 'Electricidad', icono: Zap, color: 'text-amber-500', bgColor: 'bg-amber-500/10', ejemplos: ['Corte de luz', 'Cortocircuito', 'Cable chispeando'] },
-  { id: 'gas', nombre: 'Gas', icono: Flame, color: 'text-red-500', bgColor: 'bg-red-500/10', ejemplos: ['Olor a gas', 'Perdida de gas', 'Calefon sin funcionar'] },
-  { id: 'cerrajeria', nombre: 'Cerrajeria', icono: Lock, color: 'text-slate-500', bgColor: 'bg-slate-500/10', ejemplos: ['Puerta trabada', 'Llave rota', 'Cerradura danada'] },
+  {
+    id: 'plomeria',
+    nombre: 'Plomeria',
+    icono: Droplets,
+    color: 'text-blue-600',
+    bgColor: 'bg-blue-50',
+    borderColor: 'border-blue-200 hover:border-blue-400',
+    iconBg: 'bg-blue-100',
+    ejemplos: ['Cano roto', 'Perdida de agua', 'Inundacion']
+  },
+  {
+    id: 'electricidad',
+    nombre: 'Electricidad',
+    icono: Zap,
+    color: 'text-amber-600',
+    bgColor: 'bg-amber-50',
+    borderColor: 'border-amber-200 hover:border-amber-400',
+    iconBg: 'bg-amber-100',
+    ejemplos: ['Corte de luz', 'Cortocircuito', 'Cable chispeando']
+  },
+  {
+    id: 'gas',
+    nombre: 'Gas',
+    icono: Flame,
+    color: 'text-red-600',
+    bgColor: 'bg-red-50',
+    borderColor: 'border-red-200 hover:border-red-400',
+    iconBg: 'bg-red-100',
+    ejemplos: ['Olor a gas', 'Perdida de gas', 'Calefon roto']
+  },
+  {
+    id: 'cerrajeria',
+    nombre: 'Cerrajeria',
+    icono: Lock,
+    color: 'text-slate-600',
+    bgColor: 'bg-slate-50',
+    borderColor: 'border-slate-200 hover:border-slate-400',
+    iconBg: 'bg-slate-100',
+    ejemplos: ['Puerta trabada', 'Llave rota', 'Cerradura danada']
+  },
+  {
+    id: 'pintura',
+    nombre: 'Pintura',
+    icono: Paintbrush,
+    color: 'text-purple-600',
+    bgColor: 'bg-purple-50',
+    borderColor: 'border-purple-200 hover:border-purple-400',
+    iconBg: 'bg-purple-100',
+    ejemplos: ['Filtro en techo', 'Humedad', 'Pintura urgente']
+  },
+  {
+    id: 'techista',
+    nombre: 'Techista',
+    icono: Home,
+    color: 'text-orange-600',
+    bgColor: 'bg-orange-50',
+    borderColor: 'border-orange-200 hover:border-orange-400',
+    iconBg: 'bg-orange-100',
+    ejemplos: ['Gotera', 'Techo roto', 'Filtracion de lluvia']
+  },
+  {
+    id: 'vidrios',
+    nombre: 'Vidrios',
+    icono: Layers,
+    color: 'text-cyan-600',
+    bgColor: 'bg-cyan-50',
+    borderColor: 'border-cyan-200 hover:border-cyan-400',
+    iconBg: 'bg-cyan-100',
+    ejemplos: ['Vidrio roto', 'Ventana danada', 'Espejo roto']
+  },
+  {
+    id: 'desinfeccion',
+    nombre: 'Desinfeccion',
+    icono: Sparkles,
+    color: 'text-green-600',
+    bgColor: 'bg-green-50',
+    borderColor: 'border-green-200 hover:border-green-400',
+    iconBg: 'bg-green-100',
+    ejemplos: ['Plagas', 'Fumigacion', 'Limpieza profunda']
+  },
+  {
+    id: 'otro',
+    nombre: 'Otro',
+    icono: HelpCircle,
+    color: 'text-muted-foreground',
+    bgColor: 'bg-muted/40',
+    borderColor: 'border-border hover:border-primary/40',
+    iconBg: 'bg-muted',
+    ejemplos: ['Cualquier otro servicio urgente']
+  },
 ]
 
 // Profesionales disponibles para urgencias (mock)
@@ -110,47 +201,76 @@ export default function UrgenciasClientePage() {
       <Navbar />
 
       {/* Header */}
-      <div className="bg-destructive py-6">
+      <div className="bg-destructive py-8">
         <div className="max-w-3xl mx-auto px-4">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
-              <AlertTriangle className="w-6 h-6 text-white" />
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+              <AlertTriangle className="w-7 h-7 text-white" />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-white">Solicitar Urgencia</h1>
-              <p className="text-white/80 text-sm">Profesionales disponibles 24/7</p>
+              <div className="flex items-center gap-4 mt-1">
+                <span className="flex items-center gap-1.5 text-white/80 text-sm">
+                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                  Profesionales disponibles ahora
+                </span>
+                <span className="text-white/60 text-sm">24/7</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <div className="max-w-3xl mx-auto px-4 py-6">
-        
+
         {/* Step: Seleccionar tipo */}
         {step === 'tipo' && (
-          <div className="space-y-4">
-            <div className="text-center mb-6">
-              <h2 className="text-lg font-bold text-foreground">Que tipo de urgencia tenes?</h2>
-              <p className="text-sm text-muted-foreground">Selecciona la categoria del problema</p>
+          <div>
+            <div className="mb-6">
+              <h2 className="text-xl font-bold text-foreground">Que tipo de urgencia tenes?</h2>
+              <p className="text-sm text-muted-foreground mt-1">Selecciona la categoria del problema para encontrar el profesional correcto</p>
             </div>
             
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {TIPOS_URGENCIA.map((tipo) => {
                 const Icon = tipo.icono
+                const isOtro = tipo.id === 'otro'
                 return (
                   <button
                     key={tipo.id}
                     onClick={() => handleSelectTipo(tipo.id)}
-                    className={`p-4 rounded-xl border-2 border-border hover:border-primary/50 transition-all text-left ${tipo.bgColor}`}
+                    className={`
+                      group p-4 rounded-2xl border-2 transition-all text-left
+                      ${tipo.bgColor} ${tipo.borderColor}
+                      ${isOtro ? 'sm:col-span-1' : ''}
+                      hover:shadow-md hover:-translate-y-0.5 active:translate-y-0
+                    `}
                   >
-                    <Icon className={`w-8 h-8 ${tipo.color} mb-2`} />
-                    <h3 className="font-bold text-foreground">{tipo.nombre}</h3>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      {tipo.ejemplos.join(', ')}
+                    <div className={`w-11 h-11 ${tipo.iconBg} rounded-xl flex items-center justify-center mb-3`}>
+                      <Icon className={`w-5 h-5 ${tipo.color}`} />
+                    </div>
+                    <h3 className={`font-bold text-sm ${isOtro ? 'text-muted-foreground' : 'text-foreground'}`}>
+                      {tipo.nombre}
+                    </h3>
+                    <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                      {isOtro ? 'Cualquier servicio urgente que necesites' : tipo.ejemplos.slice(0, 2).join(' · ')}
                     </p>
+                    <div className="flex items-center gap-1 mt-3">
+                      <span className={`text-xs font-medium ${isOtro ? 'text-muted-foreground' : tipo.color}`}>
+                        {isOtro ? 'Ver mas' : 'Solicitar ahora'}
+                      </span>
+                      <ChevronRight className={`w-3 h-3 ${isOtro ? 'text-muted-foreground' : tipo.color} group-hover:translate-x-0.5 transition-transform`} />
+                    </div>
                   </button>
                 )
               })}
+            </div>
+
+            <div className="mt-6 flex items-center gap-3 p-4 bg-muted/40 rounded-xl border border-border">
+              <Shield className="w-5 h-5 text-primary flex-shrink-0" />
+              <p className="text-xs text-muted-foreground">
+                Todos los profesionales estan verificados, asegurados y con antecedentes comprobados.
+              </p>
             </div>
           </div>
         )}
